@@ -92,10 +92,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BasicInit_LowLevel\GlHelper.h" />
     <ClInclude Include="BasicInit_LowLevel\GlProcess.h" />
     <ClInclude Include="BasicInit_LowLevel\main.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BasicInit_LowLevel\GlHelper.cpp" />
     <ClCompile Include="BasicInit_LowLevel\GlProcess.cpp" />
     <ClCompile Include="BasicInit_LowLevel\LowLevelCpp.cpp" />
     <ClCompile Include="main.cpp" />
