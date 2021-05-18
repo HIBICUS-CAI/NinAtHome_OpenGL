@@ -31,6 +31,7 @@ void UninitSystem()
 void SwapBuffers()
 {
 	GoRunLoopProcess();
+	//TODO
 }
 
 bool ShouldQuit()
@@ -43,7 +44,7 @@ GlHelper* GetGlHelperPtr()
 	return gp_GlHelper;
 }
 
-void SetVertexAttr(const VERTEX* v, int8_t arraySize)
+void SetVertexAttr(const VERTEX* v, int arraySize)
 {
 	float* buffer = new float[9 * arraySize];
 	GLuint* vao = new GLuint;

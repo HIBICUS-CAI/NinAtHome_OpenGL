@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include <vector>
 #include <string>
 #include <TP\glad\glad.h>
 #include <TP\glm\glm.hpp>
@@ -9,6 +10,10 @@
 typedef glm::fvec3 Float3;
 typedef glm::fvec4 Float4;
 typedef glm::fvec2 Float2;
+typedef glm::fmat4x4 Matrix4x4f;
+typedef float* Float4x4;
+
+void MatrixStore(Float4x4* ptr, Matrix4x4f mat);
 
 #define MakeFloat3 glm::fvec3
 #define MakeFloat4 glm::fvec4
@@ -31,6 +36,7 @@ public:
         const unsigned int size, float* buffer);
     void BindVAOWithVBO(unsigned int* vao, unsigned int* vbo,
         float* buffer, int bufferSize);
+    GLuint GetShaderID(std::string name);
 
 private:
     bool CompileDefaultShaders();
@@ -38,6 +44,7 @@ private:
     std::map<std::string, GLuint> mShaders;
     std::map<std::string, GLuint> mVertShaders;
     std::map<std::string, GLuint> mFragShaders;
-    std::map<std::string, GLuint> mVAOs;
+    std::vector<GLuint> mVAOs;
+    std::vector<GLuint> mVBOs;
 };
 

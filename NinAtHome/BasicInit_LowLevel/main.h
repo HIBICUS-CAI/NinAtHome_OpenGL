@@ -24,4 +24,4 @@ bool ShouldQuit();
 
 GlHelper* GetGlHelperPtr();
 
-void SetVertexAttr(const VERTEX* v, int8_t arraySize);
+void SetVertexAttr(const VERTEX* v, int arraySize);

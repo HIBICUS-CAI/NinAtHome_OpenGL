@@ -172,5 +172,16 @@ void GlHelper::BindVAOWithVBO(unsigned int* vao,
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-    //mVAOs.insert(std::make_pair("default", *vao));
+    mVAOs.push_back(*vao);
+    mVBOs.push_back(*vbo);
+}
+
+GLuint GlHelper::GetShaderID(std::string name)
+{
+    return mShaders[name];
+}
+
+void MatrixStore(Float4x4* ptr, Matrix4x4f mat)
+{
+    *ptr = glm::value_ptr(mat);
 }
