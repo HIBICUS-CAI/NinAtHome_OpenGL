@@ -62,7 +62,7 @@ bool GlHelper::StartUp()
         glEnableVertexAttribArray(3);
 
         glm::fmat4x4 projection;
-        projection = glm::ortho(0.f, 1920.f, -1080.f, 0.f);
+        projection = glm::ortho(-960.f, 960.f, 540.f, -540.f);
 
         glUniformMatrix4fv(
             glGetUniformLocation(

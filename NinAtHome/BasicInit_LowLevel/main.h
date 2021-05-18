@@ -21,3 +21,5 @@ void SwapBuffers();
 bool ShouldQuit();
 
 GlHelper* GetGlHelperPtr();
+
+void SetVertexAttr(const VERTEX* v, int8_t arraySize);

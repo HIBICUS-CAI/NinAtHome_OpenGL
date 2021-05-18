@@ -29,7 +29,6 @@ extern "C" int main()
         vertex[2].Position = MakeFloat3(+100.0f, +0.0f, 0.0f);
         vertex[3].Position = MakeFloat3(-100.0f, +0.0f, 0.0f);
 
-
         vertex[0].Color = MakeFloat4(1.0f, 0.0f, 0.0f, 1.0f);
         vertex[1].Color = MakeFloat4(1.0f, 0.0f, 0.0f, 1.0f);
         vertex[2].Color = MakeFloat4(1.0f, 0.0f, 0.0f, 1.0f);
@@ -37,22 +36,14 @@ extern "C" int main()
 
 #ifdef RUN_WITHOUT_NINSDK
         VERTEX* v = new VERTEX[ARRAYSIZE(vertex)];
-        float* buffer = new float[9 * ARRAYSIZE(vertex)];
-        GLuint* vao = new GLuint;
-        GLuint* vbo = new GLuint;
         for (int i = 0; i < ARRAYSIZE(vertex); i++)
         {
             v[i].Position = vertex[i].Position;
             v[i].Color = vertex[i].Color;
             v[i].TexCoord = vertex[i].TexCoord;
         }
-        GetGlHelperPtr()->MoveDataToBuffer(
-            v, ARRAYSIZE(vertex), buffer);
-        GetGlHelperPtr()->BindVAOWithVBO(vao, vbo, buffer,
-            9 * ARRAYSIZE(vertex));
-        glBindVertexArray(*vao);
-        delete vao, vbo;
-        delete[] v, buffer;
+        SetVertexAttr(v, ARRAYSIZE(vertex));
+        delete[] v;
 #else
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
             sizeof(VERTEX_3D), (GLvoid*)&vertex->Position);
