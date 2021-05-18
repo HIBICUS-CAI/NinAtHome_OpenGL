@@ -13,10 +13,27 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ForLowLevel">
+      <UniqueIdentifier>{357f8b07-e63e-4cbb-af43-906ee46fb3e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
+    <ClInclude Include="BasicInit_LowLevel\main.h">
+      <Filter>ForLowLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicInit_LowLevel\GlProcess.h">
+      <Filter>ForLowLevel</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicInit_LowLevel\GlProcess.cpp">
+      <Filter>ForLowLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicInit_LowLevel\LowLevelCpp.cpp">
+      <Filter>ForLowLevel</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,8 +1,32 @@
-#include <iostream>
+#include "main.h"
 
-int main()
+extern "C" int main()
 {
-    std::cout << "ready to start" << std::endl;
+    InitSystem();
+
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+
+    glFrontFace(GL_CCW);
+
+    while (true)
+    {
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        SwapBuffers();
+
+#ifdef RUN_WITHOUT_NINSDK
+        if (ShouldQuit())
+        {
+            break;
+        }
+#endif // RUN_WITHOUT_NINSDK
+
+    }
+
+    UninitSystem();
+    
 
     return 0;
 }
