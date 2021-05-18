@@ -1,5 +1,8 @@
 #pragma once
+#include <Windows.h>
 #include <TP\glad\glad.h>
+#include "GlHelper.h"
+#include "GlProcess.h"
 
 #define RUN_WITHOUT_NINSDK
 
@@ -16,3 +19,5 @@ void UninitSystem();
 void SwapBuffers();
 
 bool ShouldQuit();
+
+GlHelper* GetGlHelperPtr();

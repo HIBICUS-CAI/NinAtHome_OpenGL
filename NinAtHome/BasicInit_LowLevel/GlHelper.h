@@ -3,6 +3,22 @@
 #include <map>
 #include <string>
 #include <TP\glad\glad.h>
+#include <TP\glm\glm.hpp>
+#include <TP\glm\gtc\type_ptr.hpp>
+
+typedef glm::fvec3 Float3;
+typedef glm::fvec4 Float4;
+typedef glm::fvec2 Float2;
+
+#define MakeFloat3 glm::fvec3
+#define MakeFloat4 glm::fvec4
+
+typedef struct _VERTEX
+{
+    Float3 Position;
+    Float4 Color;
+    Float2 TexCoord;
+}VERTEX;
 
 class GlHelper
 {
@@ -11,6 +27,10 @@ public:
     ~GlHelper();
     bool StartUp();
     void CleanAndStop();
+    void MoveDataToBuffer(const VERTEX* origin,
+        const unsigned int size, float* buffer);
+    void BindVAOWithVBO(unsigned int* vao, unsigned int* vbo,
+        float* buffer, int bufferSize);
 
 private:
     bool CompileDefaultShaders();
@@ -18,5 +38,6 @@ private:
     std::map<std::string, GLuint> mShaders;
     std::map<std::string, GLuint> mVertShaders;
     std::map<std::string, GLuint> mFragShaders;
+    std::map<std::string, GLuint> mVAOs;
 };
 

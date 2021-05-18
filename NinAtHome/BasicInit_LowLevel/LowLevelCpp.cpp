@@ -1,6 +1,4 @@
 #include "main.h"
-#include "GlProcess.h"
-#include "GlHelper.h"
 #include <iostream>
 
 GlHelper* gp_GlHelper = nullptr;
@@ -38,4 +36,9 @@ void SwapBuffers()
 bool ShouldQuit()
 {
 	return ShouldGlfwQuit();
+}
+
+GlHelper* GetGlHelperPtr()
+{
+	return gp_GlHelper;
 }

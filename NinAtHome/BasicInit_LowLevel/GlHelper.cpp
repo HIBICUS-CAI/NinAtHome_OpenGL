@@ -9,7 +9,6 @@ const char* g_DefaultVertShader =
 "precision highp float;\n"
 
 "uniform mat4 uProjection;\n"
-"uniform mat4 uRotateZ;\n"
 
 "layout( location = 0 ) in vec3 inPosition;\n"
 "layout( location = 1 ) in vec4 inColor;\n"
@@ -21,7 +20,7 @@ const char* g_DefaultVertShader =
 "void main() {\n"
 "    vColor = inColor;\n"
 "    vTexCoord = inTexCoord;\n"
-"    gl_Position = vec4(inPosition, 1.0) * uRotateZ * uProjection;\n"
+"    gl_Position = vec4(inPosition, 1.0) * uProjection;\n"
 "}\n";
 
 const char* g_DefaultFragShader =
@@ -56,13 +55,14 @@ bool GlHelper::StartUp()
     if (CompileDefaultShaders())
     {
         glUseProgram(mShaders["default"]);
+
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
         glEnableVertexAttribArray(2);
         glEnableVertexAttribArray(3);
 
         glm::fmat4x4 projection;
-        projection = glm::ortho(0.f, 1920.f, 0.f, 1080.f);
+        projection = glm::ortho(0.f, 1920.f, -1080.f, 0.f);
 
         glUniformMatrix4fv(
             glGetUniformLocation(
@@ -124,4 +124,53 @@ bool GlHelper::CompileDefaultShaders()
 void GlHelper::CleanAndStop()
 {
 
+}
+
+void GlHelper::MoveDataToBuffer(const VERTEX* origin,
+    const unsigned int size, float* buffer)
+{
+    for (unsigned int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            buffer[9 * i + j] =
+                ((float*)value_ptr(origin[i].Position))[j];
+        }
+        for (int j = 0; j < 4; j++)
+        {
+            buffer[9 * i + 3 + j] =
+                ((float*)value_ptr(origin[i].Color))[j];
+        }
+        for (int j = 0; j < 2; j++)
+        {
+            buffer[9 * i + 7 + j] =
+                ((float*)value_ptr(origin[i].TexCoord))[j];
+        }
+    }
+}
+
+void GlHelper::BindVAOWithVBO(unsigned int* vao,
+    unsigned int* vbo, float* buffer, int bufferSize)
+{
+    glGenVertexArrays(1, vao);
+    glGenBuffers(1, vbo);
+    glBindVertexArray(*vao);
+    glBindBuffer(GL_ARRAY_BUFFER, *vbo);
+    glBufferData(GL_ARRAY_BUFFER,
+        bufferSize * sizeof(buffer), buffer,
+        GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
+        9 * sizeof(float), (GLvoid*)0);
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE,
+        9 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
+        9 * sizeof(float), (GLvoid*)(7 * sizeof(float)));
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+
+    //mVAOs.insert(std::make_pair("default", *vao));
 }
