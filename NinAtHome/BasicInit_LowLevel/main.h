@@ -6,6 +6,8 @@
 
 #define RUN_WITHOUT_NINSDK
 
+#define nnMain main
+
 #define DEFAULT_WIDTH   (1920)
 #define DEFAULT_HEIGHT  (1080)
 

@@ -7,7 +7,7 @@ struct VERTEX_3D
     Float2 TexCoord;
 };
 
-extern "C" int main()
+extern "C" int nnMain()
 {
     InitSystem();
 
