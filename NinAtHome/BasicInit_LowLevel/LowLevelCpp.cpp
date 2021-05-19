@@ -32,6 +32,8 @@ void SwapBuffers()
 {
 	GoRunLoopProcess();
 	gp_GlHelper->ClearVaoVbo();
+
+	Sleep(15);
 }
 
 bool ShouldQuit()
