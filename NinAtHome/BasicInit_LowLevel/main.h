@@ -3,6 +3,7 @@
 #include <TP\glad\glad.h>
 #include "GlHelper.h"
 #include "GlProcess.h"
+#include <math.h>
 
 #define RUN_WITHOUT_NINSDK
 
