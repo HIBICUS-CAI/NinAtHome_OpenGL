@@ -37,6 +37,7 @@ public:
     void BindVAOWithVBO(unsigned int* vao, unsigned int* vbo,
         float* buffer, int bufferSize);
     GLuint GetShaderID(std::string name);
+    void ClearVaoVbo();
 
 private:
     bool CompileDefaultShaders();

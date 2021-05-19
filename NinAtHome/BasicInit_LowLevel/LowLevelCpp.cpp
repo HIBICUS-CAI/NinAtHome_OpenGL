@@ -31,7 +31,7 @@ void UninitSystem()
 void SwapBuffers()
 {
 	GoRunLoopProcess();
-	//TODO
+	gp_GlHelper->ClearVaoVbo();
 }
 
 bool ShouldQuit()

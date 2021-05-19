@@ -157,7 +157,7 @@ void GlHelper::BindVAOWithVBO(unsigned int* vao,
     glBindVertexArray(*vao);
     glBindBuffer(GL_ARRAY_BUFFER, *vbo);
     glBufferData(GL_ARRAY_BUFFER,
-        bufferSize * sizeof(buffer), buffer,
+        bufferSize * sizeof(*buffer), buffer,
         GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
         9 * sizeof(float), (GLvoid*)0);
@@ -179,6 +179,23 @@ void GlHelper::BindVAOWithVBO(unsigned int* vao,
 GLuint GlHelper::GetShaderID(std::string name)
 {
     return mShaders[name];
+}
+
+void GlHelper::ClearVaoVbo()
+{
+    while (!mVAOs.empty())
+    {
+        GLuint vaoID = mVAOs.back();
+        glDeleteVertexArrays(1, &vaoID);
+        mVAOs.pop_back();
+    }
+
+    while (!mVBOs.empty())
+    {
+        GLuint vboID = mVBOs.back();
+        glDeleteBuffers(1, &vboID);
+        mVBOs.pop_back();
+    }
 }
 
 void MatrixStore(Float4x4* ptr, Matrix4x4f mat)
