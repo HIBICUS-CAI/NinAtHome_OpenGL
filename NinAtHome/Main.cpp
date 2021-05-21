@@ -18,7 +18,7 @@ extern "C" int nnMain()
     glFrontFace(GL_CCW);
 
     unsigned int tex1 = LoadTexture("rom\\cat.png");
-    unsigned int tex2 = LoadTexture("rom\\sadcat.png");
+    unsigned int tex2 = LoadTexture("rom\\sadcat.TGA");
 
     while (true)
     {
