@@ -1,6 +1,8 @@
 #pragma once
 
-unsigned int LoadTexture(const char* fileName);
+#include <string>
+
+unsigned int LoadTexture(std::string fileName);
 
 void UnloadTexture(unsigned int texture);
 
