@@ -55,7 +55,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\BasicInit_LowLevel;$(ProjectDir)ThirdParty\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)MiddleFunctions;$(ProjectDir)BasicInit_LowLevel;$(ProjectDir)ThirdParty\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -79,7 +79,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\BasicInit_LowLevel;$(ProjectDir)ThirdParty\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)MiddleFunctions;$(ProjectDir)BasicInit_LowLevel;$(ProjectDir)ThirdParty\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -101,12 +101,16 @@
     <ClInclude Include="BasicInit_LowLevel\GlHelper.h" />
     <ClInclude Include="BasicInit_LowLevel\GlProcess.h" />
     <ClInclude Include="BasicInit_LowLevel\main.h" />
+    <ClInclude Include="BasicInit_LowLevel\stb_image.h" />
+    <ClInclude Include="MiddleFunctions\texture.h" />
+    <ClInclude Include="MiddleFunctions\TextureHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicInit_LowLevel\GlHelper.cpp" />
     <ClCompile Include="BasicInit_LowLevel\GlProcess.cpp" />
     <ClCompile Include="BasicInit_LowLevel\LowLevelCpp.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MiddleFunctions\TextureHelper.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

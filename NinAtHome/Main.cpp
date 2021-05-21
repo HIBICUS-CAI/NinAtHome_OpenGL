@@ -1,4 +1,5 @@
 ﻿#include "main.h"
+#include "texture.h"
 
 struct VERTEX_3D
 {
@@ -16,45 +17,101 @@ extern "C" int nnMain()
 
     glFrontFace(GL_CCW);
 
+    unsigned int tex1 = LoadTexture("rom\\cat.png");
+    unsigned int tex2 = LoadTexture("rom\\sadcat.png");
+
     while (true)
     {
         glClearColor(0.0f, 0.5f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        //--------------------
-        VERTEX_3D vertex[4];
+        {
+            //--------------------
+            SetTexture(tex1);
 
-        vertex[0].Position = MakeFloat3(+100.0f, -250.0f, 0.0f);
-        vertex[1].Position = MakeFloat3(-100.0f, -250.0f, 0.0f);
-        vertex[2].Position = MakeFloat3(+100.0f, +0.0f, 0.0f);
-        vertex[3].Position = MakeFloat3(-100.0f, +0.0f, 0.0f);
+            VERTEX_3D vertex[4];
 
-        vertex[0].Color = MakeFloat4(1.0f, 0.0f, 0.0f, 1.0f);
-        vertex[1].Color = MakeFloat4(1.0f, 0.0f, 0.0f, 1.0f);
-        vertex[2].Color = MakeFloat4(1.0f, 0.0f, 0.0f, 1.0f);
-        vertex[3].Color = MakeFloat4(1.0f, 0.0f, 0.0f, 1.0f);
+            vertex[0].Position = MakeFloat3(+100.0f, -200.0f, 0.0f);
+            vertex[1].Position = MakeFloat3(-100.0f, -200.0f, 0.0f);
+            vertex[2].Position = MakeFloat3(+100.0f, +0.0f, 0.0f);
+            vertex[3].Position = MakeFloat3(-100.0f, +0.0f, 0.0f);
+
+            vertex[0].Color = MakeFloat4(1.0f, 1.0f, 1.0f, 1.0f);
+            vertex[1].Color = MakeFloat4(1.0f, 1.0f, 1.0f, 1.0f);
+            vertex[2].Color = MakeFloat4(1.0f, 1.0f, 1.0f, 1.0f);
+            vertex[3].Color = MakeFloat4(1.0f, 1.0f, 1.0f, 1.0f);
+
+            vertex[0].TexCoord = MakeFloat2(1.0f, 0.0f);
+            vertex[1].TexCoord = MakeFloat2(0.0f, 0.0f);
+            vertex[2].TexCoord = MakeFloat2(1.0f, 1.0f);
+            vertex[3].TexCoord = MakeFloat2(0.0f, 1.0f);
 
 #ifdef RUN_WITHOUT_NINSDK
-        VERTEX* v = new VERTEX[ARRAYSIZE(vertex)];
-        for (int i = 0; i < ARRAYSIZE(vertex); i++)
-        {
-            v[i].Position = vertex[i].Position;
-            v[i].Color = vertex[i].Color;
-            v[i].TexCoord = vertex[i].TexCoord;
-        }
-        SetVertexAttr(v, ARRAYSIZE(vertex));
-        delete[] v;
+            VERTEX* v = new VERTEX[ARRAYSIZE(vertex)];
+            for (int i = 0; i < ARRAYSIZE(vertex); i++)
+            {
+                v[i].Position = vertex[i].Position;
+                v[i].Color = vertex[i].Color;
+                v[i].TexCoord = vertex[i].TexCoord;
+            }
+            SetVertexAttr(v, ARRAYSIZE(vertex));
+            delete[] v;
 #else
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
-            sizeof(VERTEX_3D), (GLvoid*)&vertex->Position);
-        glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE,
-            sizeof(VERTEX_3D), (GLvoid*)&vertex->Color);
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
-            sizeof(VERTEX_3D), (GLvoid*)&vertex->TexCoord);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
+                sizeof(VERTEX_3D), (GLvoid*)&vertex->Position);
+            glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE,
+                sizeof(VERTEX_3D), (GLvoid*)&vertex->Color);
+            glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
+                sizeof(VERTEX_3D), (GLvoid*)&vertex->TexCoord);
 #endif // RUN_WITHOUT_NINSDK
 
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-        //--------------------
+            glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+            //--------------------
+        }
+        
+        {
+            //--------------------
+            SetTexture(tex2);
+
+            VERTEX_3D vertex[4];
+
+            vertex[0].Position = MakeFloat3(-200.0f, -200.0f, 0.0f);
+            vertex[1].Position = MakeFloat3(-400.0f, -200.0f, 0.0f);
+            vertex[2].Position = MakeFloat3(-200.0f, +0.0f, 0.0f);
+            vertex[3].Position = MakeFloat3(-400.0f, +0.0f, 0.0f);
+
+            vertex[0].Color = MakeFloat4(1.0f, 1.0f, 1.0f, 1.0f);
+            vertex[1].Color = MakeFloat4(1.0f, 1.0f, 1.0f, 1.0f);
+            vertex[2].Color = MakeFloat4(1.0f, 1.0f, 1.0f, 1.0f);
+            vertex[3].Color = MakeFloat4(1.0f, 1.0f, 1.0f, 1.0f);
+
+            vertex[0].TexCoord = MakeFloat2(1.0f, 0.0f);
+            vertex[1].TexCoord = MakeFloat2(0.0f, 0.0f);
+            vertex[2].TexCoord = MakeFloat2(1.0f, 1.0f);
+            vertex[3].TexCoord = MakeFloat2(0.0f, 1.0f);
+
+#ifdef RUN_WITHOUT_NINSDK
+            VERTEX* v = new VERTEX[ARRAYSIZE(vertex)];
+            for (int i = 0; i < ARRAYSIZE(vertex); i++)
+            {
+                v[i].Position = vertex[i].Position;
+                v[i].Color = vertex[i].Color;
+                v[i].TexCoord = vertex[i].TexCoord;
+            }
+            SetVertexAttr(v, ARRAYSIZE(vertex));
+            delete[] v;
+#else
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
+                sizeof(VERTEX_3D), (GLvoid*)&vertex->Position);
+            glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE,
+                sizeof(VERTEX_3D), (GLvoid*)&vertex->Color);
+            glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
+                sizeof(VERTEX_3D), (GLvoid*)&vertex->TexCoord);
+#endif // RUN_WITHOUT_NINSDK
+
+            glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+            //--------------------
+        }
 
         SwapBuffers();
 
@@ -67,6 +124,8 @@ extern "C" int nnMain()
 
     }
 
+    UnloadTexture(tex1);
+    UnloadTexture(tex2);
     UninitSystem();
 
 

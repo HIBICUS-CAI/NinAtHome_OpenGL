@@ -15,6 +15,7 @@ typedef float* Float4x4;
 
 void MatrixStore(Float4x4* ptr, Matrix4x4f mat);
 
+#define MakeFloat2 glm::fvec2
 #define MakeFloat3 glm::fvec3
 #define MakeFloat4 glm::fvec4
 
