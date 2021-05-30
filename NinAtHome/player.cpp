@@ -1,4 +1,5 @@
 #include "main.h"
+#include "controller.h"
 #include "player.h"
 #include "texture.h"
 #include "sprite.h"
@@ -21,17 +22,17 @@ void UninitPlayer()
 
 void UpdatePlayer()
 {
-    //// ¥Ü¥¿¥ó
-    //if (GetControllerPress(NpadButton::Left::Index))
-    //    g_PlayerPosition.x += -20.0f;
-    //if (GetControllerPress(NpadButton::Right::Index))
-    //    g_PlayerPosition.x += 20.0f;
+    // ¥Ü¥¿¥ó
+    if (GetControllerPress(NpadButton::Left::Index))
+        g_PlayerPosition.x += -20.0f;
+    if (GetControllerPress(NpadButton::Right::Index))
+        g_PlayerPosition.x += 20.0f;
 
-    //// ¥¢¥Ê¥í¥°¥¹¥Æ¥£¥Ã¥¯
-    //Float2 stick;
-    //stick = GetControllerLeftStick();
+    // ¥¢¥Ê¥í¥°¥¹¥Æ¥£¥Ã¥¯
+    Float2 stick;
+    stick = GetControllerLeftStick();
 
-    //g_PlayerPosition.x += stick.x * 20.0f;
+    g_PlayerPosition.x += stick.x * 20.0f;
 
     //// ¥¿¥Ã¥Á¥¹¥¯¥ê©`¥ó
     //if (GetControllerTouchScreen())
@@ -70,15 +71,15 @@ void UpdatePlayer()
     //    SetControllerRightVibration(5);
     //}
 
-    //if (g_PlayerPosition.x < -500.0f + 100.0f)
-    //{
-    //    g_PlayerPosition.x = -500.0f + 100.0f;
-    //}
+    if (g_PlayerPosition.x < -500.0f + 100.0f)
+    {
+        g_PlayerPosition.x = -500.0f + 100.0f;
+    }
 
-    //if (g_PlayerPosition.x > 500.0f - 100.0f)
-    //{
-    //    g_PlayerPosition.x = 500.0f - 100.0f;
-    //}
+    if (g_PlayerPosition.x > 500.0f - 100.0f)
+    {
+        g_PlayerPosition.x = 500.0f - 100.0f;
+    }
 }
 
 void DrawPlayer()

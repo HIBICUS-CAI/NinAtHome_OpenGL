@@ -1,4 +1,5 @@
 ﻿#include "main.h"
+#include "controller.h"
 #include "texture.h"
 #include "sprite.h"
 #include "bg.h"
@@ -43,7 +44,7 @@ void Init()
 
     glFrontFace(GL_CCW);
 
-    //InitController();
+    InitController();
 
     InitBG();
     InitPlayer();
@@ -55,14 +56,14 @@ void Uninit()
     UninitBG();
     UninitPlayer();
 
-    //UninitController();
+    UninitController();
     UninitSystem();
 }
 
 
 void Update()
 {
-    //UpdateController();
+    UpdateController();
 
     UpdateBG();
     UpdatePlayer();
