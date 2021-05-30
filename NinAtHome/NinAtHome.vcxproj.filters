@@ -45,6 +45,12 @@
     <ClInclude Include="MiddleFunctions\sprite.h">
       <Filter>MiddleFunc</Filter>
     </ClInclude>
+    <ClInclude Include="bg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -64,6 +70,12 @@
     </ClCompile>
     <ClCompile Include="MiddleFunctions\SpriteHelper.cpp">
       <Filter>MiddleFunc</Filter>
+    </ClCompile>
+    <ClCompile Include="bg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
