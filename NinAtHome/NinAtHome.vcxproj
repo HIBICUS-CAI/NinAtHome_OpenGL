@@ -102,6 +102,8 @@
     <ClInclude Include="BasicInit_LowLevel\GlProcess.h" />
     <ClInclude Include="BasicInit_LowLevel\main.h" />
     <ClInclude Include="BasicInit_LowLevel\stb_image.h" />
+    <ClInclude Include="MiddleFunctions\sprite.h" />
+    <ClInclude Include="MiddleFunctions\SpriteHelper.h" />
     <ClInclude Include="MiddleFunctions\texture.h" />
     <ClInclude Include="MiddleFunctions\TextureHelper.h" />
   </ItemGroup>
@@ -110,6 +112,7 @@
     <ClCompile Include="BasicInit_LowLevel\GlProcess.cpp" />
     <ClCompile Include="BasicInit_LowLevel\LowLevelCpp.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MiddleFunctions\SpriteHelper.cpp" />
     <ClCompile Include="MiddleFunctions\TextureHelper.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -39,6 +39,12 @@
     <ClInclude Include="MiddleFunctions\texture.h">
       <Filter>MiddleFunc</Filter>
     </ClInclude>
+    <ClInclude Include="MiddleFunctions\SpriteHelper.h">
+      <Filter>MiddleFunc</Filter>
+    </ClInclude>
+    <ClInclude Include="MiddleFunctions\sprite.h">
+      <Filter>MiddleFunc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -54,6 +60,9 @@
       <Filter>ForLowLevel</Filter>
     </ClCompile>
     <ClCompile Include="MiddleFunctions\TextureHelper.cpp">
+      <Filter>MiddleFunc</Filter>
+    </ClCompile>
+    <ClCompile Include="MiddleFunctions\SpriteHelper.cpp">
       <Filter>MiddleFunc</Filter>
     </ClCompile>
   </ItemGroup>
