@@ -3,9 +3,13 @@
 
 #define INPUT_DEADZONE (0.24f * float(0x7FFF))
 
+DWORD const g_XGamePadIndex = 0;
 XINPUT_STATE* gp_XGamePadStatus = nullptr;
 XINPUT_STATE* gp_XGamePadOldStatus = nullptr;
-DWORD const g_XGamePadIndex = 0;
+
+XINPUT_VIBRATION* gp_VibraHandle = nullptr;
+int g_VibrationLeftFrame = 0;
+int g_VibrationRightFrame = 0;
 
 void InitController()
 {
@@ -17,6 +21,8 @@ void InitController()
     {
         gp_XGamePadOldStatus = new XINPUT_STATE;
         *gp_XGamePadOldStatus = *gp_XGamePadStatus;
+
+        gp_VibraHandle = new XINPUT_VIBRATION{ 0 };
     }
     else
     {
@@ -35,6 +41,10 @@ void UninitController()
     if (gp_XGamePadOldStatus)
     {
         delete gp_XGamePadOldStatus;
+    }
+    if (gp_VibraHandle)
+    {
+        delete gp_VibraHandle;
     }
 }
 
@@ -58,6 +68,27 @@ void UpdateController()
     {
         std::cout <<
             "sth wrong with polling xinput status" << std::endl;
+    }
+
+    if (g_VibrationLeftFrame > 0)
+    {
+        g_VibrationLeftFrame--;
+
+        if (g_VibrationLeftFrame == 0)
+        {
+            gp_VibraHandle->wLeftMotorSpeed = 0;
+            XInputSetState(g_XGamePadIndex, gp_VibraHandle);
+        }
+    }
+    if (g_VibrationRightFrame > 0)
+    {
+        g_VibrationRightFrame--;
+
+        if (g_VibrationRightFrame == 0)
+        {
+            gp_VibraHandle->wRightMotorSpeed = 0;
+            XInputSetState(g_XGamePadIndex, gp_VibraHandle);
+        }
     }
 }
 
@@ -144,10 +175,14 @@ Float2 GetControllerRightStick()
 
 void SetControllerLeftVibration(int frame)
 {
-
+    gp_VibraHandle->wLeftMotorSpeed = 65535 / 2;
+    XInputSetState(g_XGamePadIndex, gp_VibraHandle);
+    g_VibrationLeftFrame = frame;
 }
 
 void SetControllerRightVibration(int frame)
 {
-
+    gp_VibraHandle->wRightMotorSpeed = 65535 / 2;
+    XInputSetState(g_XGamePadIndex, gp_VibraHandle);
+    g_VibrationRightFrame = frame;
 }

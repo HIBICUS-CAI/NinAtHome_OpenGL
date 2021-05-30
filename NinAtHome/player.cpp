@@ -61,15 +61,15 @@ void UpdatePlayer()
     //    g_PlayerPosition.x = angle.z * 1000.0f;
     //}
 
-    //// Õñ„Ó
-    //if (GetControllerPress(NpadButton::Y::Index))
-    //{
-    //    SetControllerLeftVibration(5);
-    //}
-    //if (GetControllerPress(NpadButton::X::Index))
-    //{
-    //    SetControllerRightVibration(5);
-    //}
+    // Õñ„Ó
+    if (GetControllerPress(NpadButton::Y::Index))
+    {
+        SetControllerLeftVibration(5);
+    }
+    if (GetControllerPress(NpadButton::X::Index))
+    {
+        SetControllerRightVibration(5);
+    }
 
     if (g_PlayerPosition.x < -500.0f + 100.0f)
     {
