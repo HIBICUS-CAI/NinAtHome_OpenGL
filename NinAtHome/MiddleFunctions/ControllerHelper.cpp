@@ -186,3 +186,20 @@ void SetControllerRightVibration(int frame)
     XInputSetState(g_XGamePadIndex, gp_VibraHandle);
     g_VibrationRightFrame = frame;
 }
+
+bool GetControllerTouchScreen()
+{
+    return IsClickingMouseLeft();
+}
+
+Float2 GetControllerTouchScreenPosition()
+{
+    Float2 pos = { 0.f,0.f };
+    if (IsClickingMouseLeft())
+    {
+        pos.x = (float)GetCursorPosX();
+        pos.y = (float)GetCursorPosY();
+    }
+
+    return pos;
+}

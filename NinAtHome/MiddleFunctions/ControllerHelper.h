@@ -65,6 +65,6 @@ void SetControllerRightVibration(int frame);
 //
 //Float3 GetControllerRightAngle();
 //
-//bool GetControllerTouchScreen();
-//
-//Float2 GetControllerTouchScreenPosition();
+bool GetControllerTouchScreen();
+
+Float2 GetControllerTouchScreenPosition();

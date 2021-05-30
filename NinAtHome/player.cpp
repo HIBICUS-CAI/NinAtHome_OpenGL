@@ -34,13 +34,13 @@ void UpdatePlayer()
 
     g_PlayerPosition.x += stick.x * 20.0f;
 
-    //// 正永民旦弁伉奈件
-    //if (GetControllerTouchScreen())
-    //{
-    //    Float2 touch;
-    //    touch = GetControllerTouchScreenPosition();
-    //    g_PlayerPosition = touch;
-    //}
+    // 正永民旦弁伉奈件
+    if (GetControllerTouchScreen())
+    {
+        Float2 touch;
+        touch = GetControllerTouchScreenPosition();
+        g_PlayerPosition = touch;
+    }
 
     //// 樓厒僅本件扔奈
     //if (GetControllerPress(NpadButton::A::Index))

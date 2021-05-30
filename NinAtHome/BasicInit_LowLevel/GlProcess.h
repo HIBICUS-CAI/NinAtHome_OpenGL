@@ -15,3 +15,9 @@ void TerminateGLFW();
 void GoRunLoopProcess();
 
 bool ShouldGlfwQuit();
+
+bool IsClickingMouseLeft();
+
+int GetCursorPosX();
+
+int GetCursorPosY();
