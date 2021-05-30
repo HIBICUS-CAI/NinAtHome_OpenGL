@@ -187,6 +187,26 @@ void SetControllerRightVibration(int frame)
     g_VibrationRightFrame = frame;
 }
 
+Float3 GetControllerLeftAngle()
+{
+    return Float3
+    {
+        GetAngleX(LEFT_ANGLE),
+        GetAngleY(LEFT_ANGLE),
+        GetAngleZ(LEFT_ANGLE)
+    };
+}
+
+Float3 GetControllerRightAngle()
+{
+    return Float3
+    {
+        GetAngleX(RIGHT_ANGLE),
+        GetAngleY(RIGHT_ANGLE),
+        GetAngleZ(RIGHT_ANGLE)
+    };
+}
+
 bool GetControllerTouchScreen()
 {
     return IsClickingMouseLeft();

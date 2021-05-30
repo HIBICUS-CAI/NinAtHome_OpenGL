@@ -52,14 +52,14 @@ void UpdatePlayer()
     //    g_PlayerPosition.y += -acc.y * 10.0f;
     //}
 
-    //// ¥¸¥ã¥¤¥í¥»¥ó¥µ©`
-    //if (GetControllerPress(NpadButton::B::Index))
-    //{
-    //    Float3 angle;
-    //    angle = GetControllerRightAngle();
+    // ¥¸¥ã¥¤¥í¥»¥ó¥µ©`
+    if (GetControllerPress(NpadButton::B::Index))
+    {
+        Float3 angle;
+        angle = GetControllerRightAngle();
 
-    //    g_PlayerPosition.x = angle.z * 1000.0f;
-    //}
+        g_PlayerPosition.x = angle.z * 1000.0f;
+    }
 
     // Õñ„Ó
     if (GetControllerPress(NpadButton::Y::Index))

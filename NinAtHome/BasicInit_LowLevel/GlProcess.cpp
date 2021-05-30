@@ -9,6 +9,11 @@ bool g_ClickingMouseLeft = false;
 int g_CursorPosX = 0;
 int g_CursorPosY = 0;
 
+bool g_IsUsingLeftAngleSensor = false;
+float g_AngleX[2] = { 0.f,0.f };
+float g_AngleY[2] = { 0.f,0.f };
+float g_AngleZ[2] = { 0.f,0.f };
+
 void ResizeCallback(
     GLFWwindow* wndHandle, int width, int height);
 void MouseButtonCallback(
@@ -35,6 +40,42 @@ int GetCursorPosX()
 int GetCursorPosY()
 {
     return g_CursorPosY;
+}
+
+float GetAngleX(int padIndex)
+{
+    if (padIndex == LEFT_ANGLE || padIndex == RIGHT_ANGLE)
+    {
+        return g_AngleX[padIndex];
+    }
+    else
+    {
+        return 0.f;
+    }
+}
+
+float GetAngleY(int padIndex)
+{
+    if (padIndex == LEFT_ANGLE || padIndex == RIGHT_ANGLE)
+    {
+        return g_AngleY[padIndex];
+    }
+    else
+    {
+        return 0.f;
+    }
+}
+
+float GetAngleZ(int padIndex)
+{
+    if (padIndex == LEFT_ANGLE || padIndex == RIGHT_ANGLE)
+    {
+        return g_AngleZ[padIndex];
+    }
+    else
+    {
+        return 0.f;
+    }
 }
 
 bool InitGlAndCreateWindow(
@@ -87,6 +128,7 @@ void ProcessInput(GLFWwindow* wndHandle)
     {
         glfwSetWindowShouldClose(wndHandle, true);
     }
+
     if (glfwGetMouseButton(
         gp_WndHandle, GLFW_MOUSE_BUTTON_LEFT) ==
         GLFW_PRESS)
@@ -101,6 +143,93 @@ void ProcessInput(GLFWwindow* wndHandle)
     if (g_ClickingMouseLeft)
     {
         g_ClearMouseBtn = true;
+    }
+
+    if (glfwGetKey(wndHandle, GLFW_KEY_LEFT_BRACKET) ==
+        GLFW_PRESS)
+    {
+        g_IsUsingLeftAngleSensor = true;
+    }
+    if (glfwGetKey(wndHandle, GLFW_KEY_RIGHT_BRACKET) ==
+        GLFW_PRESS)
+    {
+        g_IsUsingLeftAngleSensor = false;
+    }
+    if (glfwGetKey(wndHandle, GLFW_KEY_F1) == GLFW_PRESS)
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            g_AngleX[i] = 0.f;
+            g_AngleY[i] = 0.f;
+            g_AngleZ[i] = 0.f;
+        }
+    }
+    // TODO need to check whether this is correct or not
+    if (glfwGetKey(wndHandle, GLFW_KEY_I) == GLFW_PRESS)
+    {
+        if (g_IsUsingLeftAngleSensor)
+        {
+            g_AngleX[LEFT_ANGLE] += 0.01f;
+        }
+        else
+        {
+            g_AngleX[RIGHT_ANGLE] += 0.01f;
+        }
+    }
+    if (glfwGetKey(wndHandle, GLFW_KEY_K) == GLFW_PRESS)
+    {
+        if (g_IsUsingLeftAngleSensor)
+        {
+            g_AngleX[LEFT_ANGLE] -= 0.01f;
+        }
+        else
+        {
+            g_AngleX[RIGHT_ANGLE] -= 0.01f;
+        }
+    }
+    if (glfwGetKey(wndHandle, GLFW_KEY_J) == GLFW_PRESS)
+    {
+        if (g_IsUsingLeftAngleSensor)
+        {
+            g_AngleY[LEFT_ANGLE] += 0.01f;
+        }
+        else
+        {
+            g_AngleY[RIGHT_ANGLE] += 0.01f;
+        }
+    }
+    if (glfwGetKey(wndHandle, GLFW_KEY_L) == GLFW_PRESS)
+    {
+        if (g_IsUsingLeftAngleSensor)
+        {
+            g_AngleY[LEFT_ANGLE] -= 0.01f;
+        }
+        else
+        {
+            g_AngleY[RIGHT_ANGLE] -= 0.01f;
+        }
+    }
+    if (glfwGetKey(wndHandle, GLFW_KEY_U) == GLFW_PRESS)
+    {
+        if (g_IsUsingLeftAngleSensor)
+        {
+            g_AngleZ[LEFT_ANGLE] += 0.01f;
+        }
+        else
+        {
+            g_AngleZ[RIGHT_ANGLE] += 0.01f;
+        }
+    }
+    if (glfwGetKey(wndHandle, GLFW_KEY_O) == GLFW_PRESS)
+    {
+        if (g_IsUsingLeftAngleSensor)
+        {
+            g_AngleZ[LEFT_ANGLE] -= 0.01f;
+        }
+        else
+        {
+            g_AngleZ[RIGHT_ANGLE] -= 0.01f;
+        }
     }
 }
 
