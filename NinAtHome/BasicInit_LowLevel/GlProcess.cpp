@@ -3,6 +3,9 @@
 
 GLFWwindow* gp_WndHandle = nullptr;
 
+void ResizeCallback(
+    GLFWwindow* wndHandle, int width, int height);
+
 GLFWwindow* GetGlfwWndHandle()
 {
     return gp_WndHandle;

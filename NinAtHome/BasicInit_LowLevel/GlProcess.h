@@ -12,9 +12,6 @@ void ProcessInput(GLFWwindow* wndHandle);
 
 void TerminateGLFW();
 
-void ResizeCallback(
-    GLFWwindow* wndHandle, int width, int height);
-
 void GoRunLoopProcess();
 
 bool ShouldGlfwQuit();
