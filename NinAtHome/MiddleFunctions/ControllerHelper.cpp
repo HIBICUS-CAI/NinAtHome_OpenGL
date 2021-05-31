@@ -56,8 +56,8 @@ void UpdateController()
     }
     else
     {
-        std::cout <<
-            "sth wrong with getting xinput status" << std::endl;
+        /*std::cout <<
+            "sth wrong with getting xinput status" << std::endl;*/
         return;
     }
 
@@ -185,6 +185,30 @@ void SetControllerRightVibration(int frame)
     gp_VibraHandle->wRightMotorSpeed = 65535 / 2;
     XInputSetState(g_XGamePadIndex, gp_VibraHandle);
     g_VibrationRightFrame = frame;
+}
+
+Float3 GetControllerLeftAcceleration()
+{
+    int x, y, z;
+    x = GetDeltaCursorX(LEFT_ANGLE);
+    y = GetDeltaCursorY(LEFT_ANGLE);
+    z = GetDeltaScroll(LEFT_ANGLE);
+    x = x / 50;
+    y = -y / 50;
+
+    return Float3{ (float)x,(float)y,(float)z };
+}
+
+Float3 GetControllerRightAcceleration()
+{
+    int x, y, z;
+    x = GetDeltaCursorX(RIGHT_ANGLE);
+    y = GetDeltaCursorY(RIGHT_ANGLE);
+    z = GetDeltaScroll(RIGHT_ANGLE);
+    x = x / 50;
+    y = -y / 50;
+
+    return Float3{ (float)x,(float)y,(float)z };
 }
 
 Float3 GetControllerLeftAngle()

@@ -6,8 +6,15 @@ GLFWwindow* gp_WndHandle = nullptr;
 
 bool g_ClearMouseBtn = false;
 bool g_ClickingMouseLeft = false;
+bool g_ClearDeltaCursor = true;
+bool g_ClearDeltaScroll = true;
 int g_CursorPosX = 0;
 int g_CursorPosY = 0;
+int g_OldCursorPosX = 0;
+int g_OldCursorPosY = 0;
+int g_DeltaScroll[2] = { 0,0 };
+int g_DeltaPosX[2] = { 0,0 };
+int g_DeltaPosY[2] = { 0,0 };
 
 bool g_IsUsingLeftAngleSensor = false;
 float g_AngleX[2] = { 0.f,0.f };
@@ -75,6 +82,42 @@ float GetAngleZ(int padIndex)
     else
     {
         return 0.f;
+    }
+}
+
+int GetDeltaScroll(int padIndex)
+{
+    if (padIndex == LEFT_ANGLE || padIndex == RIGHT_ANGLE)
+    {
+        return g_DeltaScroll[padIndex];
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int GetDeltaCursorX(int padIndex)
+{
+    if (padIndex == LEFT_ANGLE || padIndex == RIGHT_ANGLE)
+    {
+        return g_DeltaPosX[padIndex];
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int GetDeltaCursorY(int padIndex)
+{
+    if (padIndex == LEFT_ANGLE || padIndex == RIGHT_ANGLE)
+    {
+        return g_DeltaPosY[padIndex];
+    }
+    else
+    {
+        return 0;
     }
 }
 
@@ -265,20 +308,78 @@ void MouseButtonCallback(
 void CursorPositionCallback(
     GLFWwindow* wndHandle, double x, double y)
 {
+    g_ClearDeltaCursor = false;
+
+    g_OldCursorPosX = g_CursorPosX;
+    g_OldCursorPosY = g_CursorPosY;
+
     g_CursorPosX = (int)x - (SCREEN_WIDTH / 2);
     g_CursorPosY = (int)y - (SCREEN_HEIGHT / 2);
+
+    if (g_IsUsingLeftAngleSensor)
+    {
+        g_DeltaPosX[LEFT_ANGLE] = g_CursorPosX - g_OldCursorPosX;
+        g_DeltaPosY[LEFT_ANGLE] = g_CursorPosY - g_OldCursorPosY;
+    }
+    else
+    {
+        g_DeltaPosX[RIGHT_ANGLE] = g_CursorPosX - g_OldCursorPosX;
+        g_DeltaPosY[RIGHT_ANGLE] = g_CursorPosY - g_OldCursorPosY;
+    }
 }
 
 void ScrollCallback(GLFWwindow* wndHandle, double x, double y)
 {
-    return;
+    g_ClearDeltaScroll = false;
+
+    if (g_IsUsingLeftAngleSensor)
+    {
+        g_DeltaScroll[LEFT_ANGLE] = (int)y;
+    }
+    else
+    {
+        g_DeltaScroll[RIGHT_ANGLE] = (int)y;
+    }
 }
 
 void GoRunLoopProcess()
 {
     ProcessInput(gp_WndHandle);
-
     glfwPollEvents();
+
+    int value = g_OldCursorPosX - g_CursorPosX;
+    if ((value * value) <= 25)
+    {
+        g_DeltaPosX[LEFT_ANGLE] = 0;
+        g_DeltaPosX[RIGHT_ANGLE] = 0;
+    }
+    value = g_OldCursorPosY - g_CursorPosY;
+    if ((value * value) <= 25)
+    {
+        g_DeltaPosY[LEFT_ANGLE] = 0;
+        g_DeltaPosY[RIGHT_ANGLE] = 0;
+    }
+    if (g_ClearDeltaCursor)
+    {
+        g_DeltaPosX[LEFT_ANGLE] = 0;
+        g_DeltaPosX[RIGHT_ANGLE] = 0;
+        g_DeltaPosY[LEFT_ANGLE] = 0;
+        g_DeltaPosY[RIGHT_ANGLE] = 0;
+    }
+    else
+    {
+        g_ClearDeltaCursor = true;
+    }
+    if (g_ClearDeltaScroll)
+    {
+        g_DeltaScroll[LEFT_ANGLE] = 0;
+        g_DeltaScroll[RIGHT_ANGLE] = 0;
+    }
+    else
+    {
+        g_ClearDeltaScroll = true;
+    }
+
     glfwSwapBuffers(gp_WndHandle);
 }
 

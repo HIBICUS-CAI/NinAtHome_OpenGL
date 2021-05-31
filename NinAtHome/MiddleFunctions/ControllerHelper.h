@@ -57,9 +57,9 @@ void SetControllerLeftVibration(int frame);
 
 void SetControllerRightVibration(int frame);
 
-//Float3 GetControllerLeftAcceleration();
-//
-//Float3 GetControllerRightAcceleration();
+Float3 GetControllerLeftAcceleration();
+
+Float3 GetControllerRightAcceleration();
 
 Float3 GetControllerLeftAngle();
 

@@ -30,3 +30,9 @@ float GetAngleX(int padIndex);
 float GetAngleY(int padIndex);
 
 float GetAngleZ(int padIndex);
+
+int GetDeltaScroll(int padIndex);
+
+int GetDeltaCursorX(int padIndex);
+
+int GetDeltaCursorY(int padIndex);

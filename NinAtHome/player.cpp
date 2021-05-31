@@ -22,19 +22,16 @@ void UninitPlayer()
 
 void UpdatePlayer()
 {
-    // •‹•ø•Û
     if (GetControllerPress(NpadButton::Left::Index))
         g_PlayerPosition.x += -20.0f;
     if (GetControllerPress(NpadButton::Right::Index))
         g_PlayerPosition.x += 20.0f;
 
-    // •¢• •Ì•∞•π•∆•£•√•Ø
     Float2 stick;
     stick = GetControllerLeftStick();
 
     g_PlayerPosition.x += stick.x * 20.0f;
 
-    // •ø•√•¡•π•Ø•Í©`•Û
     if (GetControllerTouchScreen())
     {
         Float2 touch;
@@ -42,17 +39,15 @@ void UpdatePlayer()
         g_PlayerPosition = touch;
     }
 
-    //// º”ÀŸ∂»•ª•Û•µ©`
-    //if (GetControllerPress(NpadButton::A::Index))
-    //{
-    //    Float3 acc;
-    //    acc = GetControllerRightAcceleration();
+    if (GetControllerPress(NpadButton::A::Index))
+    {
+        Float3 acc;
+        acc = GetControllerRightAcceleration();
 
-    //    g_PlayerPosition.x += acc.x * 10.0f;
-    //    g_PlayerPosition.y += -acc.y * 10.0f;
-    //}
+        g_PlayerPosition.x += acc.x * 10.0f;
+        g_PlayerPosition.y += -acc.y * 10.0f;
+    }
 
-    // •∏•„•§•Ì•ª•Û•µ©`
     if (GetControllerPress(NpadButton::B::Index))
     {
         Float3 angle;
@@ -61,7 +56,6 @@ void UpdatePlayer()
         g_PlayerPosition.x = angle.z * 1000.0f;
     }
 
-    // ’ÒÑ”
     if (GetControllerPress(NpadButton::Y::Index))
     {
         SetControllerLeftVibration(5);
