@@ -100,8 +100,49 @@ bool GetControllerPress(int button)
         return false;
     }
 
-    return (gp_XGamePadStatus->Gamepad.wButtons & button) ?
-        true : false;
+    if (button >= 0)
+    {
+        return (gp_XGamePadStatus->Gamepad.wButtons & button) ?
+            true : false;
+    }
+    else
+    {
+        switch (button)
+        {
+        case SZL:
+            return (gp_XGamePadStatus->Gamepad.bLeftTrigger > 5) ?
+                true : false;
+        case SZR:
+            return (gp_XGamePadStatus->Gamepad.bRightTrigger > 5) ?
+                true : false;
+        case LL:
+            return (GetControllerLeftStick().x < -0.f) ?
+                true : false;
+        case LU:
+            return (GetControllerLeftStick().y > 0.f) ?
+                true : false;
+        case LR:
+            return (GetControllerLeftStick().x > 0.f) ?
+                true : false;
+        case LD:
+            return (GetControllerLeftStick().y < -0.f) ?
+                true : false;
+        case RL:
+            return (GetControllerRightStick().x < -0.f) ?
+                true : false;
+        case RU:
+            return (GetControllerRightStick().y > 0.f) ?
+                true : false;
+        case RR:
+            return (GetControllerRightStick().x > 0.f) ?
+                true : false;
+        case RD:
+            return (GetControllerRightStick().y < -0.f) ?
+                true : false;
+        default:
+            return false;
+        }
+    }
 }
 
 bool GetControllerTrigger(int button)
