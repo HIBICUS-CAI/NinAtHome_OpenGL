@@ -48,6 +48,10 @@ void UninitController()
     }
 }
 
+Float2 GetOldControllerLeftStick();
+
+Float2 GetOldControllerRightStick();
+
 void UpdateController()
 {
     if (gp_XGamePadStatus && gp_XGamePadOldStatus)
@@ -153,13 +157,91 @@ bool GetControllerTrigger(int button)
         return false;
     }
 
-    bool oldStatus = false, thisStatus = false;
-    oldStatus = (gp_XGamePadOldStatus->Gamepad.wButtons & button) ?
-        true : false;
-    thisStatus = (gp_XGamePadStatus->Gamepad.wButtons & button) ?
-        true : false;
+    if (button >= 0)
+    {
+        bool oldStatus = false, thisStatus = false;
+        oldStatus = (gp_XGamePadOldStatus->Gamepad.wButtons & button) ?
+            true : false;
+        thisStatus = (gp_XGamePadStatus->Gamepad.wButtons & button) ?
+            true : false;
 
-    return ((!oldStatus) && thisStatus);
+        return ((!oldStatus) && thisStatus);
+    }
+    else
+    {
+        bool oldStatus = false, thisStatus = false;
+        switch (button)
+        {
+        case SZL:
+            oldStatus =
+                (gp_XGamePadOldStatus->Gamepad.bLeftTrigger > 5) ?
+                true : false;
+            thisStatus =
+                (gp_XGamePadStatus->Gamepad.bLeftTrigger > 5) ?
+                true : false;
+            break;
+        case SZR:
+            oldStatus =
+                (gp_XGamePadOldStatus->Gamepad.bRightTrigger > 5) ?
+                true : false;
+            thisStatus =
+                (gp_XGamePadStatus->Gamepad.bRightTrigger > 5) ?
+                true : false;
+            break;
+        case LL:
+            oldStatus =
+                (GetOldControllerLeftStick().x < -0.f) ? true : false;
+            thisStatus =
+                (GetControllerLeftStick().x < -0.f) ? true : false;
+            break;
+        case LU:
+            oldStatus =
+                (GetOldControllerLeftStick().y > 0.f) ? true : false;
+            thisStatus =
+                (GetControllerLeftStick().y > 0.f) ? true : false;
+            break;
+        case LR:
+            oldStatus =
+                (GetOldControllerLeftStick().x > 0.f) ? true : false;
+            thisStatus =
+                (GetControllerLeftStick().x > 0.f) ? true : false;
+            break;
+        case LD:
+            oldStatus =
+                (GetOldControllerLeftStick().y < -0.f) ? true : false;
+            thisStatus =
+                (GetControllerLeftStick().y < -0.f) ? true : false;
+            break;
+        case RL:
+            oldStatus =
+                (GetOldControllerRightStick().x < -0.f) ? true : false;
+            thisStatus =
+                (GetControllerRightStick().x < -0.f) ? true : false;
+            break;
+        case RU:
+            oldStatus =
+                (GetOldControllerRightStick().y > 0.f) ? true : false;
+            thisStatus =
+                (GetControllerRightStick().y > 0.f) ? true : false;
+            break;
+        case RR:
+            oldStatus =
+                (GetOldControllerRightStick().x > 0.f) ? true : false;
+            thisStatus =
+                (GetControllerRightStick().x > 0.f) ? true : false;
+            break;
+        case RD:
+            oldStatus =
+                (GetOldControllerRightStick().y < -0.f) ? true : false;
+            thisStatus =
+                (GetControllerRightStick().y < -0.f) ? true : false;
+            break;
+        default:
+            return false;
+        }
+
+        return ((!oldStatus) && thisStatus);
+    }
 }
 
 Float2 GetControllerLeftStick()
@@ -287,4 +369,56 @@ Float2 GetControllerTouchScreenPosition()
     }
 
     return pos;
+}
+
+Float2 GetOldControllerLeftStick()
+{
+    Float2 stick = { 0.f,0.f };
+    if (!gp_XGamePadOldStatus)
+    {
+        return stick;
+    }
+
+    SHORT xOffset, yOffset;
+    xOffset = gp_XGamePadOldStatus->Gamepad.sThumbLX;
+    yOffset = gp_XGamePadOldStatus->Gamepad.sThumbLY;
+    if ((xOffset < INPUT_DEADZONE) && (xOffset > -INPUT_DEADZONE))
+    {
+        xOffset = 0;
+    }
+    if ((yOffset < INPUT_DEADZONE) && (yOffset > -INPUT_DEADZONE))
+    {
+        yOffset = 0;
+    }
+
+    stick.x = (float)xOffset / (float)(0x7FFF);
+    stick.y = (float)yOffset / (float)(0x7FFF);
+
+    return stick;
+}
+
+Float2 GetOldControllerRightStick()
+{
+    Float2 stick = { 0.f,0.f };
+    if (!gp_XGamePadOldStatus)
+    {
+        return stick;
+    }
+
+    SHORT xOffset, yOffset;
+    xOffset = gp_XGamePadOldStatus->Gamepad.sThumbRX;
+    yOffset = gp_XGamePadOldStatus->Gamepad.sThumbRY;
+    if ((xOffset < INPUT_DEADZONE) && (xOffset > -INPUT_DEADZONE))
+    {
+        xOffset = 0;
+    }
+    if ((yOffset < INPUT_DEADZONE) && (yOffset > -INPUT_DEADZONE))
+    {
+        yOffset = 0;
+    }
+
+    stick.x = (float)xOffset / (float)(0x7FFF);
+    stick.y = (float)yOffset / (float)(0x7FFF);
+
+    return stick;
 }
