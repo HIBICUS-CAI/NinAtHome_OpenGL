@@ -101,6 +101,7 @@
     <ClInclude Include="BasicInit_LowLevel\GlHelper.h" />
     <ClInclude Include="BasicInit_LowLevel\GlProcess.h" />
     <ClInclude Include="BasicInit_LowLevel\main.h" />
+    <ClInclude Include="BasicInit_LowLevel\NinLog.h" />
     <ClInclude Include="BasicInit_LowLevel\stb_image.h" />
     <ClInclude Include="bg.h" />
     <ClInclude Include="MiddleFunctions\controller.h" />
@@ -115,6 +116,7 @@
     <ClCompile Include="BasicInit_LowLevel\GlHelper.cpp" />
     <ClCompile Include="BasicInit_LowLevel\GlProcess.cpp" />
     <ClCompile Include="BasicInit_LowLevel\LowLevelCpp.cpp" />
+    <ClCompile Include="BasicInit_LowLevel\NinLog.cpp" />
     <ClCompile Include="bg.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MiddleFunctions\ControllerHelper.cpp" />

@@ -142,7 +142,7 @@ bool InitGlAndCreateWindow(
 
     if (!gp_WndHandle)
     {
-        std::cout << "failed to create glfw wnd" << std::endl;
+        NN_LOG("failed to create glfw wnd\n");
         glfwTerminate();
         return false;
     }
@@ -154,7 +154,7 @@ bool InitGlAndCreateWindow(
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        std::cout << "failed to init glad" << std::endl;
+        NN_LOG("failed to init glad\n");
         return false;
     }
     else

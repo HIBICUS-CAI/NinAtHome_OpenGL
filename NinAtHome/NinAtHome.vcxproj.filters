@@ -57,6 +57,9 @@
     <ClInclude Include="MiddleFunctions\controller.h">
       <Filter>MiddleFunc</Filter>
     </ClInclude>
+    <ClInclude Include="BasicInit_LowLevel\NinLog.h">
+      <Filter>ForLowLevel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -85,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="MiddleFunctions\ControllerHelper.cpp">
       <Filter>MiddleFunc</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicInit_LowLevel\NinLog.cpp">
+      <Filter>ForLowLevel</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

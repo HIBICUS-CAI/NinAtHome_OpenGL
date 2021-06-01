@@ -28,7 +28,7 @@ void InitController()
     {
         delete gp_XGamePadStatus;
         gp_XGamePadStatus = nullptr;
-        std::cout << "could not find xbox gamepad" << std::endl;
+        NN_LOG("could not find xbox gamepad\n");
     }
 }
 
@@ -70,8 +70,7 @@ void UpdateController()
 
     if (result != ERROR_SUCCESS)
     {
-        std::cout <<
-            "sth wrong with polling xinput status" << std::endl;
+        NN_LOG("sth wrong with polling xinput status");
     }
 
     if (g_VibrationLeftFrame > 0)

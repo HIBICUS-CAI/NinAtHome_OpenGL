@@ -3,6 +3,8 @@
 #include <TP\glad\glad.h>
 #include <TP\glfw\glfw3.h>
 
+#include "NinLog.h"
+
 #define LEFT_ANGLE  (0)
 #define RIGHT_ANGLE (1)
 

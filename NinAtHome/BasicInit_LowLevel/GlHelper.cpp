@@ -3,6 +3,7 @@
 #include <TP\glm\glm.hpp>
 #include <TP\glm\ext\matrix_clip_space.hpp>
 #include <TP\glm\gtc\type_ptr.hpp>
+#include "NinLog.h"
 
 const char* g_DefaultVertShader =
 "#version 330 core\n"
@@ -91,9 +92,7 @@ bool GlHelper::CompileDefaultShaders()
     glGetShaderiv(vertShaderId, GL_COMPILE_STATUS, &result);
     if (!result)
     {
-        std::cout <<
-            "failed to compile default vert shader"
-            << std::endl;
+        NN_LOG("failed to compile default vert shader\n");
         return false;
     }
 
@@ -103,9 +102,7 @@ bool GlHelper::CompileDefaultShaders()
     glGetShaderiv(fragShaderId, GL_COMPILE_STATUS, &result);
     if (!result)
     {
-        std::cout <<
-            "failed to compile default vert shader"
-            << std::endl;
+        NN_LOG("failed to compile default vert shader\n");
         return false;
     }
 
