@@ -106,6 +106,8 @@
     <ClInclude Include="bg.h" />
     <ClInclude Include="MiddleFunctions\controller.h" />
     <ClInclude Include="MiddleFunctions\ControllerHelper.h" />
+    <ClInclude Include="MiddleFunctions\json.h" />
+    <ClInclude Include="MiddleFunctions\JsonHelper.h" />
     <ClInclude Include="MiddleFunctions\sprite.h" />
     <ClInclude Include="MiddleFunctions\SpriteHelper.h" />
     <ClInclude Include="MiddleFunctions\texture.h" />
@@ -120,6 +122,7 @@
     <ClCompile Include="bg.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MiddleFunctions\ControllerHelper.cpp" />
+    <ClCompile Include="MiddleFunctions\JsonHelper.cpp" />
     <ClCompile Include="MiddleFunctions\SpriteHelper.cpp" />
     <ClCompile Include="MiddleFunctions\TextureHelper.cpp" />
     <ClCompile Include="player.cpp" />

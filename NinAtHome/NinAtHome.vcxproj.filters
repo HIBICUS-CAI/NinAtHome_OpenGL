@@ -60,6 +60,12 @@
     <ClInclude Include="BasicInit_LowLevel\NinLog.h">
       <Filter>ForLowLevel</Filter>
     </ClInclude>
+    <ClInclude Include="MiddleFunctions\json.h">
+      <Filter>MiddleFunc</Filter>
+    </ClInclude>
+    <ClInclude Include="MiddleFunctions\JsonHelper.h">
+      <Filter>MiddleFunc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -91,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="BasicInit_LowLevel\NinLog.cpp">
       <Filter>ForLowLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="MiddleFunctions\JsonHelper.cpp">
+      <Filter>MiddleFunc</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
