@@ -111,6 +111,12 @@
     <ClInclude Include="HighFrame\UiObject.h">
       <Filter>02_HightFrame\Object</Filter>
     </ClInclude>
+    <ClInclude Include="HighFrame\AComponent.h">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\ActorObject.h">
+      <Filter>02_HightFrame\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -165,6 +171,12 @@
       <Filter>02_HightFrame\Component</Filter>
     </ClCompile>
     <ClCompile Include="HighFrame\UiObject.cpp">
+      <Filter>02_HightFrame\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\AComponent.cpp">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\ActorObject.cpp">
       <Filter>02_HightFrame\Object</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,7 +11,7 @@
 #include "UiObject.h"
 
 UComponent::UComponent(std::string _name,
-    class UiObject* _owner, int _order) :
+    UiObject* _owner, int _order) :
     Component(_name, STATUS::NEED_INIT), mUObjectOwner(_owner),
     mUCUpdateOrder(_order)
 {
