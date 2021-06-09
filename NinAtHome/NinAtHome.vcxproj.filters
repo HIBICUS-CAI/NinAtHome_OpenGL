@@ -96,6 +96,21 @@
     <ClInclude Include="HighFrame\SceneNode.h">
       <Filter>02_HightFrame\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="HighFrame\Object.h">
+      <Filter>02_HightFrame\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\HFCommon.h">
+      <Filter>02_HightFrame\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\Component.h">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\UComponent.h">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\UiObject.h">
+      <Filter>02_HightFrame\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -139,6 +154,18 @@
     </ClCompile>
     <ClCompile Include="HighFrame\SceneNode.cpp">
       <Filter>02_HightFrame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\Object.cpp">
+      <Filter>02_HightFrame\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\Component.cpp">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\UComponent.cpp">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\UiObject.cpp">
+      <Filter>02_HightFrame\Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
