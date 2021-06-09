@@ -1,15 +1,10 @@
 //---------------------------------------------------------------
-// File: SceneManager.h
+// File: SceneNode.cpp
 // Proj: NinAtHome
-// Info: シーン管理する機能の対応
+// Info: 単一のシーンを管理、代表するの節点
 // Date: 2021.06.09
 // Mail: cai_genkan@outlook.com
 // Comt: NULL
 //---------------------------------------------------------------
 
-#pragma once
-
-class SceneManager
-{
-};
-
+#include "SceneNode.h"

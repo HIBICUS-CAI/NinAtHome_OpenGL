@@ -13,7 +13,7 @@
 #include "main.h"
 
 RootSystem::RootSystem() :
-    mpSceneManager(nullptr), mpPropertyManager(nullptr)
+    mSceneManagerPtr(nullptr), mPropertyManagerPtr(nullptr)
 {
 
 }
@@ -25,8 +25,8 @@ RootSystem::~RootSystem()
 
 bool RootSystem::StartUp()
 {
-    mpSceneManager = new SceneManager();
-    mpPropertyManager = new PropertyManager();
+    mSceneManagerPtr = new SceneManager();
+    mPropertyManagerPtr = new PropertyManager();
 
     bool result = InitSystem();
 
@@ -40,15 +40,15 @@ bool RootSystem::StartUp()
 
 void RootSystem::ClearAndStop()
 {
-    if (mpSceneManager)
+    if (mSceneManagerPtr)
     {
-        delete mpSceneManager;
-        mpSceneManager = nullptr;
+        delete mSceneManagerPtr;
+        mSceneManagerPtr = nullptr;
     }
-    if (mpPropertyManager)
+    if (mPropertyManagerPtr)
     {
-        delete mpPropertyManager;
-        mpPropertyManager = nullptr;
+        delete mPropertyManagerPtr;
+        mPropertyManagerPtr = nullptr;
     }
 
     UninitSystem();

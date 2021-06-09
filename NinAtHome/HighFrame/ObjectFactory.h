@@ -1,10 +1,15 @@
 //---------------------------------------------------------------
-// File: SceneManager.cpp
+// File: ObjectFactory.h
 // Proj: NinAtHome
-// Info: シーン管理する機能の対応
+// Info: オブジェクトを生成するのファクトリー
 // Date: 2021.06.09
 // Mail: cai_genkan@outlook.com
 // Comt: NULL
 //---------------------------------------------------------------
 
-#include "SceneManager.h"
+#pragma once
+
+class ObjectFactory
+{
+};
+

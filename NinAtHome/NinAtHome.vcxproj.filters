@@ -66,12 +66,6 @@
     <ClInclude Include="MiddleFunctions\sprite.h">
       <Filter>01_MiddleFunc</Filter>
     </ClInclude>
-    <ClInclude Include="bg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MiddleFunctions\ControllerHelper.h">
       <Filter>01_MiddleFunc</Filter>
     </ClInclude>
@@ -87,18 +81,24 @@
     <ClInclude Include="MiddleFunctions\JsonHelper.h">
       <Filter>01_MiddleFunc</Filter>
     </ClInclude>
-    <ClInclude Include="RootSystem.h">
+    <ClInclude Include="HighFrame\ObjectFactory.h">
+      <Filter>02_HightFrame\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\PropertyManager.h">
+      <Filter>02_HightFrame\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\RootSystem.h">
       <Filter>02_HightFrame\Root</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h">
+    <ClInclude Include="HighFrame\SceneManager.h">
       <Filter>02_HightFrame\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="PropertyManager.h">
-      <Filter>02_HightFrame\Factory</Filter>
+    <ClInclude Include="HighFrame\SceneNode.h">
+      <Filter>02_HightFrame\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BasicInit_LowLevel\GlProcess.cpp">
@@ -116,12 +116,6 @@
     <ClCompile Include="MiddleFunctions\SpriteHelper.cpp">
       <Filter>01_MiddleFunc</Filter>
     </ClCompile>
-    <ClCompile Include="bg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MiddleFunctions\ControllerHelper.cpp">
       <Filter>01_MiddleFunc</Filter>
     </ClCompile>
@@ -131,14 +125,20 @@
     <ClCompile Include="MiddleFunctions\JsonHelper.cpp">
       <Filter>01_MiddleFunc</Filter>
     </ClCompile>
-    <ClCompile Include="RootSystem.cpp">
+    <ClCompile Include="HighFrame\ObjectFactory.cpp">
+      <Filter>02_HightFrame\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\PropertyManager.cpp">
+      <Filter>02_HightFrame\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\RootSystem.cpp">
       <Filter>02_HightFrame\Root</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
+    <ClCompile Include="HighFrame\SceneManager.cpp">
       <Filter>02_HightFrame\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="PropertyManager.cpp">
-      <Filter>02_HightFrame\Factory</Filter>
+    <ClCompile Include="HighFrame\SceneNode.cpp">
+      <Filter>02_HightFrame\Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

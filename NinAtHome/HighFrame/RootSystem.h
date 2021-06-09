@@ -22,8 +22,8 @@ public:
     void RunGameLoop();
 
 private:
-    class SceneManager* mpSceneManager;
+    class SceneManager* mSceneManagerPtr;
 
-    class PropertyManager* mpPropertyManager;
+    class PropertyManager* mPropertyManagerPtr;
 };
 
