@@ -25,5 +25,7 @@ private:
     class SceneManager* mSceneManagerPtr;
 
     class PropertyManager* mPropertyManagerPtr;
+
+    class ObjectFactory* mObjectFactoryPtr;
 };
 

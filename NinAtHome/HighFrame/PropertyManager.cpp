@@ -8,3 +8,29 @@
 //---------------------------------------------------------------
 
 #include "PropertyManager.h"
+#include "PropertyNode.h"
+
+PropertyManager::PropertyManager() :mPropertyMap({})
+{
+    mPropertyMap.clear();
+}
+
+PropertyManager::~PropertyManager()
+{
+
+}
+
+void PropertyManager::StartUp()
+{
+
+}
+
+void PropertyManager::CleanAndStop()
+{
+
+}
+
+PropertyNode* PropertyManager::GetPropertyNode(std::string _name)
+{
+    return mPropertyMap[_name];
+}

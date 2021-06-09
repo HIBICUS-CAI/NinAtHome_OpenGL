@@ -36,6 +36,8 @@ public:
 
     void UpdateScene();
 
+    void DrawScene();
+
     void ReleaseScene();
 
     void AddActorObject(class ActorObject* _aObj);

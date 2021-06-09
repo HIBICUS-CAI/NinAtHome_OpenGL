@@ -18,3 +18,28 @@ enum class STATUS
     PAUSE,
     NEED_DESTORY
 };
+
+enum class OBJ_TYPE
+{
+    ACTOR,
+    UI,
+    NULLTYPE
+};
+
+enum class COMP_TYPE
+{
+    ATRANSFORM,
+    ATIMER,
+    ASPRITE,
+    ACOLLISION,
+    AINPUT,
+    AANIMATE,
+    AINTERUPDATE,
+    UTRANSFORM,
+    UINPUT,
+    UTEXT,
+    USPRITE,
+    UCHECK,
+    UBTNMAP,
+    NULLTYPE
+};

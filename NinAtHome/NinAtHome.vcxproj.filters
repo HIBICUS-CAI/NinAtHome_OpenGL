@@ -117,6 +117,9 @@
     <ClInclude Include="HighFrame\ActorObject.h">
       <Filter>02_HightFrame\Object</Filter>
     </ClInclude>
+    <ClInclude Include="HighFrame\PropertyNode.h">
+      <Filter>02_HightFrame\Factory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -178,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="HighFrame\ActorObject.cpp">
       <Filter>02_HightFrame\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\PropertyNode.cpp">
+      <Filter>02_HightFrame\Factory</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

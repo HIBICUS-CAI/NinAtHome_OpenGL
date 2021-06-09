@@ -9,7 +9,23 @@
 
 #pragma once
 
+#include <string>
+#include <vector>
+#include <unordered_map>
+
 class PropertyManager
 {
-};
+public:
+    PropertyManager();
+    ~PropertyManager();
 
+    void StartUp();
+
+    void CleanAndStop();
+
+    class PropertyNode* GetPropertyNode(std::string _name);
+
+private:
+    std::unordered_map<std::string, class PropertyNode*>
+        mPropertyMap;
+};

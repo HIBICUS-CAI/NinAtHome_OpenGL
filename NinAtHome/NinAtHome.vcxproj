@@ -110,6 +110,7 @@
     <ClInclude Include="HighFrame\Object.h" />
     <ClInclude Include="HighFrame\ObjectFactory.h" />
     <ClInclude Include="HighFrame\PropertyManager.h" />
+    <ClInclude Include="HighFrame\PropertyNode.h" />
     <ClInclude Include="HighFrame\RootSystem.h" />
     <ClInclude Include="HighFrame\SceneManager.h" />
     <ClInclude Include="HighFrame\SceneNode.h" />
@@ -135,6 +136,7 @@
     <ClCompile Include="HighFrame\Object.cpp" />
     <ClCompile Include="HighFrame\ObjectFactory.cpp" />
     <ClCompile Include="HighFrame\PropertyManager.cpp" />
+    <ClCompile Include="HighFrame\PropertyNode.cpp" />
     <ClCompile Include="HighFrame\RootSystem.cpp" />
     <ClCompile Include="HighFrame\SceneManager.cpp" />
     <ClCompile Include="HighFrame\SceneNode.cpp" />

@@ -65,6 +65,11 @@ void SceneNode::UpdateScene()
 
 }
 
+void SceneNode::DrawScene()
+{
+
+}
+
 void SceneNode::ReleaseScene()
 {
 

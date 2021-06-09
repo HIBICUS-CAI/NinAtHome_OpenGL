@@ -10,10 +10,12 @@
 #include "RootSystem.h"
 #include "SceneManager.h"
 #include "PropertyManager.h"
+#include "ObjectFactory.h"
 #include "main.h"
 
 RootSystem::RootSystem() :
-    mSceneManagerPtr(nullptr), mPropertyManagerPtr(nullptr)
+    mSceneManagerPtr(nullptr), mPropertyManagerPtr(nullptr),
+    mObjectFactoryPtr(nullptr)
 {
 
 }
@@ -27,6 +29,7 @@ bool RootSystem::StartUp()
 {
     mSceneManagerPtr = new SceneManager();
     mPropertyManagerPtr = new PropertyManager();
+    mObjectFactoryPtr = new ObjectFactory();
 
     bool result = InitSystem();
 
@@ -49,6 +52,11 @@ void RootSystem::ClearAndStop()
     {
         delete mPropertyManagerPtr;
         mPropertyManagerPtr = nullptr;
+    }
+    if (mObjectFactoryPtr)
+    {
+        delete mObjectFactoryPtr;
+        mObjectFactoryPtr = nullptr;
     }
 
     UninitSystem();
