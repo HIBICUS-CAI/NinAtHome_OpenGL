@@ -9,6 +9,8 @@
 
 #pragma once
 
+#include "main.h"
+
 enum class STATUS
 {
     NEED_INIT,
