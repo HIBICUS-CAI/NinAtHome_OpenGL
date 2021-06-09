@@ -1,82 +1,25 @@
-﻿#include "main.h"
-#include "controller.h"
-#include "texture.h"
-#include "sprite.h"
-#include "bg.h"
-#include "player.h"
+﻿//---------------------------------------------------------------
+// File: main.cpp
+// Proj: NinAtHome
+// Info: 入口ファイル
+// Date: 2021.06.09
+// Mail: cai_genkan@outlook.com
+// Comt: NULL
+//---------------------------------------------------------------
 
-void Init();
+#include "main.h"
+#include "RootSystem.h"
 
-void Uninit();
-
-void Update();
-
-void Draw();
+RootSystem g_RootSystem = {};
 
 extern "C" int nnMain()
 {
-    Init();
-
-    while (true)
+    if (g_RootSystem.StartUp())
     {
-        Update();
-        Draw();
-
-#ifdef RUN_WITHOUT_NINSDK
-        if (ShouldQuit())
-        {
-            break;
-        }
-#endif // RUN_WITHOUT_NINSDK
+        g_RootSystem.RunGameLoop();
     }
 
-    Uninit();
+    g_RootSystem.ClearAndStop();
 
     return 0;
-}
-
-void Init()
-{
-    InitSystem();
-
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-
-    glFrontFace(GL_CCW);
-
-    InitController();
-
-    InitBG();
-    InitPlayer();
-}
-
-
-void Uninit()
-{
-    UninitBG();
-    UninitPlayer();
-
-    UninitController();
-    UninitSystem();
-}
-
-
-void Update()
-{
-    UpdateController();
-
-    UpdateBG();
-    UpdatePlayer();
-}
-
-
-void Draw()
-{
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    DrawBG();
-    DrawPlayer();
-
-    SwapBuffers();
 }
