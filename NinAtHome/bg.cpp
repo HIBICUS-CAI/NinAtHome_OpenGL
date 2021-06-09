@@ -7,7 +7,7 @@ unsigned int g_BGTexture;
 
 void InitBG()
 {
-	g_BGTexture = LoadTexture("rom:/bg.tga");
+	g_BGTexture = LoadTexture("rom:/Assets/Textures/bg.tga");
 }
 
 

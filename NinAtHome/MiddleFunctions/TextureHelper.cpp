@@ -29,6 +29,23 @@ unsigned int LoadTexture(std::string fileName)
         std::vector<std::string> v;
         SplitByRomSymbol(fileName, v, ":/");
         fileName = v[0] + "\\" + v[1];
+        v.clear();
+        SplitByRomSymbol(fileName, v, "/");
+        if (v.size() > 1)
+        {
+            fileName = "";
+            for (int i = 0; i < v.size(); i++)
+            {
+                if (i == (v.size() - 1))
+                {
+                    fileName += v[i];
+                }
+                else
+                {
+                    fileName += v[i] + "\\";
+                }
+            }
+        }
     }
 
     int width, height, nrChannels;

@@ -9,7 +9,8 @@ Float2			g_PlayerPosition;
 
 void InitPlayer()
 {
-    g_PlayerTexture = LoadTexture("rom:/player.tga");
+    g_PlayerTexture = LoadTexture(
+        "rom:/Assets/Textures/player.tga");
 
     g_PlayerPosition.x = 0.0f;
     g_PlayerPosition.y = 450.0f;

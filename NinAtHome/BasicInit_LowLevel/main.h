@@ -4,6 +4,7 @@
 #include "GlHelper.h"
 #include "GlProcess.h"
 #include <math.h>
+#include "NinLog.h"
 
 #define RUN_WITHOUT_NINSDK
 

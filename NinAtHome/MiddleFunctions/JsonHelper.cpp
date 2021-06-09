@@ -23,6 +23,23 @@ void LoadJsonFile(JsonFile* json, std::string _path)
         std::vector<std::string> v;
         JOSNSplitByRomSymbol(_path, v, ":/");
         _path = v[0] + "\\" + v[1];
+        v.clear();
+        JOSNSplitByRomSymbol(_path, v, "/");
+        if (v.size() > 1)
+        {
+            _path = "";
+            for (int i = 0; i < v.size(); i++)
+            {
+                if (i == (v.size() - 1))
+                {
+                    _path += v[i];
+                }
+                else
+                {
+                    _path += v[i] + "\\";
+                }
+            }
+        }
     }
 
     std::ifstream ifs(_path);
