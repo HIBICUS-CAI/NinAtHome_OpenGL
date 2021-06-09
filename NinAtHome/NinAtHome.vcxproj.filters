@@ -13,37 +13,58 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ForLowLevel">
+    <Filter Include="00_ForLowLevel">
       <UniqueIdentifier>{357f8b07-e63e-4cbb-af43-906ee46fb3e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MiddleFunc">
+    <Filter Include="01_MiddleFunc">
       <UniqueIdentifier>{2c5d331c-e6cb-4c25-8cad-ac37a78a30e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_HightFrame">
+      <UniqueIdentifier>{37d4d3e0-6655-41c2-8757-b9946156b761}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_HightFrame\Common">
+      <UniqueIdentifier>{12bb6ad6-9b1c-4afc-990b-5256894317da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_HightFrame\Scene">
+      <UniqueIdentifier>{a91009c0-b42c-48bd-ab6b-2cf6538a2ed9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_HightFrame\Object">
+      <UniqueIdentifier>{47e31696-79dd-46f5-b0db-0be9b2e8c92b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_HightFrame\Component">
+      <UniqueIdentifier>{59951144-5c53-4bc6-82eb-9025d17482c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_HightFrame\Root">
+      <UniqueIdentifier>{780eb3c1-8b2b-4da2-99f8-bc570e346ebf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_HightFrame\Factory">
+      <UniqueIdentifier>{7827a381-76e9-4229-a68d-b6a0711f6a2d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicInit_LowLevel\main.h">
-      <Filter>ForLowLevel</Filter>
+      <Filter>00_ForLowLevel</Filter>
     </ClInclude>
     <ClInclude Include="BasicInit_LowLevel\GlProcess.h">
-      <Filter>ForLowLevel</Filter>
+      <Filter>00_ForLowLevel</Filter>
     </ClInclude>
     <ClInclude Include="BasicInit_LowLevel\GlHelper.h">
-      <Filter>ForLowLevel</Filter>
+      <Filter>00_ForLowLevel</Filter>
     </ClInclude>
     <ClInclude Include="BasicInit_LowLevel\stb_image.h">
-      <Filter>ForLowLevel</Filter>
+      <Filter>00_ForLowLevel</Filter>
     </ClInclude>
     <ClInclude Include="MiddleFunctions\TextureHelper.h">
-      <Filter>MiddleFunc</Filter>
+      <Filter>01_MiddleFunc</Filter>
     </ClInclude>
     <ClInclude Include="MiddleFunctions\texture.h">
-      <Filter>MiddleFunc</Filter>
+      <Filter>01_MiddleFunc</Filter>
     </ClInclude>
     <ClInclude Include="MiddleFunctions\SpriteHelper.h">
-      <Filter>MiddleFunc</Filter>
+      <Filter>01_MiddleFunc</Filter>
     </ClInclude>
     <ClInclude Include="MiddleFunctions\sprite.h">
-      <Filter>MiddleFunc</Filter>
+      <Filter>01_MiddleFunc</Filter>
     </ClInclude>
     <ClInclude Include="bg.h">
       <Filter>Header Files</Filter>
@@ -52,19 +73,19 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MiddleFunctions\ControllerHelper.h">
-      <Filter>MiddleFunc</Filter>
+      <Filter>01_MiddleFunc</Filter>
     </ClInclude>
     <ClInclude Include="MiddleFunctions\controller.h">
-      <Filter>MiddleFunc</Filter>
+      <Filter>01_MiddleFunc</Filter>
     </ClInclude>
     <ClInclude Include="BasicInit_LowLevel\NinLog.h">
-      <Filter>ForLowLevel</Filter>
+      <Filter>00_ForLowLevel</Filter>
     </ClInclude>
     <ClInclude Include="MiddleFunctions\json.h">
-      <Filter>MiddleFunc</Filter>
+      <Filter>01_MiddleFunc</Filter>
     </ClInclude>
     <ClInclude Include="MiddleFunctions\JsonHelper.h">
-      <Filter>MiddleFunc</Filter>
+      <Filter>01_MiddleFunc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -72,19 +93,19 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BasicInit_LowLevel\GlProcess.cpp">
-      <Filter>ForLowLevel</Filter>
+      <Filter>00_ForLowLevel</Filter>
     </ClCompile>
     <ClCompile Include="BasicInit_LowLevel\LowLevelCpp.cpp">
-      <Filter>ForLowLevel</Filter>
+      <Filter>00_ForLowLevel</Filter>
     </ClCompile>
     <ClCompile Include="BasicInit_LowLevel\GlHelper.cpp">
-      <Filter>ForLowLevel</Filter>
+      <Filter>00_ForLowLevel</Filter>
     </ClCompile>
     <ClCompile Include="MiddleFunctions\TextureHelper.cpp">
-      <Filter>MiddleFunc</Filter>
+      <Filter>01_MiddleFunc</Filter>
     </ClCompile>
     <ClCompile Include="MiddleFunctions\SpriteHelper.cpp">
-      <Filter>MiddleFunc</Filter>
+      <Filter>01_MiddleFunc</Filter>
     </ClCompile>
     <ClCompile Include="bg.cpp">
       <Filter>Source Files</Filter>
@@ -93,13 +114,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MiddleFunctions\ControllerHelper.cpp">
-      <Filter>MiddleFunc</Filter>
+      <Filter>01_MiddleFunc</Filter>
     </ClCompile>
     <ClCompile Include="BasicInit_LowLevel\NinLog.cpp">
-      <Filter>ForLowLevel</Filter>
+      <Filter>00_ForLowLevel</Filter>
     </ClCompile>
     <ClCompile Include="MiddleFunctions\JsonHelper.cpp">
-      <Filter>MiddleFunc</Filter>
+      <Filter>01_MiddleFunc</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
