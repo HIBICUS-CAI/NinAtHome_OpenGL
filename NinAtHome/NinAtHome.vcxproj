@@ -118,6 +118,7 @@
     <ClInclude Include="HighFrame\UCheckComponent.h" />
     <ClInclude Include="HighFrame\UComponent.h" />
     <ClInclude Include="HighFrame\UInputComponent.h" />
+    <ClInclude Include="HighFrame\UInteractionComponent.h" />
     <ClInclude Include="HighFrame\UiObject.h" />
     <ClInclude Include="HighFrame\USpriteComponent.h" />
     <ClInclude Include="HighFrame\UTextComponent.h" />
@@ -150,6 +151,7 @@
     <ClCompile Include="HighFrame\UCheckComponent.cpp" />
     <ClCompile Include="HighFrame\UComponent.cpp" />
     <ClCompile Include="HighFrame\UInputComponent.cpp" />
+    <ClCompile Include="HighFrame\UInteractionComponent.cpp" />
     <ClCompile Include="HighFrame\UiObject.cpp" />
     <ClCompile Include="HighFrame\USpriteComponent.cpp" />
     <ClCompile Include="HighFrame\UTextComponent.cpp" />

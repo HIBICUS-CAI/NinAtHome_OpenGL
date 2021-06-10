@@ -138,6 +138,9 @@
     <ClInclude Include="HighFrame\USpriteComponent.h">
       <Filter>02_HightFrame\Component</Filter>
     </ClInclude>
+    <ClInclude Include="HighFrame\UInteractionComponent.h">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -219,6 +222,9 @@
       <Filter>02_HightFrame\Component</Filter>
     </ClCompile>
     <ClCompile Include="HighFrame\USpriteComponent.cpp">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\UInteractionComponent.cpp">
       <Filter>02_HightFrame\Component</Filter>
     </ClCompile>
   </ItemGroup>
