@@ -120,6 +120,24 @@
     <ClInclude Include="HighFrame\PropertyNode.h">
       <Filter>02_HightFrame\Factory</Filter>
     </ClInclude>
+    <ClInclude Include="HighFrame\UTransformComponent.h">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\UInputComponent.h">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\UCheckComponent.h">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\UTextComponent.h">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\UBtnMapComponent.h">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\USpriteComponent.h">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -184,6 +202,24 @@
     </ClCompile>
     <ClCompile Include="HighFrame\PropertyNode.cpp">
       <Filter>02_HightFrame\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\UTransformComponent.cpp">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\UInputComponent.cpp">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\UCheckComponent.cpp">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\UTextComponent.cpp">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\UBtnMapComponent.cpp">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\USpriteComponent.cpp">
+      <Filter>02_HightFrame\Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
