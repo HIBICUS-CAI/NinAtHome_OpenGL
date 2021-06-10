@@ -1,7 +1,7 @@
 //---------------------------------------------------------------
-// File: Component.cpp
+// File: UComponent.cpp
 // Proj: NinAtHome
-// Info: 各オブジェクトに搭載されるコンポーネント抽象
+// Info: 各UIオブジェクトに搭載されるコンポーネント抽象
 // Date: 2021.06.09
 // Mail: cai_genkan@outlook.com
 // Comt: NULL
