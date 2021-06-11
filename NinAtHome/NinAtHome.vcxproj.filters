@@ -141,6 +141,27 @@
     <ClInclude Include="HighFrame\UInteractionComponent.h">
       <Filter>02_HightFrame\Component</Filter>
     </ClInclude>
+    <ClInclude Include="HighFrame\AInteractionComponent.h">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\ATransformComponent.h">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\ATimerComponent.h">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\AInputComponent.h">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\ASpriteComponent.h">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\ACollisionComponent.h">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\AAnimateComponent.h">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -225,6 +246,27 @@
       <Filter>02_HightFrame\Component</Filter>
     </ClCompile>
     <ClCompile Include="HighFrame\UInteractionComponent.cpp">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\AInteractionComponent.cpp">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\ATransformComponent.cpp">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\ATimerComponent.cpp">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\AInputComponent.cpp">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\ASpriteComponent.cpp">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\ACollisionComponent.cpp">
+      <Filter>02_HightFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HighFrame\AAnimateComponent.cpp">
       <Filter>02_HightFrame\Component</Filter>
     </ClCompile>
   </ItemGroup>
