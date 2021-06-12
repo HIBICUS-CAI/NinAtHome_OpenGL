@@ -27,6 +27,22 @@ public:
 
     int GetUpdateOrder() const;
 
+    void AddChild(ActorObject* _obj);
+
+    void AddParent(ActorObject* _obj);
+
+    void ClearParent();
+
+    void ClearChild(std::string _name);
+
+    void ClearChildren();
+
+    ActorObject* GetChild(std::string _name);
+
+    std::vector<ActorObject*>* GetChildrenArray();
+
+    ActorObject* GetParent() const;
+
 public:
     virtual void Init();
 
@@ -42,5 +58,11 @@ private:
     std::vector<class AComponent*> mACompArray;
 
     int mActorUpdateOrder;
+
+    ActorObject* mParentActorObject;
+
+    std::unordered_map<std::string, ActorObject*> mChildrenMap;
+
+    std::vector<ActorObject*> mChildrenArray;
 };
 

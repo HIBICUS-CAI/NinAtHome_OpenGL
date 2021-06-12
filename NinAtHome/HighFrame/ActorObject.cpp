@@ -14,10 +14,14 @@
 ActorObject::ActorObject(std::string _name,
     class SceneNode* _scene, int _order) :
     Object(_name, _scene, STATUS::NEED_INIT), mACompMap({}),
-    mACompArray({}), mActorUpdateOrder(_order)
+    mACompArray({}), mActorUpdateOrder(_order),
+    mChildrenArray({}), mChildrenMap({}), 
+    mParentActorObject(nullptr)
 {
     mACompMap.clear();
     mACompArray.clear();
+    mChildrenArray.clear();
+    mChildrenMap.clear();
 }
 
 ActorObject::~ActorObject()
@@ -58,4 +62,46 @@ void ActorObject::UpdateComponents(float _deltatime)
 void ActorObject::Destory()
 {
 
+}
+
+void ActorObject::AddChild(ActorObject* _obj)
+{
+
+}
+
+void ActorObject::AddParent(ActorObject* _obj)
+{
+
+}
+
+void ActorObject::ClearParent()
+{
+
+}
+
+void ActorObject::ClearChild(std::string _name)
+{
+
+}
+
+void ActorObject::ClearChildren()
+{
+
+}
+
+ActorObject* ActorObject::GetChild(std::string _name)
+{
+    // TEMP------------------------
+    return nullptr;
+    // TEMP------------------------
+}
+
+std::vector<ActorObject*>* ActorObject::GetChildrenArray()
+{
+    return &mChildrenArray;
+}
+
+ActorObject* ActorObject::GetParent() const
+{
+    return mParentActorObject;
 }

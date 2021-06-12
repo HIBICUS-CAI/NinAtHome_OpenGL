@@ -14,10 +14,13 @@
 UiObject::UiObject(std::string _name,
     class SceneNode* _scene, int _order) :
     Object(_name, _scene, STATUS::NEED_INIT), mUCompMap({}),
-    mUCompArray({}), mUiUpdateOrder(_order)
+    mUCompArray({}), mUiUpdateOrder(_order),
+    mChildrenArray({}), mChildrenMap({}), mParentUiObject(nullptr)
 {
     mUCompMap.clear();
     mUCompArray.clear();
+    mChildrenArray.clear();
+    mChildrenMap.clear();
 }
 
 UiObject::~UiObject()
@@ -58,4 +61,46 @@ void UiObject::UpdateComponents(float _deltatime)
 void UiObject::Destory()
 {
 
+}
+
+void UiObject::AddChild(UiObject* _obj)
+{
+
+}
+
+void UiObject::AddParent(UiObject* _obj)
+{
+
+}
+
+void UiObject::ClearParent()
+{
+
+}
+
+void UiObject::ClearChild(std::string _name)
+{
+
+}
+
+void UiObject::ClearChildren()
+{
+
+}
+
+UiObject* UiObject::GetChild(std::string _name)
+{
+    // TEMP------------------------
+    return nullptr;
+    // TEMP------------------------
+}
+
+std::vector<UiObject*>* UiObject::GetChildrenArray()
+{
+    return &mChildrenArray;
+}
+
+UiObject* UiObject::GetParent() const
+{
+    return mParentUiObject;
 }

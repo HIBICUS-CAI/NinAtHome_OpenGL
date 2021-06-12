@@ -27,6 +27,22 @@ public:
 
     int GetUpdateOrder() const;
 
+    void AddChild(UiObject* _obj);
+
+    void AddParent(UiObject* _obj);
+
+    void ClearParent();
+
+    void ClearChild(std::string _name);
+
+    void ClearChildren();
+
+    UiObject* GetChild(std::string _name);
+
+    std::vector<UiObject*>* GetChildrenArray();
+
+    UiObject* GetParent() const;
+
 public:
     virtual void Init();
 
@@ -42,5 +58,11 @@ private:
     std::vector<class UComponent*> mUCompArray;
 
     int mUiUpdateOrder;
+
+    UiObject* mParentUiObject;
+
+    std::unordered_map<std::string, UiObject*> mChildrenMap;
+
+    std::vector<UiObject*> mChildrenArray;
 };
 
