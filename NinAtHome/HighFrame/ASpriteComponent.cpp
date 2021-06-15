@@ -93,3 +93,8 @@ void ASpriteComponent::ResetDrawOrder(int _order)
 {
     mDrawOrder = _order;
 }
+
+void ASpriteComponent::DrawASprite()
+{
+
+}

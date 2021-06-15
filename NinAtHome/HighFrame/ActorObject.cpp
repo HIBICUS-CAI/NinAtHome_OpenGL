@@ -10,12 +10,13 @@
 #include "ActorObject.h"
 #include "SceneNode.h"
 #include "AComponent.h"
+#include "ASpriteComponent.h"
 
 ActorObject::ActorObject(std::string _name,
     class SceneNode* _scene, int _order) :
     Object(_name, _scene, STATUS::NEED_INIT), mACompMap({}),
     mACompArray({}), mActorUpdateOrder(_order),
-    mChildrenArray({}), mChildrenMap({}), 
+    mChildrenArray({}), mChildrenMap({}),
     mParentActorObject(nullptr)
 {
     mACompMap.clear();
@@ -104,4 +105,12 @@ std::vector<ActorObject*>* ActorObject::GetChildrenArray()
 ActorObject* ActorObject::GetParent() const
 {
     return mParentActorObject;
+}
+
+void ActorObject::Draw()
+{
+    for (auto sc : mSpriteCompArray)
+    {
+        sc->DrawASprite();
+    }
 }

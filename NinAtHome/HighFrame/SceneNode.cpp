@@ -80,12 +80,51 @@ void SceneNode::UpdateScene(float _deltatime)
 
 void SceneNode::DrawScene()
 {
-
+    for (auto actor : mActorObjectsArray)
+    {
+        actor->Draw();
+    }
+    for (auto ui : mUiObjectsArray)
+    {
+        ui->Draw();
+    }
 }
 
 void SceneNode::ReleaseScene()
 {
+    while (!mNewActorObjectsArray.empty())
+    {
+        auto newActor = mNewActorObjectsArray.back();
+        delete newActor;
+        mNewActorObjectsArray.pop_back();
+    }
 
+    while (!mNewUiObjectsArray.empty())
+    {
+        auto newUi = mNewUiObjectsArray.back();
+        delete newUi;
+        mNewUiObjectsArray.pop_back();
+    }
+
+    while (!mActorObjectsArray.empty())
+    {
+        auto retireActor = mActorObjectsArray.back();
+        retireActor->Destory();
+        delete retireActor;
+        mActorObjectsArray.pop_back();
+    }
+    mActorObjectsMap.clear();
+
+    while (!mUiObjectsArray.empty())
+    {
+        auto retireUi = mUiObjectsArray.back();
+        retireUi->Destory();
+        delete retireUi;
+        mUiObjectsArray.pop_back();
+    }
+    mUiObjectsMap.clear();
+
+    delete mCamera;
 }
 
 void SceneNode::AddActorObject(ActorObject* _aObj)
@@ -120,7 +159,7 @@ void SceneNode::ClearSceneLoopFunc()
 
 void SceneNode::InitCamera(Float2 _pos, Float2 _size)
 {
-
+    mCamera = new Camera(_pos, _size);
 }
 
 Camera* SceneNode::GetCamera() const

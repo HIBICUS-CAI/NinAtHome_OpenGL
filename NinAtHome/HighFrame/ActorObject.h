@@ -43,6 +43,8 @@ public:
 
     ActorObject* GetParent() const;
 
+    void Draw();
+
 public:
     virtual void Init();
 
@@ -56,6 +58,8 @@ private:
     std::unordered_map<std::string, class AComponent*> mACompMap;
 
     std::vector<class AComponent*> mACompArray;
+
+    std::vector<class ASpriteComponent*> mSpriteCompArray;
 
     int mActorUpdateOrder;
 

@@ -41,6 +41,8 @@ public:
 
     void ResetDrawOrder(int _order);
 
+    void DrawASprite();
+
 public:
     virtual void CompInit();
 

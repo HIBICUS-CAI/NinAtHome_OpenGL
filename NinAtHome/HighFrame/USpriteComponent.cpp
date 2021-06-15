@@ -93,3 +93,8 @@ void USpriteComponent::ResetDrawOrder(int _order)
 {
     mDrawOrder = _order;
 }
+
+void USpriteComponent::DrawUSprite()
+{
+
+}

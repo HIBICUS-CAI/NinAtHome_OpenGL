@@ -10,6 +10,8 @@
 #include "UiObject.h"
 #include "SceneNode.h"
 #include "UComponent.h"
+#include "USpriteComponent.h"
+#include "UTextComponent.h"
 
 UiObject::UiObject(std::string _name,
     class SceneNode* _scene, int _order) :
@@ -103,4 +105,17 @@ std::vector<UiObject*>* UiObject::GetChildrenArray()
 UiObject* UiObject::GetParent() const
 {
     return mParentUiObject;
+}
+
+void UiObject::Draw()
+{
+    for (auto sc : mSpriteCompArray)
+    {
+        sc->DrawUSprite();
+    }
+
+    for (auto tc : mTextCompArray)
+    {
+        tc->DrawUText();
+    }
 }

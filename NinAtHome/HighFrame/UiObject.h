@@ -43,6 +43,8 @@ public:
 
     UiObject* GetParent() const;
 
+    void Draw();
+
 public:
     virtual void Init();
 
@@ -56,6 +58,10 @@ private:
     std::unordered_map<std::string, class UComponent*> mUCompMap;
 
     std::vector<class UComponent*> mUCompArray;
+
+    std::vector<class USpriteComponent*> mSpriteCompArray;
+
+    std::vector<class UTextComponent*> mTextCompArray;
 
     int mUiUpdateOrder;
 
