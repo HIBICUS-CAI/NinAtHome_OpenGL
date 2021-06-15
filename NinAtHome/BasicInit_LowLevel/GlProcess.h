@@ -17,7 +17,7 @@ void ProcessInput(GLFWwindow* wndHandle);
 
 void TerminateGLFW();
 
-void GoRunLoopProcess();
+float GoRunLoopProcess();
 
 bool ShouldGlfwQuit();
 

@@ -15,7 +15,7 @@ public:
     ObjectFactory();
     ~ObjectFactory();
 
-    void StartUp(class PropertyManager* _pmPtr,
+    bool StartUp(class PropertyManager* _pmPtr,
         class SceneManager* _smPtr);
 
     void CleanAndStop();

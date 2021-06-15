@@ -33,14 +33,21 @@ bool SceneManager::StartUp()
     return result;
 }
 
+void SceneManager::PostStartUp(PropertyManager* _pmPtr,
+    ObjectFactory* _ofPtr)
+{
+    mPropertyManagerPtr = _pmPtr;
+    mObjectFactoryPtr = _ofPtr;
+}
+
 void SceneManager::CleanAndStop()
 {
 
 }
 
-void SceneManager::UpdateSceneManager()
+void SceneManager::UpdateSceneManager(float _deltatime)
 {
-
+    NN_LOG("final delta : %f\n", _deltatime);
 }
 
 PropertyManager* SceneManager::GetPropertyManager() const

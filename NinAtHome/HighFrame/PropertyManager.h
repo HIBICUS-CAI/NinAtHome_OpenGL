@@ -19,7 +19,7 @@ public:
     PropertyManager();
     ~PropertyManager();
 
-    void StartUp();
+    bool StartUp();
 
     void CleanAndStop();
 

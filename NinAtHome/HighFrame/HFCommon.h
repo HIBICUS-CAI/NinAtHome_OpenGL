@@ -11,6 +11,9 @@
 
 #include "main.h"
 
+#define APP_FPS (30)
+#define MAX_DELTA (float)((double)1 / (double)APP_FPS)
+
 enum class STATUS
 {
     NEED_INIT,

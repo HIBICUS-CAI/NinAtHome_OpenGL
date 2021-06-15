@@ -22,7 +22,7 @@ bool InitSystem(
 
 void UninitSystem();
 
-void SwapBuffers();
+float SwapBuffers();
 
 bool ShouldQuit();
 

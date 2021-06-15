@@ -26,11 +26,15 @@ ObjectFactory::~ObjectFactory()
 
 }
 
-void ObjectFactory::StartUp(PropertyManager* _pmPtr,
+bool ObjectFactory::StartUp(PropertyManager* _pmPtr,
     SceneManager* _smPtr)
 {
     mPropertyManagerPtr = _pmPtr;
     mSceneManagerPtr = _smPtr;
+
+    bool result = true;
+
+    return result;
 }
 
 void ObjectFactory::CleanAndStop()

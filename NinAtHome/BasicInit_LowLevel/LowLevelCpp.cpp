@@ -28,12 +28,12 @@ void UninitSystem()
     TerminateGLFW();
 }
 
-void SwapBuffers()
+float SwapBuffers()
 {
-    GoRunLoopProcess();
+    float timer = GoRunLoopProcess();
     gp_GlHelper->ClearVaoVbo();
 
-    Sleep(15);
+    return timer;
 }
 
 bool ShouldQuit()

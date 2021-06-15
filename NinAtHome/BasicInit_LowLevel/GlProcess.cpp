@@ -342,9 +342,10 @@ void ScrollCallback(GLFWwindow* wndHandle, double x, double y)
     }
 }
 
-void GoRunLoopProcess()
+float GoRunLoopProcess()
 {
     ProcessInput(gp_WndHandle);
+    float timer = glfwGetTime();
     glfwPollEvents();
 
     int value = g_OldCursorPosX - g_CursorPosX;
@@ -381,6 +382,8 @@ void GoRunLoopProcess()
     }
 
     glfwSwapBuffers(gp_WndHandle);
+
+    return timer;
 }
 
 bool ShouldGlfwQuit()

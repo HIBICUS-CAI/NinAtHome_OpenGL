@@ -9,6 +9,8 @@
 
 #pragma once
 
+#include "HFCommon.h"
+
 class RootSystem
 {
 public:
@@ -22,10 +24,17 @@ public:
     void RunGameLoop();
 
 private:
+    void SwapAndClacDeltaTime();
+
+private:
     class SceneManager* mSceneManagerPtr;
 
     class PropertyManager* mPropertyManagerPtr;
 
     class ObjectFactory* mObjectFactoryPtr;
+
+    float mLastTime;
+
+    float mDeltaTime;
 };
 

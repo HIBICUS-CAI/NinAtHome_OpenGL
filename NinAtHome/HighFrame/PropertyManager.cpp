@@ -20,9 +20,11 @@ PropertyManager::~PropertyManager()
 
 }
 
-void PropertyManager::StartUp()
+bool PropertyManager::StartUp()
 {
+    bool result = true;
 
+    return result;
 }
 
 void PropertyManager::CleanAndStop()
