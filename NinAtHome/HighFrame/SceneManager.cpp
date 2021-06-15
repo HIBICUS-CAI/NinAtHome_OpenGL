@@ -47,11 +47,19 @@ void SceneManager::PostStartUp(PropertyManager* _pmPtr,
 void SceneManager::CleanAndStop()
 {
     mCurrentScenePtr->ReleaseScene();
+    delete mCurrentScenePtr;
+
     if (mNextScenePtr)
     {
         mNextScenePtr->ReleaseScene();
+        delete mNextScenePtr;
     }
-    ReleaseLoadingScene();
+
+    if (mCurrentScenePtr != mLoadingScenePtr)
+    {
+        ReleaseLoadingScene();
+        delete mLoadingScenePtr;
+    }
 }
 
 void SceneManager::UpdateSceneManager(float _deltatime)
@@ -68,11 +76,10 @@ void SceneManager::UpdateSceneManager(float _deltatime)
         loadThread.detach();
     }
 
-    /*mCurrentScenePtr->UpdateScene(_deltatime);
-    mCurrentScenePtr->DrawScene();*/
     // TEMP---------------------------
-    mLoadingScenePtr->UpdateScene(_deltatime);
-    mLoadingScenePtr->DrawScene();
+    mCurrentScenePtr = mLoadingScenePtr;
+    mCurrentScenePtr->UpdateScene(_deltatime);
+    mCurrentScenePtr->DrawScene();
     // TEMP---------------------------
 }
 
