@@ -11,6 +11,8 @@
 #include "SceneNode.h"
 #include "PropertyManager.h"
 #include "ObjectFactory.h"
+#include <thread>
+#include "controller.h"
 
 SceneManager::SceneManager() :
     mPropertyManagerPtr(nullptr), mObjectFactoryPtr(nullptr),
@@ -52,11 +54,20 @@ void SceneManager::CleanAndStop()
 
 void SceneManager::UpdateSceneManager(float _deltatime)
 {
-    NN_LOG(LOG_MESSAGE,
-        "final delta : %f\n", _deltatime);
+    /*NN_LOG(LOG_MESSAGE,
+        "final delta : %f\n", _deltatime);*/
 
-    //mCurrentScenePtr->UpdateScene();
-    //mCurrentScenePtr->DrawScene();
+    if (mLoadSceneFlg)
+    {
+        mLoadSceneFlg = false;
+        mCurrentScenePtr = mLoadingScenePtr;
+        std::thread loadThread(
+            &SceneManager::LoadNextScene, this);
+        loadThread.detach();
+    }
+
+    mCurrentScenePtr->UpdateScene();
+    mCurrentScenePtr->DrawScene();
 }
 
 PropertyManager* SceneManager::GetPropertyManager() const
@@ -69,8 +80,10 @@ ObjectFactory* SceneManager::GetObjectFactory() const
     return mObjectFactoryPtr;
 }
 
-void SceneManager::LoadSceneNode(std::string _name, std::string _path)
+void SceneManager::LoadSceneNode(
+    std::string _name, std::string _path)
 {
+    mLoadSceneFlg = true;
     mLoadSceneInfo = { _name,_path };
 }
 
@@ -86,5 +99,7 @@ void SceneManager::ReleaseLoadingScene()
 
 void SceneManager::LoadNextScene()
 {
+    NN_LOG(LOG_MESSAGE, "ready to load next scene\n");
 
+    mCurrentScenePtr = nullptr;
 }

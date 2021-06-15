@@ -12,6 +12,7 @@
 #include "PropertyManager.h"
 #include "ObjectFactory.h"
 #include "main.h"
+#include "controller.h"
 
 RootSystem::RootSystem() :
     mSceneManagerPtr(nullptr), mPropertyManagerPtr(nullptr),
@@ -48,6 +49,8 @@ bool RootSystem::StartUp()
 
     glFrontFace(GL_CCW);
 
+    InitController();
+
     if (result)
     {
         NN_LOG(LOG_MESSAGE,
@@ -83,6 +86,8 @@ void RootSystem::ClearAndStop()
         mObjectFactoryPtr = nullptr;
     }
 
+    UninitController();
+
     UninitSystem();
 
     NN_LOG(LOG_MESSAGE,
@@ -95,6 +100,8 @@ void RootSystem::RunGameLoop()
     {
         glClearColor(0.0f, 0.5f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        UpdateController();
 
         mSceneManagerPtr->UpdateSceneManager(mDeltaTime);
 
