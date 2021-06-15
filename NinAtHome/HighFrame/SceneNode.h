@@ -34,7 +34,7 @@ public:
 
     void LoadSceneInitFile(std::string _path);
 
-    void UpdateScene();
+    void UpdateScene(float _deltatime);
 
     void DrawScene();
 

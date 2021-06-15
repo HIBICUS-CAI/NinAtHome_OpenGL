@@ -60,7 +60,7 @@ void SceneNode::LoadSceneInitFile(std::string _path)
 
 }
 
-void SceneNode::UpdateScene()
+void SceneNode::UpdateScene(float _deltatime)
 {
 
 }

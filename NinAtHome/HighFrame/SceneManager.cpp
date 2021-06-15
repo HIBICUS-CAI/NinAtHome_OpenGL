@@ -40,6 +40,8 @@ void SceneManager::PostStartUp(PropertyManager* _pmPtr,
 {
     mPropertyManagerPtr = _pmPtr;
     mObjectFactoryPtr = _ofPtr;
+
+    LoadLoadingScene();
 }
 
 void SceneManager::CleanAndStop()
@@ -66,7 +68,7 @@ void SceneManager::UpdateSceneManager(float _deltatime)
         loadThread.detach();
     }
 
-    mCurrentScenePtr->UpdateScene();
+    mCurrentScenePtr->UpdateScene(_deltatime);
     mCurrentScenePtr->DrawScene();
 }
 
