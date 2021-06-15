@@ -42,13 +42,21 @@ void SceneManager::PostStartUp(PropertyManager* _pmPtr,
 
 void SceneManager::CleanAndStop()
 {
-
+    mCurrentScenePtr->ReleaseScene();
+    if (mNextScenePtr)
+    {
+        mNextScenePtr->ReleaseScene();
+    }
+    ReleaseLoadingScene();
 }
 
 void SceneManager::UpdateSceneManager(float _deltatime)
 {
     NN_LOG(LOG_MESSAGE,
         "final delta : %f\n", _deltatime);
+
+    //mCurrentScenePtr->UpdateScene();
+    //mCurrentScenePtr->DrawScene();
 }
 
 PropertyManager* SceneManager::GetPropertyManager() const
@@ -73,7 +81,7 @@ void SceneManager::LoadLoadingScene()
 
 void SceneManager::ReleaseLoadingScene()
 {
-
+    mLoadingScenePtr->ReleaseScene();
 }
 
 void SceneManager::LoadNextScene()
