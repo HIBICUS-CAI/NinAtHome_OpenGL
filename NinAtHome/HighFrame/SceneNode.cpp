@@ -62,7 +62,20 @@ void SceneNode::LoadSceneInitFile(std::string _path)
 
 void SceneNode::UpdateScene(float _deltatime)
 {
+    InitAllNewObjects();
 
+    for (auto actor : mActorObjectsArray)
+    {
+        actor->Update(_deltatime);
+        actor->UpdateComponents(_deltatime);
+    }
+    for (auto ui : mUiObjectsArray)
+    {
+        ui->Update(_deltatime);
+        ui->UpdateComponents(_deltatime);
+    }
+
+    DestoryAllRetiredObjects();
 }
 
 void SceneNode::DrawScene()
@@ -124,12 +137,48 @@ Float4x4 SceneNode::GetCameraMat() const
 
 void SceneNode::InitAllNewObjects()
 {
+    while (!mNewActorObjectsArray.empty())
+    {
+        auto newActor = mNewActorObjectsArray.back();
+        newActor->Init();
+        mNewActorObjectsArray.pop_back();
+        // TEMP--------------------
+        mActorObjectsArray.push_back(newActor);
+        mActorObjectsMap.insert(std::make_pair(
+            newActor->GetObjectName(), newActor));
+        // TEMP--------------------
+    }
 
+    while (!mNewUiObjectsArray.empty())
+    {
+        auto newUi = mNewUiObjectsArray.back();
+        newUi->Init();
+        mNewUiObjectsArray.pop_back();
+        // TEMP--------------------
+        mUiObjectsArray.push_back(newUi);
+        mUiObjectsMap.insert(std::make_pair(
+            newUi->GetObjectName(), newUi));
+        // TEMP--------------------
+    }
 }
 
 void SceneNode::DestoryAllRetiredObjects()
 {
+    while (!mRetiredActorObjectsArray.empty())
+    {
+        auto retireActor = mRetiredActorObjectsArray.back();
+        retireActor->Destory();
+        delete retireActor;
+        mRetiredActorObjectsArray.pop_back();
+    }
 
+    while (!mRetiredUiObjectsArray.empty())
+    {
+        auto retireUi = mRetiredUiObjectsArray.back();
+        retireUi->Destory();
+        delete retireUi;
+        mRetiredUiObjectsArray.pop_back();
+    }
 }
 
 Camera::Camera(Float2 _pos, Float2 _size) :
