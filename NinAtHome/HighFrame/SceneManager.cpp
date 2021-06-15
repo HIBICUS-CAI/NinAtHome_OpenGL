@@ -68,8 +68,12 @@ void SceneManager::UpdateSceneManager(float _deltatime)
         loadThread.detach();
     }
 
-    mCurrentScenePtr->UpdateScene(_deltatime);
-    mCurrentScenePtr->DrawScene();
+    /*mCurrentScenePtr->UpdateScene(_deltatime);
+    mCurrentScenePtr->DrawScene();*/
+    // TEMP---------------------------
+    mLoadingScenePtr->UpdateScene(_deltatime);
+    mLoadingScenePtr->DrawScene();
+    // TEMP---------------------------
 }
 
 PropertyManager* SceneManager::GetPropertyManager() const
@@ -91,7 +95,9 @@ void SceneManager::LoadSceneNode(
 
 void SceneManager::LoadLoadingScene()
 {
-
+    // TEMP---------------------------
+    mLoadingScenePtr = new SceneNode("load-scene", this);
+    // TEMP---------------------------
 }
 
 void SceneManager::ReleaseLoadingScene()
