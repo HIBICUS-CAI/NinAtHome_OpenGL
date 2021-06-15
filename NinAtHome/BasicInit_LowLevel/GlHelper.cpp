@@ -92,7 +92,8 @@ bool GlHelper::CompileDefaultShaders()
     glGetShaderiv(vertShaderId, GL_COMPILE_STATUS, &result);
     if (!result)
     {
-        NN_LOG("failed to compile default vert shader\n");
+        NN_LOG(LOG_ERROR, 
+            "failed to compile default vert shader\n");
         return false;
     }
 
@@ -102,7 +103,8 @@ bool GlHelper::CompileDefaultShaders()
     glGetShaderiv(fragShaderId, GL_COMPILE_STATUS, &result);
     if (!result)
     {
-        NN_LOG("failed to compile default vert shader\n");
+        NN_LOG(LOG_ERROR,
+            "failed to compile default frag shader\n");
         return false;
     }
 

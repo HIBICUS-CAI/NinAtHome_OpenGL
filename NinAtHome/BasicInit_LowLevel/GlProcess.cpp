@@ -142,7 +142,8 @@ bool InitGlAndCreateWindow(
 
     if (!gp_WndHandle)
     {
-        NN_LOG("failed to create glfw wnd\n");
+        NN_LOG(LOG_ERROR,
+            "failed to create glfw wnd\n");
         glfwTerminate();
         return false;
     }
@@ -154,7 +155,7 @@ bool InitGlAndCreateWindow(
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        NN_LOG("failed to init glad\n");
+        NN_LOG(LOG_ERROR, "failed to init glad\n");
         return false;
     }
     else
@@ -345,7 +346,7 @@ void ScrollCallback(GLFWwindow* wndHandle, double x, double y)
 float GoRunLoopProcess()
 {
     ProcessInput(gp_WndHandle);
-    float timer = glfwGetTime();
+    float timer = (float)glfwGetTime();
     glfwPollEvents();
 
     int value = g_OldCursorPosX - g_CursorPosX;

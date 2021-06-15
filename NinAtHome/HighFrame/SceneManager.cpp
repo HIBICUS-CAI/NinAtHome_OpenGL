@@ -47,7 +47,8 @@ void SceneManager::CleanAndStop()
 
 void SceneManager::UpdateSceneManager(float _deltatime)
 {
-    NN_LOG("final delta : %f\n", _deltatime);
+    NN_LOG(LOG_MESSAGE,
+        "final delta : %f\n", _deltatime);
 }
 
 PropertyManager* SceneManager::GetPropertyManager() const
