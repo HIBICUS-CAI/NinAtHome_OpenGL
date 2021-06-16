@@ -48,13 +48,14 @@ GlHelper* GetGlHelperPtr()
 
 void SetVertexAttr(const VERTEX* v, int arraySize)
 {
-    float* buffer = new float[9 * arraySize];
+    int bufferSize = 9 * arraySize;
+    float* buffer = new float[bufferSize];
     GLuint* vao = new GLuint;
     GLuint* vbo = new GLuint;
     GetGlHelperPtr()->MoveDataToBuffer(
         v, arraySize, buffer);
-    GetGlHelperPtr()->BindVAOWithVBO(vao, vbo, buffer,
-        9 * arraySize);
+    GetGlHelperPtr()->BindVAOWithVBO(vao, vbo,
+        buffer, bufferSize);
     glBindVertexArray(*vao);
     delete vao, vbo;
     delete[] buffer;
