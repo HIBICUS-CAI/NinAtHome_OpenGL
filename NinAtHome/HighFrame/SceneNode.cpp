@@ -129,7 +129,9 @@ void SceneNode::ReleaseScene()
 
 void SceneNode::AddActorObject(ActorObject* _aObj)
 {
-
+    // TEMP-------------------
+    mNewActorObjectsArray.push_back(_aObj);
+    // TEMP-------------------
 }
 
 void SceneNode::AddUiObject(UiObject* _uObj)
@@ -180,6 +182,7 @@ void SceneNode::InitAllNewObjects()
     {
         auto newActor = mNewActorObjectsArray.back();
         newActor->Init();
+        newActor->SetObjectActive(STATUS::ACTIVE);
         mNewActorObjectsArray.pop_back();
         // TEMP--------------------
         mActorObjectsArray.push_back(newActor);
@@ -192,6 +195,7 @@ void SceneNode::InitAllNewObjects()
     {
         auto newUi = mNewUiObjectsArray.back();
         newUi->Init();
+        newUi->SetObjectActive(STATUS::ACTIVE);
         mNewUiObjectsArray.pop_back();
         // TEMP--------------------
         mUiObjectsArray.push_back(newUi);

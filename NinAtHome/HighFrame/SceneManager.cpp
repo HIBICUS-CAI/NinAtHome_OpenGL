@@ -13,6 +13,10 @@
 #include "ObjectFactory.h"
 #include <thread>
 #include "controller.h"
+// TEMP--------------------
+#include "ActorObject.h"
+#include "ASpriteComponent.h"
+// TEMP--------------------
 
 SceneManager::SceneManager() :
     mPropertyManagerPtr(nullptr), mObjectFactoryPtr(nullptr),
@@ -104,6 +108,13 @@ void SceneManager::LoadLoadingScene()
 {
     // TEMP---------------------------
     mLoadingScenePtr = new SceneNode("load-scene", this);
+    ActorObject* actor = new ActorObject(
+        "test", mLoadingScenePtr, 0);
+    ASpriteComponent* asc = new ASpriteComponent("test-sprite",
+        actor, 0, 0);
+    asc->LoadTextureByPath("rom:/Assets/Textures/texture.tga");
+    actor->AddAComponent(asc);
+    mLoadingScenePtr->AddActorObject(actor);
     // TEMP---------------------------
 }
 

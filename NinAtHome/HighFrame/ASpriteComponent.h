@@ -19,7 +19,7 @@ public:
         int _order, int _drawOrder);
     virtual ~ASpriteComponent();
 
-    void LoadTexture(std::string _path);
+    void LoadTextureByPath(std::string _path);
 
     void DeleteTexture();
 

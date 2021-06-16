@@ -48,8 +48,7 @@ GlHelper* GetGlHelperPtr()
 
 void SetVertexAttr(const VERTEX* v, int arraySize)
 {
-    arraySize *= 9;
-    float* buffer = new float[arraySize];
+    float* buffer = new float[9 * arraySize];
     GLuint* vao = new GLuint;
     GLuint* vbo = new GLuint;
     GetGlHelperPtr()->MoveDataToBuffer(

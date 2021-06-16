@@ -9,6 +9,8 @@
 
 #include "ASpriteComponent.h"
 #include "ActorObject.h"
+#include "texture.h"
+#include "sprite.h"
 
 ASpriteComponent::ASpriteComponent(std::string _name,
     ActorObject* _owner, int _order, int _drawOrder) :
@@ -39,14 +41,14 @@ void ASpriteComponent::CompDestory()
 
 }
 
-void ASpriteComponent::LoadTexture(std::string _path)
+void ASpriteComponent::LoadTextureByPath(std::string _path)
 {
-
+    mTexture = LoadTexture(_path);
 }
 
 void ASpriteComponent::DeleteTexture()
 {
-
+    UnloadTexture(mTexture);
 }
 
 unsigned int ASpriteComponent::GetTexture() const
@@ -96,5 +98,9 @@ void ASpriteComponent::ResetDrawOrder(int _order)
 
 void ASpriteComponent::DrawASprite()
 {
-
+    // TEMP-------------------------
+    SetTexture(mTexture);
+    DrawSprite(0.f, 0.f, 100.f, 100.f, 0.f, 0.f, 1.f, 1.f,
+        MakeFloat4(1.f, 1.f, 1.f, 1.f));
+    // TEMP-------------------------
 }

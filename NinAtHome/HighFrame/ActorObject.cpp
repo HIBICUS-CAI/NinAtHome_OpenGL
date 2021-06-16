@@ -37,7 +37,16 @@ AComponent* ActorObject::GetAComponent(std::string _name)
 
 void ActorObject::AddAComponent(AComponent* _comp)
 {
-
+    // TEMP-----------------------
+    mACompArray.push_back(_comp);
+    mACompMap.insert(std::make_pair(
+        _comp->GetComponentName(), _comp));
+    if (_comp->GetComponentName().find("sprite", 0) !=
+        _comp->GetComponentName().npos)
+    {
+        mSpriteCompArray.push_back((ASpriteComponent*)_comp);
+    }
+    // TEMP-----------------------
 }
 
 int ActorObject::GetUpdateOrder() const
