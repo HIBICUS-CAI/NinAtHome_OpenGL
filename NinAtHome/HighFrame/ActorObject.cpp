@@ -1,5 +1,5 @@
 //---------------------------------------------------------------
-// File: ActorObject.h
+// File: ActorObject.cpp
 // Proj: NinAtHome
 // Info: ゲーム世界にACTORを代表する抽象
 // Date: 2021.06.09
@@ -35,7 +35,7 @@ AComponent* ActorObject::GetAComponent(std::string _name)
     if (mACompMap.find(_name) == mACompMap.end())
     {
         MY_NN_LOG(LOG_WARNING,
-            "cannot find this Acomponent : [ %s ]\n", _name);
+            "cannot find this Acomponent : [ %s ]\n", _name.c_str());
         return nullptr;
     }
 
@@ -44,16 +44,47 @@ AComponent* ActorObject::GetAComponent(std::string _name)
 
 void ActorObject::AddAComponent(AComponent* _comp)
 {
-    // TEMP-----------------------
-    mACompArray.push_back(_comp);
+    bool isInserted = false;
+    for (auto comp = mACompArray.begin();
+        comp != mACompArray.end(); comp++)
+    {
+        if ((*comp)->GetACUpdateOrder() >=
+            _comp->GetACUpdateOrder())
+        {
+            mACompArray.insert(comp, _comp);
+            isInserted = true;
+            break;
+        }
+    }
+    if (!isInserted)
+    {
+        mACompArray.push_back(_comp);
+    }
+
     mACompMap.insert(std::make_pair(
         _comp->GetComponentName(), _comp));
+
     if (_comp->GetComponentName().find("sprite", 0) !=
         _comp->GetComponentName().npos)
     {
-        mSpriteCompArray.push_back((ASpriteComponent*)_comp);
+        bool isSpriteInserted = false;
+        for (auto comp = mSpriteCompArray.begin();
+            comp != mSpriteCompArray.end(); comp++)
+        {
+            if (((*comp))->GetDrawOrder() >=
+                ((ASpriteComponent*)_comp)->GetDrawOrder())
+            {
+                mSpriteCompArray.insert(comp,
+                    (ASpriteComponent*)_comp);
+                isSpriteInserted = true;
+                break;
+            }
+        }
+        if (!isSpriteInserted)
+        {
+            mSpriteCompArray.push_back((ASpriteComponent*)_comp);
+        }
     }
-    // TEMP-----------------------
 }
 
 int ActorObject::GetUpdateOrder() const
@@ -63,7 +94,11 @@ int ActorObject::GetUpdateOrder() const
 
 void ActorObject::Init()
 {
-
+    for (auto comp : mACompArray)
+    {
+        comp->CompInit();
+        comp->SetCompActive(STATUS::ACTIVE);
+    }
 }
 
 void ActorObject::Update(float _deltatime)
@@ -73,44 +108,109 @@ void ActorObject::Update(float _deltatime)
 
 void ActorObject::UpdateComponents(float _deltatime)
 {
-
+    for (auto comp : mACompArray)
+    {
+        comp->CompUpdate(_deltatime);
+    }
 }
 
 void ActorObject::Destory()
 {
+    if (mChildrenArray.size())
+    {
+        for (auto child : mChildrenArray)
+        {
+            child->Destory();
+            GetSceneNodePtr()->DeleteActorObject(
+                child->GetObjectName());
+            delete child;
+        }
+    }
 
+    while (mACompArray.size())
+    {
+        auto comp = mACompArray.back();
+        comp->CompDestory();
+        delete comp;
+        mACompArray.pop_back();
+    }
+
+    mACompMap.clear();
+
+    mSpriteCompArray.clear();
+
+    mChildrenMap.clear();
+
+    mChildrenArray.clear();
 }
 
 void ActorObject::AddChild(ActorObject* _obj)
 {
+    _obj->SetObjectActive(STATUS::NEED_INIT);
 
+    mChildrenArray.push_back(_obj);
+
+    mChildrenMap.insert(std::make_pair(_obj->GetObjectName(),
+        _obj));
+
+    GetSceneNodePtr()->AddActorObject(_obj);
 }
 
 void ActorObject::AddParent(ActorObject* _obj)
 {
-
+    mParentActorObject = _obj;
 }
 
 void ActorObject::ClearParent()
 {
-
+    mParentActorObject = nullptr;
 }
 
 void ActorObject::ClearChild(std::string _name)
 {
+    if (mChildrenMap.find(_name) == mChildrenMap.end())
+    {
+        MY_NN_LOG(LOG_WARNING,
+            "cannot find this child : [ %s ]\n", _name.c_str());
+        return;
+    }
 
+    for (auto child = mChildrenArray.begin();
+        child != mChildrenArray.end(); child++)
+    {
+        if ((*child)->GetObjectName() == _name)
+        {
+            (*child)->SetObjectActive(STATUS::NEED_DESTORY);
+            mChildrenArray.erase(child);
+            break;
+        }
+    }
+
+    mChildrenMap.erase(_name);
 }
 
 void ActorObject::ClearChildren()
 {
+    for (auto child : mChildrenArray)
+    {
+        child->SetObjectActive(STATUS::NEED_DESTORY);
+    }
 
+    mChildrenArray.clear();
+
+    mChildrenMap.clear();
 }
 
 ActorObject* ActorObject::GetChild(std::string _name)
 {
-    // TEMP------------------------
-    return nullptr;
-    // TEMP------------------------
+    if (mChildrenMap.find(_name) == mChildrenMap.end())
+    {
+        MY_NN_LOG(LOG_WARNING,
+            "cannot find this child : [ %s ]\n", _name.c_str());
+        return nullptr;
+    }
+
+    return mChildrenMap[_name];
 }
 
 std::vector<ActorObject*>* ActorObject::GetChildrenArray()

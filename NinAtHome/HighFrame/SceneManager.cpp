@@ -16,6 +16,7 @@
 // TEMP--------------------
 #include "ActorObject.h"
 #include "ASpriteComponent.h"
+#include "controller.h"
 // TEMP--------------------
 
 SceneManager::SceneManager() :
@@ -82,6 +83,20 @@ void SceneManager::UpdateSceneManager(float _deltatime)
 
     // TEMP---------------------------
     mCurrentScenePtr = mLoadingScenePtr;
+
+    if (GetControllerTrigger(NpadButton::A::Index))
+    {
+        auto parent = mCurrentScenePtr->GetActorObject("test");
+        if (parent)
+        {
+            parent->ClearChild("test2");
+        }
+    }
+    if (GetControllerTrigger(NpadButton::B::Index))
+    {
+        mCurrentScenePtr->DeleteActorObject("test");
+    }
+
     mCurrentScenePtr->UpdateScene(_deltatime);
     mCurrentScenePtr->DrawScene();
     // TEMP---------------------------
@@ -115,6 +130,13 @@ void SceneManager::LoadLoadingScene()
     asc->LoadTextureByPath("rom:/Assets/Textures/texture.tga");
     actor->AddAComponent(asc);
     mLoadingScenePtr->AddActorObject(actor);
+    ActorObject* actor1 = new ActorObject(
+        "test2", mLoadingScenePtr, 0);
+    ASpriteComponent* asc1 = new ASpriteComponent("test2-sprite",
+        actor1, 0, -1);
+    asc1->LoadTextureByPath("rom:/Assets/Textures/player.tga");
+    actor1->AddAComponent(asc1);
+    actor->AddChild(actor1);
     // TEMP---------------------------
 }
 

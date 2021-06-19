@@ -35,7 +35,7 @@ UComponent* UiObject::GetUComponent(std::string _name)
     if (mUCompMap.find(_name) == mUCompMap.end())
     {
         MY_NN_LOG(LOG_WARNING,
-            "cannot find this Ucomponent : [ %s ]\n", _name);
+            "cannot find this Ucomponent : [ %s ]\n", _name.c_str());
         return nullptr;
     }
 

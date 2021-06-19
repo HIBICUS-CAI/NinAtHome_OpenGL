@@ -69,7 +69,7 @@ Timer* ATimerComponent::GetTimer(std::string _name)
     if (mTimerMap.find(_name) == mTimerMap.end())
     {
         MY_NN_LOG(LOG_WARNING,
-            "cannot find this timer : [ %s ]\n", _name);
+            "cannot find this timer : [ %s ]\n", _name.c_str());
         return nullptr;
     }
 

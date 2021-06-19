@@ -37,7 +37,7 @@ PropertyNode* PropertyManager::GetPropertyNode(std::string _name)
     if (mPropertyMap.find(_name) == mPropertyMap.end())
     {
         MY_NN_LOG(LOG_WARNING,
-            "cannot find this property node : [ %s ]\n", _name);
+            "cannot find this property node : [ %s ]\n", _name.c_str());
         return nullptr;
     }
 

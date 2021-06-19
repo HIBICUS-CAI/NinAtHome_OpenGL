@@ -50,7 +50,7 @@ ActorObject* SceneNode::GetActorObject(std::string _name)
     if (mActorObjectsMap.find(_name) == mActorObjectsMap.end())
     {
         MY_NN_LOG(LOG_WARNING,
-            "cannot find this Aobject : [ %s ]\n", _name);
+            "cannot find this Aobject : [ %s ]\n", _name.c_str());
         return nullptr;
     }
 
@@ -62,7 +62,7 @@ UiObject* SceneNode::GetUiObject(std::string _name)
     if (mUiObjectsMap.find(_name) == mUiObjectsMap.end())
     {
         MY_NN_LOG(LOG_WARNING,
-            "cannot find this Uobject : [ %s ]\n", _name);
+            "cannot find this Uobject : [ %s ]\n", _name.c_str());
         return nullptr;
     }
 
@@ -78,15 +78,43 @@ void SceneNode::UpdateScene(float _deltatime)
 {
     InitAllNewObjects();
 
-    for (auto actor : mActorObjectsArray)
+    for (auto aci = mActorObjectsArray.begin();
+        aci != mActorObjectsArray.end();)
     {
-        actor->Update(_deltatime);
-        actor->UpdateComponents(_deltatime);
+        if ((*aci)->IsObjectActive() == STATUS::NEED_DESTORY)
+        {
+            mRetiredActorObjectsArray.push_back(*aci);
+            mActorObjectsMap.erase((*aci)->GetObjectName());
+            aci = mActorObjectsArray.erase(aci);
+        }
+        else
+        {
+            if ((*aci)->IsObjectActive() == STATUS::ACTIVE)
+            {
+                (*aci)->Update(_deltatime);
+                (*aci)->UpdateComponents(_deltatime);
+            }
+            aci++;
+        }
     }
-    for (auto ui : mUiObjectsArray)
+    for (auto uii = mUiObjectsArray.begin();
+        uii != mUiObjectsArray.end();)
     {
-        ui->Update(_deltatime);
-        ui->UpdateComponents(_deltatime);
+        if ((*uii)->IsObjectActive() == STATUS::NEED_DESTORY)
+        {
+            mRetiredUiObjectsArray.push_back(*uii);
+            mUiObjectsMap.erase((*uii)->GetObjectName());
+            uii = mUiObjectsArray.erase(uii);
+        }
+        else
+        {
+            if ((*uii)->IsObjectActive() == STATUS::ACTIVE)
+            {
+                (*uii)->Update(_deltatime);
+                (*uii)->UpdateComponents(_deltatime);
+            }
+            uii++;
+        }
     }
 
     DestoryAllRetiredObjects();
@@ -155,7 +183,25 @@ void SceneNode::AddUiObject(UiObject* _uObj)
 
 void SceneNode::DeleteActorObject(std::string _name)
 {
+    if (mActorObjectsMap.find(_name) == mActorObjectsMap.end())
+    {
+        MY_NN_LOG(LOG_WARNING,
+            "cannot find this Aobject : [ %s ]\n", _name.c_str());
+        return;
+    }
 
+    for (auto aci = mActorObjectsArray.begin();
+        aci < mActorObjectsArray.end(); aci++)
+    {
+        if ((*aci)->GetObjectName() == _name)
+        {
+            (*aci)->SetObjectActive(STATUS::NEED_DESTORY);
+            (*aci)->ClearChildren();
+            mActorObjectsMap.erase(_name);
+            mActorObjectsArray.erase(aci);
+            break;
+        }
+    }
 }
 
 void SceneNode::DeleteUiObject(std::string _name)
@@ -198,11 +244,25 @@ void SceneNode::InitAllNewObjects()
         newActor->Init();
         newActor->SetObjectActive(STATUS::ACTIVE);
         mNewActorObjectsArray.pop_back();
-        // TEMP--------------------
-        mActorObjectsArray.push_back(newActor);
+
+        bool isInserted = false;
+        for (auto actor = mActorObjectsArray.begin();
+            actor != mActorObjectsArray.end(); actor++)
+        {
+            if ((*actor)->GetUpdateOrder() >=
+                newActor->GetUpdateOrder())
+            {
+                mActorObjectsArray.insert(actor, newActor);
+                isInserted = true;
+                break;
+            }
+        }
+        if (!isInserted)
+        {
+            mActorObjectsArray.push_back(newActor);
+        }
         mActorObjectsMap.insert(std::make_pair(
             newActor->GetObjectName(), newActor));
-        // TEMP--------------------
     }
 
     while (!mNewUiObjectsArray.empty())
@@ -211,11 +271,25 @@ void SceneNode::InitAllNewObjects()
         newUi->Init();
         newUi->SetObjectActive(STATUS::ACTIVE);
         mNewUiObjectsArray.pop_back();
-        // TEMP--------------------
-        mUiObjectsArray.push_back(newUi);
+
+        bool isInserted = false;
+        for (auto ui = mUiObjectsArray.begin();
+            ui != mUiObjectsArray.end(); ui++)
+        {
+            if ((*ui)->GetUpdateOrder() >=
+                newUi->GetUpdateOrder())
+            {
+                mUiObjectsArray.insert(ui, newUi);
+                isInserted = true;
+                break;
+            }
+        }
+        if (!isInserted)
+        {
+            mUiObjectsArray.push_back(newUi);
+        }
         mUiObjectsMap.insert(std::make_pair(
             newUi->GetObjectName(), newUi));
-        // TEMP--------------------
     }
 }
 
