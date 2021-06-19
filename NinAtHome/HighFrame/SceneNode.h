@@ -78,6 +78,10 @@ private:
 
     std::vector<class UiObject*> mUiObjectsArray;
 
+    std::vector<class ActorObject*> mActorSpritesArray;
+
+    std::vector<class UiObject*> mUiSpritesArray;
+
     std::vector<class ActorObject*> mNewActorObjectsArray;
 
     std::vector<class UiObject*> mNewUiObjectsArray;

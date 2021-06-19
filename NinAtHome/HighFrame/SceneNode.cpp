@@ -11,12 +11,15 @@
 #include "SceneManager.h"
 #include "ActorObject.h"
 #include "UiObject.h"
+#include "ASpriteComponent.h"
+#include "USpriteComponent.h"
 
 SceneNode::SceneNode(std::string _name, SceneManager* smPtr) :
     mName(_name), mSceneManagerPtr(smPtr), mCamera(nullptr),
     mSceneLoopFuncPtr(nullptr),
     mActorObjectsMap({}), mActorObjectsArray({}),
     mUiObjectsMap({}), mUiObjectsArray({}),
+    mActorSpritesArray({}), mUiSpritesArray({}),
     mNewActorObjectsArray({}), mNewUiObjectsArray({}),
     mRetiredActorObjectsArray({}), mRetiredUiObjectsArray({})
 {
@@ -24,6 +27,8 @@ SceneNode::SceneNode(std::string _name, SceneManager* smPtr) :
     mActorObjectsArray.clear();
     mUiObjectsMap.clear();
     mUiObjectsArray.clear();
+    mActorSpritesArray.clear();
+    mUiSpritesArray.clear();
     mNewActorObjectsArray.clear();
     mNewUiObjectsArray.clear();
     mRetiredActorObjectsArray.clear();
@@ -84,6 +89,15 @@ void SceneNode::UpdateScene(float _deltatime)
         if ((*aci)->IsObjectActive() == STATUS::NEED_DESTORY)
         {
             mRetiredActorObjectsArray.push_back(*aci);
+            for (auto spi = mActorSpritesArray.begin();
+                spi != mActorSpritesArray.end(); spi++)
+            {
+                if ((*spi) == (*aci))
+                {
+                    mActorSpritesArray.erase(spi);
+                    break;
+                }
+            }
             mActorObjectsMap.erase((*aci)->GetObjectName());
             aci = mActorObjectsArray.erase(aci);
         }
@@ -103,6 +117,15 @@ void SceneNode::UpdateScene(float _deltatime)
         if ((*uii)->IsObjectActive() == STATUS::NEED_DESTORY)
         {
             mRetiredUiObjectsArray.push_back(*uii);
+            for (auto spi = mUiSpritesArray.begin();
+                spi != mUiSpritesArray.end(); spi++)
+            {
+                if ((*spi) == (*uii))
+                {
+                    mUiSpritesArray.erase(spi);
+                    break;
+                }
+            }
             mUiObjectsMap.erase((*uii)->GetObjectName());
             uii = mUiObjectsArray.erase(uii);
         }
@@ -122,11 +145,11 @@ void SceneNode::UpdateScene(float _deltatime)
 
 void SceneNode::DrawScene()
 {
-    for (auto actor : mActorObjectsArray)
+    for (auto actor : mActorSpritesArray)
     {
         actor->Draw();
     }
-    for (auto ui : mUiObjectsArray)
+    for (auto ui : mUiSpritesArray)
     {
         ui->Draw();
     }
@@ -155,6 +178,7 @@ void SceneNode::ReleaseScene()
         delete retireActor;
         mActorObjectsArray.pop_back();
     }
+    mActorSpritesArray.clear();
     mActorObjectsMap.clear();
 
     while (!mUiObjectsArray.empty())
@@ -164,6 +188,7 @@ void SceneNode::ReleaseScene()
         delete retireUi;
         mUiObjectsArray.pop_back();
     }
+    mUiSpritesArray.clear();
     mUiObjectsMap.clear();
 
     delete mCamera;
@@ -171,9 +196,7 @@ void SceneNode::ReleaseScene()
 
 void SceneNode::AddActorObject(ActorObject* _aObj)
 {
-    // TEMP-------------------
     mNewActorObjectsArray.push_back(_aObj);
-    // TEMP-------------------
 }
 
 void SceneNode::AddUiObject(UiObject* _uObj)
@@ -191,14 +214,12 @@ void SceneNode::DeleteActorObject(std::string _name)
     }
 
     for (auto aci = mActorObjectsArray.begin();
-        aci < mActorObjectsArray.end(); aci++)
+        aci != mActorObjectsArray.end(); aci++)
     {
         if ((*aci)->GetObjectName() == _name)
         {
             (*aci)->SetObjectActive(STATUS::NEED_DESTORY);
             (*aci)->ClearChildren();
-            mActorObjectsMap.erase(_name);
-            mActorObjectsArray.erase(aci);
             break;
         }
     }
@@ -263,6 +284,28 @@ void SceneNode::InitAllNewObjects()
         }
         mActorObjectsMap.insert(std::make_pair(
             newActor->GetObjectName(), newActor));
+
+        if (newActor->GetSpriteArray()->size())
+        {
+            isInserted = false;
+            for (auto actor = mActorSpritesArray.begin();
+                actor != mActorSpritesArray.end(); actor++)
+            {
+                if (((*actor)->GetSpriteArray())->front()->
+                    GetDrawOrder() >=
+                    newActor->GetSpriteArray()->front()->
+                    GetDrawOrder())
+                {
+                    mActorSpritesArray.insert(actor, newActor);
+                    isInserted = true;
+                    break;
+                }
+            }
+            if (!isInserted)
+            {
+                mActorSpritesArray.push_back(newActor);
+            }
+        }
     }
 
     while (!mNewUiObjectsArray.empty())
@@ -290,6 +333,28 @@ void SceneNode::InitAllNewObjects()
         }
         mUiObjectsMap.insert(std::make_pair(
             newUi->GetObjectName(), newUi));
+
+        if (newUi->GetSpriteArray()->size())
+        {
+            isInserted = false;
+            for (auto ui = mUiSpritesArray.begin();
+                ui != mUiSpritesArray.end(); ui++)
+            {
+                if (((*ui)->GetSpriteArray())->front()->
+                    GetDrawOrder() >=
+                    newUi->GetSpriteArray()->front()->
+                    GetDrawOrder())
+                {
+                    mUiSpritesArray.insert(ui, newUi);
+                    isInserted = true;
+                    break;
+                }
+            }
+            if (!isInserted)
+            {
+                mUiSpritesArray.push_back(newUi);
+            }
+        }
     }
 }
 

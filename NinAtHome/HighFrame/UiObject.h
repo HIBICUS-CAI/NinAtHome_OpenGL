@@ -41,6 +41,8 @@ public:
 
     std::vector<UiObject*>* GetChildrenArray();
 
+    std::vector<class USpriteComponent*>* GetSpriteArray();
+
     UiObject* GetParent() const;
 
     void Draw();

@@ -41,6 +41,8 @@ public:
 
     std::vector<ActorObject*>* GetChildrenArray();
 
+    std::vector<class ASpriteComponent*>* GetSpriteArray();
+
     ActorObject* GetParent() const;
 
     void Draw();

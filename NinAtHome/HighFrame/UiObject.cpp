@@ -109,6 +109,11 @@ std::vector<UiObject*>* UiObject::GetChildrenArray()
     return &mChildrenArray;
 }
 
+std::vector<USpriteComponent*>* UiObject::GetSpriteArray()
+{
+    return &mSpriteCompArray;
+}
+
 UiObject* UiObject::GetParent() const
 {
     return mParentUiObject;

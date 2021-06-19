@@ -116,17 +116,6 @@ void ActorObject::UpdateComponents(float _deltatime)
 
 void ActorObject::Destory()
 {
-    if (mChildrenArray.size())
-    {
-        for (auto child : mChildrenArray)
-        {
-            child->Destory();
-            GetSceneNodePtr()->DeleteActorObject(
-                child->GetObjectName());
-            delete child;
-        }
-    }
-
     while (mACompArray.size())
     {
         auto comp = mACompArray.back();
@@ -175,6 +164,11 @@ void ActorObject::ClearChild(std::string _name)
         return;
     }
 
+    if (mChildrenMap[_name]->GetChildrenArray()->size())
+    {
+        mChildrenMap[_name]->ClearChildren();
+    }
+
     for (auto child = mChildrenArray.begin();
         child != mChildrenArray.end(); child++)
     {
@@ -193,6 +187,10 @@ void ActorObject::ClearChildren()
 {
     for (auto child : mChildrenArray)
     {
+        if (child->GetChildrenArray()->size())
+        {
+            child->ClearChildren();
+        }
         child->SetObjectActive(STATUS::NEED_DESTORY);
     }
 
@@ -216,6 +214,11 @@ ActorObject* ActorObject::GetChild(std::string _name)
 std::vector<ActorObject*>* ActorObject::GetChildrenArray()
 {
     return &mChildrenArray;
+}
+
+std::vector<ASpriteComponent*>* ActorObject::GetSpriteArray()
+{
+    return &mSpriteCompArray;
 }
 
 ActorObject* ActorObject::GetParent() const
