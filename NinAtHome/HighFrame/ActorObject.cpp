@@ -32,6 +32,13 @@ ActorObject::~ActorObject()
 
 AComponent* ActorObject::GetAComponent(std::string _name)
 {
+    if (mACompMap.find(_name) == mACompMap.end())
+    {
+        MY_NN_LOG(LOG_WARNING,
+            "cannot find this Acomponent : [ %s ]\n", _name);
+        return nullptr;
+    }
+
     return mACompMap[_name];
 }
 

@@ -66,5 +66,12 @@ void ATimerComponent::DeleteTimer(std::string _name)
 
 Timer* ATimerComponent::GetTimer(std::string _name)
 {
+    if (mTimerMap.find(_name) == mTimerMap.end())
+    {
+        MY_NN_LOG(LOG_WARNING,
+            "cannot find this timer : [ %s ]\n", _name);
+        return nullptr;
+    }
+
     return mTimerMap[_name];
 }

@@ -142,7 +142,7 @@ bool InitGlAndCreateWindow(
 
     if (!gp_WndHandle)
     {
-        NN_LOG(LOG_ERROR,
+        MY_NN_LOG(LOG_ERROR,
             "failed to create glfw wnd\n");
         glfwTerminate();
         return false;
@@ -155,7 +155,7 @@ bool InitGlAndCreateWindow(
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        NN_LOG(LOG_ERROR, "failed to init glad\n");
+        MY_NN_LOG(LOG_ERROR, "failed to init glad\n");
         return false;
     }
     else

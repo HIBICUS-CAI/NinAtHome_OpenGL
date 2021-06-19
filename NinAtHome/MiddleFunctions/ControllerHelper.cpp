@@ -28,7 +28,7 @@ void InitController()
     {
         delete gp_XGamePadStatus;
         gp_XGamePadStatus = nullptr;
-        NN_LOG(LOG_WARNING,
+        MY_NN_LOG(LOG_WARNING,
             "could not find xbox gamepad\n");
     }
 }
@@ -71,7 +71,7 @@ void UpdateController()
 
     if (result != ERROR_SUCCESS)
     {
-        NN_LOG(LOG_WARNING,
+        MY_NN_LOG(LOG_WARNING,
             "sth wrong with polling xinput status");
     }
 

@@ -28,7 +28,7 @@ RootSystem::~RootSystem()
 
 bool RootSystem::StartUp()
 {
-    NN_LOG(LOG_MESSAGE,
+    MY_NN_LOG(LOG_MESSAGE,
         "[START UP] : starting up ROOT SYSTEM\n");
 
     mSceneManagerPtr = new SceneManager();
@@ -53,12 +53,12 @@ bool RootSystem::StartUp()
 
     if (result)
     {
-        NN_LOG(LOG_MESSAGE,
+        MY_NN_LOG(LOG_MESSAGE,
             "[START UP] : start up ROOT SYSTEM successed\n");
     }
     else
     {
-        NN_LOG(LOG_ERROR,
+        MY_NN_LOG(LOG_ERROR,
             "[START UP] : start up ROOT SYSTEM failed\n");
     }
 
@@ -90,7 +90,7 @@ void RootSystem::ClearAndStop()
 
     UninitSystem();
 
-    NN_LOG(LOG_MESSAGE,
+    MY_NN_LOG(LOG_MESSAGE,
         "[CLEAN STOP] : stop ROOT SYSTEM successed\n");
 }
 

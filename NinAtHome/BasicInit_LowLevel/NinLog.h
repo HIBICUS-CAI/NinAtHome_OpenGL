@@ -19,9 +19,9 @@
 // FOR SETTING ------------------------------
 
 #ifdef LOG_TO_VS
-#define NN_LOG DebugPrintF
+#define MY_NN_LOG DebugPrintF
 #else
-#define NN_LOG MyPrintF
+#define MY_NN_LOG MyPrintF
 #endif // LOG_TO_VS
 
 int DebugPrintF(int level, const char* format, ...);

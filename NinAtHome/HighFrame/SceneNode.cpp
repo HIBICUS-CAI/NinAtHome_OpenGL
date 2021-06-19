@@ -47,11 +47,25 @@ SceneManager* SceneNode::GetSceneManagerPtr() const
 
 ActorObject* SceneNode::GetActorObject(std::string _name)
 {
+    if (mActorObjectsMap.find(_name) == mActorObjectsMap.end())
+    {
+        MY_NN_LOG(LOG_WARNING,
+            "cannot find this Aobject : [ %s ]\n", _name);
+        return nullptr;
+    }
+
     return mActorObjectsMap[_name];
 }
 
 UiObject* SceneNode::GetUiObject(std::string _name)
 {
+    if (mUiObjectsMap.find(_name) == mUiObjectsMap.end())
+    {
+        MY_NN_LOG(LOG_WARNING,
+            "cannot find this Uobject : [ %s ]\n", _name);
+        return nullptr;
+    }
+
     return mUiObjectsMap[_name];
 }
 

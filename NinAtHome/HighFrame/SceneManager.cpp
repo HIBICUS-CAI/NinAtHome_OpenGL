@@ -125,7 +125,7 @@ void SceneManager::ReleaseLoadingScene()
 
 void SceneManager::LoadNextScene()
 {
-    NN_LOG(LOG_MESSAGE, "ready to load next scene\n");
+    MY_NN_LOG(LOG_MESSAGE, "ready to load next scene\n");
 
     mCurrentScenePtr = nullptr;
 }
