@@ -17,6 +17,7 @@
 #include "ActorObject.h"
 #include "ASpriteComponent.h"
 #include "controller.h"
+#include "ATransformComponent.h"
 // TEMP--------------------
 
 SceneManager::SceneManager() :
@@ -107,6 +108,50 @@ void SceneManager::UpdateSceneManager(float _deltatime)
             }
         }
     }
+    if (GetControllerPress(NpadButton::Left::Index) ||
+        GetControllerPress(NpadButton::StickLLeft::Index))
+    {
+        auto obj = mCurrentScenePtr->GetActorObject("test");
+        if (obj && obj->IsObjectActive() == STATUS::ACTIVE)
+        {
+            ((ATransformComponent*)(obj->
+                GetAComponent("test-transform")))->
+                TranslateXAsix(-5.f);
+        }
+    }
+    if (GetControllerPress(NpadButton::Right::Index) ||
+        GetControllerPress(NpadButton::StickLRight::Index))
+    {
+        auto obj = mCurrentScenePtr->GetActorObject("test");
+        if (obj && obj->IsObjectActive() == STATUS::ACTIVE)
+        {
+            ((ATransformComponent*)(obj->
+                GetAComponent("test-transform")))->
+                TranslateXAsix(5.f);
+        }
+    }
+    if (GetControllerPress(NpadButton::Up::Index) ||
+        GetControllerPress(NpadButton::StickLUp::Index))
+    {
+        auto obj = mCurrentScenePtr->GetActorObject("test");
+        if (obj && obj->IsObjectActive() == STATUS::ACTIVE)
+        {
+            ((ATransformComponent*)(obj->
+                GetAComponent("test-transform")))->
+                TranslateYAsix(-5.f);
+        }
+    }
+    if (GetControllerPress(NpadButton::Down::Index) ||
+        GetControllerPress(NpadButton::StickLDown::Index))
+    {
+        auto obj = mCurrentScenePtr->GetActorObject("test");
+        if (obj && obj->IsObjectActive() == STATUS::ACTIVE)
+        {
+            ((ATransformComponent*)(obj->
+                GetAComponent("test-transform")))->
+                TranslateYAsix(5.f);
+        }
+    }
 
     mCurrentScenePtr->UpdateScene(_deltatime);
     mCurrentScenePtr->DrawScene();
@@ -136,20 +181,31 @@ void SceneManager::LoadLoadingScene()
     mLoadingScenePtr = new SceneNode("load-scene", this);
     ActorObject* actor = new ActorObject(
         "test", mLoadingScenePtr, 0);
+    ATransformComponent* atc = new ATransformComponent(
+        "test-transform", actor, -1, MakeFloat3(0.f, 0.f, 0.f));
+    actor->AddAComponent(atc);
     ASpriteComponent* asc = new ASpriteComponent("test-sprite",
         actor, 0, 0);
     asc->LoadTextureByPath("rom:/Assets/Textures/texture.tga");
     actor->AddAComponent(asc);
     mLoadingScenePtr->AddActorObject(actor);
+
     ActorObject* actor1 = new ActorObject(
         "test2", mLoadingScenePtr, 0);
+    ATransformComponent* atc1 = new ATransformComponent(
+        "test2-transform", actor1, -1, MakeFloat3(0.f, 0.f, 0.f));
+    actor1->AddAComponent(atc1);
     ASpriteComponent* asc1 = new ASpriteComponent("test2-sprite",
         actor1, 0, -2);
     asc1->LoadTextureByPath("rom:/Assets/Textures/player.tga");
     actor1->AddAComponent(asc1);
     actor->AddChild(actor1);
+
     ActorObject* actor2 = new ActorObject(
         "test3", mLoadingScenePtr, 0);
+    ATransformComponent* atc2 = new ATransformComponent(
+        "test3-transform", actor2, -1, MakeFloat3(0.f, 0.f, 0.f));
+    actor2->AddAComponent(atc2);
     ASpriteComponent* asc2 = new ASpriteComponent("test3-sprite",
         actor2, 0, -4);
     asc2->LoadTextureByPath("rom:/Assets/Textures/bg.tga");

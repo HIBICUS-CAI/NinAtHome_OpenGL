@@ -11,6 +11,7 @@
 #include "ActorObject.h"
 #include "texture.h"
 #include "sprite.h"
+#include "ATransformComponent.h"
 
 ASpriteComponent::ASpriteComponent(std::string _name,
     ActorObject* _owner, int _order, int _drawOrder) :
@@ -99,8 +100,36 @@ void ASpriteComponent::ResetDrawOrder(int _order)
 void ASpriteComponent::DrawASprite()
 {
     // TEMP-------------------------
+    std::string transname = GetComponentName();
+    auto offset = transname.rfind("sprite");
+    transname.replace(offset, 6, "transform");
+    auto transcomp = GetActorObjOwner()->GetAComponent(transname);
+    if (!transcomp)
+    {
+        MY_NN_LOG(LOG_ERROR,
+            "cannot find the transform component of [ %s ]\n",
+            GetActorObjOwner()->GetObjectName().c_str());
+
+        return;
+    }
+
+#ifdef RUN_WITHOUT_NINSDK
+    {
+        Matrix4x4f world = ((ATransformComponent*)transcomp)->
+            GetWorldMatrix();
+        Float4x4 pworld = nullptr;
+        MatrixStore(&pworld, world);
+        glUniformMatrix4fv(
+            glGetUniformLocation(
+                GetGlHelperPtr()->GetShaderID("default"),
+                "uWorld"), 1, GL_TRUE, pworld);
+    }
+#else
+
+#endif // RUN_WITHOUT_NINSDK
+
     SetTexture(mTexture);
     DrawSprite(0.f, 0.f, 100.f, 100.f, 0.f, 0.f, 1.f, 1.f,
-        MakeFloat4(1.f, 1.f, 1.f, 1.f));
+        mOffsetColor);
     // TEMP-------------------------
 }

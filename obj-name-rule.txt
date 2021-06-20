@@ -1,0 +1,11 @@
+1. scene's name:
+    [scene's name]-scene
+    example : load-scene title-scene
+
+2. object's name:
+    [object's name]-[actor/ui]
+    example : test-actor hp-bar-ui
+
+3. component's name:
+    [owner's name]-[component type]-[(with or not)number]
+    example : test-actor-sprite-1 hp-bar-ui-transform-11

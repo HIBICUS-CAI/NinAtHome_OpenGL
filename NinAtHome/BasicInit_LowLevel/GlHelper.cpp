@@ -9,6 +9,7 @@ const char* g_DefaultVertShader =
 "#version 330 core\n"
 "precision highp float;\n"
 
+"uniform mat4 uWorld;\n"
 "uniform mat4 uProjection;\n"
 
 "layout( location = 0 ) in vec3 inPosition;\n"
@@ -21,7 +22,7 @@ const char* g_DefaultVertShader =
 "void main() {\n"
 "    vColor = inColor;\n"
 "    vTexCoord = inTexCoord;\n"
-"    gl_Position = vec4(inPosition, 1.0) * uProjection;\n"
+"    gl_Position = vec4(inPosition, 1.0) * uWorld * uProjection;\n"
 "}\n";
 
 const char* g_DefaultFragShader =
