@@ -645,7 +645,7 @@ void ATransformComponent::UpdateWorldMatrix()
         0.f, 0.f, 0.f, 1.f
     };
 
-#ifdef RUN_WITHOUT_NINSDK
+#ifdef NIN_AT_HOME
     mWorldMatrix = glm::translate(mWorldMatrix, mPosition);
     mWorldMatrix = glm::rotate(mWorldMatrix,
         glm::radians(mRotation.x), Float3(1.f, 0.f, 0.f));

@@ -6,7 +6,7 @@
 #include <math.h>
 #include "NinLog.h"
 
-#define RUN_WITHOUT_NINSDK
+#define NIN_AT_HOME
 
 #define nnMain main
 

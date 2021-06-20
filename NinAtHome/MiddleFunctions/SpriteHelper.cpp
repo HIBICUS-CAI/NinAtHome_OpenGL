@@ -33,7 +33,7 @@ void DrawSprite(float x, float y, float width, float height,
 	vertex[2].TexCoord = MakeFloat2(tx + tw, ty + th);
 	vertex[3].TexCoord = MakeFloat2(tx, ty + th);
 
-#ifdef RUN_WITHOUT_NINSDK
+#ifdef NIN_AT_HOME
 	VERTEX* v = new VERTEX[ARRAYSIZE(vertex)];
 	for (int i = 0; i < ARRAYSIZE(vertex); i++)
 	{
@@ -50,7 +50,7 @@ void DrawSprite(float x, float y, float width, float height,
 		sizeof(VERTEX_3D), (GLvoid*)&vertex->Color);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
 		sizeof(VERTEX_3D), (GLvoid*)&vertex->TexCoord);
-#endif // RUN_WITHOUT_NINSDK
+#endif // NIN_AT_HOME
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }

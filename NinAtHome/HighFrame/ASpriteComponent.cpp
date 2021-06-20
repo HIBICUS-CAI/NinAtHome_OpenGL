@@ -113,7 +113,7 @@ void ASpriteComponent::DrawASprite()
         return;
     }
 
-#ifdef RUN_WITHOUT_NINSDK
+#ifdef NIN_AT_HOME
     {
         Matrix4x4f world = ((ATransformComponent*)transcomp)->
             GetWorldMatrix();
@@ -126,7 +126,7 @@ void ASpriteComponent::DrawASprite()
     }
 #else
 
-#endif // RUN_WITHOUT_NINSDK
+#endif // NIN_AT_HOME
 
     SetTexture(mTexture);
     DrawSprite(0.f, 0.f, 100.f, 100.f, 0.f, 0.f, 1.f, 1.f,
