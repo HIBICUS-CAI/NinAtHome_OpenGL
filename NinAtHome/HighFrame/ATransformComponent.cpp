@@ -31,7 +31,6 @@ void ATransformComponent::CompInit()
 
 void ATransformComponent::CompUpdate(float _deltatime)
 {
-    // TODO child's transform!
     UpdateWorldMatrix();
 }
 
@@ -77,51 +76,431 @@ Matrix4x4f ATransformComponent::GetWorldMatrix() const
 
 void ATransformComponent::Translate(Float3 _pos)
 {
+    if (GetActorObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetActorObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetAComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    ATransformComponent* atc =
+                        (ATransformComponent*)comp;
+                    atc->Translate(_pos);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetAComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                ATransformComponent* atc =
+                    (ATransformComponent*)comp;
+                atc->Translate(_pos);
+            }
+        }
+    }
+
     mPosition += _pos;
 }
 
 void ATransformComponent::TranslateXAsix(float _posx)
 {
+    if (GetActorObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetActorObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetAComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    ATransformComponent* atc =
+                        (ATransformComponent*)comp;
+                    atc->TranslateXAsix(_posx);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetAComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                ATransformComponent* atc =
+                    (ATransformComponent*)comp;
+                atc->TranslateXAsix(_posx);
+            }
+        }
+    }
+
     mPosition.x += _posx;
 }
 
 void ATransformComponent::TranslateYAsix(float _posy)
 {
+    if (GetActorObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetActorObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetAComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    ATransformComponent* atc =
+                        (ATransformComponent*)comp;
+                    atc->TranslateYAsix(_posy);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetAComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                ATransformComponent* atc =
+                    (ATransformComponent*)comp;
+                atc->TranslateYAsix(_posy);
+            }
+        }
+    }
+
     mPosition.y += _posy;
 }
 
 void ATransformComponent::TranslateZAsix(float _posz)
 {
+    if (GetActorObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetActorObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetAComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    ATransformComponent* atc =
+                        (ATransformComponent*)comp;
+                    atc->TranslateZAsix(_posz);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetAComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                ATransformComponent* atc =
+                    (ATransformComponent*)comp;
+                atc->TranslateZAsix(_posz);
+            }
+        }
+    }
+
     mPosition.z += _posz;
 }
 
 void ATransformComponent::Rotate(Float3 _angle)
 {
+    if (GetActorObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetActorObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetAComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    ATransformComponent* atc =
+                        (ATransformComponent*)comp;
+                    atc->Rotate(_angle);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetAComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                ATransformComponent* atc =
+                    (ATransformComponent*)comp;
+                atc->Rotate(_angle);
+            }
+        }
+    }
+
     mRotation += _angle;
 }
 
 void ATransformComponent::RotateXAsix(float _anglex)
 {
+    if (GetActorObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetActorObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetAComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    ATransformComponent* atc =
+                        (ATransformComponent*)comp;
+                    atc->RotateXAsix(_anglex);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetAComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                ATransformComponent* atc =
+                    (ATransformComponent*)comp;
+                atc->RotateXAsix(_anglex);
+            }
+        }
+    }
+
     mRotation.x += _anglex;
 }
 
 void ATransformComponent::RotateYAsix(float _angley)
 {
+    if (GetActorObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetActorObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetAComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    ATransformComponent* atc =
+                        (ATransformComponent*)comp;
+                    atc->RotateYAsix(_angley);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetAComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                ATransformComponent* atc =
+                    (ATransformComponent*)comp;
+                atc->RotateYAsix(_angley);
+            }
+        }
+    }
+
     mRotation.y += _angley;
 }
 
 void ATransformComponent::RotateZAsix(float _anglez)
 {
+    if (GetActorObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetActorObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetAComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    ATransformComponent* atc =
+                        (ATransformComponent*)comp;
+                    atc->RotateZAsix(_anglez);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetAComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                ATransformComponent* atc =
+                    (ATransformComponent*)comp;
+                atc->RotateZAsix(_anglez);
+            }
+        }
+    }
+
     mRotation.z += _anglez;
 }
 
 void ATransformComponent::Scale(Float3 _factor)
 {
+    if (GetActorObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetActorObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetAComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    ATransformComponent* atc =
+                        (ATransformComponent*)comp;
+                    atc->Scale(_factor);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetAComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                ATransformComponent* atc =
+                    (ATransformComponent*)comp;
+                atc->Scale(_factor);
+            }
+        }
+    }
+
     mScale *= _factor;
 }
 
 void ATransformComponent::Scale(float _factor)
 {
+    if (GetActorObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetActorObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetAComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    ATransformComponent* atc =
+                        (ATransformComponent*)comp;
+                    atc->Scale(_factor);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetAComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                ATransformComponent* atc =
+                    (ATransformComponent*)comp;
+                atc->Scale(_factor);
+            }
+        }
+    }
+
     mScale.x *= _factor;
     mScale.y *= _factor;
     mScale.z *= _factor;
@@ -129,16 +508,130 @@ void ATransformComponent::Scale(float _factor)
 
 void ATransformComponent::ScaleXAsix(float _factorx)
 {
+    if (GetActorObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetActorObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetAComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    ATransformComponent* atc =
+                        (ATransformComponent*)comp;
+                    atc->ScaleXAsix(_factorx);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetAComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                ATransformComponent* atc =
+                    (ATransformComponent*)comp;
+                atc->ScaleXAsix(_factorx);
+            }
+        }
+    }
+
     mScale.x *= _factorx;
 }
 
 void ATransformComponent::ScaleYAsix(float _factory)
 {
+    if (GetActorObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetActorObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetAComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    ATransformComponent* atc =
+                        (ATransformComponent*)comp;
+                    atc->ScaleYAsix(_factory);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetAComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                ATransformComponent* atc =
+                    (ATransformComponent*)comp;
+                atc->ScaleYAsix(_factory);
+            }
+        }
+    }
+
     mScale.y *= _factory;
 }
 
 void ATransformComponent::ScaleZAsix(float _factorz)
 {
+    if (GetActorObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetActorObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetAComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    ATransformComponent* atc =
+                        (ATransformComponent*)comp;
+                    atc->ScaleZAsix(_factorz);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetAComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                ATransformComponent* atc =
+                    (ATransformComponent*)comp;
+                atc->ScaleZAsix(_factorz);
+            }
+        }
+    }
+
     mScale.z *= _factorz;
 }
 
