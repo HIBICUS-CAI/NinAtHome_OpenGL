@@ -94,7 +94,18 @@ void SceneManager::UpdateSceneManager(float _deltatime)
     }
     if (GetControllerTrigger(NpadButton::B::Index))
     {
-        mCurrentScenePtr->DeleteActorObject("test");
+        auto obj = mCurrentScenePtr->GetActorObject("test");
+        if (obj)
+        {
+            if (obj->IsObjectActive() == STATUS::ACTIVE)
+            {
+                obj->SetObjectActive(STATUS::PAUSE);
+            }
+            else
+            {
+                obj->SetObjectActive(STATUS::ACTIVE);
+            }
+        }
     }
 
     mCurrentScenePtr->UpdateScene(_deltatime);

@@ -147,11 +147,17 @@ void SceneNode::DrawScene()
 {
     for (auto actor : mActorSpritesArray)
     {
-        actor->Draw();
+        if (actor->IsObjectActive() == STATUS::ACTIVE)
+        {
+            actor->Draw();
+        }
     }
     for (auto ui : mUiSpritesArray)
     {
-        ui->Draw();
+        if (ui->IsObjectActive() == STATUS::ACTIVE)
+        {
+            ui->Draw();
+        }
     }
 }
 

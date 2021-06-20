@@ -17,10 +17,11 @@ ActorObject::ActorObject(std::string _name,
     Object(_name, _scene, STATUS::NEED_INIT), mACompMap({}),
     mACompArray({}), mActorUpdateOrder(_order),
     mChildrenArray({}), mChildrenMap({}),
-    mParentActorObject(nullptr)
+    mSpriteCompArray({}), mParentActorObject(nullptr)
 {
     mACompMap.clear();
     mACompArray.clear();
+    mSpriteCompArray.clear();
     mChildrenArray.clear();
     mChildrenMap.clear();
 }
@@ -110,7 +111,10 @@ void ActorObject::UpdateComponents(float _deltatime)
 {
     for (auto comp : mACompArray)
     {
-        comp->CompUpdate(_deltatime);
+        if (comp->IsCompActive() == STATUS::ACTIVE)
+        {
+            comp->CompUpdate(_deltatime);
+        }
     }
 }
 
@@ -230,6 +234,9 @@ void ActorObject::Draw()
 {
     for (auto sc : mSpriteCompArray)
     {
-        sc->DrawASprite();
+        if (sc->IsCompActive() == STATUS::ACTIVE)
+        {
+            sc->DrawASprite();
+        }
     }
 }
