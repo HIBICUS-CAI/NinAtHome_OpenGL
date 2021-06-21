@@ -91,6 +91,17 @@ bool ACollisionComponent::CheckCollisionWith(ActorObject* _obj)
         return false;
     }
 
+    if (_obj->GetChildrenArray()->size())
+    {
+        for (auto child : *(_obj->GetChildrenArray()))
+        {
+            if (CheckCollisionWith(child))
+            {
+                return true;
+            }
+        }
+    }
+
     ATransformComponent* thisAtc = nullptr;
     ATransformComponent* atc = nullptr;
     ACollisionComponent* acc = nullptr;
