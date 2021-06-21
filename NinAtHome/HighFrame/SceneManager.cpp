@@ -187,6 +187,8 @@ void SceneManager::LoadLoadingScene()
     ASpriteComponent* asc = new ASpriteComponent("test-sprite",
         actor, 0, 0);
     asc->LoadTextureByPath("rom:/Assets/Textures/texture.tga");
+    asc->SetTexWidth(200.f);
+    asc->SetTexHeight(200.f);
     actor->AddAComponent(asc);
     mLoadingScenePtr->AddActorObject(actor);
 
@@ -198,6 +200,8 @@ void SceneManager::LoadLoadingScene()
     ASpriteComponent* asc1 = new ASpriteComponent("test2-sprite",
         actor1, 0, -2);
     asc1->LoadTextureByPath("rom:/Assets/Textures/player.tga");
+    asc1->SetTexWidth(150.f);
+    asc1->SetTexHeight(50.f);
     actor1->AddAComponent(asc1);
     actor->AddChild(actor1);
 
@@ -209,6 +213,8 @@ void SceneManager::LoadLoadingScene()
     ASpriteComponent* asc2 = new ASpriteComponent("test3-sprite",
         actor2, 0, -4);
     asc2->LoadTextureByPath("rom:/Assets/Textures/bg.tga");
+    asc2->SetTexWidth(960.f);
+    asc2->SetTexHeight(540.f);
     actor2->AddAComponent(asc2);
     actor1->AddChild(actor2);
     // TEMP---------------------------

@@ -17,7 +17,7 @@ ASpriteComponent::ASpriteComponent(std::string _name,
     ActorObject* _owner, int _order, int _drawOrder) :
     AComponent(_name, _owner, _order), mDrawOrder(_drawOrder),
     mTexture(0), mOffsetColor({ 1.f,1.f,1.f,1.f }), mVisible(true),
-    mTexWidth(0), mTexHeight(0)
+    mTexWidth(0.f), mTexHeight(0.f)
 {
 
 }
@@ -57,12 +57,32 @@ unsigned int ASpriteComponent::GetTexture() const
     return mTexture;
 }
 
-unsigned int ASpriteComponent::GetTexWidth() const
+void ASpriteComponent::SetTexWidth(float _width)
+{
+    if (_width < 0.f)
+    {
+        _width = -_width;
+    }
+
+    mTexWidth = _width;
+}
+
+void ASpriteComponent::SetTexHeight(float _height)
+{
+    if (_height < 0.f)
+    {
+        _height = -_height;
+    }
+
+    mTexHeight = _height;
+}
+
+float ASpriteComponent::GetTexWidth() const
 {
     return mTexWidth;
 }
 
-unsigned int ASpriteComponent::GetTexHeight() const
+float ASpriteComponent::GetTexHeight() const
 {
     return mTexHeight;
 }
@@ -99,7 +119,11 @@ void ASpriteComponent::ResetDrawOrder(int _order)
 
 void ASpriteComponent::DrawASprite()
 {
-    // TEMP-------------------------
+    if (!mVisible)
+    {
+        return;
+    }
+
     std::string transname = GetComponentName();
     auto offset = transname.rfind("sprite");
     transname.replace(offset, 6, "transform");
@@ -129,7 +153,6 @@ void ASpriteComponent::DrawASprite()
 #endif // NIN_AT_HOME
 
     SetTexture(mTexture);
-    DrawSprite(0.f, 0.f, 100.f, 100.f, 0.f, 0.f, 1.f, 1.f,
-        mOffsetColor);
-    // TEMP-------------------------
+    DrawSprite(0.f, 0.f, mTexWidth, mTexHeight,
+        0.f, 0.f, 1.f, 1.f, mOffsetColor);
 }

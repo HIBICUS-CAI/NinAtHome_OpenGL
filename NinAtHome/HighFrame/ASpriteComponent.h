@@ -25,9 +25,13 @@ public:
 
     unsigned int GetTexture() const;
 
-    unsigned int GetTexWidth() const;
+    void SetTexWidth(float _width);
 
-    unsigned int GetTexHeight() const;
+    void SetTexHeight(float _height);
+
+    float GetTexWidth() const;
+
+    float GetTexHeight() const;
 
     void SetOffsetColor(Float4 _color);
 
@@ -55,9 +59,9 @@ private:
 
     Float4 mOffsetColor;
 
-    unsigned int mTexWidth;
+    float mTexWidth;
 
-    unsigned int mTexHeight;
+    float mTexHeight;
 
     bool mVisible;
 

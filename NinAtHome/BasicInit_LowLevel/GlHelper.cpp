@@ -64,7 +64,8 @@ bool GlHelper::StartUp()
         glEnableVertexAttribArray(3);
 
         glm::fmat4x4 projection;
-        projection = glm::ortho(-960.f, 960.f, 540.f, -540.f);
+        projection = glm::ortho(-960.f, 960.f, 540.f, -540.f,
+            -10000.f, 10000.f);
 
         glUniformMatrix4fv(
             glGetUniformLocation(
@@ -93,7 +94,7 @@ bool GlHelper::CompileDefaultShaders()
     glGetShaderiv(vertShaderId, GL_COMPILE_STATUS, &result);
     if (!result)
     {
-        MY_NN_LOG(LOG_ERROR, 
+        MY_NN_LOG(LOG_ERROR,
             "failed to compile default vert shader\n");
         return false;
     }
