@@ -7,5 +7,5 @@
     example : test-actor hp-bar-ui
 
 3. component's name:
-    [owner's name]-[component type]-[(with or not)number]
-    example : test-actor-sprite-1 hp-bar-ui-transform-11
+    [owner's name]-[component type]
+    example : test-actor-sprite hp-bar-ui-transform

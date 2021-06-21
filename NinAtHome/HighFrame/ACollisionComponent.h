@@ -43,6 +43,24 @@ public:
 
     bool CheckCollisionWith(class ActorObject* _obj);
 
+private:
+    bool ClacCollisonWith(
+        const class ATransformComponent* _thisAtc,
+        const class ATransformComponent* _atc,
+        const ACollisionComponent* _acc);
+
+    bool ClacC2C(Float3 _thisPos, Float3 _thatPos,
+        Float2 _thisSize, Float2 _thatSize);
+
+    bool ClacC2R(Float3 _thisPos, Float3 _thatPos,
+        Float2 _thisSize, Float2 _thatSize);
+
+    bool ClacR2C(Float3 _thisPos, Float3 _thatPos,
+        Float2 _thisSize, Float2 _thatSize);
+
+    bool ClacR2R(Float3 _thisPos, Float3 _thatPos,
+        Float2 _thisSize, Float2 _thatSize);
+
 public:
     virtual void CompInit();
 
