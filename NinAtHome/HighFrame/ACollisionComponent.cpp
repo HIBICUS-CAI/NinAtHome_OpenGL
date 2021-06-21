@@ -10,12 +10,15 @@
 #include "ACollisionComponent.h"
 #include "ActorObject.h"
 #include "ATransformComponent.h"
+#include "texture.h"
+#include "sprite.h"
 
 ACollisionComponent::ACollisionComponent(std::string _name,
     ActorObject* _owner, int _order) :
     AComponent(_name, _owner, _order),
     mCollisionType(COLLISION_TYPE::NULLTYPE),
-    mCollisionSize({ 0.f,0.f }), mShowCollisionFlg(false)
+    mCollisionSize({ 0.f,0.f }), mShowCollisionFlg(false),
+    mCircleTexture(0), mRectangleTexture(0)
 {
 
 }
@@ -27,20 +30,21 @@ ACollisionComponent::~ACollisionComponent()
 
 void ACollisionComponent::CompInit()
 {
-
+    mCircleTexture = LoadTexture(
+        "rom:/Assets/Textures/collision-circ.tga");
+    mRectangleTexture = LoadTexture(
+        "rom:/Assets/Textures/collision-rect.tga");
 }
 
 void ACollisionComponent::CompUpdate(float _deltatime)
 {
-    if (mShowCollisionFlg)
-    {
-        // TODO draw collision here
-    }
+
 }
 
 void ACollisionComponent::CompDestory()
 {
-
+    UnloadTexture(mCircleTexture);
+    UnloadTexture(mRectangleTexture);
 }
 
 void ACollisionComponent::SetCollisionStatus(COLLISION_TYPE _type,
@@ -79,6 +83,59 @@ void ACollisionComponent::SetCollisionType(COLLISION_TYPE _type)
 void ACollisionComponent::SetShowCollisionFlg(bool _flag)
 {
     mShowCollisionFlg = _flag;
+}
+
+void ACollisionComponent::DrawACollision()
+{
+    if (mShowCollisionFlg)
+    {
+        ATransformComponent* thisAtc = nullptr;
+        Float4x4 pworld = {};
+        {
+            std::string keywordThisT = "";
+            keywordThisT = GetActorObjOwner()->GetObjectName() +
+                "-transform";
+            thisAtc = (ATransformComponent*)(GetActorObjOwner()->
+                GetAComponent(keywordThisT));
+            if (!thisAtc)
+            {
+                MY_NN_LOG(LOG_ERROR,
+                    "cannot find transform comp in this obj : [ %s ]\n",
+                    GetActorObjOwner()->GetObjectName());
+                return;
+            }
+            Matrix4x4f world = thisAtc->GetWorldMatrix();
+            MatrixStore(&pworld, world);
+        }
+
+        glUniformMatrix4fv(
+            glGetUniformLocation(
+                GetGlHelperPtr()->GetShaderID("default"),
+                "uWorld"), 1, GL_TRUE, pworld);
+
+        switch (mCollisionType)
+        {
+        case COLLISION_TYPE::CIRCLE:
+            SetTexture(mCircleTexture);
+            DrawSprite(0.f, 0.f,
+                mCollisionSize.x * 2.f, mCollisionSize.y * 2.f,
+                0.f, 0.f, 1.f, 1.f,
+                MakeFloat4(1.f, 1.f, 1.f, 1.f));
+            return;
+        case COLLISION_TYPE::RECTANGLE:
+            SetTexture(mRectangleTexture);
+            DrawSprite(0.f, 0.f,
+                mCollisionSize.x, mCollisionSize.y,
+                0.f, 0.f, 1.f, 1.f,
+                MakeFloat4(1.f, 1.f, 1.f, 1.f));
+            return;
+        default:
+            MY_NN_LOG(LOG_ERROR,
+                "this collison type is null in obj : [ %s ]\n",
+                GetActorObjOwner()->GetObjectName().c_str());
+            return;
+        }
+    }
 }
 
 bool ACollisionComponent::CheckCollisionWith(ActorObject* _obj)
@@ -147,6 +204,10 @@ bool ACollisionComponent::ClacCollisonWith(
     Float3 thatPos = _atc->GetPosition();
     Float2 thisSize = mCollisionSize;
     Float2 thatSize = _acc->GetCollisionSize();
+    thisSize.x *= _thisAtc->GetScale().x;
+    thisSize.y *= _thisAtc->GetScale().y;
+    thatSize.x *= _atc->GetScale().x;
+    thatSize.y *= _atc->GetScale().y;
 
     switch (mCollisionType)
     {

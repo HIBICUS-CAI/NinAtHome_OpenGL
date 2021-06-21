@@ -9,11 +9,12 @@
 #include <Windows.h>
 
 #define LOG_MESSAGE             (0)
-#define LOG_WARNING             (1)
-#define LOG_ERROR               (2)
+#define LOG_DEBUG               (1)
+#define LOG_WARNING             (2)
+#define LOG_ERROR               (3)
 
 // FOR SETTING ------------------------------
-#define LOG_LEVEL_FOR_SETTING   (LOG_MESSAGE)
+#define LOG_LEVEL_FOR_SETTING   (LOG_DEBUG)
 
 #define LOG_TO_VS
 // FOR SETTING ------------------------------

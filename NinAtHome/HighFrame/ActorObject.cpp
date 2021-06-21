@@ -11,6 +11,7 @@
 #include "SceneNode.h"
 #include "AComponent.h"
 #include "ASpriteComponent.h"
+#include "ACollisionComponent.h"
 
 ActorObject::ActorObject(std::string _name,
     class SceneNode* _scene, int _order) :
@@ -35,7 +36,7 @@ AComponent* ActorObject::GetAComponent(std::string _name)
 {
     if (mACompMap.find(_name) == mACompMap.end())
     {
-        MY_NN_LOG(LOG_WARNING,
+        MY_NN_LOG(LOG_MESSAGE,
             "cannot find this Acomponent : [ %s ]\n", _name.c_str());
         return nullptr;
     }
@@ -238,5 +239,12 @@ void ActorObject::Draw()
         {
             sc->DrawASprite();
         }
+    }
+
+    auto acc = (ACollisionComponent*)(GetAComponent(
+        GetObjectName() + "-collision"));
+    if (acc)
+    {
+        acc->DrawACollision();
     }
 }

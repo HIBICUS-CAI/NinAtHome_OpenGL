@@ -18,6 +18,7 @@
 #include "ASpriteComponent.h"
 #include "controller.h"
 #include "ATransformComponent.h"
+#include "ACollisionComponent.h"
 // TEMP--------------------
 
 SceneManager::SceneManager() :
@@ -153,6 +154,19 @@ void SceneManager::UpdateSceneManager(float _deltatime)
         }
     }
 
+    auto ac = mCurrentScenePtr->GetActorObject("test");
+    if (ac)
+    {
+        auto acc = (ACollisionComponent*)(ac->
+            GetAComponent(ac->GetObjectName() + "-collision"));
+        if (acc)
+        {
+            bool coll = acc->CheckCollisionWith(mCurrentScenePtr->
+                GetActorObject("test2"));
+            MY_NN_LOG(LOG_DEBUG, "%d\n", coll);
+        }
+    }
+
     mCurrentScenePtr->UpdateScene(_deltatime);
     mCurrentScenePtr->DrawScene();
     // TEMP---------------------------
@@ -183,6 +197,7 @@ void SceneManager::LoadLoadingScene()
         "test", mLoadingScenePtr, 0);
     ATransformComponent* atc = new ATransformComponent(
         "test-transform", actor, -1, MakeFloat3(0.f, 0.f, 0.f));
+    atc->Scale(1.5f);
     actor->AddAComponent(atc);
     ASpriteComponent* asc = new ASpriteComponent("test-sprite",
         actor, 0, 0);
@@ -190,6 +205,11 @@ void SceneManager::LoadLoadingScene()
     asc->SetTexWidth(200.f);
     asc->SetTexHeight(200.f);
     actor->AddAComponent(asc);
+    ACollisionComponent* acc = new ACollisionComponent(
+        "test-collision", actor, 0);
+    acc->SetCollisionStatus(COLLISION_TYPE::CIRCLE,
+        MakeFloat2(100.f, 100.f), true);
+    actor->AddAComponent(acc);
     mLoadingScenePtr->AddActorObject(actor);
 
     ActorObject* actor1 = new ActorObject(
@@ -203,20 +223,12 @@ void SceneManager::LoadLoadingScene()
     asc1->SetTexWidth(150.f);
     asc1->SetTexHeight(50.f);
     actor1->AddAComponent(asc1);
-    actor->AddChild(actor1);
-
-    ActorObject* actor2 = new ActorObject(
-        "test3", mLoadingScenePtr, 0);
-    ATransformComponent* atc2 = new ATransformComponent(
-        "test3-transform", actor2, -1, MakeFloat3(0.f, 0.f, 0.f));
-    actor2->AddAComponent(atc2);
-    ASpriteComponent* asc2 = new ASpriteComponent("test3-sprite",
-        actor2, 0, -4);
-    asc2->LoadTextureByPath("rom:/Assets/Textures/bg.tga");
-    asc2->SetTexWidth(960.f);
-    asc2->SetTexHeight(540.f);
-    actor2->AddAComponent(asc2);
-    actor1->AddChild(actor2);
+    ACollisionComponent* acc1 = new ACollisionComponent(
+        "test2-collision", actor1, 0);
+    acc1->SetCollisionStatus(COLLISION_TYPE::RECTANGLE,
+        MakeFloat2(150.f, 50.f), true);
+    actor1->AddAComponent(acc1);
+    mLoadingScenePtr->AddActorObject(actor1);
     // TEMP---------------------------
 }
 

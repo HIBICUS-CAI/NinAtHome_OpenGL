@@ -43,6 +43,8 @@ public:
 
     bool CheckCollisionWith(class ActorObject* _obj);
 
+    void DrawACollision();
+
 private:
     bool ClacCollisonWith(
         const class ATransformComponent* _thisAtc,
@@ -74,4 +76,8 @@ private:
     Float2 mCollisionSize;
 
     bool mShowCollisionFlg;
+
+    unsigned int mCircleTexture;
+
+    unsigned int mRectangleTexture;
 };

@@ -157,6 +157,6 @@ void ASpriteComponent::DrawASprite()
         ((ATransformComponent*)transcomp)->GetScale().x;
     float scaleY =
         ((ATransformComponent*)transcomp)->GetScale().y;
-    DrawSprite(0.f, 0.f, mTexWidth * scaleX, mTexHeight * scaleY,
+    DrawSprite(0.f, 0.f, mTexWidth, mTexHeight,
         0.f, 0.f, 1.f, 1.f, mOffsetColor);
 }
