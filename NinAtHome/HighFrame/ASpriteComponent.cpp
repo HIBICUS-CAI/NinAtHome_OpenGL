@@ -153,6 +153,10 @@ void ASpriteComponent::DrawASprite()
 #endif // NIN_AT_HOME
 
     SetTexture(mTexture);
-    DrawSprite(0.f, 0.f, mTexWidth, mTexHeight,
+    float scaleX =
+        ((ATransformComponent*)transcomp)->GetScale().x;
+    float scaleY =
+        ((ATransformComponent*)transcomp)->GetScale().y;
+    DrawSprite(0.f, 0.f, mTexWidth * scaleX, mTexHeight * scaleY,
         0.f, 0.f, 1.f, 1.f, mOffsetColor);
 }
