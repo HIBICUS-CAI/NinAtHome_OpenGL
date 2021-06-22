@@ -68,7 +68,8 @@
       </IgnoreSpecificDefaultLibraries>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy /r /y $(ProjectDir)ThirdParty\dlibs\glfw3.dll $(TargetDir)</Command>
+      <Command>xcopy /r /y $(ProjectDir)ThirdParty\dlibs\glfw3.dll $(TargetDir)
+xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -94,7 +95,8 @@
       </IgnoreSpecificDefaultLibraries>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy /r /y $(ProjectDir)ThirdParty\dlibs\glfw3.dll $(TargetDir)</Command>
+      <Command>xcopy /r /y $(ProjectDir)ThirdParty\dlibs\glfw3.dll $(TargetDir)
+xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
