@@ -13,12 +13,16 @@
 #include "texture.h"
 #include "sprite.h"
 
+static const Float4 NOT_COLLIED = MakeFloat4(0.f, 1.f, 0.f, 1.f);
+static const Float4 IS_COLLIED = MakeFloat4(1.f, 1.f, 0.f, 1.f);
+
 ACollisionComponent::ACollisionComponent(std::string _name,
     ActorObject* _owner, int _order) :
     AComponent(_name, _owner, _order),
     mCollisionType(COLLISION_TYPE::NULLTYPE),
     mCollisionSize({ 0.f,0.f }), mShowCollisionFlg(false),
-    mCircleTexture(0), mRectangleTexture(0)
+    mCircleTexture(0), mRectangleTexture(0),
+    mColliedColor({ 1.f,1.f,1.f,1.f })
 {
 
 }
@@ -34,6 +38,7 @@ void ACollisionComponent::CompInit()
         "rom:/Assets/Textures/collision-circ.tga");
     mRectangleTexture = LoadTexture(
         "rom:/Assets/Textures/collision-rect.tga");
+    mColliedColor = NOT_COLLIED;
 }
 
 void ACollisionComponent::CompUpdate(float _deltatime)
@@ -80,6 +85,18 @@ void ACollisionComponent::SetCollisionType(COLLISION_TYPE _type)
     mCollisionType = _type;
 }
 
+void ACollisionComponent::SetColliedColor(bool _isCollied)
+{
+    if (_isCollied)
+    {
+        mColliedColor = IS_COLLIED;
+    }
+    else
+    {
+        mColliedColor = NOT_COLLIED;
+    }
+}
+
 void ACollisionComponent::SetShowCollisionFlg(bool _flag)
 {
     mShowCollisionFlg = _flag;
@@ -119,15 +136,13 @@ void ACollisionComponent::DrawACollision()
             SetTexture(mCircleTexture);
             DrawSprite(0.f, 0.f,
                 mCollisionSize.x * 2.f, mCollisionSize.y * 2.f,
-                0.f, 0.f, 1.f, 1.f,
-                MakeFloat4(1.f, 1.f, 1.f, 1.f));
+                0.f, 0.f, 1.f, 1.f, mColliedColor);
             return;
         case COLLISION_TYPE::RECTANGLE:
             SetTexture(mRectangleTexture);
             DrawSprite(0.f, 0.f,
                 mCollisionSize.x, mCollisionSize.y,
-                0.f, 0.f, 1.f, 1.f,
-                MakeFloat4(1.f, 1.f, 1.f, 1.f));
+                0.f, 0.f, 1.f, 1.f, mColliedColor);
             return;
         default:
             MY_NN_LOG(LOG_ERROR,
@@ -140,12 +155,28 @@ void ACollisionComponent::DrawACollision()
 
 bool ACollisionComponent::CheckCollisionWith(ActorObject* _obj)
 {
+    SetColliedColor(false);
+
     if (!_obj)
     {
         MY_NN_LOG(LOG_ERROR,
             "pass a nullptr obj to this obj name : [ %s ]\n",
             GetActorObjOwner()->GetObjectName().c_str());
         return false;
+    }
+
+    ATransformComponent* thisAtc = nullptr;
+    ATransformComponent* atc = nullptr;
+    ACollisionComponent* acc = nullptr;
+    {
+        std::string keywordC = "";
+        keywordC = _obj->GetObjectName() + "-collision";
+        acc = (ACollisionComponent*)(_obj->
+            GetAComponent(keywordC));
+        if (acc)
+        {
+            acc->SetColliedColor(false);
+        }
     }
 
     if (_obj->GetChildrenArray()->size())
@@ -159,23 +190,17 @@ bool ACollisionComponent::CheckCollisionWith(ActorObject* _obj)
         }
     }
 
-    ATransformComponent* thisAtc = nullptr;
-    ATransformComponent* atc = nullptr;
-    ACollisionComponent* acc = nullptr;
-    std::string keywordThisT = "";
-    std::string keywordT = "";
-    std::string keywordC = "";
     {
+        std::string keywordThisT = "";
+        std::string keywordT = "";
         keywordThisT = GetActorObjOwner()->GetObjectName() +
             "-transform";
         keywordT = _obj->GetObjectName() + "-transform";
-        keywordC = _obj->GetObjectName() + "-collision";
+        thisAtc = (ATransformComponent*)(GetActorObjOwner()->
+            GetAComponent(keywordThisT));
+        atc = (ATransformComponent*)(_obj->
+            GetAComponent(keywordT));
     }
-
-    thisAtc = (ATransformComponent*)(GetActorObjOwner()->
-        GetAComponent(keywordThisT));
-    atc = (ATransformComponent*)(_obj->GetAComponent(keywordT));
-    acc = (ACollisionComponent*)(_obj->GetAComponent(keywordC));
 
     if (!thisAtc)
     {
@@ -192,7 +217,11 @@ bool ACollisionComponent::CheckCollisionWith(ActorObject* _obj)
         return false;
     }
 
-    return ClacCollisonWith(thisAtc, atc, acc);
+    bool result = ClacCollisonWith(thisAtc, atc, acc);
+    SetColliedColor(result);
+    acc->SetColliedColor(result);
+
+    return result;
 }
 
 bool ACollisionComponent::ClacCollisonWith(

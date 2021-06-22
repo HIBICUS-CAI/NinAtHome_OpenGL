@@ -161,9 +161,8 @@ void SceneManager::UpdateSceneManager(float _deltatime)
             GetAComponent(ac->GetObjectName() + "-collision"));
         if (acc)
         {
-            bool coll = acc->CheckCollisionWith(mCurrentScenePtr->
+            acc->CheckCollisionWith(mCurrentScenePtr->
                 GetActorObject("test2"));
-            MY_NN_LOG(LOG_DEBUG, "%d\n", coll);
         }
     }
 
@@ -229,6 +228,25 @@ void SceneManager::LoadLoadingScene()
         MakeFloat2(150.f, 50.f), true);
     actor1->AddAComponent(acc1);
     mLoadingScenePtr->AddActorObject(actor1);
+
+    ActorObject* actor2 = new ActorObject(
+        "test3", mLoadingScenePtr, 0);
+    ATransformComponent* atc2 = new ATransformComponent(
+        "test3-transform", actor2, -1, MakeFloat3(0.f, 0.f, 0.f));
+    atc2->TranslateXAsix(100.f);
+    actor2->AddAComponent(atc2);
+    ASpriteComponent* asc2 = new ASpriteComponent("test3-sprite",
+        actor2, 0, -2);
+    asc2->LoadTextureByPath("rom:/Assets/Textures/player.tga");
+    asc2->SetTexWidth(150.f);
+    asc2->SetTexHeight(50.f);
+    actor2->AddAComponent(asc2);
+    ACollisionComponent* acc2 = new ACollisionComponent(
+        "test3-collision", actor2, 0);
+    acc2->SetCollisionStatus(COLLISION_TYPE::RECTANGLE,
+        MakeFloat2(150.f, 50.f), true);
+    actor2->AddAComponent(acc2);
+    actor1->AddChild(actor2);
     // TEMP---------------------------
 }
 

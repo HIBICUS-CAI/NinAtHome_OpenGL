@@ -41,6 +41,8 @@ public:
 
     void SetCollisionType(COLLISION_TYPE _type);
 
+    void SetColliedColor(bool _isCollied);
+
     bool CheckCollisionWith(class ActorObject* _obj);
 
     void DrawACollision();
@@ -80,4 +82,6 @@ private:
     unsigned int mCircleTexture;
 
     unsigned int mRectangleTexture;
+
+    Float4 mColliedColor;
 };
