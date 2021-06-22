@@ -19,6 +19,67 @@
 #include "controller.h"
 #include "ATransformComponent.h"
 #include "ACollisionComponent.h"
+#include "AInputComponent.h"
+
+void TempMove(AInputComponent* _aic, float _deltatime)
+{
+    ActorObject* owner = _aic->GetActorObjOwner();
+
+    if (GetControllerTrigger(NpadButton::B::Index))
+    {
+        if (owner)
+        {
+            if (owner->IsObjectActive() == STATUS::ACTIVE)
+            {
+                owner->SetObjectActive(STATUS::PAUSE);
+            }
+            else
+            {
+                owner->SetObjectActive(STATUS::ACTIVE);
+            }
+        }
+    }
+    if (GetControllerPress(NpadButton::Left::Index) ||
+        GetControllerPress(NpadButton::StickLLeft::Index))
+    {
+        if (owner && owner->IsObjectActive() == STATUS::ACTIVE)
+        {
+            ((ATransformComponent*)(owner->
+                GetAComponent("test-transform")))->
+                TranslateXAsix(-200.f * _deltatime);
+        }
+    }
+    if (GetControllerPress(NpadButton::Right::Index) ||
+        GetControllerPress(NpadButton::StickLRight::Index))
+    {
+        if (owner && owner->IsObjectActive() == STATUS::ACTIVE)
+        {
+            ((ATransformComponent*)(owner->
+                GetAComponent("test-transform")))->
+                TranslateXAsix(200.f * _deltatime);
+        }
+    }
+    if (GetControllerPress(NpadButton::Up::Index) ||
+        GetControllerPress(NpadButton::StickLUp::Index))
+    {
+        if (owner && owner->IsObjectActive() == STATUS::ACTIVE)
+        {
+            ((ATransformComponent*)(owner->
+                GetAComponent("test-transform")))->
+                TranslateYAsix(-200.f * _deltatime);
+        }
+    }
+    if (GetControllerPress(NpadButton::Down::Index) ||
+        GetControllerPress(NpadButton::StickLDown::Index))
+    {
+        if (owner && owner->IsObjectActive() == STATUS::ACTIVE)
+        {
+            ((ATransformComponent*)(owner->
+                GetAComponent("test-transform")))->
+                TranslateYAsix(200.f * _deltatime);
+        }
+    }
+}
 // TEMP--------------------
 
 SceneManager::SceneManager() :
@@ -86,74 +147,6 @@ void SceneManager::UpdateSceneManager(float _deltatime)
     // TEMP---------------------------
     mCurrentScenePtr = mLoadingScenePtr;
 
-    if (GetControllerTrigger(NpadButton::A::Index))
-    {
-        auto parent = mCurrentScenePtr->GetActorObject("test");
-        if (parent)
-        {
-            parent->ClearChild("test2");
-        }
-    }
-    if (GetControllerTrigger(NpadButton::B::Index))
-    {
-        auto obj = mCurrentScenePtr->GetActorObject("test");
-        if (obj)
-        {
-            if (obj->IsObjectActive() == STATUS::ACTIVE)
-            {
-                obj->SetObjectActive(STATUS::PAUSE);
-            }
-            else
-            {
-                obj->SetObjectActive(STATUS::ACTIVE);
-            }
-        }
-    }
-    if (GetControllerPress(NpadButton::Left::Index) ||
-        GetControllerPress(NpadButton::StickLLeft::Index))
-    {
-        auto obj = mCurrentScenePtr->GetActorObject("test");
-        if (obj && obj->IsObjectActive() == STATUS::ACTIVE)
-        {
-            ((ATransformComponent*)(obj->
-                GetAComponent("test-transform")))->
-                TranslateXAsix(-5.f);
-        }
-    }
-    if (GetControllerPress(NpadButton::Right::Index) ||
-        GetControllerPress(NpadButton::StickLRight::Index))
-    {
-        auto obj = mCurrentScenePtr->GetActorObject("test");
-        if (obj && obj->IsObjectActive() == STATUS::ACTIVE)
-        {
-            ((ATransformComponent*)(obj->
-                GetAComponent("test-transform")))->
-                TranslateXAsix(5.f);
-        }
-    }
-    if (GetControllerPress(NpadButton::Up::Index) ||
-        GetControllerPress(NpadButton::StickLUp::Index))
-    {
-        auto obj = mCurrentScenePtr->GetActorObject("test");
-        if (obj && obj->IsObjectActive() == STATUS::ACTIVE)
-        {
-            ((ATransformComponent*)(obj->
-                GetAComponent("test-transform")))->
-                TranslateYAsix(-5.f);
-        }
-    }
-    if (GetControllerPress(NpadButton::Down::Index) ||
-        GetControllerPress(NpadButton::StickLDown::Index))
-    {
-        auto obj = mCurrentScenePtr->GetActorObject("test");
-        if (obj && obj->IsObjectActive() == STATUS::ACTIVE)
-        {
-            ((ATransformComponent*)(obj->
-                GetAComponent("test-transform")))->
-                TranslateYAsix(5.f);
-        }
-    }
-
     auto ac = mCurrentScenePtr->GetActorObject("test");
     if (ac)
     {
@@ -209,6 +202,10 @@ void SceneManager::LoadLoadingScene()
     acc->SetCollisionStatus(COLLISION_TYPE::CIRCLE,
         MakeFloat2(100.f, 100.f), true);
     actor->AddAComponent(acc);
+    AInputComponent* aic = new AInputComponent("test-input",
+        actor, 0);
+    aic->SetInputProcessFunc(TempMove);
+    actor->AddAComponent(aic);
     mLoadingScenePtr->AddActorObject(actor);
 
     ActorObject* actor1 = new ActorObject(

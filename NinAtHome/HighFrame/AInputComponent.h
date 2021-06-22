@@ -11,9 +11,8 @@
 
 #include "AComponent.h"
 
-// TEMP-------------------
-using ActorInputProcessFuncType = void(*)();
-// TEMP-------------------
+using ActorInputProcessFuncType = void(*)(
+    class AInputComponent*, float);
 
 class AInputComponent :
     public AComponent

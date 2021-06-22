@@ -30,7 +30,10 @@ void AInputComponent::CompInit()
 
 void AInputComponent::CompUpdate(float _deltatime)
 {
-
+    if (mInputProcessFuncPtr)
+    {
+        mInputProcessFuncPtr(this, _deltatime);
+    }
 }
 
 void AInputComponent::CompDestory()
