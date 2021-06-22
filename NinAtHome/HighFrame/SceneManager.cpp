@@ -21,11 +21,36 @@
 #include "ACollisionComponent.h"
 #include "AInputComponent.h"
 #include "ATimerComponent.h"
+#include "AAnimateComponent.h"
 
 void TempMove(AInputComponent* _aic, float _deltatime)
 {
     ActorObject* owner = _aic->GetActorObjOwner();
 
+    if (GetControllerTrigger(NpadButton::X::Index))
+    {
+        if (owner)
+        {
+            auto aac = (AAnimateComponent*)(owner->
+                GetAComponent("test-animate"));
+            if (aac)
+            {
+                aac->ChangeAnimateTo("run");
+            }
+        }
+    }
+    if (GetControllerTrigger(NpadButton::Y::Index))
+    {
+        if (owner)
+        {
+            auto aac = (AAnimateComponent*)(owner->
+                GetAComponent("test-animate"));
+            if (aac)
+            {
+                aac->ChangeAnimateTo("number");
+            }
+        }
+    }
     if (GetControllerTrigger(NpadButton::A::Index))
     {
         if (owner)
@@ -253,6 +278,14 @@ void SceneManager::LoadLoadingScene()
     atic->AddTimer("r");
     atic->AddTimer("g");
     atic->AddTimer("b");
+    AAnimateComponent* aac = new AAnimateComponent("test-animate",
+        actor, 0);
+    actor->AddAComponent(aac);
+    aac->LoadAnimate("number", "rom:/Assets/Textures/number.tga",
+        MakeFloat2(0.2f, 0.2f), 13, false, 1.f);
+    aac->LoadAnimate("run", "rom:/Assets/Textures/runman.tga",
+        MakeFloat2(0.2f, 0.5f), 10, true, 0.1f);
+    aac->ChangeAnimateTo("number");
     mLoadingScenePtr->AddActorObject(actor);
 
     ActorObject* actor1 = new ActorObject(

@@ -45,6 +45,10 @@ public:
 
     void ResetDrawOrder(int _order);
 
+    void ResetTexture(unsigned int _texture);
+
+    void SetUVValue(Float4 _value);
+
     void DrawASprite();
 
 public:
@@ -57,7 +61,11 @@ public:
 private:
     unsigned int mTexture;
 
+    unsigned int mFirstTexture;
+
     Float4 mOffsetColor;
+
+    Float4 mUVValue;
 
     float mTexWidth;
 

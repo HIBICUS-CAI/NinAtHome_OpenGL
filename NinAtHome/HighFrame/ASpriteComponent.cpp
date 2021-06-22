@@ -17,7 +17,8 @@ ASpriteComponent::ASpriteComponent(std::string _name,
     ActorObject* _owner, int _order, int _drawOrder) :
     AComponent(_name, _owner, _order), mDrawOrder(_drawOrder),
     mTexture(0), mOffsetColor({ 1.f,1.f,1.f,1.f }), mVisible(true),
-    mTexWidth(0.f), mTexHeight(0.f)
+    mTexWidth(0.f), mTexHeight(0.f), mUVValue({ 1.f,1.f,1.f,1.f }),
+    mFirstTexture(0)
 {
 
 }
@@ -29,7 +30,7 @@ ASpriteComponent::~ASpriteComponent()
 
 void ASpriteComponent::CompInit()
 {
-
+    mUVValue = MakeFloat4(0.f, 0.f, 1.f, 1.f);
 }
 
 void ASpriteComponent::CompUpdate(float _deltatime)
@@ -49,7 +50,14 @@ void ASpriteComponent::LoadTextureByPath(std::string _path)
 
 void ASpriteComponent::DeleteTexture()
 {
-    UnloadTexture(mTexture);
+    if (mFirstTexture)
+    {
+        UnloadTexture(mFirstTexture);
+    }
+    else
+    {
+        UnloadTexture(mTexture);
+    }
 }
 
 unsigned int ASpriteComponent::GetTexture() const
@@ -117,6 +125,21 @@ void ASpriteComponent::ResetDrawOrder(int _order)
     mDrawOrder = _order;
 }
 
+void ASpriteComponent::ResetTexture(unsigned int _texture)
+{
+    if (!mFirstTexture)
+    {
+        mFirstTexture = mTexture;
+    }
+
+    mTexture = _texture;
+}
+
+void ASpriteComponent::SetUVValue(Float4 _value)
+{
+    mUVValue = _value;
+}
+
 void ASpriteComponent::DrawASprite()
 {
     if (!mVisible)
@@ -153,10 +176,7 @@ void ASpriteComponent::DrawASprite()
 #endif // NIN_AT_HOME
 
     SetTexture(mTexture);
-    float scaleX =
-        ((ATransformComponent*)transcomp)->GetScale().x;
-    float scaleY =
-        ((ATransformComponent*)transcomp)->GetScale().y;
     DrawSprite(0.f, 0.f, mTexWidth, mTexHeight,
-        0.f, 0.f, 1.f, 1.f, mOffsetColor);
+        mUVValue.x, mUVValue.y, mUVValue.z, mUVValue.w,
+        mOffsetColor);
 }
