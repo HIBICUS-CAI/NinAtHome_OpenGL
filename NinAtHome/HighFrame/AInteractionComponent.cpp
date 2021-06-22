@@ -25,17 +25,26 @@ AInteractionComponent::~AInteractionComponent()
 
 void AInteractionComponent::CompInit()
 {
-
+    if (mInterInitFuncPtr)
+    {
+        mInterInitFuncPtr(this);
+    }
 }
 
 void AInteractionComponent::CompUpdate(float _deltatime)
 {
-
+    if (mInterUpdateFuncPtr)
+    {
+        mInterUpdateFuncPtr(this, _deltatime);
+    }
 }
 
 void AInteractionComponent::CompDestory()
 {
-
+    if (mInterDestoryFuncPtr)
+    {
+        mInterDestoryFuncPtr(this);
+    }
 }
 
 void AInteractionComponent::SetInitFunc(

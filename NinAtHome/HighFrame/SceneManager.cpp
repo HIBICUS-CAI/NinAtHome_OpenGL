@@ -22,6 +22,55 @@
 #include "AInputComponent.h"
 #include "ATimerComponent.h"
 #include "AAnimateComponent.h"
+#include "AInteractionComponent.h"
+
+void TestInit(AInteractionComponent* _aitc)
+{
+    MY_NN_LOG(LOG_DEBUG, "init test!!!!!!!!\n");
+}
+
+void TestUpdate(AInteractionComponent* _aitc, float _deltatime)
+{
+    auto ac = _aitc->GetActorObjOwner();
+    auto acc = (ACollisionComponent*)(ac->
+        GetAComponent(ac->GetObjectName() + "-collision"));
+    if (acc)
+    {
+        acc->CheckCollisionWith(ac->GetSceneNodePtr()->
+            GetActorObject("test2"));
+    }
+
+    Float4 color = MakeFloat4(1.f, 1.f, 1.f, 1.f);
+    auto atic = (ATimerComponent*)(ac->
+        GetAComponent("test-timer"));
+    if (atic)
+    {
+        if (atic->GetTimer("r")->IsGreaterThan(5.f))
+        {
+            color.x = 0.5f;
+        }
+        if (atic->GetTimer("g")->IsGreaterThan(10.f))
+        {
+            color.y = 0.5f;
+        }
+        if (atic->GetTimer("b")->IsGreaterThan(15.f))
+        {
+            color.z = 0.5f;
+        }
+    }
+
+    auto asc = (ASpriteComponent*)(ac->
+        GetAComponent("test-sprite"));
+    if (asc)
+    {
+        asc->SetOffsetColor(color);
+    }
+}
+
+void TestDestory(AInteractionComponent* _aitc)
+{
+    MY_NN_LOG(LOG_DEBUG, "init destory!!!!!!!!\n");
+}
 
 void TempMove(AInputComponent* _aic, float _deltatime)
 {
@@ -186,48 +235,10 @@ void SceneManager::UpdateSceneManager(float _deltatime)
 
     // TEMP---------------------------
     mCurrentScenePtr = mLoadingScenePtr;
-
-    auto ac = mCurrentScenePtr->GetActorObject("test");
-    if (ac)
-    {
-        auto acc = (ACollisionComponent*)(ac->
-            GetAComponent(ac->GetObjectName() + "-collision"));
-        if (acc)
-        {
-            acc->CheckCollisionWith(mCurrentScenePtr->
-                GetActorObject("test2"));
-        }
-
-        Float4 color = MakeFloat4(1.f, 1.f, 1.f, 1.f);
-        auto atic = (ATimerComponent*)(ac->
-            GetAComponent("test-timer"));
-        if (atic)
-        {
-            if (atic->GetTimer("r")->IsGreaterThan(5.f))
-            {
-                color.x = 0.5f;
-            }
-            if (atic->GetTimer("g")->IsGreaterThan(10.f))
-            {
-                color.y = 0.5f;
-            }
-            if (atic->GetTimer("b")->IsGreaterThan(15.f))
-            {
-                color.z = 0.5f;
-            }
-        }
-
-        auto asc = (ASpriteComponent*)(ac->
-            GetAComponent("test-sprite"));
-        if (asc)
-        {
-            asc->SetOffsetColor(color);
-        }
-    }
+    // TEMP---------------------------
 
     mCurrentScenePtr->UpdateScene(_deltatime);
     mCurrentScenePtr->DrawScene();
-    // TEMP---------------------------
 }
 
 PropertyManager* SceneManager::GetPropertyManager() const
@@ -286,6 +297,12 @@ void SceneManager::LoadLoadingScene()
     aac->LoadAnimate("run", "rom:/Assets/Textures/runman.tga",
         MakeFloat2(0.2f, 0.5f), 10, true, 0.1f);
     aac->ChangeAnimateTo("number");
+    AInteractionComponent* aitc = new AInteractionComponent(
+        "test-interaction", actor, 0);
+    actor->AddAComponent(aitc);
+    aitc->SetInitFunc(TestInit);
+    aitc->SetUpdateFunc(TestUpdate);
+    aitc->SetDestoryFunc(TestDestory);
     mLoadingScenePtr->AddActorObject(actor);
 
     ActorObject* actor1 = new ActorObject(

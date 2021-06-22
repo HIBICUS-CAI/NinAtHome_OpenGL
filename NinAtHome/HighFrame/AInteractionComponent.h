@@ -11,11 +11,12 @@
 
 #include "AComponent.h"
 
-// TEMP-----------------
-using ActorInterInitFuncType = void(*)();
-using ActorInterUpdateFuncType = void(*)();
-using ActorInterDestoryFuncType = void(*)();
-// TEMP-----------------
+using ActorInterInitFuncType = void(*)(
+    class AInteractionComponent*);
+using ActorInterUpdateFuncType = void(*)(
+    class AInteractionComponent*, float);
+using ActorInterDestoryFuncType = void(*)(
+    class AInteractionComponent*);
 
 class AInteractionComponent :
     public AComponent
