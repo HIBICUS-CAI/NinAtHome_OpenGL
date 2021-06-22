@@ -20,6 +20,9 @@ public:
 
     void CleanAndStop();
 
+    // TODO public create new scene node
+    // TODO move auobj create to private
+
     class ActorObject* CreateNewAObject(
         class PropertyNode* _property);
 
