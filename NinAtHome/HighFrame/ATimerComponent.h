@@ -13,11 +13,16 @@
 #include <unordered_map>
 #include <vector>
 
-class Timer
+struct Timer
 {
-    // TEMP-----------------
-    int mTemp;
-    // TEMP-----------------
+    std::string Name = "";
+    bool Active = false;
+    float Time = 0.f;
+
+    bool IsGreaterThan(float _value)
+    {
+        return (Time > _value);
+    }
 };
 
 class ATimerComponent :

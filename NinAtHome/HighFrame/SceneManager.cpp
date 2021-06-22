@@ -20,22 +20,37 @@
 #include "ATransformComponent.h"
 #include "ACollisionComponent.h"
 #include "AInputComponent.h"
+#include "ATimerComponent.h"
 
 void TempMove(AInputComponent* _aic, float _deltatime)
 {
     ActorObject* owner = _aic->GetActorObjOwner();
 
+    if (GetControllerTrigger(NpadButton::A::Index))
+    {
+        if (owner)
+        {
+            auto atic = (ATimerComponent*)(owner->
+                GetAComponent("test-timer"));
+            if (atic)
+            {
+                atic->StartTimer("r");
+                atic->StartTimer("g");
+                atic->StartTimer("b");
+            }
+        }
+    }
     if (GetControllerTrigger(NpadButton::B::Index))
     {
         if (owner)
         {
-            if (owner->IsObjectActive() == STATUS::ACTIVE)
+            auto atic = (ATimerComponent*)(owner->
+                GetAComponent("test-timer"));
+            if (atic)
             {
-                owner->SetObjectActive(STATUS::PAUSE);
-            }
-            else
-            {
-                owner->SetObjectActive(STATUS::ACTIVE);
+                atic->ResetTimer("r");
+                atic->ResetTimer("g");
+                atic->ResetTimer("b");
             }
         }
     }
@@ -157,6 +172,32 @@ void SceneManager::UpdateSceneManager(float _deltatime)
             acc->CheckCollisionWith(mCurrentScenePtr->
                 GetActorObject("test2"));
         }
+
+        Float4 color = MakeFloat4(1.f, 1.f, 1.f, 1.f);
+        auto atic = (ATimerComponent*)(ac->
+            GetAComponent("test-timer"));
+        if (atic)
+        {
+            if (atic->GetTimer("r")->IsGreaterThan(5.f))
+            {
+                color.x = 0.5f;
+            }
+            if (atic->GetTimer("g")->IsGreaterThan(10.f))
+            {
+                color.y = 0.5f;
+            }
+            if (atic->GetTimer("b")->IsGreaterThan(15.f))
+            {
+                color.z = 0.5f;
+            }
+        }
+
+        auto asc = (ASpriteComponent*)(ac->
+            GetAComponent("test-sprite"));
+        if (asc)
+        {
+            asc->SetOffsetColor(color);
+        }
     }
 
     mCurrentScenePtr->UpdateScene(_deltatime);
@@ -206,6 +247,12 @@ void SceneManager::LoadLoadingScene()
         actor, 0);
     aic->SetInputProcessFunc(TempMove);
     actor->AddAComponent(aic);
+    ATimerComponent* atic = new ATimerComponent("test-timer",
+        actor, 0);
+    actor->AddAComponent(atic);
+    atic->AddTimer("r");
+    atic->AddTimer("g");
+    atic->AddTimer("b");
     mLoadingScenePtr->AddActorObject(actor);
 
     ActorObject* actor1 = new ActorObject(
