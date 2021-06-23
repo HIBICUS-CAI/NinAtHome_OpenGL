@@ -166,6 +166,7 @@ void SceneNode::ReleaseScene()
     while (!mNewActorObjectsArray.empty())
     {
         auto newActor = mNewActorObjectsArray.back();
+        newActor->Destory();
         delete newActor;
         mNewActorObjectsArray.pop_back();
     }
@@ -173,6 +174,7 @@ void SceneNode::ReleaseScene()
     while (!mNewUiObjectsArray.empty())
     {
         auto newUi = mNewUiObjectsArray.back();
+        newUi->Destory();
         delete newUi;
         mNewUiObjectsArray.pop_back();
     }
