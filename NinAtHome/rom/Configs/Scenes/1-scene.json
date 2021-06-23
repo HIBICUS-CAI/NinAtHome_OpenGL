@@ -1,0 +1,202 @@
+{
+    "scene-name": "first-scene",
+    "actor": [
+        {
+            "actor-name": "test",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        1.5,
+                        1.5,
+                        1.5
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": 0,
+                    "texture-path": "rom:/Assets/Textures/texture.tga",
+                    "texture-width": 200.0,
+                    "texture-height": 200.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "circle",
+                    "collision-size": [
+                        100.0,
+                        100.0
+                    ],
+                    "show-flag": true
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempMove"
+                },
+                {
+                    "type": "timer",
+                    "update-order": 0,
+                    "timers": [
+                        "r",
+                        "g",
+                        "b"
+                    ]
+                },
+                {
+                    "type": "animate",
+                    "update-order": 0,
+                    "animates": [
+                        {
+                            "animate-name": "number",
+                            "animate-path": "rom:/Assets/Textures/number.tga",
+                            "animate-stride": [
+                                0.2,
+                                0.2
+                            ],
+                            "max-count": 13,
+                            "repeat-flag": false,
+                            "frame-time": 1.0
+                        },
+                        {
+                            "animate-name": "run",
+                            "animate-path": "rom:/Assets/Textures/runman.tga",
+                            "animate-stride": [
+                                0.2,
+                                0.5
+                            ],
+                            "max-count": 10,
+                            "repeat-flag": true,
+                            "frame-time": 0.1
+                        }
+                    ],
+                    "init-animate": "number"
+                },
+                {
+                    "type": "interaction",
+                    "update-order": 0,
+                    "init-func-name": "TestInit",
+                    "update-func-name": "TestUpdate",
+                    "destory-func-name": "TestDestory"
+                }
+            ]
+        },
+        {
+            "actor-name": "test2",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        150.0,
+                        50.0
+                    ],
+                    "show-flag": true
+                }
+            ]
+        },
+        {
+            "actor-name": "test3",
+            "update-order": 0,
+            "parent": "test2",
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        100.0,
+                        0.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        150.0,
+                        50.0
+                    ],
+                    "show-flag": true
+                }
+            ]
+        }
+    ]
+}

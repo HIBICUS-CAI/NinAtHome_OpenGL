@@ -1,0 +1,43 @@
+{
+    "scene-name": "load-scene",
+    "actor": [
+        {
+            "actor-name": "load",
+            "update-order": 0,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/bg.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 150.0
+                }
+            ]
+        }
+    ]
+}

@@ -9,6 +9,9 @@
 
 #pragma once
 
+#include <string>
+#include "json.h"
+
 class ObjectFactory
 {
 public:
@@ -20,14 +23,15 @@ public:
 
     void CleanAndStop();
 
-    // TODO public create new scene node
-    // TODO move auobj create to private
+    class SceneNode* CreateNewScene(std::string _name,
+        std::string _configPath);
 
-    class ActorObject* CreateNewAObject(
-        class PropertyNode* _property);
+private:
+    class ActorObject* CreateNewAObject(JsonFile* _file,
+        std::string _nodePath, class SceneNode* _scene);
 
-    class UiObject* CreateNewUObject(
-        class PropertyNode* _property);
+    class UiObject* CreateNewUObject(JsonFile* _file,
+        std::string _nodePath, class SceneNode* _scene);
 
 private:
     class PropertyManager* mPropertyManagerPtr;

@@ -1,0 +1,44 @@
+{
+    "scene-name": "second-scene",
+    "actor": [
+        {
+            "actor-name": "second",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/bg.tga",
+                    "texture-width": 450.0,
+                    "texture-height": 450.0
+                }
+            ]
+        }
+    ]
+}

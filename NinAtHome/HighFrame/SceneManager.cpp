@@ -479,7 +479,8 @@ void SceneManager::LoadNextScene()
     switch (g_scene)
     {
     case 0:
-        next = LoadScene1(this);
+        next = mObjectFactoryPtr->CreateNewScene("first-scene",
+            "rom:/Configs/Scenes/1-scene.json");
         break;
     case 1:
         next = LoadScene2(this);
