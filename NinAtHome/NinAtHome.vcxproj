@@ -109,6 +109,7 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClInclude Include="HighFrame\ACollisionComponent.h" />
     <ClInclude Include="HighFrame\AComponent.h" />
     <ClInclude Include="HighFrame\ActorObject.h" />
+    <ClInclude Include="HighFrame\Actor_all.h" />
     <ClInclude Include="HighFrame\AInputComponent.h" />
     <ClInclude Include="HighFrame\AInteractionComponent.h" />
     <ClInclude Include="HighFrame\ASpriteComponent.h" />
@@ -129,6 +130,7 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClInclude Include="HighFrame\UInputComponent.h" />
     <ClInclude Include="HighFrame\UInteractionComponent.h" />
     <ClInclude Include="HighFrame\UiObject.h" />
+    <ClInclude Include="HighFrame\Ui_all.h" />
     <ClInclude Include="HighFrame\USpriteComponent.h" />
     <ClInclude Include="HighFrame\UTextComponent.h" />
     <ClInclude Include="HighFrame\UTransformComponent.h" />

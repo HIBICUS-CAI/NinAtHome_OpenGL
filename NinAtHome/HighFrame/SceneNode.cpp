@@ -54,6 +54,17 @@ ActorObject* SceneNode::GetActorObject(std::string _name)
 {
     if (mActorObjectsMap.find(_name) == mActorObjectsMap.end())
     {
+        for (auto actor : mNewActorObjectsArray)
+        {
+            if (actor->GetObjectName() == _name)
+            {
+                MY_NN_LOG(LOG_WARNING,
+                    "return this Aobject before init : [ %s ]\n",
+                    _name.c_str());
+                return actor;
+            }
+        }
+
         MY_NN_LOG(LOG_WARNING,
             "cannot find this Aobject : [ %s ]\n", _name.c_str());
         return nullptr;
@@ -66,6 +77,17 @@ UiObject* SceneNode::GetUiObject(std::string _name)
 {
     if (mUiObjectsMap.find(_name) == mUiObjectsMap.end())
     {
+        for (auto ui : mNewUiObjectsArray)
+        {
+            if (ui->GetObjectName() == _name)
+            {
+                MY_NN_LOG(LOG_WARNING,
+                    "return this Uobject before init : [ %s ]\n",
+                    _name.c_str());
+                return ui;
+            }
+        }
+
         MY_NN_LOG(LOG_WARNING,
             "cannot find this Uobject : [ %s ]\n", _name.c_str());
         return nullptr;

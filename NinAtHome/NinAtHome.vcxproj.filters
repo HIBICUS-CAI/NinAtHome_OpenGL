@@ -162,6 +162,12 @@
     <ClInclude Include="HighFrame\AAnimateComponent.h">
       <Filter>02_HightFrame\Component</Filter>
     </ClInclude>
+    <ClInclude Include="HighFrame\Actor_all.h">
+      <Filter>02_HightFrame\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="HighFrame\Ui_all.h">
+      <Filter>02_HightFrame\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">

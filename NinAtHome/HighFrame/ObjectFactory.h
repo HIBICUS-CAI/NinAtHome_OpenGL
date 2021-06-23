@@ -33,6 +33,18 @@ private:
     class UiObject* CreateNewUObject(JsonFile* _file,
         std::string _nodePath, class SceneNode* _scene);
 
+    class ActorObject* CreateActorItself(JsonFile* _file,
+        std::string _nodePath, class SceneNode* _scene);
+
+    class UiObject* CreateUiItself(JsonFile* _file,
+        std::string _nodePath, class SceneNode* _scene);
+
+    void AddACompToActor(class ActorObject* _actor,
+        JsonFile* _file, std::string _nodePath);
+
+    void AddUCompToUi(class UiObject* _ui,
+        JsonFile* _file, std::string _nodePath);
+
 private:
     class PropertyManager* mPropertyManagerPtr;
 

@@ -14,6 +14,8 @@
 #define APP_FPS (30)
 #define MAX_DELTA (float)((double)1 / (double)APP_FPS)
 
+//#define SHOW_LOADING
+
 enum class STATUS
 {
     NEED_INIT,
