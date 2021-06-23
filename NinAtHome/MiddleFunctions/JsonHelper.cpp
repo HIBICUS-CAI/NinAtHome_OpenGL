@@ -54,5 +54,7 @@ JsonNode GetJsonNode(JsonFile* _file, std::string _path)
     static char name[MAX_NAME];
     sprintf_s(name, MAX_NAME, "%s", _path.c_str());
 
-    return rapidjson::GetValueByPointer(*_file, name);
+    rapidjson::Pointer ptr(name);
+
+    return rapidjson::GetValueByPointer(*_file, ptr);
 }

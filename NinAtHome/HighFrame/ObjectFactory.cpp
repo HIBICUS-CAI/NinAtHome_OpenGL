@@ -66,18 +66,20 @@ SceneNode* ObjectFactory::CreateNewScene(std::string _name,
     SceneNode* node = new SceneNode(_name, mSceneManagerPtr);
 
     // TODO add object here
-    if (!config["actor"].IsNull() && config["actor"].Size())
+    if (config.HasMember("actor") &&
+        !config["actor"].IsNull() && config["actor"].Size())
     {
-        for (int i = 0; i < config["actor"].Size(); i++)
+        for (unsigned int i = 0; i < config["actor"].Size(); i++)
         {
             node->AddActorObject(
                 CreateNewAObject(&config,
                     "/actor/" + std::to_string(i), node));
         }
     }
-    if (!config["ui"].IsNull() && config["ui"].Size())
+    if (config.HasMember("ui") &&
+        !config["ui"].IsNull() && config["ui"].Size())
     {
-        for (int i = 0; i < config["ui"].Size(); i++)
+        for (unsigned int i = 0; i < config["ui"].Size(); i++)
         {
             node->AddUiObject(
                 CreateNewUObject(&config,
