@@ -29,9 +29,9 @@ public:
 
     void SetTexHeight(float _height);
 
-    unsigned int GetTexWidth() const;
+    float GetTexWidth() const;
 
-    unsigned int GetTexHeight() const;
+    float GetTexHeight() const;
 
     void SetOffsetColor(Float4 _color);
 
@@ -59,9 +59,9 @@ private:
 
     Float4 mOffsetColor;
 
-    unsigned int mTexWidth;
+    float mTexWidth;
 
-    unsigned int mTexHeight;
+    float mTexHeight;
 
     bool mVisible;
 

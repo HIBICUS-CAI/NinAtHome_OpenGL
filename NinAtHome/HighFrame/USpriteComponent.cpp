@@ -77,12 +77,12 @@ void USpriteComponent::SetTexHeight(float _height)
     mTexHeight = _height;
 }
 
-unsigned int USpriteComponent::GetTexWidth() const
+float USpriteComponent::GetTexWidth() const
 {
     return mTexWidth;
 }
 
-unsigned int USpriteComponent::GetTexHeight() const
+float USpriteComponent::GetTexHeight() const
 {
     return mTexHeight;
 }
