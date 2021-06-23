@@ -234,9 +234,12 @@ SceneNode* ObjectFactory::CreateNewScene(std::string _name,
     {
         for (unsigned int i = 0; i < config["ui"].Size(); i++)
         {
-            node->AddUiObject(
-                CreateNewUObject(&config,
-                    "/ui/" + std::to_string(i), node));
+            UiObject* ui = CreateNewUObject(&config,
+                "/ui/" + std::to_string(i), node);
+            if (ui)
+            {
+                node->AddUiObject(ui);
+            }
         }
     }
 
@@ -275,9 +278,30 @@ ActorObject* ObjectFactory::CreateNewAObject(JsonFile* _file,
 UiObject* ObjectFactory::CreateNewUObject(JsonFile* _file,
     std::string _nodePath, SceneNode* _scene)
 {
-    // TEMP-------------------
-    return nullptr;
-    // TEMP-------------------
+    UiObject* uObj = CreateUiItself(
+        _file, _nodePath, _scene);
+
+    JsonNode compNode = GetJsonNode(
+        _file, _nodePath + "/components");
+    if (compNode && !compNode->IsNull() && compNode->Size())
+    {
+        for (unsigned int i = 0; i < compNode->Size(); i++)
+        {
+            AddUCompToUi(uObj, _file,
+                _nodePath + "/components/" + std::to_string(i));
+        }
+    }
+
+    compNode = GetJsonNode(_file, _nodePath + "/parent");
+    if (compNode && compNode->IsString())
+    {
+        _scene->GetUiObject(compNode->GetString())->
+            AddChild(uObj);
+
+        return nullptr;
+    }
+
+    return uObj;
 }
 
 ActorObject* ObjectFactory::CreateActorItself(JsonFile* _file,
@@ -321,9 +345,39 @@ ActorObject* ObjectFactory::CreateActorItself(JsonFile* _file,
 UiObject* ObjectFactory::CreateUiItself(JsonFile* _file,
     std::string _nodePath, SceneNode* _scene)
 {
-    // TEMP-------------------
-    return nullptr;
-    // TEMP-------------------
+    UiObject* uObj = nullptr;
+
+    {
+        JsonNode node = nullptr;
+        std::string name = "";
+        int objOrder = 0;
+        node = GetJsonNode(_file, _nodePath + "/ui-name");
+        if (node && node->IsString())
+        {
+            name = node->GetString();
+        }
+        else
+        {
+            MY_NN_LOG(LOG_ERROR,
+                "cannot get ui name in [ %s ]\n",
+                _nodePath.c_str());
+        }
+        node = GetJsonNode(_file, _nodePath + "/update-order");
+        if (node && node->IsInt())
+        {
+            objOrder = node->GetInt();
+        }
+        else
+        {
+            MY_NN_LOG(LOG_ERROR,
+                "cannot get ui update order in [ %s ]\n",
+                _nodePath.c_str());
+        }
+
+        uObj = new UiObject(name, _scene, objOrder);
+    }
+
+    return uObj;
 }
 
 void ObjectFactory::AddACompToActor(ActorObject* _actor,
@@ -843,5 +897,13 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
 void ObjectFactory::AddUCompToUi(UiObject* _ui,
     JsonFile* _file, std::string _nodePath)
 {
-
+    JsonNode compNode = GetJsonNode(_file, _nodePath + "/type");
+    if (!compNode || !compNode->IsString())
+    {
+        MY_NN_LOG(LOG_ERROR,
+            "cannot get comp type in [ %s ]\n",
+            _nodePath.c_str());
+        return;
+    }
+    std::string compType = compNode->GetString();
 }

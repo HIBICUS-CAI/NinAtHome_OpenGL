@@ -198,5 +198,17 @@
                 }
             ]
         }
+    ],
+    "ui": [
+        {
+            "ui-name": "test-ui",
+            "update-order": 0,
+            "component": []
+        },
+        {
+            "ui-name": "test-ui2",
+            "update-order": 0,
+            "component": []
+        }
     ]
 }

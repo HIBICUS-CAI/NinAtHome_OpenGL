@@ -243,7 +243,7 @@ void ActorObject::Draw()
 
     auto acc = (ACollisionComponent*)(GetAComponent(
         GetObjectName() + "-collision"));
-    if (acc)
+    if (acc && (acc->IsCompActive() == STATUS::ACTIVE))
     {
         acc->DrawACollision();
     }

@@ -231,7 +231,7 @@ void SceneNode::AddActorObject(ActorObject* _aObj)
 
 void SceneNode::AddUiObject(UiObject* _uObj)
 {
-
+    mNewUiObjectsArray.push_back(_uObj);
 }
 
 void SceneNode::DeleteActorObject(std::string _name)
@@ -257,7 +257,23 @@ void SceneNode::DeleteActorObject(std::string _name)
 
 void SceneNode::DeleteUiObject(std::string _name)
 {
+    if (mUiObjectsMap.find(_name) == mUiObjectsMap.end())
+    {
+        MY_NN_LOG(LOG_WARNING,
+            "cannot find this Uobject : [ %s ]\n", _name.c_str());
+        return;
+    }
 
+    for (auto uii = mUiObjectsArray.begin();
+        uii != mUiObjectsArray.end(); uii++)
+    {
+        if ((*uii)->GetObjectName() == _name)
+        {
+            (*uii)->SetObjectActive(STATUS::NEED_DESTORY);
+            (*uii)->ClearChildren();
+            break;
+        }
+    }
 }
 
 void SceneNode::SetSceneLoopFunc(SceneLoopFuncType _func)

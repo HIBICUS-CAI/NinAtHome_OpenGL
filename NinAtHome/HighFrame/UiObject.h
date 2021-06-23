@@ -43,6 +43,8 @@ public:
 
     std::vector<class USpriteComponent*>* GetSpriteArray();
 
+    std::vector<class UTextComponent*>* GetTextArray();
+
     UiObject* GetParent() const;
 
     void Draw();
