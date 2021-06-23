@@ -33,8 +33,6 @@ public:
 
     Matrix4x4f GetWorldMatrix() const;
 
-    Float4x4 GetWorldMatrixPtr() const;
-
     void Translate(Float3 _pos);
 
     void TranslateXAsix(float _posx);
@@ -79,6 +77,4 @@ private:
     Float3 mScale;
 
     Matrix4x4f mWorldMatrix;
-
-    Float4x4 mWorldMatrixPtr;
 };

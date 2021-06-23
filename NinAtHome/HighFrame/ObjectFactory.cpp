@@ -215,7 +215,6 @@ SceneNode* ObjectFactory::CreateNewScene(std::string _name,
     }
     SceneNode* node = new SceneNode(_name, mSceneManagerPtr);
 
-    // TODO add object here
     if (config.HasMember("actor") &&
         !config["actor"].IsNull() && config["actor"].Size())
     {
@@ -258,8 +257,9 @@ ActorObject* ObjectFactory::CreateNewAObject(JsonFile* _file,
     {
         for (unsigned int i = 0; i < compNode->Size(); i++)
         {
-            AddACompToActor(aObj, _file,
-                _nodePath + "/components/" + std::to_string(i));
+            std::string path =
+                _nodePath + "/components/" + std::to_string(i);
+            AddACompToActor(aObj, _file, path);
         }
     }
 
@@ -287,8 +287,9 @@ UiObject* ObjectFactory::CreateNewUObject(JsonFile* _file,
     {
         for (unsigned int i = 0; i < compNode->Size(); i++)
         {
-            AddUCompToUi(uObj, _file,
-                _nodePath + "/components/" + std::to_string(i));
+            std::string path =
+                _nodePath + "/components/" + std::to_string(i);
+            AddUCompToUi(uObj, _file, path);
         }
     }
 
@@ -906,4 +907,168 @@ void ObjectFactory::AddUCompToUi(UiObject* _ui,
         return;
     }
     std::string compType = compNode->GetString();
+
+    // TRANSFORM----------------------------
+    if (compType == "transform")
+    {
+        std::string name =
+            _ui->GetObjectName() + "-" + compType;
+        int updateOrder = 0;
+        Float3 initValue = MakeFloat3(0.f, 0.f, 0.f);
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/update-order");
+        if (compNode && compNode->IsInt())
+        {
+            updateOrder = compNode->GetInt();
+        }
+        else
+        {
+            MY_NN_LOG(LOG_ERROR,
+                "cannot get update order in [ %s ]\n",
+                _nodePath.c_str());
+        }
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/init-value");
+        if (compNode && (compNode->Size() == 3))
+        {
+            float temp[3] = {};
+            for (int i = 0; i < 3; i++)
+            {
+                compNode = GetJsonNode(_file,
+                    _nodePath + "/init-value/" +
+                    std::to_string(i));
+                temp[i] = compNode->GetFloat();
+            }
+            initValue = MakeFloat3(temp[0], temp[1], temp[2]);
+        }
+        else
+        {
+            MY_NN_LOG(LOG_ERROR,
+                "cannot get init value in [ %s ]\n",
+                _nodePath.c_str());
+        }
+
+        UTransformComponent* utc = new UTransformComponent(name,
+            _ui, updateOrder, initValue);
+        _ui->AddUComponent(utc);
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/position/0");
+        if (!(!compNode || compNode->IsNull()))
+        {
+            float temp[3] = {};
+            temp[0] = GetJsonNode(
+                _file, _nodePath + "/position/0")->GetFloat();
+            temp[1] = GetJsonNode(
+                _file, _nodePath + "/position/1")->GetFloat();
+            temp[2] = GetJsonNode(
+                _file, _nodePath + "/position/2")->GetFloat();
+
+            Float3 pos = MakeFloat3(temp[0], temp[1], temp[2]);
+            utc->SetPosition(pos);
+        }
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/rotation/0");
+        if (!(!compNode || compNode->IsNull()))
+        {
+            float temp[3] = {};
+            temp[0] = GetJsonNode(
+                _file, _nodePath + "/rotation/0")->GetFloat();
+            temp[1] = GetJsonNode(
+                _file, _nodePath + "/rotation/1")->GetFloat();
+            temp[2] = GetJsonNode(
+                _file, _nodePath + "/rotation/2")->GetFloat();
+
+            Float3 angle = MakeFloat3(temp[0], temp[1], temp[2]);
+            utc->SetRotation(angle);
+        }
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/scale/0");
+        if (!(!compNode || compNode->IsNull()))
+        {
+            float temp[3] = {};
+            temp[0] = GetJsonNode(
+                _file, _nodePath + "/scale/0")->GetFloat();
+            temp[1] = GetJsonNode(
+                _file, _nodePath + "/scale/1")->GetFloat();
+            temp[2] = GetJsonNode(
+                _file, _nodePath + "/scale/2")->GetFloat();
+
+            Float3 scale = MakeFloat3(temp[0], temp[1], temp[2]);
+            utc->SetScale(scale);
+        }
+    }
+
+    // SPRITE----------------------------
+    else if (compType == "sprite")
+    {
+        std::string name =
+            _ui->GetObjectName() + "-" + compType;
+        int updateOrder = 0;
+        int drawOrder = 0;
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/update-order");
+        if (compNode && compNode->IsInt())
+        {
+            updateOrder = compNode->GetInt();
+        }
+        else
+        {
+            MY_NN_LOG(LOG_ERROR,
+                "cannot get update order in [ %s ]\n",
+                _nodePath.c_str());
+        }
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/draw-order");
+        if (compNode && compNode->IsInt())
+        {
+            drawOrder = compNode->GetInt();
+        }
+        else
+        {
+            MY_NN_LOG(LOG_ERROR,
+                "cannot get update order in [ %s ]\n",
+                _nodePath.c_str());
+        }
+
+        USpriteComponent* usc = new USpriteComponent(name, _ui,
+            updateOrder, drawOrder);
+        _ui->AddUComponent(usc);
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/texture-path");
+        if (compNode && compNode->IsString())
+        {
+            usc->LoadTextureByPath(compNode->GetString());
+        }
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/texture-width");
+        if (compNode && compNode->IsFloat())
+        {
+            usc->SetTexWidth(compNode->GetFloat());
+        }
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/texture-height");
+        if (compNode && compNode->IsFloat())
+        {
+            usc->SetTexHeight(compNode->GetFloat());
+        }
+    }
+
+    // ELSE----------------------------
+    else
+    {
+        MY_NN_LOG(LOG_ERROR,
+            "this comp type doesn't exist [ %s ]\n",
+            compType.c_str());
+        return;
+    }
 }

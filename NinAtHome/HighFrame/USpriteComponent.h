@@ -19,11 +19,15 @@ public:
         int _order, int _drawOrder);
     virtual ~USpriteComponent();
 
-    void LoadTexture(std::string _path);
+    void LoadTextureByPath(std::string _path);
 
     void DeleteTexture();
 
     unsigned int GetTexture() const;
+
+    void SetTexWidth(float _width);
+
+    void SetTexHeight(float _height);
 
     unsigned int GetTexWidth() const;
 

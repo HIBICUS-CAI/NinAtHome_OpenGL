@@ -14,8 +14,7 @@ UTransformComponent::UTransformComponent(std::string _name,
     UiObject* _owner, int _order, Float3 _initValue) :
     UComponent(_name, _owner, _order),
     mPosition(_initValue), mRotation(_initValue),
-    mScale(_initValue), mWorldMatrixPtr(nullptr),
-    mWorldMatrix({})
+    mScale(MakeFloat3(1.f, 1.f, 1.f)), mWorldMatrix({})
 {
 
 }
@@ -32,7 +31,7 @@ void UTransformComponent::CompInit()
 
 void UTransformComponent::CompUpdate(float _deltatime)
 {
-
+    UpdateWorldMatrix();
 }
 
 void UTransformComponent::CompDestory()
@@ -75,77 +74,587 @@ Matrix4x4f UTransformComponent::GetWorldMatrix() const
     return mWorldMatrix;
 }
 
-Float4x4 UTransformComponent::GetWorldMatrixPtr() const
-{
-    return mWorldMatrixPtr;
-}
-
 void UTransformComponent::Translate(Float3 _pos)
 {
+    if (GetUiObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetUiObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetUComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    UTransformComponent* utc =
+                        (UTransformComponent*)comp;
+                    utc->Translate(_pos);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetUComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                UTransformComponent* utc =
+                    (UTransformComponent*)comp;
+                utc->Translate(_pos);
+            }
+        }
+    }
 
+    mPosition += _pos;
 }
 
 void UTransformComponent::TranslateXAsix(float _posx)
 {
+    if (GetUiObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetUiObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetUComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    UTransformComponent* utc =
+                        (UTransformComponent*)comp;
+                    utc->TranslateXAsix(_posx);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetUComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                UTransformComponent* utc =
+                    (UTransformComponent*)comp;
+                utc->TranslateXAsix(_posx);
+            }
+        }
+    }
 
+    mPosition.x += _posx;
 }
 
 void UTransformComponent::TranslateYAsix(float _posy)
 {
+    if (GetUiObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetUiObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetUComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    UTransformComponent* utc =
+                        (UTransformComponent*)comp;
+                    utc->TranslateYAsix(_posy);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetUComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                UTransformComponent* utc =
+                    (UTransformComponent*)comp;
+                utc->TranslateYAsix(_posy);
+            }
+        }
+    }
 
+    mPosition.y += _posy;
 }
 
 void UTransformComponent::TranslateZAsix(float _posz)
 {
+    if (GetUiObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetUiObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetUComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    UTransformComponent* utc =
+                        (UTransformComponent*)comp;
+                    utc->TranslateZAsix(_posz);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetUComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                UTransformComponent* utc =
+                    (UTransformComponent*)comp;
+                utc->TranslateZAsix(_posz);
+            }
+        }
+    }
 
+    mPosition.z += _posz;
 }
 
 void UTransformComponent::Rotate(Float3 _angle)
 {
+    if (GetUiObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetUiObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetUComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    UTransformComponent* utc =
+                        (UTransformComponent*)comp;
+                    utc->Rotate(_angle);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetUComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                UTransformComponent* utc =
+                    (UTransformComponent*)comp;
+                utc->Rotate(_angle);
+            }
+        }
+    }
 
+    mRotation += _angle;
 }
 
 void UTransformComponent::RotateXAsix(float _anglex)
 {
+    if (GetUiObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetUiObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetUComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    UTransformComponent* utc =
+                        (UTransformComponent*)comp;
+                    utc->RotateXAsix(_anglex);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetUComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                UTransformComponent* utc =
+                    (UTransformComponent*)comp;
+                utc->RotateXAsix(_anglex);
+            }
+        }
+    }
 
+    mRotation.x += _anglex;
 }
 
 void UTransformComponent::RotateYAsix(float _angley)
 {
+    if (GetUiObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetUiObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetUComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    UTransformComponent* utc =
+                        (UTransformComponent*)comp;
+                    utc->RotateYAsix(_angley);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetUComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                UTransformComponent* utc =
+                    (UTransformComponent*)comp;
+                utc->RotateYAsix(_angley);
+            }
+        }
+    }
 
+    mRotation.y += _angley;
 }
 
 void UTransformComponent::RotateZAsix(float _anglez)
 {
+    if (GetUiObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetUiObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetUComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    UTransformComponent* utc =
+                        (UTransformComponent*)comp;
+                    utc->RotateZAsix(_anglez);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetUComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                UTransformComponent* utc =
+                    (UTransformComponent*)comp;
+                utc->RotateZAsix(_anglez);
+            }
+        }
+    }
 
+    mRotation.z += _anglez;
 }
 
 void UTransformComponent::Scale(Float3 _factor)
 {
+    if (GetUiObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetUiObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetUComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    UTransformComponent* utc =
+                        (UTransformComponent*)comp;
+                    utc->Scale(_factor);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetUComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                UTransformComponent* utc =
+                    (UTransformComponent*)comp;
+                utc->Scale(_factor);
+            }
+        }
+    }
 
+    mScale *= _factor;
 }
 
 void UTransformComponent::Scale(float _factor)
 {
+    if (GetUiObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetUiObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetUComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    UTransformComponent* utc =
+                        (UTransformComponent*)comp;
+                    utc->Scale(_factor);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetUComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                UTransformComponent* utc =
+                    (UTransformComponent*)comp;
+                utc->Scale(_factor);
+            }
+        }
+    }
 
+    mScale.x *= _factor;
+    mScale.y *= _factor;
+    mScale.z *= _factor;
 }
 
 void UTransformComponent::ScaleXAsix(float _factorx)
 {
+    if (GetUiObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetUiObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetUComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    UTransformComponent* utc =
+                        (UTransformComponent*)comp;
+                    utc->ScaleXAsix(_factorx);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetUComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                UTransformComponent* utc =
+                    (UTransformComponent*)comp;
+                utc->ScaleXAsix(_factorx);
+            }
+        }
+    }
 
+    mScale.x *= _factorx;
 }
 
 void UTransformComponent::ScaleYAsix(float _factory)
 {
+    if (GetUiObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetUiObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetUComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    UTransformComponent* utc =
+                        (UTransformComponent*)comp;
+                    utc->ScaleYAsix(_factory);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetUComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                UTransformComponent* utc =
+                    (UTransformComponent*)comp;
+                utc->ScaleYAsix(_factory);
+            }
+        }
+    }
 
+    mScale.y *= _factory;
 }
 
 void UTransformComponent::ScaleZAsix(float _factorz)
 {
+    if (GetUiObjOwner()->GetChildrenArray()->size())
+    {
+        for (auto child :
+            *(GetUiObjOwner()->GetChildrenArray()))
+        {
+            std::string childName = child->GetObjectName();
+            if (child->GetSpriteArray()->size() > 1)
+            {
+                for (int i = 0;
+                    i < child->GetSpriteArray()->size(); i++)
+                {
+                    childName = childName + "-transform-" +
+                        std::to_string(i + 1);
+                    auto comp = child->GetUComponent(childName);
+                    if (!comp)
+                    {
+                        return;
+                    }
+                    UTransformComponent* utc =
+                        (UTransformComponent*)comp;
+                    utc->ScaleZAsix(_factorz);
+                }
+            }
+            else
+            {
+                childName = childName + "-transform";
+                auto comp = child->GetUComponent(childName);
+                if (!comp)
+                {
+                    return;
+                }
+                UTransformComponent* utc =
+                    (UTransformComponent*)comp;
+                utc->ScaleZAsix(_factorz);
+            }
+        }
+    }
 
+    mScale.z *= _factorz;
 }
 
 void UTransformComponent::UpdateWorldMatrix()
 {
+    mWorldMatrix =
+    {
+        1.f, 0.f, 0.f, 0.f,
+        0.f, 1.f, 0.f, 0.f,
+        0.f, 0.f, 1.f, 0.f,
+        0.f, 0.f, 0.f, 1.f
+    };
 
+#ifdef NIN_AT_HOME
+    mWorldMatrix = glm::translate(mWorldMatrix, mPosition);
+    mWorldMatrix = glm::rotate(mWorldMatrix,
+        glm::radians(mRotation.x), Float3(1.f, 0.f, 0.f));
+    mWorldMatrix = glm::rotate(mWorldMatrix,
+        glm::radians(mRotation.y), Float3(0.f, 1.f, 0.f));
+    mWorldMatrix = glm::rotate(mWorldMatrix,
+        glm::radians(mRotation.z), Float3(0.f, 0.f, 1.f));
+    mWorldMatrix = glm::scale(mWorldMatrix, mScale);
+#else
+
+#endif // NIN_AT_HOME
 }
