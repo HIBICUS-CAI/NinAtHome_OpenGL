@@ -45,8 +45,16 @@ public:
 
     class UiObject* GetRightBtn() const;
 
+    void SetLeftName(std::string _name);
+    
+    void SetRightName(std::string _name);
+
+    void SetUpName(std::string _name);
+    
+    void SetDownName(std::string _name);
+
 private:
-    void UpdateButtonMapWith(class UiObject* _toAddUi);
+    void SetCanSelectFlg(bool _value);
 
 public:
     virtual void CompInit();
@@ -58,6 +66,10 @@ public:
 private:
     std::array<class UiObject*, 4> mSurroundBtns;
 
+    std::array<std::string, 4> mSurroundName;
+
     bool mIsSelected;
+
+    bool mCanSelectOther;
 };
 

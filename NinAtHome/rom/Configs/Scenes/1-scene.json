@@ -245,6 +245,7 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "right": "test-ui2",
                     "default-select": true
                 }
             ]
@@ -294,6 +295,7 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "left": "test-ui",
                     "default-select": false
                 }
             ]

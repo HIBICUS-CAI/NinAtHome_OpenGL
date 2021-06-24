@@ -87,6 +87,8 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "right": "test-ui2",
+                    "down": "test-ui5",
                     "default-select": true
                 }
             ]
@@ -136,6 +138,9 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "left": "test-ui1",
+                    "down": "test-ui6",
+                    "right": "test-ui3",
                     "default-select": false
                 }
             ]
@@ -185,6 +190,9 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "left": "test-ui2",
+                    "down": "test-ui7",
+                    "right": "test-ui4",
                     "default-select": false
                 }
             ]
@@ -234,6 +242,8 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "left": "test-ui3",
+                    "down": "test-ui8",
                     "default-select": false
                 }
             ]
@@ -283,6 +293,9 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "up": "test-ui1",
+                    "right": "test-ui6",
+                    "down": "test-ui9",
                     "default-select": false
                 }
             ]
@@ -332,6 +345,10 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "left": "test-ui5",
+                    "up": "test-ui2",
+                    "right": "test-ui7",
+                    "down": "test-ui10",
                     "default-select": false
                 }
             ]
@@ -381,6 +398,10 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "left": "test-ui6",
+                    "up": "test-ui3",
+                    "right": "test-ui8",
+                    "down": "test-ui11",
                     "default-select": false
                 }
             ]
@@ -430,6 +451,9 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "left": "test-ui7",
+                    "up": "test-ui4",
+                    "down": "test-ui12",
                     "default-select": false
                 }
             ]
@@ -479,6 +503,9 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "up": "test-ui5",
+                    "right": "test-ui10",
+                    "down": "test-ui13",
                     "default-select": false
                 }
             ]
@@ -528,6 +555,10 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "left": "test-ui9",
+                    "up": "test-ui6",
+                    "right": "test-ui11",
+                    "down": "test-ui14",
                     "default-select": false
                 }
             ]
@@ -577,6 +608,10 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "left": "test-ui10",
+                    "up": "test-ui7",
+                    "right": "test-ui12",
+                    "down": "test-ui15",
                     "default-select": false
                 }
             ]
@@ -626,6 +661,9 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "left": "test-ui11",
+                    "up": "test-ui8",
+                    "down": "test-ui16",
                     "default-select": false
                 }
             ]
@@ -675,6 +713,8 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "up": "test-ui9",
+                    "right": "test-ui14",
                     "default-select": false
                 }
             ]
@@ -724,6 +764,9 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "left": "test-ui13",
+                    "up": "test-ui10",
+                    "right": "test-ui15",
                     "default-select": false
                 }
             ]
@@ -773,6 +816,9 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "left": "test-ui14",
+                    "up": "test-ui11",
+                    "right": "test-ui16",
                     "default-select": false
                 }
             ]
@@ -822,6 +868,8 @@
                 {
                     "type": "btnmap",
                     "update-order": 0,
+                    "left": "test-ui15",
+                    "up": "test-ui12",
                     "default-select": false
                 }
             ]

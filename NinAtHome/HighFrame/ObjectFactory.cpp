@@ -1170,6 +1170,31 @@ void ObjectFactory::AddUCompToUi(UiObject* _ui,
         {
             ubmc->SetIsSelected(compNode->GetBool());
         }
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/left");
+        if (compNode && compNode->IsString())
+        {
+            ubmc->SetLeftName(compNode->GetString());
+        }
+        compNode = GetJsonNode(
+            _file, _nodePath + "/right");
+        if (compNode && compNode->IsString())
+        {
+            ubmc->SetRightName(compNode->GetString());
+        }
+        compNode = GetJsonNode(
+            _file, _nodePath + "/up");
+        if (compNode && compNode->IsString())
+        {
+            ubmc->SetUpName(compNode->GetString());
+        }
+        compNode = GetJsonNode(
+            _file, _nodePath + "/down");
+        if (compNode && compNode->IsString())
+        {
+            ubmc->SetDownName(compNode->GetString());
+        }
     }
 
     // ELSE----------------------------
