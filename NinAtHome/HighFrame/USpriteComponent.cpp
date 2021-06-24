@@ -12,6 +12,7 @@
 #include "texture.h"
 #include "sprite.h"
 #include "UTransformComponent.h"
+#include "UBtnMapComponent.h"
 
 USpriteComponent::USpriteComponent(std::string _name,
     UiObject* _owner, int _order, int _drawOrder) :
@@ -34,7 +35,22 @@ void USpriteComponent::CompInit()
 
 void USpriteComponent::CompUpdate(float _deltatime)
 {
+    std::string bmcName =
+        GetUiObjOwner()->GetObjectName() + "-btnmap";
+    UBtnMapComponent* ubmc = (UBtnMapComponent*)
+        (GetUiObjOwner()->GetUComponent(bmcName));
 
+    if (ubmc)
+    {
+        if (ubmc->IsBeingSelected())
+        {
+            mOffsetColor = MakeFloat4(1.f, 1.f, 1.f, 1.f);
+        }
+        else
+        {
+            mOffsetColor = MakeFloat4(1.f, 1.f, 1.f, 0.5f);
+        }
+    }
 }
 
 void USpriteComponent::CompDestory()

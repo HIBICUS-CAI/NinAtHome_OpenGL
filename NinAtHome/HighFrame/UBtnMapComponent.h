@@ -12,6 +12,11 @@
 #include "UComponent.h"
 #include <array>
 
+#define LEFT_BTN    (0)
+#define UP_BTN      (1)
+#define RIGHT_BTN   (2)
+#define DOWN_BTN    (3)
+
 class UBtnMapComponent :
     public UComponent
 {
@@ -20,7 +25,9 @@ public:
         int _order);
     virtual ~UBtnMapComponent();
 
-    bool IsBeingSelected();
+    void SetIsSelected(bool _value);
+
+    bool IsBeingSelected() const;
 
     void SelectUpBtn();
 
@@ -39,7 +46,7 @@ public:
     class UiObject* GetRightBtn() const;
 
 private:
-    void UpdateButtonMap();
+    void UpdateButtonMapWith(class UiObject* _toAddUi);
 
 public:
     virtual void CompInit();

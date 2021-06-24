@@ -40,5 +40,791 @@
                 }
             ]
         }
+    ],
+    "ui": [
+        {
+            "ui-name": "test-ui1",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        -300.0,
+                        -165.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": true
+                }
+            ]
+        },
+        {
+            "ui-name": "test-ui2",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        -100.0,
+                        -165.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": false
+                }
+            ]
+        },
+        {
+            "ui-name": "test-ui3",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        100.0,
+                        -165.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": false
+                }
+            ]
+        },
+        {
+            "ui-name": "test-ui4",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        300.0,
+                        -165.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": false
+                }
+            ]
+        },
+        {
+            "ui-name": "test-ui5",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        -300.0,
+                        -55.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": false
+                }
+            ]
+        },
+        {
+            "ui-name": "test-ui6",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        -100.0,
+                        -55.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": false
+                }
+            ]
+        },
+        {
+            "ui-name": "test-ui7",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        100.0,
+                        -55.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": false
+                }
+            ]
+        },
+        {
+            "ui-name": "test-ui8",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        300.0,
+                        -55.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": false
+                }
+            ]
+        },
+        {
+            "ui-name": "test-ui9",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        -300.0,
+                        55.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": false
+                }
+            ]
+        },
+        {
+            "ui-name": "test-ui10",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        -100.0,
+                        55.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": false
+                }
+            ]
+        },
+        {
+            "ui-name": "test-ui11",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        100.0,
+                        55.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": false
+                }
+            ]
+        },
+        {
+            "ui-name": "test-ui12",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        300.0,
+                        55.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": false
+                }
+            ]
+        },
+        {
+            "ui-name": "test-ui13",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        -300.0,
+                        165.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": false
+                }
+            ]
+        },
+        {
+            "ui-name": "test-ui14",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        -100.0,
+                        165.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": false
+                }
+            ]
+        },
+        {
+            "ui-name": "test-ui15",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        100.0,
+                        165.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": false
+                }
+            ]
+        },
+        {
+            "ui-name": "test-ui16",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        300.0,
+                        165.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 150.0,
+                    "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": false
+                }
+            ]
+        }
     ]
 }

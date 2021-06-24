@@ -66,23 +66,42 @@ void TestDestory(AInteractionComponent* _aitc)
     MY_NN_LOG(LOG_DEBUG, "test destory!!!!!!!!\n");
 }
 
-void TempUiInput1(UInputComponent* _uic, float _deltatime)
+void TempUiInput(UInputComponent* _uic, float _deltatime)
 {
     UiObject* owner = _uic->GetUiObjOwner();
 
-    if (GetControllerTrigger(NpadButton::Plus::Index))
+    std::string btnmapName =
+        owner->GetObjectName() + "-btnmap";
+    UBtnMapComponent* ubmc = nullptr;
+    ubmc = (UBtnMapComponent*)owner->GetUComponent(btnmapName);
+
+    if (GetControllerTrigger(NpadButton::Left::Index))
     {
-        MY_NN_LOG(LOG_DEBUG, "trigger plus by input 1\n");
+        if (ubmc && ubmc->IsBeingSelected())
+        {
+            ubmc->SelectLeftBtn();
+        }
     }
-}
-
-void TempUiInput2(UInputComponent* _uic, float _deltatime)
-{
-    UiObject* owner = _uic->GetUiObjOwner();
-
-    if (GetControllerTrigger(NpadButton::Minus::Index))
+    else if (GetControllerTrigger(NpadButton::Right::Index))
     {
-        MY_NN_LOG(LOG_DEBUG, "trigger plus by input 2\n");
+        if (ubmc && ubmc->IsBeingSelected())
+        {
+            ubmc->SelectRightBtn();
+        }
+    }
+    else if (GetControllerTrigger(NpadButton::Up::Index))
+    {
+        if (ubmc && ubmc->IsBeingSelected())
+        {
+            ubmc->SelectUpBtn();
+        }
+    }
+    else if (GetControllerTrigger(NpadButton::Down::Index))
+    {
+        if (ubmc && ubmc->IsBeingSelected())
+        {
+            ubmc->SelectDownBtn();
+        }
     }
 }
 
@@ -142,8 +161,7 @@ void TempMove(AInputComponent* _aic, float _deltatime)
             }
         }
     }
-    if (GetControllerPress(NpadButton::Left::Index) ||
-        GetControllerPress(NpadButton::StickLLeft::Index))
+    if (GetControllerPress(NpadButton::StickLLeft::Index))
     {
         if (owner && owner->IsObjectActive() == STATUS::ACTIVE)
         {
@@ -152,8 +170,7 @@ void TempMove(AInputComponent* _aic, float _deltatime)
                 TranslateXAsix(-200.f * _deltatime);
         }
     }
-    if (GetControllerPress(NpadButton::Right::Index) ||
-        GetControllerPress(NpadButton::StickLRight::Index))
+    if (GetControllerPress(NpadButton::StickLRight::Index))
     {
         if (owner && owner->IsObjectActive() == STATUS::ACTIVE)
         {
@@ -162,8 +179,7 @@ void TempMove(AInputComponent* _aic, float _deltatime)
                 TranslateXAsix(200.f * _deltatime);
         }
     }
-    if (GetControllerPress(NpadButton::Up::Index) ||
-        GetControllerPress(NpadButton::StickLUp::Index))
+    if (GetControllerPress(NpadButton::StickLUp::Index))
     {
         if (owner && owner->IsObjectActive() == STATUS::ACTIVE)
         {
@@ -172,8 +188,7 @@ void TempMove(AInputComponent* _aic, float _deltatime)
                 TranslateYAsix(-200.f * _deltatime);
         }
     }
-    if (GetControllerPress(NpadButton::Down::Index) ||
-        GetControllerPress(NpadButton::StickLDown::Index))
+    if (GetControllerPress(NpadButton::StickLDown::Index))
     {
         if (owner && owner->IsObjectActive() == STATUS::ACTIVE)
         {
@@ -1113,15 +1128,47 @@ void ObjectFactory::AddUCompToUi(UiObject* _ui,
         {
             // TEMP----------------------------
             std::string funcName = compNode->GetString();
-            if (funcName == "TempUiInput1")
+            if (funcName == "TempUiInput")
             {
-                uic->SetInputProcessFunc(TempUiInput1);
+                uic->SetInputProcessFunc(TempUiInput);
             }
-            else if (funcName == "TempUiInput2")
+            else if (funcName == "TempUiInput")
             {
-                uic->SetInputProcessFunc(TempUiInput2);
+                uic->SetInputProcessFunc(TempUiInput);
             }
             // TEMP----------------------------
+        }
+    }
+
+    // BTNMAP----------------------------
+    else if (compType == "btnmap")
+    {
+        std::string name =
+            _ui->GetObjectName() + "-" + compType;
+        int updateOrder = 0;
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/update-order");
+        if (compNode && compNode->IsInt())
+        {
+            updateOrder = compNode->GetInt();
+        }
+        else
+        {
+            MY_NN_LOG(LOG_ERROR,
+                "cannot get update order in [ %s ]\n",
+                _nodePath.c_str());
+        }
+
+        UBtnMapComponent* ubmc = new UBtnMapComponent(name, _ui,
+            updateOrder);
+        _ui->AddUComponent(ubmc);
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/default-select");
+        if (compNode && compNode->IsBool())
+        {
+            ubmc->SetIsSelected(compNode->GetBool());
         }
     }
 

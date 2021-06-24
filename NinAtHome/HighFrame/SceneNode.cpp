@@ -96,6 +96,16 @@ UiObject* SceneNode::GetUiObject(std::string _name)
     return mUiObjectsMap[_name];
 }
 
+std::vector<ActorObject*>* SceneNode::GetActorArray()
+{
+    return &mActorObjectsArray;
+}
+
+std::vector<UiObject*>* SceneNode::GetUiArray()
+{
+    return &mUiObjectsArray;
+}
+
 void SceneNode::LoadSceneInitFile(std::string _path)
 {
 

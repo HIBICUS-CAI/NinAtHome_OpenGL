@@ -32,6 +32,10 @@ public:
 
     class UiObject* GetUiObject(std::string _name);
 
+    std::vector<class ActorObject*>* GetActorArray();
+
+    std::vector<class UiObject*>* GetUiArray();
+
     void LoadSceneInitFile(std::string _path);
 
     void UpdateScene(float _deltatime);

@@ -240,7 +240,12 @@
                 {
                     "type": "input",
                     "update-order": 0,
-                    "func-name": "TempUiInput1"
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": true
                 }
             ]
         },
@@ -284,7 +289,12 @@
                 {
                     "type": "input",
                     "update-order": 0,
-                    "func-name": "TempUiInput2"
+                    "func-name": "TempUiInput"
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "default-select": false
                 }
             ]
         }
