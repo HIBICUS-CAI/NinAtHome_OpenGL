@@ -25,20 +25,30 @@ UInteractionComponent::~UInteractionComponent()
 
 void UInteractionComponent::CompInit()
 {
-
+    if (mInterInitFuncPtr)
+    {
+        mInterInitFuncPtr(this);
+    }
 }
 
 void UInteractionComponent::CompUpdate(float _deltatime)
 {
-
+    if (mInterUpdateFuncPtr)
+    {
+        mInterUpdateFuncPtr(this, _deltatime);
+    }
 }
 
 void UInteractionComponent::CompDestory()
 {
-
+    if (mInterDestoryFuncPtr)
+    {
+        mInterDestoryFuncPtr(this);
+    }
 }
 
-void UInteractionComponent::SetInitFunc(UiInterInitFuncType _func)
+void UInteractionComponent::SetInitFunc(
+    UiInterInitFuncType _func)
 {
     mInterInitFuncPtr = _func;
 }

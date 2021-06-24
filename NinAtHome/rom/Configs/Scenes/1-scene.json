@@ -297,6 +297,13 @@
                     "update-order": 0,
                     "left": "test-ui",
                     "default-select": false
+                },
+                {
+                    "type": "interaction",
+                    "update-order": 0,
+                    "init-func-name": "TestUiInit",
+                    "update-func-name": "TestUiUpdate",
+                    "destory-func-name": "TestUiDestory"
                 }
             ]
         }

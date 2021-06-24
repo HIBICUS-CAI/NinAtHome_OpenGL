@@ -66,6 +66,36 @@ void TestDestory(AInteractionComponent* _aitc)
     MY_NN_LOG(LOG_DEBUG, "test destory!!!!!!!!\n");
 }
 
+void TestUiInit(UInteractionComponent* _aitc)
+{
+    MY_NN_LOG(LOG_DEBUG, "ui init test!!!!!!!!\n");
+}
+
+void TestUiUpdate(UInteractionComponent* _aitc, float _deltatime)
+{
+    auto scene = _aitc->GetUiObjOwner()->GetSceneNodePtr();
+    if (GetControllerTrigger(NpadButton::R::Index))
+    {
+        if (scene->GetUiObject("test-ui")->IsObjectActive() ==
+            STATUS::ACTIVE)
+        {
+            scene->GetUiObject("test-ui")->
+                SetObjectActive(STATUS::PAUSE);
+        }
+        else if (scene->GetUiObject("test-ui")->IsObjectActive() ==
+            STATUS::PAUSE)
+        {
+            scene->GetUiObject("test-ui")->
+                SetObjectActive(STATUS::ACTIVE);
+        }
+    }
+}
+
+void TestUiDestory(UInteractionComponent* _aitc)
+{
+    MY_NN_LOG(LOG_DEBUG, "ui test destory!!!!!!!!\n");
+}
+
 void TempUiInput(UInputComponent* _uic, float _deltatime)
 {
     UiObject* owner = _uic->GetUiObjOwner();
@@ -1194,6 +1224,58 @@ void ObjectFactory::AddUCompToUi(UiObject* _ui,
         if (compNode && compNode->IsString())
         {
             ubmc->SetDownName(compNode->GetString());
+        }
+    }
+
+    // INTERACTION----------------------------
+    else if (compType == "interaction")
+    {
+        std::string name =
+            _ui->GetObjectName() + "-" + compType;
+        int updateOrder = 0;
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/update-order");
+        if (compNode && compNode->IsInt())
+        {
+            updateOrder = compNode->GetInt();
+        }
+        else
+        {
+            MY_NN_LOG(LOG_ERROR,
+                "cannot get update order in [ %s ]\n",
+                _nodePath.c_str());
+        }
+
+        UInteractionComponent* uitc = new UInteractionComponent(
+            name, _ui, updateOrder);
+        _ui->AddUComponent(uitc);
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/init-func-name");
+        if (compNode && compNode->IsString())
+        {
+            // TEMP--------------------
+            uitc->SetInitFunc(TestUiInit);
+            // TEMP--------------------
+        }
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/update-func-name");
+        if (compNode && compNode->IsString())
+        {
+            // TEMP--------------------
+            uitc->SetUpdateFunc(TestUiUpdate);
+            // TEMP--------------------
+        }
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/destory-func-name");
+        if (compNode && compNode->IsString())
+        {
+            // TEMP--------------------
+            uitc->SetDestoryFunc(TestUiDestory);
+            // TEMP--------------------
         }
     }
 

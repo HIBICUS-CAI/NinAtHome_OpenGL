@@ -11,11 +11,12 @@
 
 #include "UComponent.h"
 
-// TEMP-----------------
-using UiInterInitFuncType = void(*)();
-using UiInterUpdateFuncType = void(*)();
-using UiInterDestoryFuncType = void(*)();
-// TEMP-----------------
+using UiInterInitFuncType = void(*)(
+    class UInteractionComponent*);
+using UiInterUpdateFuncType = void(*)(
+    class UInteractionComponent*, float);
+using UiInterDestoryFuncType = void(*)(
+    class UInteractionComponent*);
 
 class UInteractionComponent :
     public UComponent
@@ -51,4 +52,3 @@ private:
 
     UiInterDestoryFuncType mInterDestoryFuncPtr;
 };
-
