@@ -304,6 +304,27 @@
                     "init-func-name": "TestUiInit",
                     "update-func-name": "TestUiUpdate",
                     "destory-func-name": "TestUiDestory"
+                },
+                {
+                    "type": "text",
+                    "update-order": 0,
+                    "moji-path": "rom:/Assets/Textures/moji.tga",
+                    "init-text": "it's a great day, É¢ši¤·¤è¤¦",
+                    "init-size": [
+                        30.0,
+                        30.0
+                    ],
+                    "init-position": [
+                        -950.0,
+                        -530.0,
+                        0.0
+                    ],
+                    "init-color": [
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0
+                    ]
                 }
             ]
         }

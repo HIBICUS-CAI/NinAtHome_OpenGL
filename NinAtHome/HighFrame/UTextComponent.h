@@ -10,11 +10,6 @@
 #pragma once
 
 #include "UComponent.h"
-#include <vector>
-
-// TEMP-----------------
-using Font = RECT;
-// TEMP-----------------
 
 class UTextComponent :
     public UComponent
@@ -33,6 +28,8 @@ public:
     void LoadFontTexture(std::string _path);
 
     void ChangeTextString(std::string _text);
+
+    void SetTextColor(Float4 _color);
 
     void DrawUText();
 

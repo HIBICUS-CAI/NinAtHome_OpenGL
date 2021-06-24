@@ -1279,6 +1279,126 @@ void ObjectFactory::AddUCompToUi(UiObject* _ui,
         }
     }
 
+    // TEXT----------------------------
+    else if (compType == "text")
+    {
+        std::string name =
+            _ui->GetObjectName() + "-" + compType;
+        int updateOrder = 0;
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/update-order");
+        if (compNode && compNode->IsInt())
+        {
+            updateOrder = compNode->GetInt();
+        }
+        else
+        {
+            MY_NN_LOG(LOG_ERROR,
+                "cannot get update order in [ %s ]\n",
+                _nodePath.c_str());
+        }
+
+        UTextComponent* utxc = new UTextComponent(
+            name, _ui, updateOrder);
+        _ui->AddUComponent(utxc);
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/moji-path");
+        if (compNode && compNode->IsString())
+        {
+            utxc->LoadFontTexture(compNode->GetString());
+        }
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/init-text");
+        if (compNode && compNode->IsString())
+        {
+            utxc->ChangeTextString(compNode->GetString());
+        }
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/init-size");
+        if (compNode && (compNode->Size() == 2))
+        {
+            Float2 fontSize = MakeFloat2(0.f, 0.f);
+            compNode = GetJsonNode(
+                _file, _nodePath + "/init-size/0");
+            if (compNode && compNode->IsFloat())
+            {
+                fontSize.x = compNode->GetFloat();
+            }
+            compNode = GetJsonNode(
+                _file, _nodePath + "/init-size/1");
+            if (compNode && compNode->IsFloat())
+            {
+                fontSize.y = compNode->GetFloat();
+            }
+
+            utxc->SetFontSize(fontSize);
+        }
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/init-position");
+        if (compNode && (compNode->Size() == 3))
+        {
+            Float3 pos = MakeFloat3(0.f, 0.f, 0.f);
+            compNode = GetJsonNode(
+                _file, _nodePath + "/init-position/0");
+            if (compNode && compNode->IsFloat())
+            {
+                pos.x = compNode->GetFloat();
+            }
+            compNode = GetJsonNode(
+                _file, _nodePath + "/init-position/1");
+            if (compNode && compNode->IsFloat())
+            {
+                pos.y = compNode->GetFloat();
+            }
+            compNode = GetJsonNode(
+                _file, _nodePath + "/init-position/2");
+            if (compNode && compNode->IsFloat())
+            {
+                pos.z = compNode->GetFloat();
+            }
+
+            utxc->SetTextPosition(pos);
+        }
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/init-color");
+        if (compNode && (compNode->Size() == 4))
+        {
+            Float4 color = MakeFloat4(0.f, 0.f, 0.f, 0.f);
+            compNode = GetJsonNode(
+                _file, _nodePath + "/init-color/0");
+            if (compNode && compNode->IsFloat())
+            {
+                color.x = compNode->GetFloat();
+            }
+            compNode = GetJsonNode(
+                _file, _nodePath + "/init-color/1");
+            if (compNode && compNode->IsFloat())
+            {
+                color.y = compNode->GetFloat();
+            }
+            compNode = GetJsonNode(
+                _file, _nodePath + "/init-color/2");
+            if (compNode && compNode->IsFloat())
+            {
+                color.z = compNode->GetFloat();
+            }
+            compNode = GetJsonNode(
+                _file, _nodePath + "/init-color/3");
+            if (compNode && compNode->IsFloat())
+            {
+                color.w = compNode->GetFloat();
+            }
+
+            utxc->SetTextColor(color);
+        }
+    }
+
     // ELSE----------------------------
     else
     {

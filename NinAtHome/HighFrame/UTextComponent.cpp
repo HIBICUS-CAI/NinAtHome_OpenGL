@@ -70,7 +70,22 @@ void UTextComponent::ChangeTextString(std::string _text)
     mTextString = _text;
 }
 
+void UTextComponent::SetTextColor(Float4 _color)
+{
+    mTextColor = _color;
+}
+
 void UTextComponent::DrawUText()
 {
-
+    // TEMP----------------------------
+    MY_NN_LOG(LOG_DEBUG, "draw this string [ %s ] \n",
+        mTextString.c_str());
+    MY_NN_LOG(LOG_DEBUG, "at position [ %f, %f, %f ] \n",
+        mTextPosition.x, mTextPosition.y, mTextPosition.z);
+    MY_NN_LOG(LOG_DEBUG, "with size [ %f, %f ] \n",
+        mFontSize.x, mFontSize.y);
+    MY_NN_LOG(LOG_DEBUG, "and color [ %f, %f, %f, %f ]\n",
+        mTextColor.x, mTextColor.y,
+        mTextColor.z, mTextColor.w);
+    // TEMP----------------------------
 }
