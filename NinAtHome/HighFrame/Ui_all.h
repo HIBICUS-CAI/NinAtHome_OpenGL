@@ -2,7 +2,6 @@
 
 #include "UiObject.h"
 #include "UBtnMapComponent.h"
-#include "UCheckComponent.h"
 #include "UInputComponent.h"
 #include "UInteractionComponent.h"
 #include "USpriteComponent.h"

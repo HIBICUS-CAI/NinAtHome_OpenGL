@@ -20,6 +20,8 @@ public:
         int _order);
     virtual ~UBtnMapComponent();
 
+    bool IsBeingSelected();
+
     void SelectUpBtn();
 
     void SelectDownBtn();
@@ -48,5 +50,7 @@ public:
 
 private:
     std::array<class UiObject*, 4> mSurroundBtns;
+
+    bool mIsSelected;
 };
 

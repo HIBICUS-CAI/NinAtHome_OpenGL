@@ -126,9 +126,6 @@
     <ClInclude Include="HighFrame\UInputComponent.h">
       <Filter>02_HightFrame\Component</Filter>
     </ClInclude>
-    <ClInclude Include="HighFrame\UCheckComponent.h">
-      <Filter>02_HightFrame\Component</Filter>
-    </ClInclude>
     <ClInclude Include="HighFrame\UTextComponent.h">
       <Filter>02_HightFrame\Component</Filter>
     </ClInclude>
@@ -237,9 +234,6 @@
       <Filter>02_HightFrame\Component</Filter>
     </ClCompile>
     <ClCompile Include="HighFrame\UInputComponent.cpp">
-      <Filter>02_HightFrame\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="HighFrame\UCheckComponent.cpp">
       <Filter>02_HightFrame\Component</Filter>
     </ClCompile>
     <ClCompile Include="HighFrame\UTextComponent.cpp">

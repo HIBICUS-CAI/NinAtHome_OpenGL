@@ -125,7 +125,6 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClInclude Include="HighFrame\SceneManager.h" />
     <ClInclude Include="HighFrame\SceneNode.h" />
     <ClInclude Include="HighFrame\UBtnMapComponent.h" />
-    <ClInclude Include="HighFrame\UCheckComponent.h" />
     <ClInclude Include="HighFrame\UComponent.h" />
     <ClInclude Include="HighFrame\UInputComponent.h" />
     <ClInclude Include="HighFrame\UInteractionComponent.h" />
@@ -166,7 +165,6 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClCompile Include="HighFrame\SceneManager.cpp" />
     <ClCompile Include="HighFrame\SceneNode.cpp" />
     <ClCompile Include="HighFrame\UBtnMapComponent.cpp" />
-    <ClCompile Include="HighFrame\UCheckComponent.cpp" />
     <ClCompile Include="HighFrame\UComponent.cpp" />
     <ClCompile Include="HighFrame\UInputComponent.cpp" />
     <ClCompile Include="HighFrame\UInteractionComponent.cpp" />

@@ -13,10 +13,9 @@
 UInputComponent::UInputComponent(std::string _name,
     UiObject* _owner, int _order) :
     UComponent(_name, _owner, _order),
-    mEventBtns({}), mEventSensors({})
+    mInputProcessFuncPtr(nullptr)
 {
-    mEventBtns.clear();
-    mEventSensors.clear();
+
 }
 
 UInputComponent::~UInputComponent()
@@ -31,7 +30,10 @@ void UInputComponent::CompInit()
 
 void UInputComponent::CompUpdate(float _deltatime)
 {
-
+    if (mInputProcessFuncPtr)
+    {
+        mInputProcessFuncPtr(this, _deltatime);
+    }
 }
 
 void UInputComponent::CompDestory()
@@ -39,36 +41,13 @@ void UInputComponent::CompDestory()
 
 }
 
-void UInputComponent::AddEventBtn(int _btnCode)
+void UInputComponent::SetInputProcessFunc(
+    UiInputProcessFuncType _func)
 {
-
+    mInputProcessFuncPtr = _func;
 }
 
-void UInputComponent::DeleteEventBtn(int _btnCode)
+void UInputComponent::ClearInputProcessFunc()
 {
-
-}
-
-bool UInputComponent::HasBtnExisted(int _btnCode)
-{
-    // TEMP--------------------
-    return false;
-    // TEMP--------------------
-}
-
-void UInputComponent::AddEventSensor(int _senCode)
-{
-
-}
-
-void UInputComponent::DeleteEventSensor(int _senCode)
-{
-
-}
-
-bool UInputComponent::HasSensorExisted(int _senCode)
-{
-    // TEMP--------------------
-    return false;
-    // TEMP--------------------
+    mInputProcessFuncPtr = nullptr;
 }

@@ -10,7 +10,9 @@
 #pragma once
 
 #include "UComponent.h"
-#include <vector>
+
+using UiInputProcessFuncType = void(*)(
+    class UInputComponent*, float);
 
 class UInputComponent :
     public UComponent
@@ -20,17 +22,9 @@ public:
         int _order);
     virtual ~UInputComponent();
 
-    void AddEventBtn(int _btnCode);
+    void SetInputProcessFunc(UiInputProcessFuncType _func);
 
-    void DeleteEventBtn(int _btnCode);
-
-    bool HasBtnExisted(int _btnCode);
-
-    void AddEventSensor(int _senCode);
-
-    void DeleteEventSensor(int _senCode);
-
-    bool HasSensorExisted(int _senCode);
+    void ClearInputProcessFunc();
 
 public:
     virtual void CompInit();
@@ -40,7 +34,5 @@ public:
     virtual void CompDestory();
 
 private:
-    std::vector<int> mEventBtns;
-
-    std::vector<int> mEventSensors;
+    UiInputProcessFuncType mInputProcessFuncPtr;
 };

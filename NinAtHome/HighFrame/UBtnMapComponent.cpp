@@ -13,7 +13,8 @@
 UBtnMapComponent::UBtnMapComponent(std::string _name,
     UiObject* _owner, int _order) :
     UComponent(_name, _owner, _order),
-    mSurroundBtns({ nullptr,nullptr,nullptr,nullptr })
+    mSurroundBtns({ nullptr,nullptr,nullptr,nullptr }),
+    mIsSelected(false)
 {
 
 }
@@ -36,6 +37,11 @@ void UBtnMapComponent::CompUpdate(float _deltatime)
 void UBtnMapComponent::CompDestory()
 {
 
+}
+
+bool UBtnMapComponent::IsBeingSelected()
+{
+    return mIsSelected;
 }
 
 void UBtnMapComponent::SelectUpBtn()
