@@ -34,9 +34,9 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -2,
-                    "texture-path": "rom:/Assets/Textures/player.tga",
-                    "texture-width": 450.0,
-                    "texture-height": 450.0
+                    "texture-path": "rom:/Assets/Textures/moji.tga",
+                    "texture-width": 950.0,
+                    "texture-height": 500.0
                 }
             ]
         }
