@@ -26,15 +26,13 @@ public:
 
     void SetTextPosition(Float3 _pos);
 
-    void SetFontSize(unsigned int _size);
+    void SetFontSize(Float2 _size);
 
-    unsigned int GetFontSize() const;
+    Float2 GetFontSize() const;
 
-    void LoadFont(std::string _path);
+    void LoadFontTexture(std::string _path);
 
-    void ChangeSingleText(std::string _text);
-
-    void ReloadMutiText(std::string _path);
+    void ChangeTextString(std::string _text);
 
     void DrawUText();
 
@@ -46,15 +44,13 @@ public:
     virtual void CompDestory();
 
 private:
-    std::string mSingleText;
+    unsigned int mFontTexture;
 
-    std::vector<std::string> mMutiText;
+    std::string mTextString;
 
     Float3 mTextPosition;
 
-    unsigned int mFontSize;
+    Float2 mFontSize;
 
-    Font mFont;
-
-    bool mUsingMutiTextFlg;
+    Float4 mTextColor;
 };
