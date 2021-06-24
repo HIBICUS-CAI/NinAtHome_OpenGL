@@ -236,6 +236,11 @@
                     "texture-path": "rom:/Assets/Textures/player.tga",
                     "texture-width": 150.0,
                     "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput1"
                 }
             ]
         },
@@ -275,6 +280,11 @@
                     "texture-path": "rom:/Assets/Textures/player.tga",
                     "texture-width": 150.0,
                     "texture-height": 50.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TempUiInput2"
                 }
             ]
         }

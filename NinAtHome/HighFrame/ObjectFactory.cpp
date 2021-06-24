@@ -66,6 +66,26 @@ void TestDestory(AInteractionComponent* _aitc)
     MY_NN_LOG(LOG_DEBUG, "test destory!!!!!!!!\n");
 }
 
+void TempUiInput1(UInputComponent* _uic, float _deltatime)
+{
+    UiObject* owner = _uic->GetUiObjOwner();
+
+    if (GetControllerTrigger(NpadButton::Plus::Index))
+    {
+        MY_NN_LOG(LOG_DEBUG, "trigger plus by input 1\n");
+    }
+}
+
+void TempUiInput2(UInputComponent* _uic, float _deltatime)
+{
+    UiObject* owner = _uic->GetUiObjOwner();
+
+    if (GetControllerTrigger(NpadButton::Minus::Index))
+    {
+        MY_NN_LOG(LOG_DEBUG, "trigger plus by input 2\n");
+    }
+}
+
 void TempMove(AInputComponent* _aic, float _deltatime)
 {
     ActorObject* owner = _aic->GetActorObjOwner();
@@ -1060,6 +1080,48 @@ void ObjectFactory::AddUCompToUi(UiObject* _ui,
         if (compNode && compNode->IsFloat())
         {
             usc->SetTexHeight(compNode->GetFloat());
+        }
+    }
+
+    // INPUT----------------------------
+    else if (compType == "input")
+    {
+        std::string name =
+            _ui->GetObjectName() + "-" + compType;
+        int updateOrder = 0;
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/update-order");
+        if (compNode && compNode->IsInt())
+        {
+            updateOrder = compNode->GetInt();
+        }
+        else
+        {
+            MY_NN_LOG(LOG_ERROR,
+                "cannot get update order in [ %s ]\n",
+                _nodePath.c_str());
+        }
+
+        UInputComponent* uic = new UInputComponent(name, _ui,
+            updateOrder);
+        _ui->AddUComponent(uic);
+
+        compNode = GetJsonNode(
+            _file, _nodePath + "/func-name");
+        if (compNode && compNode->IsString())
+        {
+            // TEMP----------------------------
+            std::string funcName = compNode->GetString();
+            if (funcName == "TempUiInput1")
+            {
+                uic->SetInputProcessFunc(TempUiInput1);
+            }
+            else if (funcName == "TempUiInput2")
+            {
+                uic->SetInputProcessFunc(TempUiInput2);
+            }
+            // TEMP----------------------------
         }
     }
 
