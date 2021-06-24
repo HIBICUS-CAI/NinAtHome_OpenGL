@@ -192,6 +192,9 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
 
     if (_toAddUi == GetUiObjOwner())
     {
+        MY_NN_LOG(LOG_DEBUG,
+            "start to get nearest of this obj [ %s ]\n",
+            _toAddUi->GetObjectName().c_str());
         utcNameToAdd = _toAddUi->GetObjectName() + "-transform";
         utcToAdd = (UTransformComponent*)(_toAddUi->GetUComponent(
             utcNameToAdd));
@@ -233,6 +236,9 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
                         beginUpdate[RIGHT_BTN] = true;
                         nearestPos[RIGHT_BTN] = deltaX;
                         mSurroundBtns[RIGHT_BTN] = ui;
+                        MY_NN_LOG(LOG_DEBUG,
+                            "set [ %s ] to [ %s ] right\n",
+                            utcNameOther.c_str(), utcNameToAdd.c_str());
                     }
                     else
                     {
@@ -240,6 +246,9 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
                         {
                             nearestPos[RIGHT_BTN] = deltaX;
                             mSurroundBtns[RIGHT_BTN] = ui;
+                            MY_NN_LOG(LOG_DEBUG,
+                                "replace [ %s ] to [ %s ] right\n",
+                                utcNameOther.c_str(), utcNameToAdd.c_str());
                         }
                     }
                 }
@@ -250,6 +259,9 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
                         beginUpdate[LEFT_BTN] = true;
                         nearestPos[LEFT_BTN] = deltaX;
                         mSurroundBtns[LEFT_BTN] = ui;
+                        MY_NN_LOG(LOG_DEBUG,
+                            "set [ %s ] to [ %s ] left\n",
+                            utcNameOther.c_str(), utcNameToAdd.c_str());
                     }
                     else
                     {
@@ -257,6 +269,9 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
                         {
                             nearestPos[LEFT_BTN] = deltaX;
                             mSurroundBtns[LEFT_BTN] = ui;
+                            MY_NN_LOG(LOG_DEBUG,
+                                "replace [ %s ] to [ %s ] left\n",
+                                utcNameOther.c_str(), utcNameToAdd.c_str());
                         }
                     }
                 }
@@ -270,6 +285,9 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
                         beginUpdate[DOWN_BTN] = true;
                         nearestPos[DOWN_BTN] = deltaY;
                         mSurroundBtns[DOWN_BTN] = ui;
+                        MY_NN_LOG(LOG_DEBUG,
+                            "set [ %s ] to [ %s ] down\n",
+                            utcNameOther.c_str(), utcNameToAdd.c_str());
                     }
                     else
                     {
@@ -277,6 +295,9 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
                         {
                             nearestPos[DOWN_BTN] = deltaY;
                             mSurroundBtns[DOWN_BTN] = ui;
+                            MY_NN_LOG(LOG_DEBUG,
+                                "replace [ %s ] to [ %s ] down\n",
+                                utcNameOther.c_str(), utcNameToAdd.c_str());
                         }
                     }
                 }
@@ -287,6 +308,9 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
                         beginUpdate[UP_BTN] = true;
                         nearestPos[UP_BTN] = deltaY;
                         mSurroundBtns[UP_BTN] = ui;
+                        MY_NN_LOG(LOG_DEBUG,
+                            "set [ %s ] to [ %s ] up\n",
+                            utcNameOther.c_str(), utcNameToAdd.c_str());
                     }
                     else
                     {
@@ -294,6 +318,9 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
                         {
                             nearestPos[UP_BTN] = deltaY;
                             mSurroundBtns[UP_BTN] = ui;
+                            MY_NN_LOG(LOG_DEBUG,
+                                "replace [ %s ] to [ %s ] up\n",
+                                utcNameOther.c_str(), utcNameToAdd.c_str());
                         }
                     }
                 }
@@ -302,6 +329,10 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
     }
     else
     {
+        MY_NN_LOG(LOG_DEBUG,
+            "start to work on replace of new obj [ %s ] and exist obj [ %s ]\n",
+            _toAddUi->GetObjectName().c_str(), 
+            GetUiObjOwner()->GetObjectName().c_str());
         utcNameToAdd = _toAddUi->GetObjectName() + "-transform";
         utcToAdd = (UTransformComponent*)(_toAddUi->GetUComponent(
             utcNameToAdd));
@@ -338,9 +369,9 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
                 if (mSurroundBtns[RIGHT_BTN])
                 {
                     utcOther = (UTransformComponent*)
-                        mSurroundBtns[RIGHT_BTN]->
+                        (mSurroundBtns[RIGHT_BTN]->
                         GetUComponent(mSurroundBtns[RIGHT_BTN]->
-                            GetObjectName() + "-transform");
+                            GetObjectName() + "-transform"));
                     if (!utcOther)
                     {
                         MY_NN_LOG(LOG_ERROR,
@@ -356,11 +387,18 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
                     if (deltaX < nowDeltaX)
                     {
                         mSurroundBtns[RIGHT_BTN] = _toAddUi;
+                        MY_NN_LOG(LOG_DEBUG,
+                            "set [ %s ] to [ %s ] right instead of [ %s ]\n",
+                            utcNameToAdd.c_str(), utcNameThis.c_str(),
+                            utcOther->GetComponentName().c_str());
                     }
                 }
                 else
                 {
                     mSurroundBtns[RIGHT_BTN] = _toAddUi;
+                    MY_NN_LOG(LOG_DEBUG,
+                        "set [ %s ] to [ %s ] right\n",
+                        utcNameToAdd.c_str(), utcNameThis.c_str());
                 }
             }
             else
@@ -368,9 +406,9 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
                 if (mSurroundBtns[LEFT_BTN])
                 {
                     utcOther = (UTransformComponent*)
-                        mSurroundBtns[LEFT_BTN]->
+                        (mSurroundBtns[LEFT_BTN]->
                         GetUComponent(mSurroundBtns[LEFT_BTN]->
-                            GetObjectName() + "-transform");
+                            GetObjectName() + "-transform"));
                     if (!utcOther)
                     {
                         MY_NN_LOG(LOG_ERROR,
@@ -386,11 +424,18 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
                     if (deltaX > nowDeltaX)
                     {
                         mSurroundBtns[LEFT_BTN] = _toAddUi;
+                        MY_NN_LOG(LOG_DEBUG,
+                            "set [ %s ] to [ %s ] left instead of [ %s ]\n",
+                            utcNameToAdd.c_str(), utcNameThis.c_str(),
+                            utcOther->GetComponentName().c_str());
                     }
                 }
                 else
                 {
                     mSurroundBtns[LEFT_BTN] = _toAddUi;
+                    MY_NN_LOG(LOG_DEBUG,
+                        "set [ %s ] to [ %s ] left\n",
+                        utcNameToAdd.c_str(), utcNameThis.c_str());
                 }
             }
         }
@@ -401,9 +446,9 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
                 if (mSurroundBtns[DOWN_BTN])
                 {
                     utcOther = (UTransformComponent*)
-                        mSurroundBtns[DOWN_BTN]->
+                        (mSurroundBtns[DOWN_BTN]->
                         GetUComponent(mSurroundBtns[DOWN_BTN]->
-                            GetObjectName() + "-transform");
+                            GetObjectName() + "-transform"));
                     if (!utcOther)
                     {
                         MY_NN_LOG(LOG_ERROR,
@@ -419,11 +464,18 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
                     if (deltaY < nowDeltaY)
                     {
                         mSurroundBtns[DOWN_BTN] = _toAddUi;
+                        MY_NN_LOG(LOG_DEBUG,
+                            "set [ %s ] to [ %s ] down instead of [ %s ]\n",
+                            utcNameToAdd.c_str(), utcNameThis.c_str(),
+                            utcOther->GetComponentName().c_str());
                     }
                 }
                 else
                 {
                     mSurroundBtns[DOWN_BTN] = _toAddUi;
+                    MY_NN_LOG(LOG_DEBUG,
+                        "set [ %s ] to [ %s ] down\n",
+                        utcNameToAdd.c_str(), utcNameThis.c_str());
                 }
             }
             else
@@ -431,9 +483,9 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
                 if (mSurroundBtns[UP_BTN])
                 {
                     utcOther = (UTransformComponent*)
-                        mSurroundBtns[UP_BTN]->
+                        (mSurroundBtns[UP_BTN]->
                         GetUComponent(mSurroundBtns[UP_BTN]->
-                            GetObjectName() + "-transform");
+                            GetObjectName() + "-transform"));
                     if (!utcOther)
                     {
                         MY_NN_LOG(LOG_ERROR,
@@ -449,11 +501,18 @@ void UBtnMapComponent::UpdateButtonMapWith(UiObject* _toAddUi)
                     if (deltaY > nowDeltaY)
                     {
                         mSurroundBtns[UP_BTN] = _toAddUi;
+                        MY_NN_LOG(LOG_DEBUG,
+                            "set [ %s ] to [ %s ] up instead of [ %s ]\n",
+                            utcNameToAdd.c_str(), utcNameThis.c_str(),
+                            utcOther->GetComponentName().c_str());
                     }
                 }
                 else
                 {
                     mSurroundBtns[UP_BTN] = _toAddUi;
+                    MY_NN_LOG(LOG_DEBUG,
+                        "set [ %s ] to [ %s ] up\n",
+                        utcNameToAdd.c_str(), utcNameThis.c_str());
                 }
             }
         }
