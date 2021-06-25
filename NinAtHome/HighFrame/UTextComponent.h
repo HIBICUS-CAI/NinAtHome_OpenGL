@@ -10,6 +10,12 @@
 #pragma once
 
 #include "UComponent.h"
+#include <unordered_map>
+
+#define MOJI_TEX_H_NUM  (19)
+#define MOJI_TEX_V_NUM  (10)
+#define MOJI_U          (1.f / (float)MOJI_TEX_H_NUM)
+#define MOJI_V          (1.f / (float)MOJI_TEX_V_NUM)
 
 class UTextComponent :
     public UComponent
@@ -50,4 +56,8 @@ private:
     Float2 mFontSize;
 
     Float4 mTextColor;
+
+    const char* mTextPtr;
+
+    std::unordered_map<std::string, Float3> mKanaUV;
 };

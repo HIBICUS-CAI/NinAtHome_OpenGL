@@ -17,9 +17,10 @@ UTextComponent::UTextComponent(std::string _name,
     UComponent(_name, _owner, _order), mTextString(""),
     mTextPosition(MakeFloat3(0.f, 0.f, 0.f)),
     mFontSize(MakeFloat2(0.f, 0.f)), mFontTexture(0),
-    mTextColor(MakeFloat4(1.f, 1.f, 1.f, 1.f))
+    mTextColor(MakeFloat4(1.f, 1.f, 1.f, 1.f)), mTextPtr(nullptr),
+    mKanaUV({})
 {
-
+    mKanaUV.clear();
 }
 
 UTextComponent::~UTextComponent()
@@ -29,12 +30,22 @@ UTextComponent::~UTextComponent()
 
 void UTextComponent::CompInit()
 {
-
+    // TODO add here
+    mKanaUV.insert(std::make_pair(
+        "あ", MakeFloat3(0.0f * MOJI_U, 5.0 * MOJI_V, 1.0f)));
+    mKanaUV.insert(std::make_pair(
+        "い", MakeFloat3(1.0f * MOJI_U, 5.0 * MOJI_V, 1.0f)));
+    mKanaUV.insert(std::make_pair(
+        "う", MakeFloat3(2.0f * MOJI_U, 5.0 * MOJI_V, 1.0f)));
+    mKanaUV.insert(std::make_pair(
+        "え", MakeFloat3(3.0f * MOJI_U, 5.0 * MOJI_V, 1.0f)));
+    mKanaUV.insert(std::make_pair(
+        "お", MakeFloat3(4.0f * MOJI_U, 5.0 * MOJI_V, 1.0f)));
 }
 
 void UTextComponent::CompUpdate(float _deltatime)
 {
-
+    mTextPtr = mTextString.c_str();
 }
 
 void UTextComponent::CompDestory()
@@ -77,15 +88,57 @@ void UTextComponent::SetTextColor(Float4 _color)
 
 void UTextComponent::DrawUText()
 {
-    // TEMP----------------------------
-    MY_NN_LOG(LOG_DEBUG, "draw this string [ %s ] \n",
-        mTextString.c_str());
-    MY_NN_LOG(LOG_DEBUG, "at position [ %f, %f, %f ] \n",
-        mTextPosition.x, mTextPosition.y, mTextPosition.z);
-    MY_NN_LOG(LOG_DEBUG, "with size [ %f, %f ] \n",
-        mFontSize.x, mFontSize.y);
-    MY_NN_LOG(LOG_DEBUG, "and color [ %f, %f, %f, %f ]\n",
-        mTextColor.x, mTextColor.y,
-        mTextColor.z, mTextColor.w);
-    // TEMP----------------------------
+    SetTexture(mFontTexture);
+    Float3 nowPosition = mTextPosition;
+
+    for (auto i = mTextString.length() - mTextString.length();
+        i < mTextString.length() + 1; i++)
+    {
+        if (mTextPtr[i] == '\0')
+        {
+            break;
+        }
+        else if (mTextPtr[i] == '\n')
+        {
+            nowPosition.x = mTextPosition.x;
+            nowPosition.y += mFontSize.y;
+            continue;
+        }
+        // TODO check kana here
+        /*else if (false)
+        {
+
+        }*/
+        else if (mTextPtr[i] >= 32 && mTextPtr[i] <= 126)
+        {
+            unsigned int index = mTextPtr[i] - 32;
+            Float2 uv = MakeFloat2(
+                (float)(index % MOJI_TEX_H_NUM) * MOJI_U,
+                (float)(index / MOJI_TEX_H_NUM) * MOJI_V);
+
+#ifdef NIN_AT_HOME
+            {
+                float zeroMove[16] =
+                {
+                    1.f,0.f,0.f,0.f,
+                    0.f,1.f,0.f,0.f,
+                    0.f,0.f,1.f,0.f,
+                    0.f,0.f,0.f,1.f
+                };
+                glUniformMatrix4fv(
+                    glGetUniformLocation(
+                        GetGlHelperPtr()->GetShaderID("default"),
+                        "uWorld"), 1, GL_TRUE, zeroMove);
+            }
+#else
+
+#endif // NIN_AT_HOME
+
+            DrawSprite(nowPosition.x, nowPosition.y,
+                mFontSize.x, mFontSize.y, uv.x, uv.y,
+                MOJI_U, MOJI_V, mTextColor);
+
+            nowPosition.x += mFontSize.x;
+        }
+    }
 }
