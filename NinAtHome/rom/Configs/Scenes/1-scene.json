@@ -309,7 +309,7 @@
                     "type": "text",
                     "update-order": 0,
                     "moji-path": "rom:/Assets/Textures/moji.tga",
-                    "init-text": "it's a great day, É¢ši¤·¤è¤¦",
+                    "init-text": "it's a great day, \n¤¢¤¤¤¦¤¨¤ª \nnice",
                     "init-size": [
                         30.0,
                         30.0

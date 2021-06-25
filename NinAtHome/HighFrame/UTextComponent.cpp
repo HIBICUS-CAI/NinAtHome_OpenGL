@@ -94,6 +94,18 @@ void UTextComponent::DrawUText()
     for (auto i = mTextString.length() - mTextString.length();
         i < mTextString.length() + 1; i++)
     {
+        std::string kana = "";
+        std::string null = "";
+        if ((i + 1) < (mTextString.length() + 1) &&
+            mTextPtr[i + 1] != '\0')
+        {
+            char kanaStr[3] = "";
+            kanaStr[0] = mTextPtr[i];
+            kanaStr[1] = mTextPtr[i + 1];
+            kanaStr[2] = '\0';
+            kana = kanaStr;
+        }
+
         if (mTextPtr[i] == '\0')
         {
             break;
@@ -104,12 +116,46 @@ void UTextComponent::DrawUText()
             nowPosition.y += mFontSize.y;
             continue;
         }
-        // TODO check kana here
-        /*else if (false)
+        else if (kana != null)
         {
+            if (mKanaUV.find(kana) != mKanaUV.end())
+            {
+                Float3 mojiData = mKanaUV[kana];
+                Float2 uv = MakeFloat2(mojiData.x, mojiData.y);
+                float sizeOffset = mojiData.z;
 
-        }*/
-        else if (mTextPtr[i] >= 32 && mTextPtr[i] <= 126)
+#ifdef NIN_AT_HOME
+                {
+                    float zeroMove[16] =
+                    {
+                        1.f,0.f,0.f,0.f,
+                        0.f,1.f,0.f,0.f,
+                        0.f,0.f,1.f,0.f,
+                        0.f,0.f,0.f,1.f
+                    };
+                    glUniformMatrix4fv(
+                        glGetUniformLocation(
+                            GetGlHelperPtr()->GetShaderID("default"),
+                            "uWorld"), 1, GL_TRUE, zeroMove);
+                }
+#else
+
+#endif // NIN_AT_HOME
+
+                DrawSprite(nowPosition.x, nowPosition.y,
+                    mFontSize.x * sizeOffset,
+                    mFontSize.y * sizeOffset,
+                    uv.x, uv.y,
+                    MOJI_U, MOJI_V, mTextColor);
+
+                ++i;
+                nowPosition.x += mFontSize.x * 2.f;
+
+                continue;
+            }
+        }
+
+        if (mTextPtr[i] >= 32 && mTextPtr[i] <= 126)
         {
             unsigned int index = mTextPtr[i] - 32;
             Float2 uv = MakeFloat2(
@@ -139,6 +185,12 @@ void UTextComponent::DrawUText()
                 MOJI_U, MOJI_V, mTextColor);
 
             nowPosition.x += mFontSize.x;
+        }
+        else
+        {
+            MY_NN_LOG(LOG_ERROR,
+                "cannot support this char or moji in [ %s ]\n",
+                mTextString.c_str());
         }
     }
 }
