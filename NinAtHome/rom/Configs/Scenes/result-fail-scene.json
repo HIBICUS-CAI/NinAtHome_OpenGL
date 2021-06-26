@@ -1,0 +1,214 @@
+{
+    "scene-name": "result-fail-scene",
+    "camera": [
+        0.0,
+        0.0,
+        1920.0,
+        1080.0
+    ],
+    "actor": [],
+    "ui": [
+        {
+            "ui-name": "background-ui",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/title_fail.tga",
+                    "texture-width": 1920.0,
+                    "texture-height": 1080.0
+                },
+                {
+                    "type": "text",
+                    "update-order": 0,
+                    "moji-path": "rom:/Assets/Textures/moji.tga",
+                    "init-text": "しっは＜い",
+                    "init-size": [
+                        100.0,
+                        100.0
+                    ],
+                    "init-position": [
+                        -550.0,
+                        -200.0,
+                        0.0
+                    ],
+                    "init-color": [
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0
+                    ]
+                }
+            ]
+        },
+        {
+            "ui-name": "retry-btn-ui",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        -400.0,
+                        200.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 400.0,
+                    "texture-height": 80.0
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "right": "title-btn-ui",
+                    "default-select": true
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "RetryBtnInput"
+                },
+                {
+                    "type": "text",
+                    "update-order": 0,
+                    "moji-path": "rom:/Assets/Textures/moji.tga",
+                    "init-text": "リトライ",
+                    "init-size": [
+                        50.0,
+                        50.0
+                    ],
+                    "init-position": [
+                        -500.0,
+                        200.0,
+                        0.0
+                    ],
+                    "init-color": [
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0
+                    ]
+                }
+            ]
+        },
+        {
+            "ui-name": "title-btn-ui",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        400.0,
+                        200.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -2,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 400.0,
+                    "texture-height": 80.0
+                },
+                {
+                    "type": "btnmap",
+                    "update-order": 0,
+                    "left": "retry-btn-ui",
+                    "default-select": false
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "TitleBtnInput"
+                },
+                {
+                    "type": "text",
+                    "update-order": 0,
+                    "moji-path": "rom:/Assets/Textures/moji.tga",
+                    "init-text": "タイトル",
+                    "init-size": [
+                        50.0,
+                        50.0
+                    ],
+                    "init-position": [
+                        300.0,
+                        200.0,
+                        0.0
+                    ],
+                    "init-color": [
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0
+                    ]
+                }
+            ]
+        }
+    ]
+}
