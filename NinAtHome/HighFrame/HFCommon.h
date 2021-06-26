@@ -11,7 +11,7 @@
 
 #include "main.h"
 
-#define APP_FPS (30)
+#define APP_FPS (60)
 #define MAX_DELTA (float)((double)1 / (double)APP_FPS)
 
 //#define SHOW_LOADING
