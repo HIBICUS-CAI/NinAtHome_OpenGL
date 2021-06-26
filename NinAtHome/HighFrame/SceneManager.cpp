@@ -14,7 +14,7 @@
 #include <thread>
 #include "controller.h"
 // TEMP--------------------
-static int g_scene = 1;
+//static int g_scene = 1;
 // TEMP--------------------
 
 SceneManager::SceneManager() :
@@ -47,10 +47,10 @@ void SceneManager::PostStartUp(PropertyManager* _pmPtr,
     LoadLoadingScene();
 
     // TEMP-------------------
-    g_scene = 0;
+    //g_scene = 0;
     LoadSceneNode(
-        "first-scene",
-        "rom:/Configs/Scenes/1-scene.json");
+        "title-scene",
+        "rom:/Configs/Scenes/title-scene.json");
     // TEMP-------------------
 }
 
@@ -101,33 +101,6 @@ void SceneManager::UpdateSceneManager(float _deltatime)
         mCurrentScenePtr = mNextScenePtr;
         mNextScenePtr = nullptr;
     }
-
-    // TEMP---------------------------
-    if (GetControllerTrigger(NpadButton::StickL::Index))
-    {
-        g_scene = (++g_scene) % 3;
-        std::string name = "";
-        std::string path = "";
-        switch (g_scene)
-        {
-        case 0:
-            name = "first-scene";
-            path = "rom:/Configs/Scenes/1-scene.json";
-            break;
-        case 1:
-            name = "second-scene";
-            path = "rom:/Configs/Scenes/2-scene.json";
-            break;
-        case 2:
-            name = "third-scene";
-            path = "rom:/Configs/Scenes/3-scene.json";
-            break;
-        default:
-            break;
-        }
-        LoadSceneNode(name, path);
-    }
-    // TEMP---------------------------
 
     mCurrentScenePtr->UpdateScene(_deltatime);
     mCurrentScenePtr->DrawScene();

@@ -17,6 +17,7 @@
 
 // TEMP---------------------------------------------
 #include "..\TempTest.h"
+#include "..\TitleStartBtn.h"
 // TEMP---------------------------------------------
 
 ObjectFactory::ObjectFactory() :
@@ -967,6 +968,10 @@ void ObjectFactory::AddUCompToUi(UiObject* _ui,
             else if (funcName == "TempUiInput")
             {
                 uic->SetInputProcessFunc(TempUiInput);
+            }
+            else if (funcName == "StartBtnInput")
+            {
+                uic->SetInputProcessFunc(StartBtnInput);
             }
             // TEMP----------------------------
         }

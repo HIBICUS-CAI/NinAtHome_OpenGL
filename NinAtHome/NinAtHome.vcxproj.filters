@@ -171,6 +171,9 @@
     <ClInclude Include="TempTest.h">
       <Filter>03_Temp</Filter>
     </ClInclude>
+    <ClInclude Include="TitleStartBtn.h">
+      <Filter>03_Temp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -276,6 +279,9 @@
       <Filter>02_HightFrame\Component</Filter>
     </ClCompile>
     <ClCompile Include="TempTest.cpp">
+      <Filter>03_Temp</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleStartBtn.cpp">
       <Filter>03_Temp</Filter>
     </ClCompile>
   </ItemGroup>
