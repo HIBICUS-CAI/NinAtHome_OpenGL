@@ -1,7 +1,7 @@
-//---------------------------------------------------------------
+Ôªø//---------------------------------------------------------------
 // File: UTransformComponent.cpp
 // Proj: NinAtHome
-// Info: UI•™•÷•∏•ß•Ø•»§ÀÑ”§ØŒª÷√§ÀÈv§∑§∆§Œ•≥•Û•›©`•Õ•Û•»
+// Info: UI„Ç™„Éñ„Ç∏„Çß„ÇØ„Éà„Å´Âãï„Åè‰ΩçÁΩÆ„Å´Èñ¢„Åó„Å¶„ÅÆ„Ç≥„É≥„Éù„Éº„Éç„É≥„Éà
 // Date: 2021.06.10
 // Mail: cai_genkan@outlook.com
 // Comt: NULL
@@ -9,12 +9,16 @@
 
 #include "UTransformComponent.h"
 #include "UiObject.h"
+#ifndef NIN_AT_HOME
+#include <TP\glm\glm.hpp>
+#include <TP\glm\gtc\type_ptr.hpp>
+#endif // !NIN_AT_HOME
 
 UTransformComponent::UTransformComponent(std::string _name,
     UiObject* _owner, int _order, Float3 _initValue) :
     UComponent(_name, _owner, _order),
     mPosition(_initValue), mRotation(_initValue),
-    mScale(MakeFloat3(1.f, 1.f, 1.f)), mWorldMatrix({})
+    mScale(MakeFloat3(1.f, 1.f, 1.f)), mWorldMatrix(Matrix4x4f())
 {
 
 }
@@ -114,7 +118,9 @@ void UTransformComponent::Translate(Float3 _pos)
         }
     }
 
-    mPosition += _pos;
+    mPosition.x += _pos.x;
+    mPosition.y += _pos.y;
+    mPosition.z += _pos.z;
 }
 
 void UTransformComponent::TranslateXAsix(float _posx)
@@ -286,7 +292,9 @@ void UTransformComponent::Rotate(Float3 _angle)
         }
     }
 
-    mRotation += _angle;
+    mRotation.x += _angle.x;
+    mRotation.y += _angle.y;
+    mRotation.z += _angle.z;
 }
 
 void UTransformComponent::RotateXAsix(float _anglex)
@@ -458,7 +466,9 @@ void UTransformComponent::Scale(Float3 _factor)
         }
     }
 
-    mScale *= _factor;
+    mScale.x *= _factor.x;
+    mScale.y *= _factor.y;
+    mScale.z *= _factor.z;
 }
 
 void UTransformComponent::Scale(float _factor)
@@ -655,6 +665,28 @@ void UTransformComponent::UpdateWorldMatrix()
         glm::radians(mRotation.z), Float3(0.f, 0.f, 1.f));
     mWorldMatrix = glm::scale(mWorldMatrix, mScale);
 #else
-
+    glm::fmat4x4 world =
+    {
+        1.f, 0.f, 0.f, 0.f,
+        0.f, 1.f, 0.f, 0.f,
+        0.f, 0.f, 1.f, 0.f,
+        0.f, 0.f, 0.f, 1.f
+    };
+    world = glm::translate(world, mPosition);
+    world = glm::rotate(world,
+        glm::radians(mRotation.x), Float3(1.f, 0.f, 0.f));
+    world = glm::rotate(world,
+        glm::radians(mRotation.y), Float3(0.f, 1.f, 0.f));
+    world = glm::rotate(world,
+        glm::radians(mRotation.z), Float3(0.f, 0.f, 1.f));
+    world = glm::scale(world, mScale);
+    float* matArray = glm::value_ptr(world);
+    mWorldMatrix =
+    {
+        matArray[0],matArray[1],matArray[2],matArray[3],
+        matArray[4],matArray[5],matArray[6],matArray[7],
+        matArray[8],matArray[9],matArray[10],matArray[11],
+        matArray[12],matArray[13],matArray[14],matArray[15]
+    };
 #endif // NIN_AT_HOME
 }

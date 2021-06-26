@@ -9,3 +9,6 @@
 3. component's name:
     [owner's name]-[component type]
     example : test-actor-sprite hp-bar-ui-transform
+
+4. if kana in json:
+    use gb 2312!!!(or shift jis?)

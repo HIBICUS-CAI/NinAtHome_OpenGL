@@ -1,7 +1,7 @@
-//---------------------------------------------------------------
+ï»¿//---------------------------------------------------------------
 // File: USpriteComponent.cpp
 // Proj: NinAtHome
-// Info: UI¥ª¥Ö¥¸¥§¥¯¥È¤Ë¥¹¥×¥é¥¤¥È¤Ëév¤·¤Æ¤Î¥³¥ó¥Ý©`¥Í¥ó¥È
+// Info: UIã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã«é–¢ã—ã¦ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 // Date: 2021.06.10
 // Mail: cai_genkan@outlook.com
 // Comt: NULL
@@ -17,8 +17,8 @@
 USpriteComponent::USpriteComponent(std::string _name,
     UiObject* _owner, int _order, int _drawOrder) :
     UComponent(_name, _owner, _order), mDrawOrder(_drawOrder),
-    mTexture(0), mOffsetColor({ 1.f,1.f,1.f,1.f }), mVisible(true),
-    mTexWidth(0), mTexHeight(0)
+    mTexture(0), mOffsetColor(MakeFloat4(1.f, 1.f, 1.f, 1.f)),
+    mVisible(true), mTexWidth(0), mTexHeight(0)
 {
 
 }
@@ -165,7 +165,16 @@ void USpriteComponent::DrawUSprite()
                 "uWorld"), 1, GL_TRUE, pworld);
     }
 #else
-
+    {
+        Matrix4x4f world = ((UTransformComponent*)transcomp)->
+            GetWorldMatrix();
+        Float4x4 pworld = Float4x4();
+        MatrixStore(&pworld, world);
+        glUniformMatrix4fv(
+            glGetUniformLocation(
+                GetShaderProgramId(),
+                "uWorld"), 1, GL_TRUE, (float*)&pworld);
+    }
 #endif // NIN_AT_HOME
 
     SetTexture(mTexture);

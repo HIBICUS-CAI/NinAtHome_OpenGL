@@ -3,6 +3,7 @@
 #include "TP\rapidjson\document.h"
 #include "TP\rapidjson\istreamwrapper.h"
 #include "TP\rapidjson\pointer.h"
+#include "TP\rapidjson\filereadstream.h"
 #include <fstream>
 #include <string>
 

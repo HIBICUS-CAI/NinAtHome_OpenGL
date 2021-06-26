@@ -1,7 +1,7 @@
-//---------------------------------------------------------------
+ï»¿//---------------------------------------------------------------
 // File: ACollisionComponent.cpp
 // Proj: NinAtHome
-// Info: ACTOR¥ª¥Ö¥¸¥§¥¯¥È¤Ë¤¢¤¿¤ëÅÐ¶¨¤Ëév¤·¤Æ¤Î¥³¥ó¥Ý©`¥Í¥ó¥È
+// Info: ACTORã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã‚ãŸã‚‹åˆ¤å®šã«é–¢ã—ã¦ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 // Date: 2021.06.11
 // Mail: cai_genkan@outlook.com
 // Comt: NULL
@@ -20,9 +20,9 @@ ACollisionComponent::ACollisionComponent(std::string _name,
     ActorObject* _owner, int _order) :
     AComponent(_name, _owner, _order),
     mCollisionType(COLLISION_TYPE::NULLTYPE),
-    mCollisionSize({ 0.f,0.f }), mShowCollisionFlg(false),
+    mCollisionSize(MakeFloat2(0.f, 0.f)), mShowCollisionFlg(false),
     mCircleTexture(0), mRectangleTexture(0),
-    mColliedColor({ 1.f,1.f,1.f,1.f })
+    mColliedColor(MakeFloat4(1.f, 1.f, 1.f, 1.f))
 {
 
 }
@@ -107,7 +107,7 @@ void ACollisionComponent::DrawACollision()
     if (mShowCollisionFlg)
     {
         ATransformComponent* thisAtc = nullptr;
-        Float4x4 pworld = {};
+        Float4x4 pworld = Float4x4();
         {
             std::string keywordThisT = "";
             keywordThisT = GetActorObjOwner()->GetObjectName() +
@@ -125,10 +125,17 @@ void ACollisionComponent::DrawACollision()
             MatrixStore(&pworld, world);
         }
 
+#ifdef NIN_AT_HOME
         glUniformMatrix4fv(
             glGetUniformLocation(
                 GetGlHelperPtr()->GetShaderID("default"),
                 "uWorld"), 1, GL_TRUE, pworld);
+#else
+        glUniformMatrix4fv(
+            glGetUniformLocation(
+                GetShaderProgramId(),
+                "uWorld"), 1, GL_TRUE, (float*)&pworld);
+#endif // NIN_AT_HOME
 
         switch (mCollisionType)
         {
@@ -425,7 +432,11 @@ bool ACollisionComponent::ClacR2R(
     float deltaSHh = _thisSize.y / 2.f + _thatSize.y / 2.f;
     float deltaLengthSq = 0.f;
     {
-        Float3 deltaPos = _thatPos - _thisPos;
+        Float3 deltaPos = MakeFloat3(
+            _thatPos.x - _thisPos.x,
+            _thatPos.y - _thisPos.y,
+            _thatPos.z - _thisPos.z);
+
         deltaLengthSq =
             deltaPos.x * deltaPos.x + deltaPos.y * deltaPos.y;
     }

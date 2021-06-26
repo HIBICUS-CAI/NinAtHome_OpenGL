@@ -1,7 +1,7 @@
-//---------------------------------------------------------------
+ï»¿//---------------------------------------------------------------
 // File: RootSystem.cpp
 // Proj: NinAtHome
-// Info: ¥·¥¹¥Æ¥à¤òÈ«ÌåµÄ¤Ë¹ÜÀí¤¹¤ë
+// Info: ã‚·ã‚¹ãƒ†ãƒ ã‚’å…¨ä½“çš„ã«ç®¡ç†ã™ã‚‹
 // Date: 2021.06.09
 // Mail: cai_genkan@outlook.com
 // Comt: NULL
@@ -116,7 +116,14 @@ void RootSystem::RunGameLoop()
 
 void RootSystem::SwapAndClacDeltaTime()
 {
-    float time = SwapBuffers();
+    float time = 0.f;
+#ifdef NIN_AT_HOME
+    time = SwapBuffers();
+#else
+    SwapBuffers();
+    nn::os::Tick t = nn::os::GetSystemTick();
+    time = (float)(t.ToTimeSpan().GetMilliSeconds()) / 1000.f;
+#endif // NIN_AT_HOME
     mDeltaTime = time - mLastTime;
     mLastTime = time;
     time = MAX_DELTA - mDeltaTime;
@@ -125,7 +132,11 @@ void RootSystem::SwapAndClacDeltaTime()
     if (time > 0.001f)
     {
         mLastTime += time;
+#ifdef NIN_AT_HOME
         Sleep((int)(1000.f * time));
+#else
+
+#endif // NIN_AT_HOME
         mDeltaTime = MAX_DELTA;
     }
     else if (time < 0.f)

@@ -1,7 +1,7 @@
-//---------------------------------------------------------------
+Ôªø//---------------------------------------------------------------
 // File: UTextComponent.cpp
 // Proj: NinAtHome
-// Info: UI•™•÷•∏•ß•Ø•»§ÀŒƒ◊÷±Ì æ§ÀÈv§∑§∆§Œ•≥•Û•›©`•Õ•Û•»
+// Info: UI„Ç™„Éñ„Ç∏„Çß„ÇØ„Éà„Å´ÊñáÂ≠óË°®Á§∫„Å´Èñ¢„Åó„Å¶„ÅÆ„Ç≥„É≥„Éù„Éº„Éç„É≥„Éà
 // Date: 2021.06.10
 // Mail: cai_genkan@outlook.com
 // Comt: NULL
@@ -11,6 +11,7 @@
 #include "UiObject.h"
 #include "texture.h"
 #include "sprite.h"
+#include "json.h"
 
 UTextComponent::UTextComponent(std::string _name,
     UiObject* _owner, int _order) :
@@ -22,264 +23,17 @@ UTextComponent::UTextComponent(std::string _name,
 {
     mKanaUV.clear();
 
-    mKanaUV.insert(std::make_pair(
-        "§¢", MakeFloat3(0.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§§", MakeFloat3(1.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§¶", MakeFloat3(2.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§®", MakeFloat3(3.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§™", MakeFloat3(4.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "§´", MakeFloat3(5.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§≠", MakeFloat3(6.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§Ø", MakeFloat3(7.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§±", MakeFloat3(8.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§≥", MakeFloat3(9.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "§µ", MakeFloat3(10.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§∑", MakeFloat3(11.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§π", MakeFloat3(12.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§ª", MakeFloat3(13.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§Ω", MakeFloat3(14.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "§ø", MakeFloat3(15.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§¡", MakeFloat3(16.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§ƒ", MakeFloat3(17.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§∆", MakeFloat3(18.0f * MOJI_U, 5.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§»", MakeFloat3(0.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "§ ", MakeFloat3(1.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§À", MakeFloat3(2.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§Ã", MakeFloat3(3.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§Õ", MakeFloat3(4.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§Œ", MakeFloat3(5.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "§œ", MakeFloat3(6.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§“", MakeFloat3(7.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§’", MakeFloat3(8.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§ÿ", MakeFloat3(9.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§€", MakeFloat3(10.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "§ﬁ", MakeFloat3(11.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§ﬂ", MakeFloat3(12.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§‡", MakeFloat3(13.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§·", MakeFloat3(14.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§‚", MakeFloat3(15.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "§‰", MakeFloat3(16.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§Ê", MakeFloat3(17.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§Ë", MakeFloat3(18.0f * MOJI_U, 6.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "§È", MakeFloat3(0.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§Í", MakeFloat3(1.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§Î", MakeFloat3(2.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§Ï", MakeFloat3(3.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§Ì", MakeFloat3(4.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "§Ô", MakeFloat3(5.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§Ú", MakeFloat3(6.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "§Û", MakeFloat3(7.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "•¢", MakeFloat3(8.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•§", MakeFloat3(9.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•¶", MakeFloat3(10.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•®", MakeFloat3(11.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•™", MakeFloat3(12.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "•´", MakeFloat3(13.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•≠", MakeFloat3(14.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•Ø", MakeFloat3(15.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•±", MakeFloat3(16.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•≥", MakeFloat3(17.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "•µ", MakeFloat3(18.0f * MOJI_U, 7.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•∑", MakeFloat3(0.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•π", MakeFloat3(1.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•ª", MakeFloat3(2.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•Ω", MakeFloat3(3.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "•ø", MakeFloat3(4.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•¡", MakeFloat3(5.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•ƒ", MakeFloat3(6.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•∆", MakeFloat3(7.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•»", MakeFloat3(8.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "• ", MakeFloat3(9.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "∂˛", MakeFloat3(10.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•Ã", MakeFloat3(11.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•Õ", MakeFloat3(12.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•Œ", MakeFloat3(13.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "•œ", MakeFloat3(14.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•“", MakeFloat3(15.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•’", MakeFloat3(16.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•ÿ", MakeFloat3(17.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•€", MakeFloat3(18.0f * MOJI_U, 8.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "•ﬁ", MakeFloat3(0.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•ﬂ", MakeFloat3(1.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•‡", MakeFloat3(2.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•·", MakeFloat3(3.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•‚", MakeFloat3(4.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "•‰", MakeFloat3(5.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•Ê", MakeFloat3(6.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•Ë", MakeFloat3(7.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "•È", MakeFloat3(8.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•Í", MakeFloat3(9.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•Î", MakeFloat3(10.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•Ï", MakeFloat3(11.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•Ì", MakeFloat3(12.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "•Ô", MakeFloat3(13.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•Ú", MakeFloat3(14.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "•Û", MakeFloat3(15.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "©`", MakeFloat3(16.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "°„", MakeFloat3(17.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-    mKanaUV.insert(std::make_pair(
-        "©a", MakeFloat3(18.0f * MOJI_U, 9.0f * MOJI_V, 1.0f)));
-
-    mKanaUV.insert(std::make_pair(
-        "§°", MakeFloat3(0.0f * MOJI_U, 5.0f * MOJI_V, 0.7f)));
-    mKanaUV.insert(std::make_pair(
-        "§£", MakeFloat3(1.0f * MOJI_U, 5.0f * MOJI_V, 0.7f)));
-    mKanaUV.insert(std::make_pair(
-        "§•", MakeFloat3(2.0f * MOJI_U, 5.0f * MOJI_V, 0.7f)));
-    mKanaUV.insert(std::make_pair(
-        "§ß", MakeFloat3(3.0f * MOJI_U, 5.0f * MOJI_V, 0.7f)));
-    mKanaUV.insert(std::make_pair(
-        "§©", MakeFloat3(4.0f * MOJI_U, 5.0f * MOJI_V, 0.7f)));
-
-    mKanaUV.insert(std::make_pair(
-        "§√", MakeFloat3(17.0f * MOJI_U, 5.0f * MOJI_V, 0.7f)));
-
-    mKanaUV.insert(std::make_pair(
-        "§„", MakeFloat3(16.0f * MOJI_U, 6.0f * MOJI_V, 0.7f)));
-    mKanaUV.insert(std::make_pair(
-        "§Â", MakeFloat3(17.0f * MOJI_U, 6.0f * MOJI_V, 0.7f)));
-    mKanaUV.insert(std::make_pair(
-        "§Á", MakeFloat3(18.0f * MOJI_U, 6.0f * MOJI_V, 0.7f)));
-
-    mKanaUV.insert(std::make_pair(
-        "§Ó", MakeFloat3(5.0f * MOJI_U, 7.0f * MOJI_V, 0.7f)));
-
-    mKanaUV.insert(std::make_pair(
-        "•°", MakeFloat3(0.0f * MOJI_U, 5.0f * MOJI_V, 0.7f)));
-    mKanaUV.insert(std::make_pair(
-        "•£", MakeFloat3(1.0f * MOJI_U, 5.0f * MOJI_V, 0.7f)));
-    mKanaUV.insert(std::make_pair(
-        "••", MakeFloat3(2.0f * MOJI_U, 5.0f * MOJI_V, 0.7f)));
-    mKanaUV.insert(std::make_pair(
-        "•ß", MakeFloat3(3.0f * MOJI_U, 5.0f * MOJI_V, 0.7f)));
-    mKanaUV.insert(std::make_pair(
-        "•©", MakeFloat3(4.0f * MOJI_U, 5.0f * MOJI_V, 0.7f)));
-
-    mKanaUV.insert(std::make_pair(
-        "•√", MakeFloat3(17.0f * MOJI_U, 5.0f * MOJI_V, 0.7f)));
-
-    mKanaUV.insert(std::make_pair(
-        "•„", MakeFloat3(16.0f * MOJI_U, 6.0f * MOJI_V, 0.7f)));
-    mKanaUV.insert(std::make_pair(
-        "•Â", MakeFloat3(17.0f * MOJI_U, 6.0f * MOJI_V, 0.7f)));
-    mKanaUV.insert(std::make_pair(
-        "•Á", MakeFloat3(18.0f * MOJI_U, 6.0f * MOJI_V, 0.7f)));
-
-    mKanaUV.insert(std::make_pair(
-        "•Ó", MakeFloat3(5.0f * MOJI_U, 7.0f * MOJI_V, 0.7f)));
+    JsonFile moji = {};
+    LoadJsonFile(&moji, "rom:/Configs/moji.json");
+    for (unsigned int i = 0; i < moji["moji"].Size(); i++)
+    {
+        mKanaUV.insert(std::make_pair(
+            moji["moji"][i]["kana"].GetString(),
+            MakeFloat3(
+                moji["moji"][i]["start"][0].GetFloat() * MOJI_U,
+                moji["moji"][i]["start"][1].GetFloat() * MOJI_V,
+                moji["moji"][i]["size"].GetFloat())));
+    }
 }
 
 UTextComponent::~UTextComponent()
@@ -388,7 +142,19 @@ void UTextComponent::DrawUText()
                             "uWorld"), 1, GL_TRUE, zeroMove);
                 }
 #else
-
+                {
+                    float zeroMove[16] =
+                    {
+                        1.f,0.f,0.f,0.f,
+                        0.f,1.f,0.f,0.f,
+                        0.f,0.f,1.f,0.f,
+                        0.f,0.f,0.f,1.f
+                    };
+                    glUniformMatrix4fv(
+                        glGetUniformLocation(
+                            GetShaderProgramId(),
+                            "uWorld"), 1, GL_TRUE, zeroMove);
+                }
 #endif // NIN_AT_HOME
 
                 DrawSprite(nowPosition.x, nowPosition.y,
@@ -426,7 +192,19 @@ void UTextComponent::DrawUText()
                         "uWorld"), 1, GL_TRUE, zeroMove);
             }
 #else
-
+            {
+                float zeroMove[16] =
+                {
+                    1.f,0.f,0.f,0.f,
+                    0.f,1.f,0.f,0.f,
+                    0.f,0.f,1.f,0.f,
+                    0.f,0.f,0.f,1.f
+                };
+                glUniformMatrix4fv(
+                    glGetUniformLocation(
+                        GetShaderProgramId(),
+                        "uWorld"), 1, GL_TRUE, zeroMove);
+            }
 #endif // NIN_AT_HOME
 
             DrawSprite(nowPosition.x, nowPosition.y,

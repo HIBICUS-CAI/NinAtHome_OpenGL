@@ -1,7 +1,7 @@
-//---------------------------------------------------------------
+﻿//---------------------------------------------------------------
 // File: ATimerComponent.cpp
 // Proj: NinAtHome
-// Info: ACTOR���֥������Ȥ˕r�g�y�����v���ƤΥ���ݩ`�ͥ��
+// Info: ACTORオブジェクトに時間測定に関してのコンポーネント
 // Date: 2021.06.11
 // Mail: cai_genkan@outlook.com
 // Comt: NULL
