@@ -1,5 +1,7 @@
 #pragma once
 
+#include "SceneManager.h"
+#include "SceneNode.h"
 #include "UiObject.h"
 #include "UBtnMapComponent.h"
 #include "UInputComponent.h"

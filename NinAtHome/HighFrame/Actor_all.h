@@ -1,5 +1,7 @@
 #pragma once
 
+#include "SceneManager.h"
+#include "SceneNode.h"
 #include "ActorObject.h"
 #include "AAnimateComponent.h"
 #include "ACollisionComponent.h"

@@ -40,6 +40,9 @@
     <Filter Include="02_HightFrame\Factory">
       <UniqueIdentifier>{7827a381-76e9-4229-a68d-b6a0711f6a2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03_Temp">
+      <UniqueIdentifier>{0a9c2781-1bbd-40c2-8f3e-86b0b7e7688c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicInit_LowLevel\main.h">
@@ -165,6 +168,9 @@
     <ClInclude Include="HighFrame\Ui_all.h">
       <Filter>02_HightFrame\Common</Filter>
     </ClInclude>
+    <ClInclude Include="TempTest.h">
+      <Filter>03_Temp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -268,6 +274,9 @@
     </ClCompile>
     <ClCompile Include="HighFrame\AAnimateComponent.cpp">
       <Filter>02_HightFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="TempTest.cpp">
+      <Filter>03_Temp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
