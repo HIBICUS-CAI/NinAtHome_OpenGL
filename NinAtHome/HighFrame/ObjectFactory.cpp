@@ -198,6 +198,9 @@ void TempMove(AInputComponent* _aic, float _deltatime)
             ((ATransformComponent*)(owner->
                 GetAComponent("test-transform")))->
                 TranslateXAsix(-200.f * _deltatime);
+            owner->GetSceneNodePtr()->GetCamera()->
+                TranslateCameraPos(MakeFloat2(
+                    -200.f * _deltatime, 0.f));
         }
     }
     if (GetControllerPress(NpadButton::StickLRight::Index))
@@ -207,6 +210,9 @@ void TempMove(AInputComponent* _aic, float _deltatime)
             ((ATransformComponent*)(owner->
                 GetAComponent("test-transform")))->
                 TranslateXAsix(200.f * _deltatime);
+            owner->GetSceneNodePtr()->GetCamera()->
+                TranslateCameraPos(MakeFloat2(
+                    200.f * _deltatime, 0.f));
         }
     }
     if (GetControllerPress(NpadButton::StickLUp::Index))
@@ -216,6 +222,9 @@ void TempMove(AInputComponent* _aic, float _deltatime)
             ((ATransformComponent*)(owner->
                 GetAComponent("test-transform")))->
                 TranslateYAsix(-200.f * _deltatime);
+            owner->GetSceneNodePtr()->GetCamera()->
+                TranslateCameraPos(MakeFloat2(
+                    0.f, -200.f * _deltatime));
         }
     }
     if (GetControllerPress(NpadButton::StickLDown::Index))
@@ -225,6 +234,9 @@ void TempMove(AInputComponent* _aic, float _deltatime)
             ((ATransformComponent*)(owner->
                 GetAComponent("test-transform")))->
                 TranslateYAsix(200.f * _deltatime);
+            owner->GetSceneNodePtr()->GetCamera()->
+                TranslateCameraPos(MakeFloat2(
+                    0.f, 200.f * _deltatime));
         }
     }
 }
@@ -279,6 +291,19 @@ SceneNode* ObjectFactory::CreateNewScene(std::string _name,
         return nullptr;
     }
     SceneNode* node = new SceneNode(_name, mSceneManagerPtr);
+    node->InitCamera(
+        MakeFloat2(0.f, 0.f), MakeFloat2(1920.f, 1080.f));
+
+    if (config.HasMember("camera") && config["actor"].Size() == 4)
+    {
+        node->InitCamera(
+            MakeFloat2(
+                config["camera"][0].GetFloat(),
+                config["camera"][1].GetFloat()),
+            MakeFloat2(
+                config["camera"][2].GetFloat(),
+                config["camera"][3].GetFloat()));
+    }
 
     if (config.HasMember("actor") &&
         !config["actor"].IsNull() && config["actor"].Size())

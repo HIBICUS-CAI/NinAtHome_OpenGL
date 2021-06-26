@@ -60,8 +60,6 @@ public:
 
     class Camera* GetCamera() const;
 
-    Float4x4 GetCameraMat() const;
-
 private:
     void InitAllNewObjects();
 
@@ -105,27 +103,16 @@ public:
     Camera(Float2 _pos, Float2 _size);
     ~Camera();
 
-    void CheckMatUpdate();
+    void ResetCameraPos(Float2 _pos);
 
     void TranslateCameraPos(Float2 _deltaPos);
 
     void ChangeCameraSize(Float2 _size);
 
-private:
-    void CalcViewMat();
-
-    void CalcOPMat();
+    Float3 GetRelativePosWithCam(Float3 _absolutePos);
 
 private:
     Float2 mCameraPosition;
 
     Float2 mCameraSize;
-
-    Float4x4 mViewMat;
-
-    Float4x4 mOPMat;
-
-    bool mViewMatDirtyFlg;
-
-    bool mOPMatDirtyFlg;
 };

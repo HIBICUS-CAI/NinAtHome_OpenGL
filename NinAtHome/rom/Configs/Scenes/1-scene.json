@@ -1,5 +1,11 @@
 {
     "scene-name": "first-scene",
+    "camera": [
+        0.0,
+        0.0,
+        1920.0,
+        1080.0
+    ],
     "actor": [
         {
             "actor-name": "test",

@@ -9,6 +9,7 @@
 
 #include "ATransformComponent.h"
 #include "ActorObject.h"
+#include "SceneNode.h"
 #ifndef NIN_AT_HOME
 #include <TP\glm\glm.hpp>
 #include <TP\glm\gtc\type_ptr.hpp>
@@ -656,8 +657,12 @@ void ATransformComponent::UpdateWorldMatrix()
         0.f, 0.f, 0.f, 1.f
     };
 
+    Float3 relative = MakeFloat3(0.f, 0.f, 0.f);
+    relative = GetActorObjOwner()->GetSceneNodePtr()->
+        GetCamera()->GetRelativePosWithCam(mPosition);
+
 #ifdef NIN_AT_HOME
-    mWorldMatrix = glm::translate(mWorldMatrix, mPosition);
+    mWorldMatrix = glm::translate(mWorldMatrix, relative);
     mWorldMatrix = glm::rotate(mWorldMatrix,
         glm::radians(mRotation.x), Float3(1.f, 0.f, 0.f));
     mWorldMatrix = glm::rotate(mWorldMatrix,

@@ -306,13 +306,6 @@ Camera* SceneNode::GetCamera() const
     return mCamera;
 }
 
-Float4x4 SceneNode::GetCameraMat() const
-{
-    // TEMP-------------------
-    return nullptr;
-    // TEMP-------------------
-}
-
 void SceneNode::InitAllNewObjects()
 {
     while (!mNewActorObjectsArray.empty())
@@ -434,9 +427,7 @@ void SceneNode::DestoryAllRetiredObjects()
 }
 
 Camera::Camera(Float2 _pos, Float2 _size) :
-    mCameraPosition(_pos), mCameraSize(_size),
-    mViewMat(nullptr), mOPMat(nullptr),
-    mViewMatDirtyFlg(true), mOPMatDirtyFlg(true)
+    mCameraPosition(_pos), mCameraSize(_size)
 {
 
 }
@@ -446,27 +437,28 @@ Camera::~Camera()
 
 }
 
-void Camera::CheckMatUpdate()
+void Camera::ResetCameraPos(Float2 _pos)
 {
-
+    mCameraPosition = _pos;
 }
 
 void Camera::TranslateCameraPos(Float2 _deltaPos)
 {
-
+    mCameraPosition.x += _deltaPos.x;
+    mCameraPosition.y += _deltaPos.y;
 }
 
 void Camera::ChangeCameraSize(Float2 _size)
 {
-
+    mCameraSize = _size;
 }
 
-void Camera::CalcViewMat()
+Float3 Camera::GetRelativePosWithCam(Float3 _absolutePos)
 {
+    Float3 relative = MakeFloat3(0.f, 0.f, 0.f);
+    relative.x = _absolutePos.x - mCameraPosition.x;
+    relative.y = _absolutePos.y - mCameraPosition.y;
+    relative.z = _absolutePos.z;
 
-}
-
-void Camera::CalcOPMat()
-{
-
+    return relative;
 }
