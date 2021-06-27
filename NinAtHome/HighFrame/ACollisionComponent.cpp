@@ -430,18 +430,14 @@ bool ACollisionComponent::ClacR2R(
 {
     float deltaSWh = _thisSize.x / 2.f + _thatSize.x / 2.f;
     float deltaSHh = _thisSize.y / 2.f + _thatSize.y / 2.f;
-    float deltaLengthSq = 0.f;
-    {
-        Float3 deltaPos = MakeFloat3(
-            _thatPos.x - _thisPos.x,
-            _thatPos.y - _thisPos.y,
-            _thatPos.z - _thisPos.z);
+    Float3 deltaPos = MakeFloat3(
+        _thatPos.x - _thisPos.x,
+        _thatPos.y - _thisPos.y,
+        _thatPos.z - _thisPos.z);
+    float deltaX = (deltaPos.x > 0 ? deltaPos.x : -deltaPos.x);
+    float deltaY = (deltaPos.y > 0 ? deltaPos.y : -deltaPos.y);
 
-        deltaLengthSq =
-            deltaPos.x * deltaPos.x + deltaPos.y * deltaPos.y;
-    }
-
-    if (deltaSWh * deltaSWh + deltaSHh * deltaSHh > deltaLengthSq)
+    if (deltaX < deltaSWh && deltaY < deltaSHh)
     {
         return true;
     }

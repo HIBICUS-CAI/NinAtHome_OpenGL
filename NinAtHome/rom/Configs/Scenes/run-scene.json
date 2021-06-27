@@ -39,7 +39,7 @@
                 {
                     "type": "sprite",
                     "update-order": 0,
-                    "draw-order": 0,
+                    "draw-order": -5,
                     "texture-path": "rom:/Assets/Textures/run_bg.tga",
                     "texture-width": 20000.0,
                     "texture-height": 1080.0
@@ -48,6 +48,55 @@
                     "type": "input",
                     "update-order": 0,
                     "func-name": "HiddenCommandInput"
+                }
+            ]
+        },
+        {
+            "actor-name": "midland-1-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        0.0,
+                        470.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -1,
+                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-width": 350.0,
+                    "texture-height": 70.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        350.0,
+                        70.0
+                    ],
+                    "show-flag": true
                 }
             ]
         },
@@ -87,6 +136,16 @@
                     "texture-path": "rom:/Assets/Textures/player.tga",
                     "texture-width": 72.0,
                     "texture-height": 97.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        46.0,
+                        97.0
+                    ],
+                    "show-flag": true
                 },
                 {
                     "type": "animate",
