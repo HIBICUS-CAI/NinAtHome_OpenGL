@@ -112,24 +112,38 @@ void RunnerInit(AInteractionComponent* _aitc)
     g_HVel = 300.f;
 }
 
-void CheckWithLand(ActorObject* _runner, ActorObject* _land,
+bool CheckWithLand(ActorObject* _runner, ActorObject* _land,
     float _deltatime)
 {
     if (!_land)
     {
-        return;
+        return false;
     }
+
+    bool shouldFall = true;
+
+    std::string landTransName = _land->GetObjectName() +
+        "-transform";
 
     bool canStand = false;
     float deltaX = 0.f;
+    float deltaY = 0.f;
     {
         float thisX = ((ATransformComponent*)(_runner->
             GetAComponent("runner-actor-transform")))->
             GetPosition().x;
         float thatX = ((ATransformComponent*)(_land->
-            GetAComponent("midland-1-actor-transform")))->
-            GetPosition().x;
+            GetAComponent(landTransName)))->GetPosition().x;
         deltaX = thisX - thatX;
+
+        float thatY = ((ATransformComponent*)(_runner->
+            GetAComponent("runner-actor-transform")))->
+            GetPosition().y;
+        float thisY = ((ATransformComponent*)(_land->
+            GetAComponent(landTransName)))->GetPosition().y;
+        deltaY = thisY - thatY;
+        deltaY -= 84.f;
+        MY_NN_LOG(LOG_DEBUG, "delta y : [ %f ]\n", deltaY);
 
         if (deltaX > -200.f && deltaX < 200.f)
         {
@@ -142,18 +156,7 @@ void CheckWithLand(ActorObject* _runner, ActorObject* _land,
         CheckCollisionWith(_land) && canStand)
     {
         g_VVel = 0.f;
-        g_CanJump = true;
-    }
-    else
-    {
-        float distance = g_VVel * _deltatime -
-            g_Gravity * _deltatime * _deltatime;
-        g_VVel = g_VVel + g_Gravity * _deltatime;
-
-        ((ATransformComponent*)(_runner->
-            GetAComponent("runner-actor-transform")))->
-            TranslateYAsix(-distance);
-        g_CanJump = false;
+        shouldFall = false;
     }
 
     if (((ACollisionComponent*)(_runner->
@@ -162,17 +165,31 @@ void CheckWithLand(ActorObject* _runner, ActorObject* _land,
     {
         if (deltaX > 0.f)
         {
-            ((ATransformComponent*)(_runner->
-                GetAComponent("runner-actor-transform")))->
-                TranslateXAsix(5.f);
+            if (deltaY < -12.f)
+            {
+                ((ATransformComponent*)(_runner->
+                    GetAComponent("runner-actor-transform")))->
+                    TranslateXAsix(5.f);
+                _runner->GetSceneNodePtr()->GetCamera()->
+                    TranslateCameraPos(MakeFloat2(
+                        5.f, 0.f));
+            }
         }
         else
         {
-            ((ATransformComponent*)(_runner->
-                GetAComponent("runner-actor-transform")))->
-                TranslateXAsix(-5.f);
+            if (deltaY < -12.f)
+            {
+                ((ATransformComponent*)(_runner->
+                    GetAComponent("runner-actor-transform")))->
+                    TranslateXAsix(-5.f);
+                _runner->GetSceneNodePtr()->GetCamera()->
+                    TranslateCameraPos(MakeFloat2(
+                        -5.f, 0.f));
+            }
         }
     }
+
+    return shouldFall;
 }
 
 void RunnerUpdate(AInteractionComponent* _aitc, float _deltatime)
@@ -180,8 +197,31 @@ void RunnerUpdate(AInteractionComponent* _aitc, float _deltatime)
     ActorObject* owner = _aitc->GetActorObjOwner();
     ActorObject* land1 = owner->GetSceneNodePtr()->
         GetActorObject("midland-1-actor");
+    ActorObject* land2 = owner->GetSceneNodePtr()->
+        GetActorObject("midland-2-actor");
 
-    CheckWithLand(owner, land1, _deltatime);
+    bool should1 = CheckWithLand(owner, land1, _deltatime);
+    bool should2 = CheckWithLand(owner, land2, _deltatime);
+
+    if (should1 && should2)
+    {
+        float distance = g_VVel * _deltatime -
+            g_Gravity * _deltatime * _deltatime;
+        g_VVel = g_VVel + g_Gravity * _deltatime;
+
+        ((ATransformComponent*)(owner->
+            GetAComponent("runner-actor-transform")))->
+            TranslateYAsix(-distance);
+    }
+
+    if (should1 && should2)
+    {
+        g_CanJump = false;
+    }
+    else
+    {
+        g_CanJump = true;
+    }
 }
 
 void RunnerDestory(AInteractionComponent* _aitc)
