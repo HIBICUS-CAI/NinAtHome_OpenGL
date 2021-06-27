@@ -142,6 +142,7 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClInclude Include="MiddleFunctions\texture.h" />
     <ClInclude Include="MiddleFunctions\TextureHelper.h" />
     <ClInclude Include="ResultBtn.h" />
+    <ClInclude Include="RunnerAndBg.h" />
     <ClInclude Include="TempTest.h" />
     <ClInclude Include="TitleStartBtn.h" />
   </ItemGroup>
@@ -181,6 +182,7 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClCompile Include="MiddleFunctions\SpriteHelper.cpp" />
     <ClCompile Include="MiddleFunctions\TextureHelper.cpp" />
     <ClCompile Include="ResultBtn.cpp" />
+    <ClCompile Include="RunnerAndBg.cpp" />
     <ClCompile Include="TempTest.cpp" />
     <ClCompile Include="TitleStartBtn.cpp" />
   </ItemGroup>

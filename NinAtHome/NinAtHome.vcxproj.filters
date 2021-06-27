@@ -177,6 +177,9 @@
     <ClInclude Include="ResultBtn.h">
       <Filter>03_Temp</Filter>
     </ClInclude>
+    <ClInclude Include="RunnerAndBg.h">
+      <Filter>03_Temp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -288,6 +291,9 @@
       <Filter>03_Temp</Filter>
     </ClCompile>
     <ClCompile Include="ResultBtn.cpp">
+      <Filter>03_Temp</Filter>
+    </ClCompile>
+    <ClCompile Include="RunnerAndBg.cpp">
       <Filter>03_Temp</Filter>
     </ClCompile>
   </ItemGroup>

@@ -31,8 +31,8 @@ void RetryBtnInput(UInputComponent* _uic, float _deltatime)
         {
             _uic->GetUiObjOwner()->GetSceneNodePtr()->
                 GetSceneManagerPtr()->LoadSceneNode(
-                    "title-scene",
-                    "rom:/Configs/Scenes/title-scene.json");
+                    "run-scene",
+                    "rom:/Configs/Scenes/run-scene.json");
         }
     }
 }

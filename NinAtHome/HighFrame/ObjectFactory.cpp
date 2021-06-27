@@ -19,6 +19,7 @@
 #include "..\TempTest.h"
 #include "..\TitleStartBtn.h"
 #include "..\ResultBtn.h"
+#include "..\RunnerAndBg.h"
 // TEMP---------------------------------------------
 
 ObjectFactory::ObjectFactory() :
@@ -509,7 +510,15 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
         if (compNode && compNode->IsString())
         {
             // TEMP----------------------------
-            aic->SetInputProcessFunc(TempMove);
+            std::string funcName = compNode->GetString();
+            if (funcName == "HiddenCommandInput")
+            {
+                aic->SetInputProcessFunc(HiddenCommandInput);
+            }
+            else if (funcName == "RunnerInput")
+            {
+                aic->SetInputProcessFunc(RunnerInput);
+            }
             // TEMP----------------------------
         }
     }
@@ -730,27 +739,39 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
             _file, _nodePath + "/init-func-name");
         if (compNode && compNode->IsString())
         {
-            // TEMP--------------------
-            aitc->SetInitFunc(TestInit);
-            // TEMP--------------------
+            // TEMP----------------------------
+            std::string funcName = compNode->GetString();
+            if (funcName == "RunnerInit")
+            {
+                aitc->SetInitFunc(RunnerInit);
+            }
+            // TEMP----------------------------
         }
 
         compNode = GetJsonNode(
             _file, _nodePath + "/update-func-name");
         if (compNode && compNode->IsString())
         {
-            // TEMP--------------------
-            aitc->SetUpdateFunc(TestUpdate);
-            // TEMP--------------------
+            // TEMP----------------------------
+            std::string funcName = compNode->GetString();
+            if (funcName == "RunnerUpdate")
+            {
+                aitc->SetUpdateFunc(RunnerUpdate);
+            }
+            // TEMP----------------------------
         }
 
         compNode = GetJsonNode(
             _file, _nodePath + "/destory-func-name");
         if (compNode && compNode->IsString())
         {
-            // TEMP--------------------
-            aitc->SetDestoryFunc(TestDestory);
-            // TEMP--------------------
+            // TEMP----------------------------
+            std::string funcName = compNode->GetString();
+            if (funcName == "RunnerDestory")
+            {
+                aitc->SetDestoryFunc(RunnerDestory);
+            }
+            // TEMP----------------------------
         }
     }
 

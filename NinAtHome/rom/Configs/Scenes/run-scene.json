@@ -1,0 +1,147 @@
+{
+    "scene-name": "run-scene",
+    "camera": [
+        0.0,
+        0.0,
+        1920.0,
+        1080.0
+    ],
+    "actor": [
+        {
+            "actor-name": "bg-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        9040.0,
+                        0.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": 0,
+                    "texture-path": "rom:/Assets/Textures/run_bg.tga",
+                    "texture-width": 20000.0,
+                    "texture-height": 1080.0
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "HiddenCommandInput"
+                }
+            ]
+        },
+        {
+            "actor-name": "runner-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        1.5,
+                        1.5,
+                        1.5
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": 0,
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 72.0,
+                    "texture-height": 97.0
+                },
+                {
+                    "type": "animate",
+                    "update-order": 0,
+                    "animates": [
+                        {
+                            "animate-name": "stand",
+                            "animate-path": "rom:/Assets/Textures/stand_ani.tga",
+                            "animate-stride": [
+                                0.5,
+                                1.0
+                            ],
+                            "max-count": 2,
+                            "repeat-flag": false,
+                            "frame-time": 0.033
+                        },
+                        {
+                            "animate-name": "walk",
+                            "animate-path": "rom:/Assets/Textures/walk_ani.tga",
+                            "animate-stride": [
+                                0.33333333333333333333333333333,
+                                0.33333333333333333333333333333
+                            ],
+                            "max-count": 9,
+                            "repeat-flag": true,
+                            "frame-time": 0.033
+                        },
+                        {
+                            "animate-name": "jump",
+                            "animate-path": "rom:/Assets/Textures/jump_ani.tga",
+                            "animate-stride": [
+                                0.5,
+                                1.0
+                            ],
+                            "max-count": 2,
+                            "repeat-flag": false,
+                            "frame-time": 0.033
+                        }
+                    ],
+                    "init-animate": "stand"
+                },
+                {
+                    "type": "input",
+                    "update-order": 0,
+                    "func-name": "RunnerInput"
+                },
+                {
+                    "type": "interaction",
+                    "update-order": 0,
+                    "init-func-name": "RunnerInit",
+                    "update-func-name": "RunnerUpdate",
+                    "destory-func-name": "RunnerDestory"
+                }
+            ]
+        }
+    ],
+    "ui": []
+}

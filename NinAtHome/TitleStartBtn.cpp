@@ -12,8 +12,8 @@ void StartBtnInput(UInputComponent* _uic, float _deltatime)
         {
             _uic->GetUiObjOwner()->GetSceneNodePtr()->
                 GetSceneManagerPtr()->LoadSceneNode(
-                    "result-fail-scene",
-                    "rom:/Configs/Scenes/result-fail-scene.json");
+                    "run-scene",
+                    "rom:/Configs/Scenes/run-scene.json");
         }
     }
 }
