@@ -73,7 +73,7 @@ void RunnerInput(AInputComponent* _aic, float _deltatime)
         }
     }
 
-    static bool shouldSetWalk = false;
+    static bool shouldSetWalk = true;
     if (GetControllerTrigger(NpadButton::B::Index))
     {
         if (owner && g_CanJump)
@@ -112,13 +112,10 @@ void RunnerInit(AInteractionComponent* _aitc)
     g_HVel = 300.f;
 }
 
-void RunnerUpdate(AInteractionComponent* _aitc, float _deltatime)
+void CheckWithLand(ActorObject* _runner, ActorObject* _land,
+    float _deltatime)
 {
-    ActorObject* owner = _aitc->GetActorObjOwner();
-    ActorObject* land1 = owner->GetSceneNodePtr()->
-        GetActorObject("midland-1-actor");
-
-    if (!land1)
+    if (!_land)
     {
         return;
     }
@@ -126,10 +123,10 @@ void RunnerUpdate(AInteractionComponent* _aitc, float _deltatime)
     bool canStand = false;
     float deltaX = 0.f;
     {
-        float thisX = ((ATransformComponent*)(owner->
+        float thisX = ((ATransformComponent*)(_runner->
             GetAComponent("runner-actor-transform")))->
             GetPosition().x;
-        float thatX = ((ATransformComponent*)(land1->
+        float thatX = ((ATransformComponent*)(_land->
             GetAComponent("midland-1-actor-transform")))->
             GetPosition().x;
         deltaX = thisX - thatX;
@@ -140,9 +137,9 @@ void RunnerUpdate(AInteractionComponent* _aitc, float _deltatime)
         }
     }
 
-    if (((ACollisionComponent*)(owner->
+    if (((ACollisionComponent*)(_runner->
         GetAComponent("runner-actor-collision")))->
-        CheckCollisionWith(land1) && canStand)
+        CheckCollisionWith(_land) && canStand)
     {
         g_VVel = 0.f;
         g_CanJump = true;
@@ -153,29 +150,38 @@ void RunnerUpdate(AInteractionComponent* _aitc, float _deltatime)
             g_Gravity * _deltatime * _deltatime;
         g_VVel = g_VVel + g_Gravity * _deltatime;
 
-        ((ATransformComponent*)(owner->
+        ((ATransformComponent*)(_runner->
             GetAComponent("runner-actor-transform")))->
             TranslateYAsix(-distance);
         g_CanJump = false;
     }
 
-    if (((ACollisionComponent*)(owner->
+    if (((ACollisionComponent*)(_runner->
         GetAComponent("runner-actor-collision")))->
-        CheckCollisionWith(land1) && !canStand)
+        CheckCollisionWith(_land) && !canStand)
     {
         if (deltaX > 0.f)
         {
-            ((ATransformComponent*)(owner->
+            ((ATransformComponent*)(_runner->
                 GetAComponent("runner-actor-transform")))->
                 TranslateXAsix(5.f);
         }
         else
         {
-            ((ATransformComponent*)(owner->
+            ((ATransformComponent*)(_runner->
                 GetAComponent("runner-actor-transform")))->
                 TranslateXAsix(-5.f);
         }
     }
+}
+
+void RunnerUpdate(AInteractionComponent* _aitc, float _deltatime)
+{
+    ActorObject* owner = _aitc->GetActorObjOwner();
+    ActorObject* land1 = owner->GetSceneNodePtr()->
+        GetActorObject("midland-1-actor");
+
+    CheckWithLand(owner, land1, _deltatime);
 }
 
 void RunnerDestory(AInteractionComponent* _aitc)
