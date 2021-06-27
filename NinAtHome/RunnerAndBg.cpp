@@ -165,7 +165,7 @@ bool CheckWithLand(ActorObject* _runner, ActorObject* _land,
     {
         if (deltaX > 0.f)
         {
-            if (deltaY < -12.f)
+            if (deltaY < 9.5f)
             {
                 ((ATransformComponent*)(_runner->
                     GetAComponent("runner-actor-transform")))->
@@ -177,7 +177,7 @@ bool CheckWithLand(ActorObject* _runner, ActorObject* _land,
         }
         else
         {
-            if (deltaY < -12.f)
+            if (deltaY < 9.5f)
             {
                 ((ATransformComponent*)(_runner->
                     GetAComponent("runner-actor-transform")))->
