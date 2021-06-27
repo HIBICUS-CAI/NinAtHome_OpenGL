@@ -167,13 +167,13 @@ void RunnerUpdate(AInteractionComponent* _aitc, float _deltatime)
         {
             ((ATransformComponent*)(owner->
                 GetAComponent("runner-actor-transform")))->
-                TranslateXAsix(10.f);
+                TranslateXAsix(5.f);
         }
         else
         {
             ((ATransformComponent*)(owner->
                 GetAComponent("runner-actor-transform")))->
-                TranslateXAsix(-10.f);
+                TranslateXAsix(-5.f);
         }
     }
 }
