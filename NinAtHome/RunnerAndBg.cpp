@@ -1,5 +1,6 @@
 #include "RunnerAndBg.h"
 #include "controller.h"
+#include "BulletCoin.h"
 
 void HiddenCommandInput(AInputComponent* _aic, float _deltatime)
 {
@@ -23,6 +24,46 @@ static float g_Gravity = 0.f;
 static float g_VVel = 0.f;
 static float g_HVel = 0.f;
 static bool g_CanJump = true;
+
+void CreateNewBullet(Float3 _pos, SceneNode* _scene)
+{
+    int updateOrder = 0;
+    static int nameID = 0;
+    std::string name =
+        "bullet-" + std::to_string(++nameID) + "-actor";
+
+    ActorObject* bullet = new ActorObject(
+        name, _scene, updateOrder);
+
+    {
+        ATransformComponent* atc = new ATransformComponent(
+            name + "-transform", bullet, -1,
+            MakeFloat3(0.f, 0.f, 0.f));
+        atc->SetPosition(_pos);
+        bullet->AddAComponent(atc);
+
+        ASpriteComponent* asc = new ASpriteComponent(
+            name + "-sprite", bullet, 0, 1);
+        asc->LoadTextureByPath("rom:/Assets/Textures/coin.tga");
+        asc->SetTexWidth(36.f);
+        asc->SetTexHeight(36.f);
+        bullet->AddAComponent(asc);
+
+        AInteractionComponent* aitc = new AInteractionComponent(
+            name + "-interaction", bullet, 0);
+        aitc->SetInitFunc(BulletInit);
+        aitc->SetUpdateFunc(BulletUpdate);
+        aitc->SetDestoryFunc(BulletDestory);
+        bullet->AddAComponent(aitc);
+
+        ATimerComponent* atic = new ATimerComponent(
+            name + "-timer", bullet, 0);
+        atic->AddTimer("life-time");
+        bullet->AddAComponent(atic);
+    }
+
+    _scene->AddActorObject(bullet);
+}
 
 void RunnerInput(AInputComponent* _aic, float _deltatime)
 {
@@ -102,6 +143,13 @@ void RunnerInput(AInputComponent* _aic, float _deltatime)
                 GetAComponent("runner-actor-animate")))->
                 ChangeAnimateTo("walk");
         }
+    }
+
+    if (GetControllerTrigger(NpadButton::ZR::Index) && owner)
+    {
+        CreateNewBullet(((ATransformComponent*)(owner->
+            GetAComponent("runner-actor-transform")))->
+            GetPosition(), owner->GetSceneNodePtr());
     }
 }
 

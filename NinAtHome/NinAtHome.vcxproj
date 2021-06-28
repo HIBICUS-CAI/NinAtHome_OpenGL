@@ -105,6 +105,7 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClInclude Include="BasicInit_LowLevel\main.h" />
     <ClInclude Include="BasicInit_LowLevel\NinLog.h" />
     <ClInclude Include="BasicInit_LowLevel\stb_image.h" />
+    <ClInclude Include="BulletCoin.h" />
     <ClInclude Include="HighFrame\AAnimateComponent.h" />
     <ClInclude Include="HighFrame\ACollisionComponent.h" />
     <ClInclude Include="HighFrame\AComponent.h" />
@@ -151,6 +152,7 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClCompile Include="BasicInit_LowLevel\GlProcess.cpp" />
     <ClCompile Include="BasicInit_LowLevel\LowLevelCpp.cpp" />
     <ClCompile Include="BasicInit_LowLevel\NinLog.cpp" />
+    <ClCompile Include="BulletCoin.cpp" />
     <ClCompile Include="HighFrame\AAnimateComponent.cpp" />
     <ClCompile Include="HighFrame\ACollisionComponent.cpp" />
     <ClCompile Include="HighFrame\AComponent.cpp" />
