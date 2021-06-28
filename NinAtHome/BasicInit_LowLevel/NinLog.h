@@ -9,8 +9,8 @@
 #include <Windows.h>
 
 #define LOG_MESSAGE             (0)
-#define LOG_DEBUG               (1)
-#define LOG_WARNING             (2)
+#define LOG_WARNING             (1)
+#define LOG_DEBUG               (2)
 #define LOG_ERROR               (3)
 
 // FOR SETTING ------------------------------
