@@ -201,18 +201,20 @@ bool CheckWithLand(ActorObject* _runner, ActorObject* _land,
 void RunnerUpdate(AInteractionComponent* _aitc, float _deltatime)
 {
     ActorObject* owner = _aitc->GetActorObjOwner();
-    ActorObject* land1 = owner->GetSceneNodePtr()->
-        GetActorObject("midland-1-actor");
-    ActorObject* land2 = owner->GetSceneNodePtr()->
-        GetActorObject("midland-2-actor");
-    ActorObject* land3 = owner->GetSceneNodePtr()->
-        GetActorObject("midland-3-actor");
 
-    bool should1 = CheckWithLand(owner, land1, _deltatime);
-    bool should2 = CheckWithLand(owner, land2, _deltatime);
-    bool should3 = CheckWithLand(owner, land3, _deltatime);
+    ActorObject* land = nullptr;
+    bool shouldFall = true;
+    for (int i = 0; i < 3; i++)
+    {
+        std::string name =
+            "midland-" + std::to_string(i + 1) + "-actor";
+        land = owner->GetSceneNodePtr()->
+            GetActorObject(name);
+        bool thisShould = CheckWithLand(owner, land, _deltatime);
+        shouldFall = shouldFall && thisShould;
+    }
 
-    if (should1 && should2 && should3)
+    if (shouldFall)
     {
         float distance = g_VVel * _deltatime -
             g_Gravity * _deltatime * _deltatime;
@@ -223,7 +225,7 @@ void RunnerUpdate(AInteractionComponent* _aitc, float _deltatime)
             TranslateYAsix(-distance);
     }
 
-    if (should1 && should2 && should3)
+    if (shouldFall)
     {
         g_CanJump = false;
     }
