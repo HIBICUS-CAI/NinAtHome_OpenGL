@@ -145,7 +145,7 @@ bool CheckWithLand(ActorObject* _runner, ActorObject* _land,
         deltaY -= 84.f;
         MY_NN_LOG(LOG_DEBUG, "delta y : [ %f ]\n", deltaY);
 
-        if (deltaX > -200.f && deltaX < 200.f)
+        if (deltaX > -200.f && deltaX < 200.f && deltaY > 7.5f)
         {
             canStand = true;
         }
@@ -163,9 +163,9 @@ bool CheckWithLand(ActorObject* _runner, ActorObject* _land,
         GetAComponent("runner-actor-collision")))->
         CheckCollisionWith(_land) && !canStand)
     {
-        if (deltaX > 0.f)
+        if (deltaX > 195.f)
         {
-            if (deltaY < 9.5f)
+            if (deltaY < 7.5f)
             {
                 ((ATransformComponent*)(_runner->
                     GetAComponent("runner-actor-transform")))->
@@ -175,9 +175,9 @@ bool CheckWithLand(ActorObject* _runner, ActorObject* _land,
                         5.f, 0.f));
             }
         }
-        else
+        else if (deltaX < -195.f)
         {
-            if (deltaY < 9.5f)
+            if (deltaY < 7.5f)
             {
                 ((ATransformComponent*)(_runner->
                     GetAComponent("runner-actor-transform")))->
@@ -186,6 +186,16 @@ bool CheckWithLand(ActorObject* _runner, ActorObject* _land,
                     TranslateCameraPos(MakeFloat2(
                         -5.f, 0.f));
             }
+        }
+        else
+        {
+            g_VVel = 0.f;
+            ((ATransformComponent*)(_runner->
+                GetAComponent("runner-actor-transform")))->
+                TranslateYAsix(5.f);
+            _runner->GetSceneNodePtr()->GetCamera()->
+                TranslateCameraPos(MakeFloat2(
+                    5.f, 0.f));
         }
     }
 
@@ -199,11 +209,14 @@ void RunnerUpdate(AInteractionComponent* _aitc, float _deltatime)
         GetActorObject("midland-1-actor");
     ActorObject* land2 = owner->GetSceneNodePtr()->
         GetActorObject("midland-2-actor");
+    ActorObject* land3 = owner->GetSceneNodePtr()->
+        GetActorObject("midland-3-actor");
 
     bool should1 = CheckWithLand(owner, land1, _deltatime);
     bool should2 = CheckWithLand(owner, land2, _deltatime);
+    bool should3 = CheckWithLand(owner, land3, _deltatime);
 
-    if (should1 && should2)
+    if (should1 && should2 && should3)
     {
         float distance = g_VVel * _deltatime -
             g_Gravity * _deltatime * _deltatime;
@@ -214,7 +227,7 @@ void RunnerUpdate(AInteractionComponent* _aitc, float _deltatime)
             TranslateYAsix(-distance);
     }
 
-    if (should1 && should2)
+    if (should1 && should2 && should3)
     {
         g_CanJump = false;
     }
