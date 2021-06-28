@@ -25,46 +25,6 @@ static float g_VVel = 0.f;
 static float g_HVel = 0.f;
 static bool g_CanJump = true;
 
-void CreateNewBullet(Float3 _pos, SceneNode* _scene)
-{
-    int updateOrder = 0;
-    static int nameID = 0;
-    std::string name =
-        "bullet-" + std::to_string(++nameID) + "-actor";
-
-    ActorObject* bullet = new ActorObject(
-        name, _scene, updateOrder);
-
-    {
-        ATransformComponent* atc = new ATransformComponent(
-            name + "-transform", bullet, -1,
-            MakeFloat3(0.f, 0.f, 0.f));
-        atc->SetPosition(_pos);
-        bullet->AddAComponent(atc);
-
-        ASpriteComponent* asc = new ASpriteComponent(
-            name + "-sprite", bullet, 0, 1);
-        asc->LoadTextureByPath("rom:/Assets/Textures/coin.tga");
-        asc->SetTexWidth(36.f);
-        asc->SetTexHeight(36.f);
-        bullet->AddAComponent(asc);
-
-        AInteractionComponent* aitc = new AInteractionComponent(
-            name + "-interaction", bullet, 0);
-        aitc->SetInitFunc(BulletInit);
-        aitc->SetUpdateFunc(BulletUpdate);
-        aitc->SetDestoryFunc(BulletDestory);
-        bullet->AddAComponent(aitc);
-
-        ATimerComponent* atic = new ATimerComponent(
-            name + "-timer", bullet, 0);
-        atic->AddTimer("life-time");
-        bullet->AddAComponent(atic);
-    }
-
-    _scene->AddActorObject(bullet);
-}
-
 void RunnerInput(AInputComponent* _aic, float _deltatime)
 {
     ActorObject* owner = _aic->GetActorObjOwner();
@@ -246,6 +206,50 @@ bool CheckWithLand(ActorObject* _runner, ActorObject* _land,
     return shouldFall;
 }
 
+void CheckWithBoard(ActorObject* _runner, ActorObject* _board,
+    float _deltatime)
+{
+    if (!_board)
+    {
+        return;
+    }
+
+    if (((ACollisionComponent*)(_runner->
+        GetAComponent("runner-actor-collision")))->
+        CheckCollisionWith(_board))
+    {
+        std::string boardTransName = _board->GetObjectName() +
+            "-transform";
+        float deltaX = 0.f;
+        {
+            Float3 thisB = ((ATransformComponent*)
+                (_board->GetAComponent(boardTransName)))->GetPosition();
+            Float3 runP = ((ATransformComponent*)
+                (_runner->GetAComponent("runner-actor-transform")))->
+                GetPosition();
+            deltaX = runP.x - thisB.x;
+        }
+        if (deltaX > 0.f)
+        {
+            ((ATransformComponent*)(_runner->
+                GetAComponent("runner-actor-transform")))->
+                TranslateXAsix(5.f);
+            _runner->GetSceneNodePtr()->GetCamera()->
+                TranslateCameraPos(MakeFloat2(
+                    5.f, 0.f));
+        }
+        else
+        {
+            ((ATransformComponent*)(_runner->
+                GetAComponent("runner-actor-transform")))->
+                TranslateXAsix(-5.f);
+            _runner->GetSceneNodePtr()->GetCamera()->
+                TranslateCameraPos(MakeFloat2(
+                    -5.f, 0.f));
+        }
+    }
+}
+
 void RunnerUpdate(AInteractionComponent* _aitc, float _deltatime)
 {
     ActorObject* owner = _aitc->GetActorObjOwner();
@@ -280,6 +284,16 @@ void RunnerUpdate(AInteractionComponent* _aitc, float _deltatime)
     else
     {
         g_CanJump = true;
+    }
+
+    ActorObject* board = nullptr;
+    for (int i = 0; i < 2; i++)
+    {
+        std::string name =
+            "wood-" + std::to_string(i + 1) + "-actor";
+        board = owner->GetSceneNodePtr()->
+            GetActorObject(name);
+        CheckWithBoard(owner, board, _deltatime);
     }
 }
 

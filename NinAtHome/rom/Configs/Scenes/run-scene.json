@@ -199,6 +199,104 @@
             ]
         },
         {
+            "actor-name": "wood-1-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        100.0,
+                        350.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        0.0,
+                        0.0,
+                        90.0
+                    ],
+                    "scale": [
+                        2.0,
+                        2.0,
+                        1.0
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -1,
+                    "texture-path": "rom:/Assets/Textures/wood.tga",
+                    "texture-width": 70.0,
+                    "texture-height": 25.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        25.0,
+                        70.0
+                    ],
+                    "show-flag": true
+                }
+            ]
+        },
+        {
+            "actor-name": "wood-2-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        645.0,
+                        350.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        0.0,
+                        0.0,
+                        90.0
+                    ],
+                    "scale": [
+                        2.0,
+                        2.0,
+                        1.0
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -1,
+                    "texture-path": "rom:/Assets/Textures/wood.tga",
+                    "texture-width": 70.0,
+                    "texture-height": 25.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        25.0,
+                        70.0
+                    ],
+                    "show-flag": true
+                }
+            ]
+        },
+        {
             "actor-name": "runner-actor",
             "update-order": 0,
             "parent": null,
