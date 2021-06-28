@@ -12,19 +12,7 @@
 #include "texture.h"
 #include "sprite.h"
 #include "ATransformComponent.h"
-#include <unordered_map>
-
-static std::unordered_map<std::string,unsigned int> g_TexPool = {};
-
-void CleanATexPool()
-{
-    for (auto tex : g_TexPool)
-    {
-        UnloadTexture(tex.second);
-    }
-
-    g_TexPool.clear();
-}
+#include "SceneNode.h"
 
 ASpriteComponent::ASpriteComponent(std::string _name,
     ActorObject* _owner, int _order, int _drawOrder) :
@@ -59,15 +47,19 @@ void ASpriteComponent::CompDestory()
 
 void ASpriteComponent::LoadTextureByPath(std::string _path)
 {
-	if (g_TexPool.find(_path) == g_TexPool.end())
-	{
-		mTexture = LoadTexture(_path);
-		g_TexPool.insert(std::make_pair(_path, mTexture));
-	}
-	else
-	{
-		mTexture = g_TexPool[_path];
-	}
+    unsigned int exist =
+        GetActorObjOwner()->GetSceneNodePtr()->
+        CheckIfTexExist(_path);
+    if (!exist)
+    {
+        mTexture = LoadTexture(_path);
+        GetActorObjOwner()->GetSceneNodePtr()->
+            InsertNewTex(_path, mTexture);
+    }
+    else
+    {
+        mTexture = exist;
+    }
 }
 
 void ASpriteComponent::DeleteTexture()

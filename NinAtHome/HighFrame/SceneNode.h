@@ -52,6 +52,10 @@ public:
 
     void DeleteUiObject(std::string _name);
 
+    unsigned int CheckIfTexExist(std::string _path);
+
+    void InsertNewTex(std::string _path, unsigned int _tex);
+
     void SetSceneLoopFunc(SceneLoopFuncType _func);
 
     void ClearSceneLoopFunc();
@@ -64,6 +68,8 @@ private:
     void InitAllNewObjects();
 
     void DestoryAllRetiredObjects();
+
+    void ClearTexPool();
 
 private:
     const std::string mName;
@@ -91,6 +97,8 @@ private:
     std::vector<class ActorObject*> mRetiredActorObjectsArray;
 
     std::vector<class UiObject*> mRetiredUiObjectsArray;
+
+    std::unordered_map<std::string, unsigned int> mTexPool;
 
     SceneLoopFuncType mSceneLoopFuncPtr;
 

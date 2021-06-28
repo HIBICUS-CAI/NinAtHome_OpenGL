@@ -11,8 +11,6 @@
 
 #include "UComponent.h"
 
-void CleanUTexPool();
-
 class USpriteComponent :
     public UComponent
 {

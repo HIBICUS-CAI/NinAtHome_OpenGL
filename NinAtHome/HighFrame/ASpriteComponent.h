@@ -11,8 +11,6 @@
 
 #include "AComponent.h"
 
-void CleanATexPool();
-
 class ASpriteComponent :
     public AComponent
 {

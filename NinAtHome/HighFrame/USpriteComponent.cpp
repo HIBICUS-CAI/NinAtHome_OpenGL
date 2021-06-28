@@ -13,19 +13,7 @@
 #include "sprite.h"
 #include "UTransformComponent.h"
 #include "UBtnMapComponent.h"
-#include <unordered_map>
-
-static std::unordered_map<std::string, unsigned int> g_TexPool = {};
-
-void CleanUTexPool()
-{
-    for (auto tex : g_TexPool)
-    {
-        UnloadTexture(tex.second);
-    }
-
-    g_TexPool.clear();
-}
+#include "SceneNode.h"
 
 USpriteComponent::USpriteComponent(std::string _name,
     UiObject* _owner, int _order, int _drawOrder) :
@@ -73,14 +61,18 @@ void USpriteComponent::CompDestory()
 
 void USpriteComponent::LoadTextureByPath(std::string _path)
 {
-    if (g_TexPool.find(_path) == g_TexPool.end())
+    unsigned int exist =
+        GetUiObjOwner()->GetSceneNodePtr()->
+        CheckIfTexExist(_path);
+    if (!exist)
     {
         mTexture = LoadTexture(_path);
-        g_TexPool.insert(std::make_pair(_path, mTexture));
+        GetUiObjOwner()->GetSceneNodePtr()->
+            InsertNewTex(_path, mTexture);
     }
     else
     {
-        mTexture = g_TexPool[_path];
+        mTexture = exist;
     }
 }
 

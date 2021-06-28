@@ -13,6 +13,7 @@
 #include "UiObject.h"
 #include "ASpriteComponent.h"
 #include "USpriteComponent.h"
+#include "texture.h"
 
 SceneNode::SceneNode(std::string _name, SceneManager* smPtr) :
     mName(_name), mSceneManagerPtr(smPtr), mCamera(nullptr),
@@ -233,8 +234,7 @@ void SceneNode::ReleaseScene()
 
     delete mCamera;
 
-    CleanATexPool();
-    CleanUTexPool();
+    ClearTexPool();
 }
 
 void SceneNode::AddActorObject(ActorObject* _aObj)
@@ -427,6 +427,33 @@ void SceneNode::DestoryAllRetiredObjects()
         delete retireUi;
         mRetiredUiObjectsArray.pop_back();
     }
+}
+
+unsigned int SceneNode::CheckIfTexExist(std::string _path)
+{
+    if (mTexPool.find(_path) != mTexPool.end())
+    {
+        return mTexPool[_path];
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+void SceneNode::InsertNewTex(std::string _path, unsigned int _tex)
+{
+    mTexPool.insert(std::make_pair(_path, _tex));
+}
+
+void SceneNode::ClearTexPool()
+{
+    for (auto& tex : mTexPool)
+    {
+        UnloadTexture(tex.second);
+    }
+
+    mTexPool.clear();
 }
 
 Camera::Camera(Float2 _pos, Float2 _size) :
