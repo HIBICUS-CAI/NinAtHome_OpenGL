@@ -143,7 +143,6 @@ bool CheckWithLand(ActorObject* _runner, ActorObject* _land,
             GetAComponent(landTransName)))->GetPosition().y;
         deltaY = thisY - thatY;
         deltaY -= 84.f;
-        MY_NN_LOG(LOG_DEBUG, "delta y : [ %f ]\n", deltaY);
 
         if (deltaX > -200.f && deltaX < 200.f && deltaY > 7.5f)
         {
@@ -193,9 +192,6 @@ bool CheckWithLand(ActorObject* _runner, ActorObject* _land,
             ((ATransformComponent*)(_runner->
                 GetAComponent("runner-actor-transform")))->
                 TranslateYAsix(5.f);
-            _runner->GetSceneNodePtr()->GetCamera()->
-                TranslateCameraPos(MakeFloat2(
-                    5.f, 0.f));
         }
     }
 
