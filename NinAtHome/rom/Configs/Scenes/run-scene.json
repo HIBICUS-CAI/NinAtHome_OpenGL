@@ -297,6 +297,189 @@
             ]
         },
         {
+            "actor-name": "bullet-1-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        -10000.0,
+                        0.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": 1,
+                    "texture-path": "rom:/Assets/Textures/coin.tga",
+                    "texture-width": 36.0,
+                    "texture-height": 36.0
+                },
+                {
+                    "type": "interaction",
+                    "update-order": 0,
+                    "init-func-name": "BulletInit",
+                    "update-func-name": "BulletUpdate",
+                    "destory-func-name": "BulletDestory"
+                },
+                {
+                    "type": "timer",
+                    "update-order": 0,
+                    "timers": ["life-time"]
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "circle",
+                    "collision-size": [
+                        18.0,
+                        18.0
+                    ],
+                    "show-flag": true
+                }
+            ]
+        },
+        {
+            "actor-name": "bullet-2-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        -10000.0,
+                        0.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": 1,
+                    "texture-path": "rom:/Assets/Textures/coin.tga",
+                    "texture-width": 36.0,
+                    "texture-height": 36.0
+                },
+                {
+                    "type": "interaction",
+                    "update-order": 0,
+                    "init-func-name": "BulletInit",
+                    "update-func-name": "BulletUpdate",
+                    "destory-func-name": "BulletDestory"
+                },
+                {
+                    "type": "timer",
+                    "update-order": 0,
+                    "timers": ["life-time"]
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "circle",
+                    "collision-size": [
+                        18.0,
+                        18.0
+                    ],
+                    "show-flag": true
+                }
+            ]
+        },
+        {
+            "actor-name": "bullet-3-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        -10000.0,
+                        0.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": 1,
+                    "texture-path": "rom:/Assets/Textures/coin.tga",
+                    "texture-width": 36.0,
+                    "texture-height": 36.0
+                },
+                {
+                    "type": "interaction",
+                    "update-order": 0,
+                    "init-func-name": "BulletInit",
+                    "update-func-name": "BulletUpdate",
+                    "destory-func-name": "BulletDestory"
+                },
+                {
+                    "type": "timer",
+                    "update-order": 0,
+                    "timers": ["life-time"]
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "circle",
+                    "collision-size": [
+                        18.0,
+                        18.0
+                    ],
+                    "show-flag": true
+                }
+            ]
+        },
+        {
             "actor-name": "runner-actor",
             "update-order": 0,
             "parent": null,

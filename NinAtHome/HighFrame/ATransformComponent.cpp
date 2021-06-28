@@ -678,14 +678,14 @@ void ATransformComponent::UpdateWorldMatrix()
         0.f, 0.f, 1.f, 0.f,
         0.f, 0.f, 0.f, 1.f
     };
-    world = glm::translate(world, mPosition);
+    world = glm::translate(world, glm::fvec3(relative.x, relative.y, relative.z));
     world = glm::rotate(world,
-        glm::radians(mRotation.x), Float3(1.f, 0.f, 0.f));
+        glm::radians(mRotation.x), glm::fvec3(1.f, 0.f, 0.f));
     world = glm::rotate(world,
-        glm::radians(mRotation.y), Float3(0.f, 1.f, 0.f));
+        glm::radians(mRotation.y), glm::fvec3(0.f, 1.f, 0.f));
     world = glm::rotate(world,
-        glm::radians(mRotation.z), Float3(0.f, 0.f, 1.f));
-    world = glm::scale(world, mScale);
+        glm::radians(mRotation.z), glm::fvec3(0.f, 0.f, 1.f));
+    world = glm::scale(world, glm::fvec3(mScale.x, mScale.y, mScale.z));
     float* matArray = glm::value_ptr(world);
     mWorldMatrix =
     {

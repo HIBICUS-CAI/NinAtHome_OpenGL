@@ -20,6 +20,7 @@
 #include "..\TitleStartBtn.h"
 #include "..\ResultBtn.h"
 #include "..\RunnerAndBg.h"
+#include "..\BulletCoin.h"
 // TEMP---------------------------------------------
 
 ObjectFactory::ObjectFactory() :
@@ -745,6 +746,14 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
             {
                 aitc->SetInitFunc(RunnerInit);
             }
+			else if (funcName == "BulletInit")
+			{
+				aitc->SetInitFunc(BulletInit);
+			}
+			else if (funcName == "BulletParentInit")
+			{
+				aitc->SetInitFunc(BulletParentInit);
+			}
             // TEMP----------------------------
         }
 
@@ -758,6 +767,10 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
             {
                 aitc->SetUpdateFunc(RunnerUpdate);
             }
+			else if (funcName == "BulletUpdate")
+			{
+				aitc->SetUpdateFunc(BulletUpdate);
+			}
             // TEMP----------------------------
         }
 
@@ -771,6 +784,10 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
             {
                 aitc->SetDestoryFunc(RunnerDestory);
             }
+			else if (funcName == "BulletDestory")
+			{
+				aitc->SetDestoryFunc(BulletDestory);
+			}
             // TEMP----------------------------
         }
     }
@@ -778,7 +795,7 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
     // ELSE----------------------------
     else
     {
-        MY_NN_LOG(LOG_ERROR,
+    MY_NN_LOG(LOG_ERROR,
             "this comp type doesn't exist [ %s ]\n",
             compType.c_str());
         return;
@@ -1239,7 +1256,7 @@ void ObjectFactory::AddUCompToUi(UiObject* _ui,
     // ELSE----------------------------
     else
     {
-        MY_NN_LOG(LOG_ERROR,
+    MY_NN_LOG(LOG_ERROR,
             "this comp type doesn't exist [ %s ]\n",
             compType.c_str());
         return;

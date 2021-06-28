@@ -12,6 +12,19 @@
 #include "texture.h"
 #include "sprite.h"
 #include "ATransformComponent.h"
+#include <unordered_map>
+
+static std::unordered_map<std::string,unsigned int> g_TexPool = {};
+
+void CleanATexPool()
+{
+    for (auto tex : g_TexPool)
+    {
+        UnloadTexture(tex.second);
+    }
+
+    g_TexPool.clear();
+}
 
 ASpriteComponent::ASpriteComponent(std::string _name,
     ActorObject* _owner, int _order, int _drawOrder) :
@@ -41,12 +54,20 @@ void ASpriteComponent::CompUpdate(float _deltatime)
 
 void ASpriteComponent::CompDestory()
 {
-    DeleteTexture();
+    //DeleteTexture();
 }
 
 void ASpriteComponent::LoadTextureByPath(std::string _path)
 {
-    mTexture = LoadTexture(_path);
+	if (g_TexPool.find(_path) == g_TexPool.end())
+	{
+		mTexture = LoadTexture(_path);
+		g_TexPool.insert(std::make_pair(_path, mTexture));
+	}
+	else
+	{
+		mTexture = g_TexPool[_path];
+	}
 }
 
 void ASpriteComponent::DeleteTexture()

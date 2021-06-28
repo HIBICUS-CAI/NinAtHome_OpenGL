@@ -74,8 +74,11 @@ void SceneManager::CleanAndStop()
 
 void SceneManager::UpdateSceneManager(float _deltatime)
 {
-    /*NN_LOG(LOG_MESSAGE,
+    /*NN_LOG(
         "final delta : %f\n", _deltatime);*/
+
+	static bool releaseFlg = false;
+	static SceneNode* needRelease = nullptr;
 
     if (mLoadSceneFlg)
     {
@@ -83,8 +86,10 @@ void SceneManager::UpdateSceneManager(float _deltatime)
 
         if (mCurrentScenePtr)
         {
-            mCurrentScenePtr->ReleaseScene();
-            delete mCurrentScenePtr;
+			releaseFlg = false;
+			needRelease = mCurrentScenePtr;
+            /*mCurrentScenePtr->ReleaseScene();
+            delete mCurrentScenePtr;*/
         }
 
         mCurrentScenePtr = mLoadingScenePtr;
@@ -107,7 +112,21 @@ void SceneManager::UpdateSceneManager(float _deltatime)
 
     if (mCurrentScenePtr == mLoadingScenePtr)
     {
-        LoadNextScene();
+		if (needRelease && !releaseFlg)
+		{
+			releaseFlg = true;
+		}
+		else if (needRelease && releaseFlg)
+		{
+			needRelease->ReleaseScene();
+			delete needRelease;
+			needRelease = nullptr;
+			LoadNextScene();
+		}
+		else if (!needRelease)
+		{
+			LoadNextScene();
+		}
     }
 }
 

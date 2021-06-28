@@ -232,6 +232,9 @@ void SceneNode::ReleaseScene()
     mUiObjectsMap.clear();
 
     delete mCamera;
+
+    CleanATexPool();
+    CleanUTexPool();
 }
 
 void SceneNode::AddActorObject(ActorObject* _aObj)
