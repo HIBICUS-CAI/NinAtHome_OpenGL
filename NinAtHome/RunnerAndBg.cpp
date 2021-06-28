@@ -295,6 +295,16 @@ void RunnerUpdate(AInteractionComponent* _aitc, float _deltatime)
             GetActorObject(name);
         CheckWithBoard(owner, board, _deltatime);
     }
+
+    if (((ATransformComponent*)(owner->
+        GetAComponent("runner-actor-transform")))->
+        GetPosition().y > 600.f)
+    {
+        owner->GetSceneNodePtr()->GetSceneManagerPtr()->
+            LoadSceneNode(
+                "result-fail-scene",
+                "rom:/Configs/Scenes/result-fail-scene.json");
+    }
 }
 
 void RunnerDestory(AInteractionComponent* _aitc)
