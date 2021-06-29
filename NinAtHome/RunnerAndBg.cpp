@@ -256,7 +256,7 @@ void RunnerUpdate(AInteractionComponent* _aitc, float _deltatime)
 
     ActorObject* land = nullptr;
     bool shouldFall = true;
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 9; i++)
     {
         std::string name =
             "midland-" + std::to_string(i + 1) + "-actor";
