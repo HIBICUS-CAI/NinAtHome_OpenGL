@@ -22,6 +22,7 @@
 #include "..\RunnerAndBg.h"
 #include "..\BulletCoin.h"
 #include "..\Board.h"
+#include "..\Flag.h"
 // TEMP---------------------------------------------
 
 ObjectFactory::ObjectFactory() :
@@ -755,6 +756,10 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
             {
                 aitc->SetInitFunc(BoardInit);
             }
+            else if (funcName == "FlagInit")
+            {
+                aitc->SetInitFunc(FlagInit);
+            }
             // TEMP----------------------------
         }
 
@@ -776,6 +781,10 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
             {
                 aitc->SetUpdateFunc(BoardUpdate);
             }
+            else if (funcName == "FlagUpdate")
+            {
+                aitc->SetUpdateFunc(FlagUpdate);
+            }
             // TEMP----------------------------
         }
 
@@ -796,6 +805,10 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
             else if (funcName == "BoardDestory")
             {
                 aitc->SetDestoryFunc(BoardDestory);
+            }
+            else if (funcName == "FlagDestory")
+            {
+                aitc->SetDestoryFunc(FlagDestory);
             }
             // TEMP----------------------------
         }

@@ -163,8 +163,8 @@
                         0.0
                     ],
                     "position": [
-                        670.0,
-                        170.0,
+                        870.0,
+                        370.0,
                         0.0
                     ],
                     "rotation": [
@@ -546,6 +546,62 @@
                         18.0
                     ],
                     "show-flag": true
+                }
+            ]
+        },
+        {
+            "actor-name": "flag-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        1070.0,
+                        280.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -1,
+                    "texture-path": "rom:/Assets/Textures/flag.tga",
+                    "texture-width": 100.0,
+                    "texture-height": 200.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        100.0,
+                        200.0
+                    ],
+                    "show-flag": true
+                },
+                {
+                    "type": "interaction",
+                    "update-order": 0,
+                    "init-func-name": "FlagInit",
+                    "update-func-name": "FlagUpdate",
+                    "destory-func-name": "FlagDestory"
                 }
             ]
         },
