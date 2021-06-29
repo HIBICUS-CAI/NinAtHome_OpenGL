@@ -6,7 +6,7 @@ static Float4 g_Color;
 void TimeInit(UInteractionComponent* _uitc)
 {
     g_TimeLimit = 60.f;
-    g_Color = MakeFloat4(1.f, 1.f, 1.f, 1.f);
+    g_Color = MakeFloat4(0.f, 0.f, 0.f, 1.f);
 }
 
 void TimeUpdate(UInteractionComponent* _uitc, float _deltatime)
@@ -15,7 +15,7 @@ void TimeUpdate(UInteractionComponent* _uitc, float _deltatime)
         std::to_string(g_TimeLimit) + " sec";
     float redOffset = (g_TimeLimit / 60.f);
     Float4 colorOffset = MakeFloat4(
-        1.f, redOffset, redOffset, 1.f);
+        1.f - redOffset, 0.f, 0.f, 1.f);
     ((UTextComponent*)
         (_uitc->GetUiObjOwner()->
             GetUComponent("time-ui-text")))->
