@@ -738,6 +738,300 @@
             ]
         },
         {
+            "actor-name": "midland-15-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        1095.0,
+                        -155.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -1,
+                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-width": 350.0,
+                    "texture-height": 70.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        350.0,
+                        70.0
+                    ],
+                    "show-flag": true
+                }
+            ]
+        },
+        {
+            "actor-name": "midland-16-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        745.0,
+                        -290.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -1,
+                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-width": 350.0,
+                    "texture-height": 70.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        350.0,
+                        70.0
+                    ],
+                    "show-flag": true
+                }
+            ]
+        },
+        {
+            "actor-name": "midland-17-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        185.0,
+                        -425.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -1,
+                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-width": 350.0,
+                    "texture-height": 70.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        350.0,
+                        70.0
+                    ],
+                    "show-flag": true
+                }
+            ]
+        },
+        {
+            "actor-name": "midland-18-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        395.0,
+                        0.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -1,
+                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-width": 350.0,
+                    "texture-height": 70.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        350.0,
+                        70.0
+                    ],
+                    "show-flag": true
+                }
+            ]
+        },
+        {
+            "actor-name": "midland-19-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        745.0,
+                        -565.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -1,
+                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-width": 350.0,
+                    "texture-height": 70.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        350.0,
+                        70.0
+                    ],
+                    "show-flag": true
+                }
+            ]
+        },
+        {
+            "actor-name": "midland-20-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        2712.5,
+                        -565.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -1,
+                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-width": 3625.0,
+                    "texture-height": 70.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        3625.0,
+                        70.0
+                    ],
+                    "show-flag": true
+                }
+            ]
+        },
+        {
             "actor-name": "wood-1-actor",
             "update-order": 0,
             "parent": null,
