@@ -751,10 +751,6 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
 			{
 				aitc->SetInitFunc(BulletInit);
 			}
-			else if (funcName == "BulletParentInit")
-			{
-				aitc->SetInitFunc(BulletParentInit);
-			}
             else if (funcName == "BoardInit")
             {
                 aitc->SetInitFunc(BoardInit);

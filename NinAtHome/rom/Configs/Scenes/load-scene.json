@@ -1,8 +1,8 @@
 {
     "scene-name": "load-scene",
-    "actor": [
+    "ui": [
         {
-            "actor-name": "load",
+            "ui-name": "load",
             "update-order": 0,
             "components": [
                 {
@@ -33,9 +33,30 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -2,
-                    "texture-path": "rom:/Assets/Textures/bg.tga",
-                    "texture-width": 150.0,
-                    "texture-height": 150.0
+                    "texture-path": "rom:/Assets/Textures/title_success_bg.tga",
+                    "texture-width": 1920.0,
+                    "texture-height": 1080.0
+                },
+                {
+                    "type": "text",
+                    "update-order": 0,
+                    "moji-path": "rom:/Assets/Textures/moji.tga",
+                    "init-text": "NOW LOADING ...",
+                    "init-size": [
+                        100.0,
+                        100.0
+                    ],
+                    "init-position": [
+                        -550.0,
+                        400.0,
+                        0.0
+                    ],
+                    "init-color": [
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0
+                    ]
                 }
             ]
         }
