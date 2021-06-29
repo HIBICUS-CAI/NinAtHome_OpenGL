@@ -96,7 +96,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -145,7 +145,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -194,7 +194,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -243,7 +243,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -292,7 +292,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -341,7 +341,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -390,7 +390,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -439,7 +439,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -488,7 +488,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -537,7 +537,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -586,7 +586,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -635,7 +635,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -684,7 +684,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -733,7 +733,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -782,7 +782,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -831,7 +831,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -880,7 +880,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -929,7 +929,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -978,7 +978,7 @@
                         350.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -1027,7 +1027,7 @@
                         3625.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -1076,7 +1076,7 @@
                         25.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 },
                 {
                     "type": "animate",
@@ -1157,7 +1157,7 @@
                         25.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 },
                 {
                     "type": "animate",
@@ -1238,7 +1238,7 @@
                         25.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 },
                 {
                     "type": "animate",
@@ -1319,7 +1319,7 @@
                         25.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 },
                 {
                     "type": "animate",
@@ -1400,7 +1400,7 @@
                         25.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 },
                 {
                     "type": "animate",
@@ -1481,7 +1481,7 @@
                         25.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 },
                 {
                     "type": "animate",
@@ -1562,7 +1562,7 @@
                         25.0,
                         70.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 },
                 {
                     "type": "animate",
@@ -1657,7 +1657,7 @@
                         18.0,
                         18.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -1720,7 +1720,7 @@
                         18.0,
                         18.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -1783,7 +1783,7 @@
                         18.0,
                         18.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 }
             ]
         },
@@ -1832,7 +1832,7 @@
                         100.0,
                         200.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 },
                 {
                     "type": "interaction",
@@ -1888,7 +1888,7 @@
                         46.0,
                         97.0
                     ],
-                    "show-flag": true
+                    "show-flag": false
                 },
                 {
                     "type": "animate",
