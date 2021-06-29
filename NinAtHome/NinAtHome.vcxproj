@@ -147,6 +147,7 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClInclude Include="ResultBtn.h" />
     <ClInclude Include="RunnerAndBg.h" />
     <ClInclude Include="TempTest.h" />
+    <ClInclude Include="TimeUi.h" />
     <ClInclude Include="TitleStartBtn.h" />
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +191,7 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClCompile Include="ResultBtn.cpp" />
     <ClCompile Include="RunnerAndBg.cpp" />
     <ClCompile Include="TempTest.cpp" />
+    <ClCompile Include="TimeUi.cpp" />
     <ClCompile Include="TitleStartBtn.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

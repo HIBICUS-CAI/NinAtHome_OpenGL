@@ -23,6 +23,7 @@
 #include "..\BulletCoin.h"
 #include "..\Board.h"
 #include "..\Flag.h"
+#include "..\TimeUi.h"
 // TEMP---------------------------------------------
 
 ObjectFactory::ObjectFactory() :
@@ -748,10 +749,10 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
             {
                 aitc->SetInitFunc(RunnerInit);
             }
-			else if (funcName == "BulletInit")
-			{
-				aitc->SetInitFunc(BulletInit);
-			}
+            else if (funcName == "BulletInit")
+            {
+                aitc->SetInitFunc(BulletInit);
+            }
             else if (funcName == "BoardInit")
             {
                 aitc->SetInitFunc(BoardInit);
@@ -773,10 +774,10 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
             {
                 aitc->SetUpdateFunc(RunnerUpdate);
             }
-			else if (funcName == "BulletUpdate")
-			{
-				aitc->SetUpdateFunc(BulletUpdate);
-			}
+            else if (funcName == "BulletUpdate")
+            {
+                aitc->SetUpdateFunc(BulletUpdate);
+            }
             else if (funcName == "BoardUpdate")
             {
                 aitc->SetUpdateFunc(BoardUpdate);
@@ -798,10 +799,10 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
             {
                 aitc->SetDestoryFunc(RunnerDestory);
             }
-			else if (funcName == "BulletDestory")
-			{
-				aitc->SetDestoryFunc(BulletDestory);
-			}
+            else if (funcName == "BulletDestory")
+            {
+                aitc->SetDestoryFunc(BulletDestory);
+            }
             else if (funcName == "BoardDestory")
             {
                 aitc->SetDestoryFunc(BoardDestory);
@@ -817,7 +818,7 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
     // ELSE----------------------------
     else
     {
-    MY_NN_LOG(LOG_ERROR,
+        MY_NN_LOG(LOG_ERROR,
             "this comp type doesn't exist [ %s ]\n",
             compType.c_str());
         return;
@@ -1131,27 +1132,33 @@ void ObjectFactory::AddUCompToUi(UiObject* _ui,
             _file, _nodePath + "/init-func-name");
         if (compNode && compNode->IsString())
         {
-            // TEMP--------------------
-            uitc->SetInitFunc(TestUiInit);
-            // TEMP--------------------
+            std::string funcName = compNode->GetString();
+            if (funcName == "TimeUiInit")
+            {
+                uitc->SetInitFunc(TimeInit);
+            }
         }
 
         compNode = GetJsonNode(
             _file, _nodePath + "/update-func-name");
         if (compNode && compNode->IsString())
         {
-            // TEMP--------------------
-            uitc->SetUpdateFunc(TestUiUpdate);
-            // TEMP--------------------
+            std::string funcName = compNode->GetString();
+            if (funcName == "TimeUiUpdate")
+            {
+                uitc->SetUpdateFunc(TimeUpdate);
+            }
         }
 
         compNode = GetJsonNode(
             _file, _nodePath + "/destory-func-name");
         if (compNode && compNode->IsString())
         {
-            // TEMP--------------------
-            uitc->SetDestoryFunc(TestUiDestory);
-            // TEMP--------------------
+            std::string funcName = compNode->GetString();
+            if (funcName == "TimeUiDestory")
+            {
+                uitc->SetDestoryFunc(TimeDestory);
+            }
         }
     }
 
@@ -1278,7 +1285,7 @@ void ObjectFactory::AddUCompToUi(UiObject* _ui,
     // ELSE----------------------------
     else
     {
-    MY_NN_LOG(LOG_ERROR,
+        MY_NN_LOG(LOG_ERROR,
             "this comp type doesn't exist [ %s ]\n",
             compType.c_str());
         return;

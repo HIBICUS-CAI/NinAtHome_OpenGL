@@ -189,6 +189,9 @@
     <ClInclude Include="Flag.h">
       <Filter>03_Temp</Filter>
     </ClInclude>
+    <ClInclude Include="TimeUi.h">
+      <Filter>03_Temp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -312,6 +315,9 @@
       <Filter>03_Temp</Filter>
     </ClCompile>
     <ClCompile Include="Flag.cpp">
+      <Filter>03_Temp</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeUi.cpp">
       <Filter>03_Temp</Filter>
     </ClCompile>
   </ItemGroup>

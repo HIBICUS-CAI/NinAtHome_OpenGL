@@ -707,5 +707,73 @@
             ]
         }
     ],
-    "ui": []
+    "ui": [
+        {
+            "ui-name":"time-ui",
+            "update-order":0,
+            "parent":null,
+            "components":[
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "rotation": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "scale": [
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    "type": "interaction",
+                    "update-order": 0,
+                    "init-func-name": "TimeUiInit",
+                    "update-func-name": "TimeUiUpdate",
+                    "destory-func-name": "TimeUiDestory"
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": 0,
+                    "texture-path": null,
+                    "texture-width": 0.0,
+                    "texture-height": 0.0
+                },
+                {
+                    "type": "text",
+                    "update-order": 0,
+                    "moji-path": "rom:/Assets/Textures/moji.tga",
+                    "init-text": "REST : ",
+                    "init-size": [
+                        80.0,
+                        80.0
+                    ],
+                    "init-position": [
+                        -900.0,
+                        -500.0,
+                        0.0
+                    ],
+                    "init-color": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                }
+            ]
+        }
+    ]
 }
