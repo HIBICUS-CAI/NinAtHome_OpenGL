@@ -77,11 +77,13 @@ void RunnerInput(AInputComponent* _aic, float _deltatime)
     static bool shouldSetWalk = true;
     if (GetControllerTrigger(NpadButton::B::Index))
     {
+        SetControllerLeftVibration(5);
+        SetControllerRightVibration(5);
         if (owner && g_CanJump)
         {
             ((ATransformComponent*)(owner->
                 GetAComponent("runner-actor-transform")))->
-                TranslateYAsix(-15.f);
+                TranslateYAsix(-20.f);
             g_CanJump = false;
             g_VVel = 600.f;
             shouldSetWalk = true;
@@ -107,6 +109,8 @@ void RunnerInput(AInputComponent* _aic, float _deltatime)
 
     if (GetControllerTrigger(NpadButton::ZR::Index) && owner)
     {
+        SetControllerLeftVibration(5);
+        SetControllerRightVibration(5);
         CreateNewBullet(((ATransformComponent*)(owner->
             GetAComponent("runner-actor-transform")))->
             GetPosition(), owner->GetSceneNodePtr());
