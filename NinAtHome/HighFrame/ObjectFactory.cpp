@@ -21,6 +21,7 @@
 #include "..\ResultBtn.h"
 #include "..\RunnerAndBg.h"
 #include "..\BulletCoin.h"
+#include "..\Board.h"
 // TEMP---------------------------------------------
 
 ObjectFactory::ObjectFactory() :
@@ -754,6 +755,10 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
 			{
 				aitc->SetInitFunc(BulletParentInit);
 			}
+            else if (funcName == "BoardInit")
+            {
+                aitc->SetInitFunc(BoardInit);
+            }
             // TEMP----------------------------
         }
 
@@ -771,6 +776,10 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
 			{
 				aitc->SetUpdateFunc(BulletUpdate);
 			}
+            else if (funcName == "BoardUpdate")
+            {
+                aitc->SetUpdateFunc(BoardUpdate);
+            }
             // TEMP----------------------------
         }
 
@@ -788,6 +797,10 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
 			{
 				aitc->SetDestoryFunc(BulletDestory);
 			}
+            else if (funcName == "BoardDestory")
+            {
+                aitc->SetDestoryFunc(BoardDestory);
+            }
             // TEMP----------------------------
         }
     }

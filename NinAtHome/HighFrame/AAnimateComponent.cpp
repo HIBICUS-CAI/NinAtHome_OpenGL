@@ -16,7 +16,7 @@ AAnimateComponent::AAnimateComponent(std::string _name,
     ActorObject* _owner, int _order) :
     AComponent(_name, _owner, _order), mAnimates({}),
     mCurrentAnimateCut(0), mCurrentAnimate(nullptr),
-    mAnimateChangedFlg(false)
+    mAnimateChangedFlg(false), mTimeCounter(0.f)
 {
     mAnimates.clear();
 }
@@ -33,11 +33,9 @@ void AAnimateComponent::CompInit()
 
 void AAnimateComponent::CompUpdate(float _deltatime)
 {
-    static float timeCounter = 0.f;
-
     if (mAnimateChangedFlg)
     {
-        timeCounter = 0.f;
+        mTimeCounter = 0.f;
         mAnimateChangedFlg = false;
         ResetCurrentAnimateCut();
         SetThisAnimateToTextureComp(mCurrentAnimate,
@@ -46,9 +44,9 @@ void AAnimateComponent::CompUpdate(float _deltatime)
 
     if (mCurrentAnimate)
     {
-        if (timeCounter > mCurrentAnimate->SwitchTime)
+        if (mTimeCounter > mCurrentAnimate->SwitchTime)
         {
-            timeCounter = 0.f;
+            mTimeCounter = 0.f;
             ++mCurrentAnimateCut;
             if (mCurrentAnimateCut >= mCurrentAnimate->MaxCut)
             {
@@ -65,7 +63,7 @@ void AAnimateComponent::CompUpdate(float _deltatime)
             SetThisAnimateToTextureComp(mCurrentAnimate,
                 mCurrentAnimateCut);
         }
-        timeCounter += _deltatime;
+        mTimeCounter += _deltatime;
     }
 }
 

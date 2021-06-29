@@ -183,6 +183,9 @@
     <ClInclude Include="BulletCoin.h">
       <Filter>03_Temp</Filter>
     </ClInclude>
+    <ClInclude Include="Board.h">
+      <Filter>03_Temp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -300,6 +303,9 @@
       <Filter>03_Temp</Filter>
     </ClCompile>
     <ClCompile Include="BulletCoin.cpp">
+      <Filter>03_Temp</Filter>
+    </ClCompile>
+    <ClCompile Include="Board.cpp">
       <Filter>03_Temp</Filter>
     </ClCompile>
   </ItemGroup>

@@ -58,4 +58,6 @@ private:
     ANIMATE_INFO* mCurrentAnimate;
 
     bool mAnimateChangedFlg;
+
+    float mTimeCounter;
 };
