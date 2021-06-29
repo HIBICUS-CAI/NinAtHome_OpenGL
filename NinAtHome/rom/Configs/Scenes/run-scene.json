@@ -996,7 +996,7 @@
                         0.0
                     ],
                     "position": [
-                        2712.5,
+                        3012.5,
                         -565.0,
                         0.0
                     ],
@@ -1128,6 +1128,411 @@
                     "position": [
                         645.0,
                         350.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        0.0,
+                        0.0,
+                        90.0
+                    ],
+                    "scale": [
+                        2.0,
+                        2.0,
+                        1.0
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -1,
+                    "texture-path": "rom:/Assets/Textures/wood.tga",
+                    "texture-width": 70.0,
+                    "texture-height": 25.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        25.0,
+                        70.0
+                    ],
+                    "show-flag": true
+                },
+                {
+                    "type": "animate",
+                    "update-order": 0,
+                    "animates": [
+                        {
+                            "animate-name": "explosion",
+                            "animate-path": "rom:/Assets/Textures/explosion.tga",
+                            "animate-stride": [
+                                0.142857,
+                                0.5
+                            ],
+                            "max-count": 14,
+                            "repeat-flag": false,
+                            "frame-time": 0.1
+                        }
+                    ],
+                    "init-animate": null
+                },
+                {
+                    "type": "timer",
+                    "update-order": 0,
+                    "timers": [
+                        "explosion"
+                    ]
+                },
+                {
+                    "type": "interaction",
+                    "update-order": 0,
+                    "init-func-name": "BoardInit",
+                    "update-func-name": "BoardUpdate",
+                    "destory-func-name": "BoardDestory"
+                }
+            ]
+        },
+        {
+            "actor-name": "wood-3-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        1770.0,
+                        -5.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        0.0,
+                        0.0,
+                        90.0
+                    ],
+                    "scale": [
+                        2.0,
+                        2.0,
+                        1.0
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -1,
+                    "texture-path": "rom:/Assets/Textures/wood.tga",
+                    "texture-width": 70.0,
+                    "texture-height": 25.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        25.0,
+                        70.0
+                    ],
+                    "show-flag": true
+                },
+                {
+                    "type": "animate",
+                    "update-order": 0,
+                    "animates": [
+                        {
+                            "animate-name": "explosion",
+                            "animate-path": "rom:/Assets/Textures/explosion.tga",
+                            "animate-stride": [
+                                0.142857,
+                                0.5
+                            ],
+                            "max-count": 14,
+                            "repeat-flag": false,
+                            "frame-time": 0.1
+                        }
+                    ],
+                    "init-animate": null
+                },
+                {
+                    "type": "timer",
+                    "update-order": 0,
+                    "timers": [
+                        "explosion"
+                    ]
+                },
+                {
+                    "type": "interaction",
+                    "update-order": 0,
+                    "init-func-name": "BoardInit",
+                    "update-func-name": "BoardUpdate",
+                    "destory-func-name": "BoardDestory"
+                }
+            ]
+        },
+        {
+            "actor-name": "wood-4-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        3495.0,
+                        -120.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        0.0,
+                        0.0,
+                        90.0
+                    ],
+                    "scale": [
+                        2.0,
+                        2.0,
+                        1.0
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -1,
+                    "texture-path": "rom:/Assets/Textures/wood.tga",
+                    "texture-width": 70.0,
+                    "texture-height": 25.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        25.0,
+                        70.0
+                    ],
+                    "show-flag": true
+                },
+                {
+                    "type": "animate",
+                    "update-order": 0,
+                    "animates": [
+                        {
+                            "animate-name": "explosion",
+                            "animate-path": "rom:/Assets/Textures/explosion.tga",
+                            "animate-stride": [
+                                0.142857,
+                                0.5
+                            ],
+                            "max-count": 14,
+                            "repeat-flag": false,
+                            "frame-time": 0.1
+                        }
+                    ],
+                    "init-animate": null
+                },
+                {
+                    "type": "timer",
+                    "update-order": 0,
+                    "timers": [
+                        "explosion"
+                    ]
+                },
+                {
+                    "type": "interaction",
+                    "update-order": 0,
+                    "init-func-name": "BoardInit",
+                    "update-func-name": "BoardUpdate",
+                    "destory-func-name": "BoardDestory"
+                }
+            ]
+        },
+        {
+            "actor-name": "wood-5-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        4020.0,
+                        80.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        0.0,
+                        0.0,
+                        90.0
+                    ],
+                    "scale": [
+                        2.0,
+                        2.0,
+                        1.0
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -1,
+                    "texture-path": "rom:/Assets/Textures/wood.tga",
+                    "texture-width": 70.0,
+                    "texture-height": 25.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        25.0,
+                        70.0
+                    ],
+                    "show-flag": true
+                },
+                {
+                    "type": "animate",
+                    "update-order": 0,
+                    "animates": [
+                        {
+                            "animate-name": "explosion",
+                            "animate-path": "rom:/Assets/Textures/explosion.tga",
+                            "animate-stride": [
+                                0.142857,
+                                0.5
+                            ],
+                            "max-count": 14,
+                            "repeat-flag": false,
+                            "frame-time": 0.1
+                        }
+                    ],
+                    "init-animate": null
+                },
+                {
+                    "type": "timer",
+                    "update-order": 0,
+                    "timers": [
+                        "explosion"
+                    ]
+                },
+                {
+                    "type": "interaction",
+                    "update-order": 0,
+                    "init-func-name": "BoardInit",
+                    "update-func-name": "BoardUpdate",
+                    "destory-func-name": "BoardDestory"
+                }
+            ]
+        },
+        {
+            "actor-name": "wood-6-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        4370.0,
+                        -60.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        0.0,
+                        0.0,
+                        90.0
+                    ],
+                    "scale": [
+                        2.0,
+                        2.0,
+                        1.0
+                    ]
+                },
+                {
+                    "type": "sprite",
+                    "update-order": 0,
+                    "draw-order": -1,
+                    "texture-path": "rom:/Assets/Textures/wood.tga",
+                    "texture-width": 70.0,
+                    "texture-height": 25.0
+                },
+                {
+                    "type": "collision",
+                    "update-order": 0,
+                    "collision-type": "rectangle",
+                    "collision-size": [
+                        25.0,
+                        70.0
+                    ],
+                    "show-flag": true
+                },
+                {
+                    "type": "animate",
+                    "update-order": 0,
+                    "animates": [
+                        {
+                            "animate-name": "explosion",
+                            "animate-path": "rom:/Assets/Textures/explosion.tga",
+                            "animate-stride": [
+                                0.142857,
+                                0.5
+                            ],
+                            "max-count": 14,
+                            "repeat-flag": false,
+                            "frame-time": 0.1
+                        }
+                    ],
+                    "init-animate": null
+                },
+                {
+                    "type": "timer",
+                    "update-order": 0,
+                    "timers": [
+                        "explosion"
+                    ]
+                },
+                {
+                    "type": "interaction",
+                    "update-order": 0,
+                    "init-func-name": "BoardInit",
+                    "update-func-name": "BoardUpdate",
+                    "destory-func-name": "BoardDestory"
+                }
+            ]
+        },
+        {
+            "actor-name": "wood-7-actor",
+            "update-order": 0,
+            "parent": null,
+            "components": [
+                {
+                    "type": "transform",
+                    "update-order": -1,
+                    "init-value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "position": [
+                        4570.0,
+                        -60.0,
                         0.0
                     ],
                     "rotation": [
@@ -1396,8 +1801,8 @@
                         0.0
                     ],
                     "position": [
-                        -1070.0,
-                        280.0,
+                        4920.0,
+                        -200.0,
                         0.0
                     ],
                     "rotation": [
@@ -1542,10 +1947,10 @@
     ],
     "ui": [
         {
-            "ui-name":"time-ui",
-            "update-order":0,
-            "parent":null,
-            "components":[
+            "ui-name": "time-ui",
+            "update-order": 0,
+            "parent": null,
+            "components": [
                 {
                     "type": "transform",
                     "update-order": -1,

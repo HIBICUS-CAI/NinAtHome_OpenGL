@@ -125,7 +125,7 @@ void BulletUpdate(AInteractionComponent* _aitc, float _deltatime)
         }
 
         ActorObject* board = nullptr;
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 7; i++)
         {
             std::string name =
                 "wood-" + std::to_string(i + 1) + "-actor";

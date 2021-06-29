@@ -1,11 +1,11 @@
 #include "TimeUi.h"
 
-static float g_TimeLimit = 40.f;
+static float g_TimeLimit = 45.f;
 static Float4 g_Color;
 
 void TimeInit(UInteractionComponent* _uitc)
 {
-    g_TimeLimit = 40.f;
+    g_TimeLimit = 45.f;
     g_Color = MakeFloat4(0.f, 0.f, 0.f, 1.f);
 }
 
@@ -13,7 +13,7 @@ void TimeUpdate(UInteractionComponent* _uitc, float _deltatime)
 {
     std::string showTime = "REST : " +
         std::to_string(g_TimeLimit) + " sec";
-    float redOffset = (g_TimeLimit / 40.f);
+    float redOffset = (g_TimeLimit / 45.f);
     Float4 colorOffset = MakeFloat4(
         1.f - redOffset, 0.f, 0.f, 1.f);
     ((UTextComponent*)
