@@ -24,7 +24,11 @@ ACollisionComponent::ACollisionComponent(std::string _name,
     mCircleTexture(0), mRectangleTexture(0),
     mColliedColor(MakeFloat4(1.f, 1.f, 1.f, 1.f))
 {
-
+    mCircleTexture = LoadTexture(
+        "rom:/Assets/Textures/collision-circ.tga");
+    mRectangleTexture = LoadTexture(
+        "rom:/Assets/Textures/collision-rect.tga");
+    mColliedColor = NOT_COLLIED;
 }
 
 ACollisionComponent::~ACollisionComponent()
@@ -34,11 +38,7 @@ ACollisionComponent::~ACollisionComponent()
 
 void ACollisionComponent::CompInit()
 {
-    mCircleTexture = LoadTexture(
-        "rom:/Assets/Textures/collision-circ.tga");
-    mRectangleTexture = LoadTexture(
-        "rom:/Assets/Textures/collision-rect.tga");
-    mColliedColor = NOT_COLLIED;
+    
 }
 
 void ACollisionComponent::CompUpdate(float _deltatime)

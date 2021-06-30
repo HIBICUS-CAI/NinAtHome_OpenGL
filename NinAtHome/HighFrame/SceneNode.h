@@ -29,6 +29,8 @@ public:
 
     class SceneManager* GetSceneManagerPtr() const;
 
+    void ResetSceneNode();
+
     class ActorObject* GetActorObject(std::string _name);
 
     class UiObject* GetUiObject(std::string _name);

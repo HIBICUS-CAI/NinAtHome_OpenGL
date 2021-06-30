@@ -37,6 +37,399 @@ ObjectFactory::~ObjectFactory()
 
 }
 
+void ObjectFactory::ResetSceneNode(SceneNode* _scene,
+    std::string _configPath)
+{
+    JsonFile config = {};
+    LoadJsonFile(&config, _configPath);
+    if (config.HasParseError())
+    {
+        MY_NN_LOG(LOG_ERROR,
+            "failed to parse json file [ %s ] with error [ %d ]\n",
+            _configPath.c_str(), config.GetParseError());
+        return;
+    }
+
+    if (config.HasMember("camera"))
+    {
+        if (config["camera"].Size() == 4)
+        {
+            _scene->GetCamera()->ResetCameraPos(
+                MakeFloat2(
+                    config["camera"][0].GetFloat(),
+                    config["camera"][1].GetFloat()));
+        }
+
+    }
+
+    unsigned int arraySize = config["actor"].Size();
+    std::vector<ActorObject*>* pActors = _scene->GetActorArray();
+    while (!pActors->empty())
+    {
+        auto pa = pActors->back();
+        pActors->pop_back();
+        pa->SetObjectActive(STATUS::NEED_INIT);
+        for (unsigned int i = 0; i < arraySize; i++)
+        {
+            std::string name =
+                config["actor"][i]["actor-name"].GetString();
+            if (name == pa->GetObjectName())
+            {
+                ResetAComp(pa, &config,
+                    "/actor/" +
+                    std::to_string(i) + "/components");
+            }
+        }
+        _scene->AddActorObject(pa);
+    }
+
+    arraySize = config["ui"].Size();
+    std::vector<UiObject*>* pUis = _scene->GetUiArray();
+    while (!pUis->empty())
+    {
+        auto pu = pUis->back();
+        pUis->pop_back();
+        pu->SetObjectActive(STATUS::NEED_INIT);
+        for (unsigned int i = 0; i < arraySize; i++)
+        {
+            std::string name =
+                config["ui"][i]["ui-name"].GetString();
+            if (name == pu->GetObjectName())
+            {
+                ResetUComp(pu, &config,
+                    "/ui/" +
+                    std::to_string(i) + "/components");
+            }
+        }
+        _scene->AddUiObject(pu);
+    }
+}
+
+void ObjectFactory::ResetAComp(ActorObject* _actor,
+    JsonFile* _file, std::string _nodePath)
+{
+    JsonNode compStart = GetJsonNode(_file, _nodePath);
+    unsigned int compSize = compStart->Size();
+    std::string objName = _actor->GetObjectName();
+    for (unsigned int i = 0; i < compSize; i++)
+    {
+        JsonNode comp = GetJsonNode(_file,
+            _nodePath + "/" + std::to_string(i) + "/type");
+        JsonNode node = nullptr;
+        std::string compType = comp->GetString();
+        AComponent* pComp = _actor->GetAComponent(
+            _actor->GetObjectName() + "-" + compType);
+        pComp->SetCompActive(STATUS::NEED_INIT);
+
+        if (compType == "transform")
+        {
+            ATransformComponent* atc =
+                (ATransformComponent*)pComp;
+
+            node = GetJsonNode(_file,
+                _nodePath + "/" + std::to_string(i) +
+                "/position/0");
+            if (!node->IsNull())
+            {
+                float value[3] = { 0.f,0.f,0.f };
+                for (int j = 0; j < 3; j++)
+                {
+                    node = GetJsonNode(_file,
+                        _nodePath + "/" + std::to_string(i) +
+                        "/position/" + std::to_string(j));
+                    value[j] = node->GetFloat();
+                }
+                atc->SetPosition(
+                    MakeFloat3(value[0], value[1], value[2]));
+            }
+            else
+            {
+                atc->SetPosition(
+                    MakeFloat3(0.f, 0.f, 0.f));
+            }
+
+            node = GetJsonNode(_file,
+                _nodePath + "/" + std::to_string(i) +
+                "/rotation/0");
+            if (!node->IsNull())
+            {
+                float value[3] = { 0.f,0.f,0.f };
+                for (int j = 0; j < 3; j++)
+                {
+                    node = GetJsonNode(_file,
+                        _nodePath + "/" + std::to_string(i) +
+                        "/rotation/" + std::to_string(j));
+                    value[j] = node->GetFloat();
+                }
+                atc->SetRotation(
+                    MakeFloat3(value[0], value[1], value[2]));
+            }
+            else
+            {
+                atc->SetRotation(
+                    MakeFloat3(0.f, 0.f, 0.f));
+            }
+
+            node = GetJsonNode(_file,
+                _nodePath + "/" + std::to_string(i) +
+                "/scale/0");
+            if (!node->IsNull())
+            {
+                float value[3] = { 0.f,0.f,0.f };
+                for (int j = 0; j < 3; j++)
+                {
+                    node = GetJsonNode(_file,
+                        _nodePath + "/" + std::to_string(i) +
+                        "/scale/" + std::to_string(j));
+                    value[j] = node->GetFloat();
+                }
+                atc->SetScale(
+                    MakeFloat3(value[0], value[1], value[2]));
+            }
+            else
+            {
+                atc->SetScale(
+                    MakeFloat3(1.f, 1.f, 1.f));
+            }
+        }
+
+        else if (compType == "sprite")
+        {
+            ASpriteComponent* asc = (ASpriteComponent*)pComp;
+            node = GetJsonNode(_file, _nodePath + "/" +
+                std::to_string(i) + "/texture-width");
+            asc->SetTexWidth(node->GetFloat());
+            node = GetJsonNode(_file, _nodePath + "/" +
+                std::to_string(i) + "/texture-height");
+            asc->SetTexHeight(node->GetFloat());
+            asc->ResetFirstTexture();
+        }
+
+        else if (compType == "collision")
+        {
+            ACollisionComponent* acc =
+                (ACollisionComponent*)pComp;
+            node = GetJsonNode(_file, _nodePath + "/" +
+                std::to_string(i) + "/collision-type");
+            {
+                std::string type = node->GetString();
+                if (type == "circle")
+                {
+                    acc->SetCollisionType(COLLISION_TYPE::CIRCLE);
+                }
+                else if (type == "rectangle")
+                {
+                    acc->SetCollisionType(COLLISION_TYPE::RECTANGLE);
+                }
+                else
+                {
+
+                }
+            }
+            float value[2] = { 0.f,0.f };
+            node = GetJsonNode(_file, _nodePath + "/" +
+                std::to_string(i) + "/collision-size/0");
+            value[0] = node->GetFloat();
+            node = GetJsonNode(_file, _nodePath + "/" +
+                std::to_string(i) + "/collision-size/1");
+            value[1] = node->GetFloat();
+            acc->SetCollisionSize(MakeFloat2(value[0], value[1]));
+        }
+
+        else if (compType == "input")
+        {
+
+        }
+
+        else if (compType == "timer")
+        {
+            ATimerComponent* atic =
+                (ATimerComponent*)pComp;
+            node = GetJsonNode(_file, _nodePath + "/" +
+                std::to_string(i) + "/timers");
+            unsigned int timerSize = node->Size();
+            for (unsigned int j = 0; j < timerSize; j++)
+            {
+                node = GetJsonNode(_file, _nodePath + "/" +
+                    std::to_string(i) + "/timers/" +
+                    std::to_string(j));
+                std::string timerName = node->GetString();
+                atic->PauseTimer(timerName);
+                atic->ResetTimer(timerName);
+            }
+        }
+
+        else if (compType == "animate")
+        {
+
+        }
+
+        else if (compType == "interaction")
+        {
+
+        }
+
+        else
+        {
+            MY_NN_LOG(LOG_ERROR, "you fuck up\n");
+        }
+    }
+}
+
+void ObjectFactory::ResetUComp(UiObject* _ui,
+    JsonFile* _file, std::string _nodePath)
+{
+    JsonNode compStart = GetJsonNode(_file, _nodePath);
+    unsigned int compSize = compStart->Size();
+    std::string objName = _ui->GetObjectName();
+    for (unsigned int i = 0; i < compSize; i++)
+    {
+        JsonNode comp = GetJsonNode(_file,
+            _nodePath + "/" + std::to_string(i) + "/type");
+        JsonNode node = nullptr;
+        std::string compType = comp->GetString();
+        UComponent* pComp = _ui->GetUComponent(
+            _ui->GetObjectName() + "-" + compType);
+        pComp->SetCompActive(STATUS::NEED_INIT);
+
+        if (compType == "transform")
+        {
+            UTransformComponent* utc =
+                (UTransformComponent*)pComp;
+
+            node = GetJsonNode(_file,
+                _nodePath + "/" + std::to_string(i) +
+                "/position/0");
+            if (!node->IsNull())
+            {
+                float value[3] = { 0.f,0.f,0.f };
+                for (int j = 0; j < 3; j++)
+                {
+                    node = GetJsonNode(_file,
+                        _nodePath + "/" + std::to_string(i) +
+                        "/position/" + std::to_string(j));
+                    value[j] = node->GetFloat();
+                }
+                utc->SetPosition(
+                    MakeFloat3(value[0], value[1], value[2]));
+            }
+            else
+            {
+                utc->SetPosition(
+                    MakeFloat3(0.f, 0.f, 0.f));
+            }
+
+            node = GetJsonNode(_file,
+                _nodePath + "/" + std::to_string(i) +
+                "/rotation/0");
+            if (!node->IsNull())
+            {
+                float value[3] = { 0.f,0.f,0.f };
+                for (int j = 0; j < 3; j++)
+                {
+                    node = GetJsonNode(_file,
+                        _nodePath + "/" + std::to_string(i) +
+                        "/rotation/" + std::to_string(j));
+                    value[j] = node->GetFloat();
+                }
+                utc->SetRotation(
+                    MakeFloat3(value[0], value[1], value[2]));
+            }
+            else
+            {
+                utc->SetRotation(
+                    MakeFloat3(0.f, 0.f, 0.f));
+            }
+
+            node = GetJsonNode(_file,
+                _nodePath + "/" + std::to_string(i) +
+                "/scale/0");
+            if (!node->IsNull())
+            {
+                float value[3] = { 0.f,0.f,0.f };
+                for (int j = 0; j < 3; j++)
+                {
+                    node = GetJsonNode(_file,
+                        _nodePath + "/" + std::to_string(i) +
+                        "/scale/" + std::to_string(j));
+                    value[j] = node->GetFloat();
+                }
+                utc->SetScale(
+                    MakeFloat3(value[0], value[1], value[2]));
+            }
+            else
+            {
+                utc->SetScale(
+                    MakeFloat3(1.f, 1.f, 1.f));
+            }
+        }
+
+        else if (compType == "sprite")
+        {
+
+        }
+
+        else if (compType == "input")
+        {
+
+        }
+
+        else if (compType == "btnmap")
+        {
+
+        }
+
+        else if (compType == "interaction")
+        {
+
+        }
+
+        else if (compType == "text")
+        {
+            UTextComponent* utxc = (UTextComponent*)pComp;
+            node = GetJsonNode(_file,
+                _nodePath + "/" + std::to_string(i) +
+                "/init-text");
+            utxc->ChangeTextString(node->GetString());
+            float value[4] = { 0.f,0.f,0.f,0.f };
+
+            for (int j = 0; j < 2; j++)
+            {
+                node = GetJsonNode(_file,
+                    _nodePath + "/" + std::to_string(i) +
+                    "/init-size/" + std::to_string(j));
+                value[j] = node->GetFloat();
+            }
+            utxc->SetFontSize(MakeFloat2(value[0], value[1]));
+
+            for (int j = 0; j < 3; j++)
+            {
+                node = GetJsonNode(_file,
+                    _nodePath + "/" + std::to_string(i) +
+                    "/init-position/" + std::to_string(j));
+                value[j] = node->GetFloat();
+            }
+            utxc->SetTextPosition(
+                MakeFloat3(value[0], value[1], value[2]));
+
+            for (int j = 0; j < 4; j++)
+            {
+                node = GetJsonNode(_file,
+                    _nodePath + "/" + std::to_string(i) +
+                    "/init-color/" + std::to_string(j));
+                value[j] = node->GetFloat();
+            }
+            utxc->SetTextColor(MakeFloat4(value[0], value[1],
+                value[2], value[3]));
+        }
+
+        else
+        {
+            MY_NN_LOG(LOG_ERROR, "you fuck up\n");
+        }
+    }
+}
+
 bool ObjectFactory::StartUp(PropertyManager* _pmPtr,
     SceneManager* _smPtr)
 {
@@ -79,7 +472,7 @@ SceneNode* ObjectFactory::CreateNewScene(std::string _name,
     node->InitCamera(
         MakeFloat2(0.f, 0.f), MakeFloat2(1920.f, 1080.f));
 
-    if (config.HasMember("camera") && config["actor"].Size() == 4)
+    if (config.HasMember("camera") && config["camera"].Size() == 4)
     {
         node->InitCamera(
             MakeFloat2(

@@ -26,6 +26,9 @@ public:
     class SceneNode* CreateNewScene(std::string _name,
         std::string _configPath);
 
+    void ResetSceneNode(class SceneNode* _scene,
+        std::string _configPath);
+
 private:
     class ActorObject* CreateNewAObject(JsonFile* _file,
         std::string _nodePath, class SceneNode* _scene);
@@ -43,6 +46,12 @@ private:
         JsonFile* _file, std::string _nodePath);
 
     void AddUCompToUi(class UiObject* _ui,
+        JsonFile* _file, std::string _nodePath);
+
+    void ResetAComp(class ActorObject* _actor,
+        JsonFile* _file, std::string _nodePath);
+
+    void ResetUComp(class UiObject* _ui,
         JsonFile* _file, std::string _nodePath);
 
 private:

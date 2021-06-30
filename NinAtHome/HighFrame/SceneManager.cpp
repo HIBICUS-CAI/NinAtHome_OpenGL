@@ -169,6 +169,7 @@ void SceneManager::LoadNextScene()
             mScenePool[i]->GetSceneName() == mLoadSceneInfo[0])
         {
             mNextScenePtr = mScenePool[i];
+            mNextScenePtr->ResetSceneNode();
             if (i)
             {
                 SceneNode* temp = mScenePool[0];

@@ -9,6 +9,7 @@
 
 #include "SceneNode.h"
 #include "SceneManager.h"
+#include "ObjectFactory.h"
 #include "ActorObject.h"
 #include "UiObject.h"
 #include "ASpriteComponent.h"
@@ -50,6 +51,12 @@ std::string SceneNode::GetSceneName() const
 SceneManager* SceneNode::GetSceneManagerPtr() const
 {
     return mSceneManagerPtr;
+}
+
+void SceneNode::ResetSceneNode()
+{
+    GetSceneManagerPtr()->GetObjectFactory()->
+        ResetSceneNode(this, mConfigPath);
 }
 
 ActorObject* SceneNode::GetActorObject(std::string _name)

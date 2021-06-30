@@ -149,6 +149,15 @@ void ASpriteComponent::ResetTexture(unsigned int _texture)
     mTexture = _texture;
 }
 
+void ASpriteComponent::ResetFirstTexture()
+{
+    if (mFirstTexture)
+    {
+        mTexture = mFirstTexture;
+        mFirstTexture = 0;
+    }
+}
+
 void ASpriteComponent::SetUVValue(Float4 _value)
 {
     mUVValue = _value;

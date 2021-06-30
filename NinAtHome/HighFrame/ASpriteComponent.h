@@ -47,6 +47,8 @@ public:
 
     void ResetTexture(unsigned int _texture);
 
+    void ResetFirstTexture();
+
     void SetUVValue(Float4 _value);
 
     void DrawASprite();
