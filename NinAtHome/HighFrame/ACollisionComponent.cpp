@@ -162,6 +162,12 @@ void ACollisionComponent::DrawACollision()
 
 bool ACollisionComponent::CheckCollisionWith(ActorObject* _obj)
 {
+    if (GetActorObjOwner()->IsObjectActive() != STATUS::ACTIVE ||
+        _obj->IsObjectActive() != STATUS::ACTIVE)
+    {
+        return false;
+    }
+
     SetColliedColor(false);
 
     if (!_obj)

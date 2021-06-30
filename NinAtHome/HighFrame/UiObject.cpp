@@ -134,11 +134,14 @@ void UiObject::Update(float _deltatime)
 
 void UiObject::UpdateComponents(float _deltatime)
 {
-    for (auto comp : mUCompArray)
+    if (IsObjectActive() == STATUS::ACTIVE)
     {
-        if (comp->IsCompActive() == STATUS::ACTIVE)
+        for (auto comp : mUCompArray)
         {
-            comp->CompUpdate(_deltatime);
+            if (comp->IsCompActive() == STATUS::ACTIVE)
+            {
+                comp->CompUpdate(_deltatime);
+            }
         }
     }
 }
@@ -205,7 +208,7 @@ void UiObject::ClearChild(std::string _name)
     {
         if ((*child)->GetObjectName() == _name)
         {
-            (*child)->SetObjectActive(STATUS::NEED_DESTORY);
+            (*child)->SetObjectActive(STATUS::PAUSE);
             mChildrenArray.erase(child);
             break;
         }
@@ -222,7 +225,7 @@ void UiObject::ClearChildren()
         {
             child->ClearChildren();
         }
-        child->SetObjectActive(STATUS::NEED_DESTORY);
+        child->SetObjectActive(STATUS::PAUSE);
     }
 
     mChildrenArray.clear();

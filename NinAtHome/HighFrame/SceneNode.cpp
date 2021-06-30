@@ -262,7 +262,7 @@ void SceneNode::DeleteActorObject(std::string _name)
     {
         if ((*aci)->GetObjectName() == _name)
         {
-            (*aci)->SetObjectActive(STATUS::NEED_DESTORY);
+            (*aci)->SetObjectActive(STATUS::PAUSE);
             (*aci)->ClearChildren();
             break;
         }
@@ -283,7 +283,7 @@ void SceneNode::DeleteUiObject(std::string _name)
     {
         if ((*uii)->GetObjectName() == _name)
         {
-            (*uii)->SetObjectActive(STATUS::NEED_DESTORY);
+            (*uii)->SetObjectActive(STATUS::PAUSE);
             (*uii)->ClearChildren();
             break;
         }

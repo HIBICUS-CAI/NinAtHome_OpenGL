@@ -13,7 +13,7 @@ void BoardUpdate(AInteractionComponent* _aitc, float _deltatime)
         GetTimer("explosion")->IsGreaterThan(1.5f))
     {
         _aitc->GetActorObjOwner()->SetObjectActive(
-            STATUS::NEED_DESTORY);
+            STATUS::PAUSE);
     }
 }
 

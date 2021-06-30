@@ -110,11 +110,14 @@ void ActorObject::Update(float _deltatime)
 
 void ActorObject::UpdateComponents(float _deltatime)
 {
-    for (auto comp : mACompArray)
+    if (IsObjectActive() == STATUS::ACTIVE)
     {
-        if (comp->IsCompActive() == STATUS::ACTIVE)
+        for (auto comp : mACompArray)
         {
-            comp->CompUpdate(_deltatime);
+            if (comp->IsCompActive() == STATUS::ACTIVE)
+            {
+                comp->CompUpdate(_deltatime);
+            }
         }
     }
 }
@@ -179,7 +182,7 @@ void ActorObject::ClearChild(std::string _name)
     {
         if ((*child)->GetObjectName() == _name)
         {
-            (*child)->SetObjectActive(STATUS::NEED_DESTORY);
+            (*child)->SetObjectActive(STATUS::PAUSE);
             mChildrenArray.erase(child);
             break;
         }
@@ -196,7 +199,7 @@ void ActorObject::ClearChildren()
         {
             child->ClearChildren();
         }
-        child->SetObjectActive(STATUS::NEED_DESTORY);
+        child->SetObjectActive(STATUS::PAUSE);
     }
 
     mChildrenArray.clear();
