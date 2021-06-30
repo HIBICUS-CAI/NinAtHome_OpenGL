@@ -74,7 +74,8 @@ SceneNode* ObjectFactory::CreateNewScene(std::string _name,
             _name.c_str());
         return nullptr;
     }
-    SceneNode* node = new SceneNode(_name, mSceneManagerPtr);
+    SceneNode* node = new SceneNode(_name, _configPath,
+        mSceneManagerPtr);
     node->InitCamera(
         MakeFloat2(0.f, 0.f), MakeFloat2(1920.f, 1080.f));
 

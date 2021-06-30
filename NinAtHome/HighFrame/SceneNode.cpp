@@ -15,9 +15,10 @@
 #include "USpriteComponent.h"
 #include "texture.h"
 
-SceneNode::SceneNode(std::string _name, SceneManager* smPtr) :
+SceneNode::SceneNode(std::string _name, std::string _path,
+    SceneManager* smPtr) :
     mName(_name), mSceneManagerPtr(smPtr), mCamera(nullptr),
-    mSceneLoopFuncPtr(nullptr),
+    mSceneLoopFuncPtr(nullptr), mConfigPath(_path),
     mActorObjectsMap({}), mActorObjectsArray({}),
     mUiObjectsMap({}), mUiObjectsArray({}),
     mActorSpritesArray({}), mUiSpritesArray({}),

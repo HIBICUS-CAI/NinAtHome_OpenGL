@@ -21,7 +21,7 @@ SceneManager::SceneManager() :
     mPropertyManagerPtr(nullptr), mObjectFactoryPtr(nullptr),
     mLoadingScenePtr(nullptr), mCurrentScenePtr(nullptr),
     mNextScenePtr(nullptr), mLoadSceneFlg(false),
-    mLoadSceneInfo({ "","" })
+    mLoadSceneInfo({ "","" }), mScenePool({ nullptr,nullptr })
 {
 
 }
@@ -77,8 +77,8 @@ void SceneManager::UpdateSceneManager(float _deltatime)
     /*NN_LOG(
         "final delta : %f\n", _deltatime);*/
 
-	static bool releaseFlg = false;
-	static SceneNode* needRelease = nullptr;
+    static bool releaseFlg = false;
+    static SceneNode* needRelease = nullptr;
 
     if (mLoadSceneFlg)
     {
@@ -86,8 +86,8 @@ void SceneManager::UpdateSceneManager(float _deltatime)
 
         if (mCurrentScenePtr)
         {
-			releaseFlg = false;
-			needRelease = mCurrentScenePtr;
+            releaseFlg = false;
+            needRelease = mCurrentScenePtr;
             /*mCurrentScenePtr->ReleaseScene();
             delete mCurrentScenePtr;*/
         }
@@ -112,21 +112,21 @@ void SceneManager::UpdateSceneManager(float _deltatime)
 
     if (mCurrentScenePtr == mLoadingScenePtr)
     {
-		if (needRelease && !releaseFlg)
-		{
-			releaseFlg = true;
-		}
-		else if (needRelease && releaseFlg)
-		{
-			needRelease->ReleaseScene();
-			delete needRelease;
-			needRelease = nullptr;
-			LoadNextScene();
-		}
-		else if (!needRelease)
-		{
-			LoadNextScene();
-		}
+        if (needRelease && !releaseFlg)
+        {
+            releaseFlg = true;
+        }
+        else if (needRelease && releaseFlg)
+        {
+            /*needRelease->ReleaseScene();
+            delete needRelease;*/
+            needRelease = nullptr;
+            LoadNextScene();
+        }
+        else if (!needRelease)
+        {
+            LoadNextScene();
+        }
     }
 }
 
@@ -163,6 +163,40 @@ void SceneManager::LoadNextScene()
 {
     MY_NN_LOG(LOG_MESSAGE, "ready to load next scene\n");
 
+    for (int i = 0; i < 2; i++)
+    {
+        if (mScenePool[i] &&
+            mScenePool[i]->GetSceneName() == mLoadSceneInfo[0])
+        {
+            mNextScenePtr = mScenePool[i];
+            if (i)
+            {
+                SceneNode* temp = mScenePool[0];
+                mScenePool[0] = mScenePool[1];
+                mScenePool[1] = temp;
+            }
+            return;
+        }
+    }
+
     mNextScenePtr = mObjectFactoryPtr->CreateNewScene(
         mLoadSceneInfo[0], mLoadSceneInfo[1]);
+
+    if (!mScenePool[0])
+    {
+        mScenePool[0] = mNextScenePtr;
+    }
+    else if (!mScenePool[1])
+    {
+        mScenePool[1] = mScenePool[0];
+        mScenePool[0] = mNextScenePtr;
+    }
+    else
+    {
+        SceneNode* needRelease = mScenePool[1];
+        mScenePool[1] = mScenePool[0];
+        mScenePool[0] = mNextScenePtr;
+        needRelease->ReleaseScene();
+        delete needRelease;
+    }
 }

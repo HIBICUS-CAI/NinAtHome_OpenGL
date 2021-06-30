@@ -54,5 +54,7 @@ private:
     bool mLoadSceneFlg;
 
     std::array<std::string, 2> mLoadSceneInfo;
+
+    std::array<class SceneNode*, 2> mScenePool;
 };
 

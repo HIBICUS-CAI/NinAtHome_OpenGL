@@ -21,7 +21,8 @@ using SceneLoopFuncType = void (*)();
 class SceneNode
 {
 public:
-    SceneNode(std::string _name, class SceneManager* smPtr);
+    SceneNode(std::string _name, std::string _path,
+        class SceneManager* smPtr);
     ~SceneNode();
 
     std::string GetSceneName() const;
@@ -73,6 +74,8 @@ private:
 
 private:
     const std::string mName;
+
+    const std::string mConfigPath;
 
     class SceneManager* mSceneManagerPtr;
 
