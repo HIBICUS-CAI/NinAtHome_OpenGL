@@ -37,6 +37,8 @@ public:
 
     void ResetCurrentAnimateCut();
 
+    void ClearCurrentAnimate();
+
     void ChangeAnimateTo(std::string _name);
 
 private:

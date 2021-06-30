@@ -112,6 +112,11 @@ void AAnimateComponent::ResetCurrentAnimateCut()
     mCurrentAnimateCut = 0;
 }
 
+void AAnimateComponent::ClearCurrentAnimate()
+{
+    mCurrentAnimate = nullptr;
+}
+
 void AAnimateComponent::ChangeAnimateTo(std::string _name)
 {
     if (mAnimates.find(_name) == mAnimates.end())

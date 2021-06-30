@@ -261,7 +261,16 @@ void ObjectFactory::ResetAComp(ActorObject* _actor,
 
         else if (compType == "animate")
         {
-
+            AAnimateComponent* aac = (AAnimateComponent*)pComp;
+            aac->ClearCurrentAnimate();
+            aac->ResetCurrentAnimateCut();
+            node = GetJsonNode(_file, _nodePath + "/" +
+                std::to_string(i) + "/init-animate");
+            if (!node->IsNull())
+            {
+                std::string aniName = node->GetString();
+                aac->ChangeAnimateTo(aniName);
+            }
         }
 
         else if (compType == "interaction")
