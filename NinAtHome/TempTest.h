@@ -4,6 +4,8 @@
 #include "Ui_all.h"
 #include "controller.h"
 
+void TempTestRegister(ObjectFactory* _factory);
+
 void TestInit(AInteractionComponent* _aitc);
 
 void TestUpdate(AInteractionComponent* _aitc, float _deltatime);

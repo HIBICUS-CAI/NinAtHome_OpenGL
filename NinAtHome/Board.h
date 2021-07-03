@@ -2,6 +2,8 @@
 
 #include "Actor_all.h"
 
+void BoardRegister(ObjectFactory* _factory);
+
 void BoardInit(AInteractionComponent* _aitc);
 
 void BoardUpdate(AInteractionComponent* _aitc, float _deltatime);

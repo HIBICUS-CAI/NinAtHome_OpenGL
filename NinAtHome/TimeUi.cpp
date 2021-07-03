@@ -3,13 +3,27 @@
 static float g_TimeLimit = 45.f;
 static Float4 g_Color;
 
-void TimeInit(UInteractionComponent* _uitc)
+void TimeUiRegister(ObjectFactory* _factory)
+{
+    auto init = _factory->GetUiInterInitPool();
+    auto update = _factory->GetUiInterUpdatePool();
+    auto destory = _factory->GetUiInterDestoryPool();
+
+    init->insert(std::make_pair(
+        FUNC_NAME(TimeUiInit), TimeUiInit));
+    update->insert(std::make_pair(
+        FUNC_NAME(TimeUiUpdate), TimeUiUpdate));
+    destory->insert(std::make_pair(
+        FUNC_NAME(TimeUiDestory), TimeUiDestory));
+}
+
+void TimeUiInit(UInteractionComponent* _uitc)
 {
     g_TimeLimit = 45.f;
     g_Color = MakeFloat4(0.f, 0.f, 0.f, 1.f);
 }
 
-void TimeUpdate(UInteractionComponent* _uitc, float _deltatime)
+void TimeUiUpdate(UInteractionComponent* _uitc, float _deltatime)
 {
     std::string showTime = "REST : " +
         std::to_string(g_TimeLimit) + " sec";
@@ -36,7 +50,7 @@ void TimeUpdate(UInteractionComponent* _uitc, float _deltatime)
     }
 }
 
-void TimeDestory(UInteractionComponent* _uitc)
+void TimeUiDestory(UInteractionComponent* _uitc)
 {
 
 }

@@ -1,6 +1,15 @@
 #include "ResultBtn.h"
 #include "controller.h"
 
+void ResultBtnRegister(ObjectFactory* _factory)
+{
+    auto pool = _factory->GetUiInputPool();
+    pool->insert(std::make_pair(
+        FUNC_NAME(RetryBtnInput), RetryBtnInput));
+    pool->insert(std::make_pair(
+        FUNC_NAME(TitleBtnInput), TitleBtnInput));
+}
+
 void RetryBtnInput(UInputComponent* _uic, float _deltatime)
 {
     UiObject* owner = _uic->GetUiObjOwner();

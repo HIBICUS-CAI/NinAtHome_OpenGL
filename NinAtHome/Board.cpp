@@ -1,5 +1,19 @@
 #include "Board.h"
 
+void BoardRegister(ObjectFactory* _factory)
+{
+    auto init = _factory->GetActorInterInitPool();
+    auto update = _factory->GetActorInterUpdatePool();
+    auto destory = _factory->GetActorInterDestoryPool();
+
+    init->insert(std::make_pair(
+        FUNC_NAME(BoardInit), BoardInit));
+    update->insert(std::make_pair(
+        FUNC_NAME(BoardUpdate), BoardUpdate));
+    destory->insert(std::make_pair(
+        FUNC_NAME(BoardDestory), BoardDestory));
+}
+
 void BoardInit(AInteractionComponent* _aitc)
 {
 

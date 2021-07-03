@@ -68,3 +68,5 @@ using UiInterUpdateFuncType = void(*)(
     class UInteractionComponent*, float);
 using UiInterDestoryFuncType = void(*)(
     class UInteractionComponent*);
+
+#define FUNC_NAME(funcName) #funcName

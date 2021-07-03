@@ -1,6 +1,13 @@
 #include "TitleStartBtn.h"
 #include "controller.h"
 
+void StartBtnRegister(ObjectFactory* _factory)
+{
+    auto pool = _factory->GetUiInputPool();
+    pool->insert(std::make_pair(
+        FUNC_NAME(StartBtnInput), StartBtnInput));
+}
+
 void StartBtnInput(UInputComponent* _uic, float _deltatime)
 {
     bool selected = ((UBtnMapComponent*)

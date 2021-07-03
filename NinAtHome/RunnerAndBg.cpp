@@ -2,6 +2,25 @@
 #include "controller.h"
 #include "BulletCoin.h"
 
+void RunnerAndBgRegister(ObjectFactory* _factory)
+{
+    auto aInputPool = _factory->GetActorInputPool();
+    auto aInitPool = _factory->GetActorInterInitPool();
+    auto aUpdatePool = _factory->GetActorInterUpdatePool();
+    auto aDestoryPool = _factory->GetActorInterDestoryPool();
+
+    aInputPool->insert(std::make_pair(
+        FUNC_NAME(HiddenCommandInput), HiddenCommandInput));
+    aInputPool->insert(std::make_pair(
+        FUNC_NAME(RunnerInput), RunnerInput));
+    aInitPool->insert(std::make_pair(
+        FUNC_NAME(RunnerInit), RunnerInit));
+    aUpdatePool->insert(std::make_pair(
+        FUNC_NAME(RunnerUpdate), RunnerUpdate));
+    aDestoryPool->insert(std::make_pair(
+        FUNC_NAME(RunnerDestory), RunnerDestory));
+}
+
 void HiddenCommandInput(AInputComponent* _aic, float _deltatime)
 {
     if (GetControllerTrigger(NpadButton::StickL::Index))

@@ -2,6 +2,7 @@
 
 #include "SceneManager.h"
 #include "SceneNode.h"
+#include "ObjectFactory.h"
 #include "UiObject.h"
 #include "UBtnMapComponent.h"
 #include "UInputComponent.h"

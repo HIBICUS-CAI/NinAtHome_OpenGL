@@ -27,7 +27,14 @@
 // TEMP---------------------------------------------
 
 ObjectFactory::ObjectFactory() :
-    mPropertyManagerPtr(nullptr), mSceneManagerPtr(nullptr)
+    mPropertyManagerPtr(nullptr), mSceneManagerPtr(nullptr),
+    mActorInputFunctionPool({}), mUiInputFunctionPool({}),
+    mActorInteractionInitFunctionPool({}),
+    mActorInteractionUpdateFunctionPool({}),
+    mActorInteractionDestoryFunctionPool({}),
+    mUiInteractionInitFunctionPool({}),
+    mUiInteractionUpdateFunctionPool({}),
+    mUiInteractionDestoryFunctionPool({})
 {
 
 }
@@ -35,6 +42,79 @@ ObjectFactory::ObjectFactory() :
 ObjectFactory::~ObjectFactory()
 {
 
+}
+
+bool ObjectFactory::StartUp(PropertyManager* _pmPtr,
+    SceneManager* _smPtr)
+{
+    mPropertyManagerPtr = _pmPtr;
+    mSceneManagerPtr = _smPtr;
+
+    bool result = true;
+
+    TempTestRegister(this);
+    StartBtnRegister(this);
+    ResultBtnRegister(this);
+    RunnerAndBgRegister(this);
+    BulletCoinRegister(this);
+    BoardRegister(this);
+    FlagRegister(this);
+    TimeUiRegister(this);
+
+    return result;
+}
+
+void ObjectFactory::CleanAndStop()
+{
+
+}
+
+std::unordered_map<std::string, ActorInputProcessFuncType>*
+ObjectFactory::GetActorInputPool()
+{
+    return &mActorInputFunctionPool;
+}
+
+std::unordered_map<std::string, UiInputProcessFuncType>*
+ObjectFactory::GetUiInputPool()
+{
+    return &mUiInputFunctionPool;
+}
+
+std::unordered_map<std::string, ActorInterInitFuncType>*
+ObjectFactory::GetActorInterInitPool()
+{
+    return &mActorInteractionInitFunctionPool;
+}
+
+std::unordered_map<std::string, ActorInterUpdateFuncType>*
+ObjectFactory::GetActorInterUpdatePool()
+{
+    return &mActorInteractionUpdateFunctionPool;
+}
+
+std::unordered_map<std::string, ActorInterDestoryFuncType>*
+ObjectFactory::GetActorInterDestoryPool()
+{
+    return &mActorInteractionDestoryFunctionPool;
+}
+
+std::unordered_map<std::string, UiInterInitFuncType>*
+ObjectFactory::GetUiInterInitPool()
+{
+    return &mUiInteractionInitFunctionPool;
+}
+
+std::unordered_map<std::string, UiInterUpdateFuncType>*
+ObjectFactory::GetUiInterUpdatePool()
+{
+    return &mUiInteractionUpdateFunctionPool;
+}
+
+std::unordered_map<std::string, UiInterDestoryFuncType>*
+ObjectFactory::GetUiInterDestoryPool()
+{
+    return &mUiInteractionDestoryFunctionPool;
 }
 
 void ObjectFactory::ResetSceneNode(SceneNode* _scene,
@@ -437,22 +517,6 @@ void ObjectFactory::ResetUComp(UiObject* _ui,
             MY_NN_LOG(LOG_ERROR, "you fuck up\n");
         }
     }
-}
-
-bool ObjectFactory::StartUp(PropertyManager* _pmPtr,
-    SceneManager* _smPtr)
-{
-    mPropertyManagerPtr = _pmPtr;
-    mSceneManagerPtr = _smPtr;
-
-    bool result = true;
-
-    return result;
-}
-
-void ObjectFactory::CleanAndStop()
-{
-
 }
 
 SceneNode* ObjectFactory::CreateNewScene(std::string _name,
@@ -916,17 +980,13 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
             _file, _nodePath + "/func-name");
         if (compNode && compNode->IsString())
         {
-            // TEMP----------------------------
             std::string funcName = compNode->GetString();
-            if (funcName == "HiddenCommandInput")
+            if (mActorInputFunctionPool.find(funcName) !=
+                mActorInputFunctionPool.end())
             {
-                aic->SetInputProcessFunc(HiddenCommandInput);
+                aic->SetInputProcessFunc(
+                    mActorInputFunctionPool[funcName]);
             }
-            else if (funcName == "RunnerInput")
-            {
-                aic->SetInputProcessFunc(RunnerInput);
-            }
-            // TEMP----------------------------
         }
     }
 
@@ -1146,75 +1206,39 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
             _file, _nodePath + "/init-func-name");
         if (compNode && compNode->IsString())
         {
-            // TEMP----------------------------
             std::string funcName = compNode->GetString();
-            if (funcName == "RunnerInit")
+            if (mActorInteractionInitFunctionPool.find(funcName) !=
+                mActorInteractionInitFunctionPool.end())
             {
-                aitc->SetInitFunc(RunnerInit);
+                aitc->SetInitFunc(
+                    mActorInteractionInitFunctionPool[funcName]);
             }
-            else if (funcName == "BulletInit")
-            {
-                aitc->SetInitFunc(BulletInit);
-            }
-            else if (funcName == "BoardInit")
-            {
-                aitc->SetInitFunc(BoardInit);
-            }
-            else if (funcName == "FlagInit")
-            {
-                aitc->SetInitFunc(FlagInit);
-            }
-            // TEMP----------------------------
         }
 
         compNode = GetJsonNode(
             _file, _nodePath + "/update-func-name");
         if (compNode && compNode->IsString())
         {
-            // TEMP----------------------------
             std::string funcName = compNode->GetString();
-            if (funcName == "RunnerUpdate")
+            if (mActorInteractionUpdateFunctionPool.find(funcName) !=
+                mActorInteractionUpdateFunctionPool.end())
             {
-                aitc->SetUpdateFunc(RunnerUpdate);
+                aitc->SetUpdateFunc(
+                    mActorInteractionUpdateFunctionPool[funcName]);
             }
-            else if (funcName == "BulletUpdate")
-            {
-                aitc->SetUpdateFunc(BulletUpdate);
-            }
-            else if (funcName == "BoardUpdate")
-            {
-                aitc->SetUpdateFunc(BoardUpdate);
-            }
-            else if (funcName == "FlagUpdate")
-            {
-                aitc->SetUpdateFunc(FlagUpdate);
-            }
-            // TEMP----------------------------
         }
 
         compNode = GetJsonNode(
             _file, _nodePath + "/destory-func-name");
         if (compNode && compNode->IsString())
         {
-            // TEMP----------------------------
             std::string funcName = compNode->GetString();
-            if (funcName == "RunnerDestory")
+            if (mActorInteractionDestoryFunctionPool.find(funcName) !=
+                mActorInteractionDestoryFunctionPool.end())
             {
-                aitc->SetDestoryFunc(RunnerDestory);
+                aitc->SetDestoryFunc(
+                    mActorInteractionDestoryFunctionPool[funcName]);
             }
-            else if (funcName == "BulletDestory")
-            {
-                aitc->SetDestoryFunc(BulletDestory);
-            }
-            else if (funcName == "BoardDestory")
-            {
-                aitc->SetDestoryFunc(BoardDestory);
-            }
-            else if (funcName == "FlagDestory")
-            {
-                aitc->SetDestoryFunc(FlagDestory);
-            }
-            // TEMP----------------------------
         }
     }
 
@@ -1424,29 +1448,13 @@ void ObjectFactory::AddUCompToUi(UiObject* _ui,
             _file, _nodePath + "/func-name");
         if (compNode && compNode->IsString())
         {
-            // TEMP----------------------------
             std::string funcName = compNode->GetString();
-            if (funcName == "TempUiInput")
+            if (mUiInputFunctionPool.find(funcName) !=
+                mUiInputFunctionPool.end())
             {
-                uic->SetInputProcessFunc(TempUiInput);
+                uic->SetInputProcessFunc(
+                    mUiInputFunctionPool[funcName]);
             }
-            else if (funcName == "TempUiInput")
-            {
-                uic->SetInputProcessFunc(TempUiInput);
-            }
-            else if (funcName == "StartBtnInput")
-            {
-                uic->SetInputProcessFunc(StartBtnInput);
-            }
-            else if (funcName == "RetryBtnInput")
-            {
-                uic->SetInputProcessFunc(RetryBtnInput);
-            }
-            else if (funcName == "TitleBtnInput")
-            {
-                uic->SetInputProcessFunc(TitleBtnInput);
-            }
-            // TEMP----------------------------
         }
     }
 
@@ -1536,9 +1544,11 @@ void ObjectFactory::AddUCompToUi(UiObject* _ui,
         if (compNode && compNode->IsString())
         {
             std::string funcName = compNode->GetString();
-            if (funcName == "TimeUiInit")
+            if (mUiInteractionInitFunctionPool.find(funcName) !=
+                mUiInteractionInitFunctionPool.end())
             {
-                uitc->SetInitFunc(TimeInit);
+                uitc->SetInitFunc(
+                    mUiInteractionInitFunctionPool[funcName]);
             }
         }
 
@@ -1547,9 +1557,11 @@ void ObjectFactory::AddUCompToUi(UiObject* _ui,
         if (compNode && compNode->IsString())
         {
             std::string funcName = compNode->GetString();
-            if (funcName == "TimeUiUpdate")
+            if (mUiInteractionUpdateFunctionPool.find(funcName) !=
+                mUiInteractionUpdateFunctionPool.end())
             {
-                uitc->SetUpdateFunc(TimeUpdate);
+                uitc->SetUpdateFunc(
+                    mUiInteractionUpdateFunctionPool[funcName]);
             }
         }
 
@@ -1558,9 +1570,11 @@ void ObjectFactory::AddUCompToUi(UiObject* _ui,
         if (compNode && compNode->IsString())
         {
             std::string funcName = compNode->GetString();
-            if (funcName == "TimeUiDestory")
+            if (mUiInteractionDestoryFunctionPool.find(funcName) !=
+                mUiInteractionDestoryFunctionPool.end())
             {
-                uitc->SetDestoryFunc(TimeDestory);
+                uitc->SetDestoryFunc(
+                    mUiInteractionDestoryFunctionPool[funcName]);
             }
         }
     }

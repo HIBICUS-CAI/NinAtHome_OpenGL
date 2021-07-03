@@ -1,5 +1,34 @@
 #include "TempTest.h"
 
+void TempTestRegister(ObjectFactory* _factory)
+{
+    auto aInputPoolPtr = _factory->GetActorInputPool();
+    auto aInitPoolPtr = _factory->GetActorInterInitPool();
+    auto aUpdatePoolPtr = _factory->GetActorInterUpdatePool();
+    auto aDestoryPoolPtr = _factory->GetActorInterDestoryPool();
+    auto uInputPoolPtr = _factory->GetUiInputPool();
+    auto uInitPoolPtr = _factory->GetUiInterInitPool();
+    auto uUpdatePoolPtr = _factory->GetUiInterUpdatePool();
+    auto uDestoryPoolPtr = _factory->GetUiInterDestoryPool();
+
+    aInitPoolPtr->insert(
+        std::make_pair(FUNC_NAME(TestInit), TestInit));
+    aUpdatePoolPtr->insert(
+        std::make_pair(FUNC_NAME(TestUpdate), TestUpdate));
+    aDestoryPoolPtr->insert(
+        std::make_pair(FUNC_NAME(TestDestory), TestDestory));
+    uInitPoolPtr->insert(
+        std::make_pair(FUNC_NAME(TestUiInit), TestUiInit));
+    uUpdatePoolPtr->insert(
+        std::make_pair(FUNC_NAME(TestUiUpdate), TestUiUpdate));
+    uDestoryPoolPtr->insert(
+        std::make_pair(FUNC_NAME(TestUiDestory), TestUiDestory));
+    aInputPoolPtr->insert(
+        std::make_pair(FUNC_NAME(TempMove), TempMove));
+    uInputPoolPtr->insert(
+        std::make_pair(FUNC_NAME(TempUiInput), TempUiInput));
+}
+
 void TestInit(AInteractionComponent* _aitc)
 {
     MY_NN_LOG(LOG_DEBUG, "init test!!!!!!!!\n");

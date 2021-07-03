@@ -2,8 +2,10 @@
 
 #include "Ui_all.h"
 
-void TimeInit(UInteractionComponent* _uitc);
+void TimeUiRegister(ObjectFactory* _factory);
 
-void TimeUpdate(UInteractionComponent* _uitc, float _deltatime);
+void TimeUiInit(UInteractionComponent* _uitc);
 
-void TimeDestory(UInteractionComponent* _uitc);
+void TimeUiUpdate(UInteractionComponent* _uitc, float _deltatime);
+
+void TimeUiDestory(UInteractionComponent* _uitc);

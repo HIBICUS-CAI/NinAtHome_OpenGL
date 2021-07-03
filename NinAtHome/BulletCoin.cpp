@@ -9,6 +9,20 @@ struct BULLET_INFO
 
 static BULLET_INFO g_AllBullets[3];
 
+void BulletCoinRegister(ObjectFactory* _factory)
+{
+    auto init = _factory->GetActorInterInitPool();
+    auto update = _factory->GetActorInterUpdatePool();
+    auto destory = _factory->GetActorInterDestoryPool();
+
+    init->insert(std::make_pair(
+        FUNC_NAME(BulletInit), BulletInit));
+    update->insert(std::make_pair(
+        FUNC_NAME(BulletUpdate), BulletUpdate));
+    destory->insert(std::make_pair(
+        FUNC_NAME(BulletDestory), BulletDestory));
+}
+
 void CreateNewBullet(Float3 _pos, SceneNode* _scene)
 {
     for (int i = 0; i < 3; i++)

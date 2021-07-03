@@ -1,5 +1,19 @@
 #include "Flag.h"
 
+void FlagRegister(ObjectFactory* _factory)
+{
+    auto init = _factory->GetActorInterInitPool();
+    auto update = _factory->GetActorInterUpdatePool();
+    auto destory = _factory->GetActorInterDestoryPool();
+
+    init->insert(std::make_pair(
+        FUNC_NAME(FlagInit), FlagInit));
+    update->insert(std::make_pair(
+        FUNC_NAME(FlagUpdate), FlagUpdate));
+    destory->insert(std::make_pair(
+        FUNC_NAME(FlagDestory), FlagDestory));
+}
+
 void FlagInit(AInteractionComponent* _aitc)
 {
 
