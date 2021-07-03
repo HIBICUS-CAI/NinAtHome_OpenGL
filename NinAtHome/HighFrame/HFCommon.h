@@ -48,3 +48,23 @@ enum class COMP_TYPE
     UBTNMAP,
     NULLTYPE
 };
+
+using ActorInputProcessFuncType = void(*)(
+    class AInputComponent*, float);
+
+using ActorInterInitFuncType = void(*)(
+    class AInteractionComponent*);
+using ActorInterUpdateFuncType = void(*)(
+    class AInteractionComponent*, float);
+using ActorInterDestoryFuncType = void(*)(
+    class AInteractionComponent*);
+
+using UiInputProcessFuncType = void(*)(
+    class UInputComponent*, float);
+
+using UiInterInitFuncType = void(*)(
+    class UInteractionComponent*);
+using UiInterUpdateFuncType = void(*)(
+    class UInteractionComponent*, float);
+using UiInterDestoryFuncType = void(*)(
+    class UInteractionComponent*);

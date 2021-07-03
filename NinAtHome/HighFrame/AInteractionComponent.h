@@ -11,13 +11,6 @@
 
 #include "AComponent.h"
 
-using ActorInterInitFuncType = void(*)(
-    class AInteractionComponent*);
-using ActorInterUpdateFuncType = void(*)(
-    class AInteractionComponent*, float);
-using ActorInterDestoryFuncType = void(*)(
-    class AInteractionComponent*);
-
 class AInteractionComponent :
     public AComponent
 {

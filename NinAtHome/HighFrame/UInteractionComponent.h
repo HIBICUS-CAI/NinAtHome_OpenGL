@@ -11,13 +11,6 @@
 
 #include "UComponent.h"
 
-using UiInterInitFuncType = void(*)(
-    class UInteractionComponent*);
-using UiInterUpdateFuncType = void(*)(
-    class UInteractionComponent*, float);
-using UiInterDestoryFuncType = void(*)(
-    class UInteractionComponent*);
-
 class UInteractionComponent :
     public UComponent
 {

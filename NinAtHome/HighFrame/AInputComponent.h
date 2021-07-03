@@ -11,9 +11,6 @@
 
 #include "AComponent.h"
 
-using ActorInputProcessFuncType = void(*)(
-    class AInputComponent*, float);
-
 class AInputComponent :
     public AComponent
 {

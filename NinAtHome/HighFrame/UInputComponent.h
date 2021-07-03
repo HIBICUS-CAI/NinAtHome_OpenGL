@@ -11,9 +11,6 @@
 
 #include "UComponent.h"
 
-using UiInputProcessFuncType = void(*)(
-    class UInputComponent*, float);
-
 class UInputComponent :
     public UComponent
 {
