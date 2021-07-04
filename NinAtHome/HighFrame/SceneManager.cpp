@@ -13,9 +13,6 @@
 #include "ObjectFactory.h"
 #include <thread>
 #include "controller.h"
-// TEMP--------------------
-//static int g_scene = 1;
-// TEMP--------------------
 
 SceneManager::SceneManager() :
     mPropertyManagerPtr(nullptr), mObjectFactoryPtr(nullptr),
@@ -46,12 +43,9 @@ void SceneManager::PostStartUp(PropertyManager* _pmPtr,
 
     LoadLoadingScene();
 
-    // TEMP-------------------
-    //g_scene = 0;
     LoadSceneNode(
         "title-scene",
         "rom:/Configs/Scenes/title-scene.json");
-    // TEMP-------------------
 }
 
 void SceneManager::CleanAndStop()
@@ -74,60 +68,24 @@ void SceneManager::CleanAndStop()
 
 void SceneManager::UpdateSceneManager(float _deltatime)
 {
-    /*NN_LOG(
-        "final delta : %f\n", _deltatime);*/
-
-    static bool releaseFlg = false;
-    static SceneNode* needRelease = nullptr;
-
     if (mLoadSceneFlg)
     {
         mLoadSceneFlg = false;
 
-        if (mCurrentScenePtr)
-        {
-            releaseFlg = false;
-            needRelease = mCurrentScenePtr;
-            /*mCurrentScenePtr->ReleaseScene();
-            delete mCurrentScenePtr;*/
-        }
-
         mCurrentScenePtr = mLoadingScenePtr;
-        /*std::thread loadThread(
+        std::thread loadThread(
             &SceneManager::LoadNextScene, this);
-        loadThread.detach();*/
+        loadThread.detach();
     }
 
     if (mNextScenePtr)
     {
-#ifdef SHOW_LOADING
-        Sleep(500);
-#endif // SHOW_LOADING
         mCurrentScenePtr = mNextScenePtr;
         mNextScenePtr = nullptr;
     }
 
     mCurrentScenePtr->UpdateScene(_deltatime);
     mCurrentScenePtr->DrawScene();
-
-    if (mCurrentScenePtr == mLoadingScenePtr)
-    {
-        if (needRelease && !releaseFlg)
-        {
-            releaseFlg = true;
-        }
-        else if (needRelease && releaseFlg)
-        {
-            /*needRelease->ReleaseScene();
-            delete needRelease;*/
-            needRelease = nullptr;
-            LoadNextScene();
-        }
-        else if (!needRelease)
-        {
-            LoadNextScene();
-        }
-    }
 }
 
 PropertyManager* SceneManager::GetPropertyManager() const
