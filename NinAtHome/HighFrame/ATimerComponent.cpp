@@ -31,7 +31,7 @@ void ATimerComponent::CompInit()
 
 void ATimerComponent::CompUpdate(float _deltatime)
 {
-    for (auto timer : mTimerArray)
+    for (auto& timer : mTimerArray)
     {
         if (timer->Active)
         {
@@ -42,7 +42,7 @@ void ATimerComponent::CompUpdate(float _deltatime)
 
 void ATimerComponent::CompDestory()
 {
-    for (auto timer : mTimerArray)
+    for (auto& timer : mTimerArray)
     {
         delete timer;
     }

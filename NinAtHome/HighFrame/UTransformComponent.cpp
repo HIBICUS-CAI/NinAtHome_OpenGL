@@ -82,7 +82,7 @@ void UTransformComponent::Translate(Float3 _pos)
 {
     if (GetUiObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetUiObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -127,7 +127,7 @@ void UTransformComponent::TranslateXAsix(float _posx)
 {
     if (GetUiObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetUiObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -170,7 +170,7 @@ void UTransformComponent::TranslateYAsix(float _posy)
 {
     if (GetUiObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetUiObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -213,7 +213,7 @@ void UTransformComponent::TranslateZAsix(float _posz)
 {
     if (GetUiObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetUiObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -256,7 +256,7 @@ void UTransformComponent::Rotate(Float3 _angle)
 {
     if (GetUiObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetUiObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -301,7 +301,7 @@ void UTransformComponent::RotateXAsix(float _anglex)
 {
     if (GetUiObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetUiObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -344,7 +344,7 @@ void UTransformComponent::RotateYAsix(float _angley)
 {
     if (GetUiObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetUiObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -387,7 +387,7 @@ void UTransformComponent::RotateZAsix(float _anglez)
 {
     if (GetUiObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetUiObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -430,7 +430,7 @@ void UTransformComponent::Scale(Float3 _factor)
 {
     if (GetUiObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetUiObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -475,7 +475,7 @@ void UTransformComponent::Scale(float _factor)
 {
     if (GetUiObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetUiObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -520,7 +520,7 @@ void UTransformComponent::ScaleXAsix(float _factorx)
 {
     if (GetUiObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetUiObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -563,7 +563,7 @@ void UTransformComponent::ScaleYAsix(float _factory)
 {
     if (GetUiObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetUiObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -606,7 +606,7 @@ void UTransformComponent::ScaleZAsix(float _factorz)
 {
     if (GetUiObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetUiObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();

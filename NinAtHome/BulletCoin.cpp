@@ -55,6 +55,11 @@ void BulletInit(AInteractionComponent* _aitc)
                 g_AllBullets[i].actor = owner;
                 break;
             }
+            if (!g_AllBullets[i].canUse)
+            {
+                g_AllBullets[i].canUse = true;
+                break;
+            }
         }
     }
 }

@@ -50,7 +50,7 @@ void UBtnMapComponent::CompInit()
 
     /*UpdateButtonMapWith(GetUiObjOwner());
 
-    for (auto ui : *(scene->GetUiArray()))
+    for (auto& ui : *(scene->GetUiArray()))
     {
         std::string btnCompName = ui->GetObjectName() + "-btnmap";
         UBtnMapComponent* ubmc =

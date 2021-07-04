@@ -225,7 +225,7 @@ bool ACollisionComponent::CheckCollisionWith(ActorObject* _obj)
 
     if (_obj->GetChildrenArray()->size())
     {
-        for (auto child : *(_obj->GetChildrenArray()))
+        for (auto& child : *(_obj->GetChildrenArray()))
         {
             if (CheckCollisionWith(child))
             {

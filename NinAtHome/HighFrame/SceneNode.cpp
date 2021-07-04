@@ -55,6 +55,8 @@ SceneManager* SceneNode::GetSceneManagerPtr() const
 
 void SceneNode::ResetSceneNode()
 {
+    mActorSpritesArray.clear();
+    mUiSpritesArray.clear();
     GetSceneManagerPtr()->GetObjectFactory()->
         ResetSceneNode(this, mConfigPath);
 }
@@ -63,7 +65,7 @@ ActorObject* SceneNode::GetActorObject(std::string _name)
 {
     if (mActorObjectsMap.find(_name) == mActorObjectsMap.end())
     {
-        for (auto actor : mNewActorObjectsArray)
+        for (auto& actor : mNewActorObjectsArray)
         {
             if (actor->GetObjectName() == _name)
             {
@@ -86,7 +88,7 @@ UiObject* SceneNode::GetUiObject(std::string _name)
 {
     if (mUiObjectsMap.find(_name) == mUiObjectsMap.end())
     {
-        for (auto ui : mNewUiObjectsArray)
+        for (auto& ui : mNewUiObjectsArray)
         {
             if (ui->GetObjectName() == _name)
             {
@@ -186,14 +188,14 @@ void SceneNode::UpdateScene(float _deltatime)
 
 void SceneNode::DrawScene()
 {
-    for (auto actor : mActorSpritesArray)
+    for (auto& actor : mActorSpritesArray)
     {
         if (actor->IsObjectActive() == STATUS::ACTIVE)
         {
             actor->Draw();
         }
     }
-    for (auto ui : mUiSpritesArray)
+    for (auto& ui : mUiSpritesArray)
     {
         if (ui->IsObjectActive() == STATUS::ACTIVE)
         {

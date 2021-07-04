@@ -96,7 +96,7 @@ int ActorObject::GetUpdateOrder() const
 
 void ActorObject::Init()
 {
-    for (auto comp : mACompArray)
+    for (auto& comp : mACompArray)
     {
         comp->CompInit();
         comp->SetCompActive(STATUS::ACTIVE);
@@ -112,7 +112,7 @@ void ActorObject::UpdateComponents(float _deltatime)
 {
     if (IsObjectActive() == STATUS::ACTIVE)
     {
-        for (auto comp : mACompArray)
+        for (auto& comp : mACompArray)
         {
             if (comp->IsCompActive() == STATUS::ACTIVE)
             {
@@ -193,7 +193,7 @@ void ActorObject::ClearChild(std::string _name)
 
 void ActorObject::ClearChildren()
 {
-    for (auto child : mChildrenArray)
+    for (auto& child : mChildrenArray)
     {
         if (child->GetChildrenArray()->size())
         {
@@ -236,7 +236,7 @@ ActorObject* ActorObject::GetParent() const
 
 void ActorObject::Draw()
 {
-    for (auto sc : mSpriteCompArray)
+    for (auto& sc : mSpriteCompArray)
     {
         if (sc->IsCompActive() == STATUS::ACTIVE)
         {

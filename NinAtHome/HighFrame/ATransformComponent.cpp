@@ -84,7 +84,7 @@ void ATransformComponent::Translate(Float3 _pos)
 {
     if (GetActorObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetActorObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -129,7 +129,7 @@ void ATransformComponent::TranslateXAsix(float _posx)
 {
     if (GetActorObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetActorObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -172,7 +172,7 @@ void ATransformComponent::TranslateYAsix(float _posy)
 {
     if (GetActorObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetActorObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -215,7 +215,7 @@ void ATransformComponent::TranslateZAsix(float _posz)
 {
     if (GetActorObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetActorObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -258,7 +258,7 @@ void ATransformComponent::Rotate(Float3 _angle)
 {
     if (GetActorObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetActorObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -303,7 +303,7 @@ void ATransformComponent::RotateXAsix(float _anglex)
 {
     if (GetActorObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetActorObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -346,7 +346,7 @@ void ATransformComponent::RotateYAsix(float _angley)
 {
     if (GetActorObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetActorObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -389,7 +389,7 @@ void ATransformComponent::RotateZAsix(float _anglez)
 {
     if (GetActorObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetActorObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -432,7 +432,7 @@ void ATransformComponent::Scale(Float3 _factor)
 {
     if (GetActorObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetActorObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -477,7 +477,7 @@ void ATransformComponent::Scale(float _factor)
 {
     if (GetActorObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetActorObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -522,7 +522,7 @@ void ATransformComponent::ScaleXAsix(float _factorx)
 {
     if (GetActorObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetActorObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -565,7 +565,7 @@ void ATransformComponent::ScaleYAsix(float _factory)
 {
     if (GetActorObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetActorObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();
@@ -608,7 +608,7 @@ void ATransformComponent::ScaleZAsix(float _factorz)
 {
     if (GetActorObjOwner()->GetChildrenArray()->size())
     {
-        for (auto child :
+        for (auto& child :
             *(GetActorObjOwner()->GetChildrenArray()))
         {
             std::string childName = child->GetObjectName();

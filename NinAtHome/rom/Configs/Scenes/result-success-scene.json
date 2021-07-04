@@ -40,7 +40,7 @@
                 {
                     "type": "sprite",
                     "update-order": 0,
-                    "draw-order": -2,
+                    "draw-order": -3,
                     "texture-path": "rom:/Assets/Textures/title_success_bg.tga",
                     "texture-width": 1920.0,
                     "texture-height": 1080.0

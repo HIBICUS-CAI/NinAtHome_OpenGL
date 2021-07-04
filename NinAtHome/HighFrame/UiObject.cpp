@@ -120,7 +120,7 @@ int UiObject::GetUpdateOrder() const
 
 void UiObject::Init()
 {
-    for (auto comp : mUCompArray)
+    for (auto& comp : mUCompArray)
     {
         comp->CompInit();
         comp->SetCompActive(STATUS::ACTIVE);
@@ -136,7 +136,7 @@ void UiObject::UpdateComponents(float _deltatime)
 {
     if (IsObjectActive() == STATUS::ACTIVE)
     {
-        for (auto comp : mUCompArray)
+        for (auto& comp : mUCompArray)
         {
             if (comp->IsCompActive() == STATUS::ACTIVE)
             {
@@ -219,7 +219,7 @@ void UiObject::ClearChild(std::string _name)
 
 void UiObject::ClearChildren()
 {
-    for (auto child : mChildrenArray)
+    for (auto& child : mChildrenArray)
     {
         if (child->GetChildrenArray()->size())
         {
@@ -267,7 +267,7 @@ UiObject* UiObject::GetParent() const
 
 void UiObject::Draw()
 {
-    for (auto sc : mSpriteCompArray)
+    for (auto& sc : mSpriteCompArray)
     {
         if (sc->IsCompActive() == STATUS::ACTIVE)
         {
@@ -275,7 +275,7 @@ void UiObject::Draw()
         }
     }
 
-    for (auto tc : mTextCompArray)
+    for (auto& tc : mTextCompArray)
     {
         if (tc->IsCompActive() == STATUS::ACTIVE)
         {

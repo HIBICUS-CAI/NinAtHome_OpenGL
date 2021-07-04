@@ -86,7 +86,7 @@ void AAnimateComponent::CompUpdate(float _deltatime)
 
 void AAnimateComponent::CompDestory()
 {
-    for (auto ani : mAnimates)
+    for (auto& ani : mAnimates)
     {
         UnloadTexture(ani.second->Texture);
         delete ani.second;
