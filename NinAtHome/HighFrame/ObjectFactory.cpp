@@ -163,6 +163,7 @@ void ObjectFactory::ResetSceneNode(SceneNode* _scene,
             }
         }
         _scene->AddActorObject(pa);
+        mSceneManagerPtr->PlusHasLoaded();
     }
 
     arraySize = config["ui"].Size();
@@ -184,6 +185,7 @@ void ObjectFactory::ResetSceneNode(SceneNode* _scene,
             }
         }
         _scene->AddUiObject(pu);
+        mSceneManagerPtr->PlusHasLoaded();
     }
 }
 
@@ -568,6 +570,7 @@ SceneNode* ObjectFactory::CreateNewScene(std::string _name,
             if (actor)
             {
                 node->AddActorObject(actor);
+                mSceneManagerPtr->PlusHasLoaded();
             }
         }
     }
@@ -581,6 +584,7 @@ SceneNode* ObjectFactory::CreateNewScene(std::string _name,
             if (ui)
             {
                 node->AddUiObject(ui);
+                mSceneManagerPtr->PlusHasLoaded();
             }
         }
     }

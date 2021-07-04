@@ -33,6 +33,16 @@ public:
 
     class ObjectFactory* GetObjectFactory() const;
 
+    unsigned int GetNeedToLoad() const;
+
+    unsigned int GetHasLoaded() const;
+
+    void PlusHasLoaded();
+
+    bool GetLoadFinishedFlag() const;
+
+    void SetLoadFinishedFlag(bool _value);
+
 private:
     void LoadLoadingScene();
 
@@ -58,5 +68,11 @@ private:
     std::array<std::string, 2> mLoadSceneInfo;
 
     std::array<class SceneNode*, 2> mScenePool;
+
+    unsigned int mNeedToLoadSize;
+
+    unsigned int mHasLoadedSize;
+
+    bool mLoadFinishFlg;
 };
 

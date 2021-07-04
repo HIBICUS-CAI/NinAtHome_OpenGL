@@ -19,7 +19,8 @@ SceneManager::SceneManager() :
     mLoadingScenePtr(nullptr), mCurrentScenePtr(nullptr),
     mNextScenePtr(nullptr), mLoadSceneFlg(false),
     mLoadSceneInfo({ "","" }), mScenePool({ nullptr,nullptr }),
-    mReleaseScenePtr(nullptr)
+    mReleaseScenePtr(nullptr), mLoadFinishFlg(true),
+    mNeedToLoadSize(0), mHasLoadedSize(0)
 {
 
 }
@@ -86,7 +87,7 @@ void SceneManager::UpdateSceneManager(float _deltatime)
         mReleaseScenePtr = nullptr;
     }
 
-    if (mNextScenePtr)
+    if (mNextScenePtr && mLoadFinishFlg)
     {
         mCurrentScenePtr = mNextScenePtr;
         mNextScenePtr = nullptr;
@@ -111,6 +112,45 @@ void SceneManager::LoadSceneNode(
 {
     mLoadSceneFlg = true;
     mLoadSceneInfo = { _name,_path };
+
+    {
+        JsonFile config = {};
+        LoadJsonFile(&config, _path);
+        unsigned int actorSize = config["actor"].Size();
+        unsigned int uiSize = config["ui"].Size();
+        mNeedToLoadSize = actorSize + uiSize;
+        mHasLoadedSize = 0;
+    }
+}
+
+unsigned int SceneManager::GetNeedToLoad() const
+{
+    return mNeedToLoadSize;
+}
+
+unsigned int SceneManager::GetHasLoaded() const
+{
+    return mHasLoadedSize;
+}
+
+void SceneManager::PlusHasLoaded()
+{
+    ++mHasLoadedSize;
+#ifdef SHOW_LOADING
+#ifdef NIN_AT_HOME
+    Sleep(100);
+#endif // NIN_AT_HOME
+#endif // SHOW_LOADING
+}
+
+bool SceneManager::GetLoadFinishedFlag() const
+{
+    return mLoadFinishFlg;
+}
+
+void SceneManager::SetLoadFinishedFlag(bool _value)
+{
+    mLoadFinishFlg = _value;
 }
 
 void SceneManager::LoadLoadingScene()
