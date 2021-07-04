@@ -57,6 +57,13 @@
                         0.0,
                         1.0
                     ]
+                },
+                {
+                    "type": "interaction",
+                    "update-order": 0,
+                    "init-func-name": "LoadingInit",
+                    "update-func-name": "LoadingUpdate",
+                    "destory-func-name": "LoadingDestory"
                 }
             ]
         }

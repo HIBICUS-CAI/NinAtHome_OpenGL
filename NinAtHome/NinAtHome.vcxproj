@@ -136,6 +136,7 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClInclude Include="HighFrame\USpriteComponent.h" />
     <ClInclude Include="HighFrame\UTextComponent.h" />
     <ClInclude Include="HighFrame\UTransformComponent.h" />
+    <ClInclude Include="Loading.h" />
     <ClInclude Include="MiddleFunctions\controller.h" />
     <ClInclude Include="MiddleFunctions\ControllerHelper.h" />
     <ClInclude Include="MiddleFunctions\json.h" />
@@ -183,6 +184,7 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClCompile Include="HighFrame\USpriteComponent.cpp" />
     <ClCompile Include="HighFrame\UTextComponent.cpp" />
     <ClCompile Include="HighFrame\UTransformComponent.cpp" />
+    <ClCompile Include="Loading.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MiddleFunctions\ControllerHelper.cpp" />
     <ClCompile Include="MiddleFunctions\JsonHelper.cpp" />

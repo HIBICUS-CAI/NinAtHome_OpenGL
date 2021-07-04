@@ -24,6 +24,7 @@
 #include "..\Board.h"
 #include "..\Flag.h"
 #include "..\TimeUi.h"
+#include "..\Loading.h"
 // TEMP---------------------------------------------
 
 ObjectFactory::ObjectFactory() :
@@ -52,6 +53,7 @@ bool ObjectFactory::StartUp(PropertyManager* _pmPtr,
 
     bool result = true;
 
+    LoadingRegister(this);
     TempTestRegister(this);
     StartBtnRegister(this);
     ResultBtnRegister(this);

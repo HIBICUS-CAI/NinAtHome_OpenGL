@@ -51,6 +51,8 @@ private:
 
     class SceneNode* mNextScenePtr;
 
+    class SceneNode* mReleaseScenePtr;
+
     bool mLoadSceneFlg;
 
     std::array<std::string, 2> mLoadSceneInfo;

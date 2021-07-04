@@ -18,7 +18,8 @@ SceneManager::SceneManager() :
     mPropertyManagerPtr(nullptr), mObjectFactoryPtr(nullptr),
     mLoadingScenePtr(nullptr), mCurrentScenePtr(nullptr),
     mNextScenePtr(nullptr), mLoadSceneFlg(false),
-    mLoadSceneInfo({ "","" }), mScenePool({ nullptr,nullptr })
+    mLoadSceneInfo({ "","" }), mScenePool({ nullptr,nullptr }),
+    mReleaseScenePtr(nullptr)
 {
 
 }
@@ -78,6 +79,13 @@ void SceneManager::UpdateSceneManager(float _deltatime)
         loadThread.detach();
     }
 
+    if (mReleaseScenePtr)
+    {
+        mReleaseScenePtr->ReleaseScene();
+        delete mReleaseScenePtr;
+        mReleaseScenePtr = nullptr;
+    }
+
     if (mNextScenePtr)
     {
         mCurrentScenePtr = mNextScenePtr;
@@ -126,36 +134,37 @@ void SceneManager::LoadNextScene()
         if (mScenePool[i] &&
             mScenePool[i]->GetSceneName() == mLoadSceneInfo[0])
         {
-            mNextScenePtr = mScenePool[i];
-            mNextScenePtr->ResetSceneNode();
+            SceneNode* node = mScenePool[i];
+            node->ResetSceneNode();
             if (i)
             {
                 SceneNode* temp = mScenePool[0];
                 mScenePool[0] = mScenePool[1];
                 mScenePool[1] = temp;
             }
+            mNextScenePtr = node;
             return;
         }
     }
 
-    mNextScenePtr = mObjectFactoryPtr->CreateNewScene(
+    SceneNode* node = mObjectFactoryPtr->CreateNewScene(
         mLoadSceneInfo[0], mLoadSceneInfo[1]);
 
     if (!mScenePool[0])
     {
-        mScenePool[0] = mNextScenePtr;
+        mScenePool[0] = node;
     }
     else if (!mScenePool[1])
     {
         mScenePool[1] = mScenePool[0];
-        mScenePool[0] = mNextScenePtr;
+        mScenePool[0] = node;
     }
     else
     {
         SceneNode* needRelease = mScenePool[1];
         mScenePool[1] = mScenePool[0];
-        mScenePool[0] = mNextScenePtr;
-        needRelease->ReleaseScene();
-        delete needRelease;
+        mScenePool[0] = node;
+        mReleaseScenePtr = needRelease;
     }
+    mNextScenePtr = node;
 }
