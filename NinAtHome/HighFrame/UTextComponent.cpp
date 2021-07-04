@@ -9,6 +9,7 @@
 
 #include "UTextComponent.h"
 #include "UiObject.h"
+#include "SceneNode.h"
 #include "texture.h"
 #include "sprite.h"
 #include "json.h"
@@ -19,7 +20,7 @@ UTextComponent::UTextComponent(std::string _name,
     mTextPosition(MakeFloat3(0.f, 0.f, 0.f)),
     mFontSize(MakeFloat2(0.f, 0.f)), mFontTexture(0),
     mTextColor(MakeFloat4(1.f, 1.f, 1.f, 1.f)), mTextPtr(nullptr),
-    mKanaUV({})
+    mKanaUV({}), mFontTexPath("")
 {
     mKanaUV.clear();
 
@@ -43,7 +44,7 @@ UTextComponent::~UTextComponent()
 
 void UTextComponent::CompInit()
 {
-
+    LoadFontTexture(mFontTexPath);
 }
 
 void UTextComponent::CompUpdate(float _deltatime)
@@ -74,9 +75,26 @@ Float2 UTextComponent::GetFontSize() const
     return mFontSize;
 }
 
+void UTextComponent::SaveFontTexPath(std::string _path)
+{
+    mFontTexPath = _path;
+}
+
 void UTextComponent::LoadFontTexture(std::string _path)
 {
-    mFontTexture = LoadTexture(_path);
+    unsigned int exist =
+        GetUiObjOwner()->GetSceneNodePtr()->
+        CheckIfTexExist(_path);
+    if (!exist)
+    {
+        mFontTexture = LoadTexture(_path);
+        GetUiObjOwner()->GetSceneNodePtr()->
+            InsertNewTex(_path, mFontTexture);
+    }
+    else
+    {
+        mFontTexture = exist;
+    }
 }
 
 void UTextComponent::ChangeTextString(std::string _text)
@@ -167,8 +185,8 @@ void UTextComponent::DrawUText()
                 nowPosition.x += mFontSize.x;
 
                 continue;
+                }
             }
-        }
 
         if (mTextPtr[i] >= 32 && mTextPtr[i] <= 126)
         {
@@ -212,12 +230,12 @@ void UTextComponent::DrawUText()
                 MOJI_U, MOJI_V, mTextColor);
 
             nowPosition.x += mFontSize.x;
-        }
+            }
         else
         {
             MY_NN_LOG(LOG_ERROR,
                 "cannot support this char or moji in [ %s ]\n",
                 mTextString.c_str());
         }
-    }
-}
+        }
+        }

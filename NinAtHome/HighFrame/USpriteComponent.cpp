@@ -19,7 +19,7 @@ USpriteComponent::USpriteComponent(std::string _name,
     UiObject* _owner, int _order, int _drawOrder) :
     UComponent(_name, _owner, _order), mDrawOrder(_drawOrder),
     mTexture(0), mOffsetColor(MakeFloat4(1.f, 1.f, 1.f, 1.f)),
-    mVisible(true), mTexWidth(0), mTexHeight(0)
+    mVisible(true), mTexWidth(0), mTexHeight(0), mTexPath("")
 {
 
 }
@@ -31,7 +31,10 @@ USpriteComponent::~USpriteComponent()
 
 void USpriteComponent::CompInit()
 {
-
+    if (mTexPath != "")
+    {
+        LoadTextureByPath(mTexPath);
+    }
 }
 
 void USpriteComponent::CompUpdate(float _deltatime)
@@ -57,6 +60,11 @@ void USpriteComponent::CompUpdate(float _deltatime)
 void USpriteComponent::CompDestory()
 {
     //DeleteTexture();
+}
+
+void USpriteComponent::SaveTexturePath(std::string _path)
+{
+    mTexPath = _path;
 }
 
 void USpriteComponent::LoadTextureByPath(std::string _path)

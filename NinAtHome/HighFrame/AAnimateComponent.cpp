@@ -9,6 +9,7 @@
 
 #include "AAnimateComponent.h"
 #include "ActorObject.h"
+#include "SceneNode.h"
 #include "texture.h"
 #include "ASpriteComponent.h"
 
@@ -28,7 +29,23 @@ AAnimateComponent::~AAnimateComponent()
 
 void AAnimateComponent::CompInit()
 {
-
+    for (auto& ani : mAnimates)
+    {
+        unsigned int exist =
+            GetActorObjOwner()->GetSceneNodePtr()->
+            CheckIfTexExist(ani.second->TexPath);
+        if (!exist)
+        {
+            ani.second->Texture = LoadTexture(ani.second->TexPath);
+            GetActorObjOwner()->GetSceneNodePtr()->
+                InsertNewTex(ani.second->TexPath,
+                    ani.second->Texture);
+        }
+        else
+        {
+            ani.second->Texture = exist;
+        }
+    }
 }
 
 void AAnimateComponent::CompUpdate(float _deltatime)
@@ -83,7 +100,8 @@ void AAnimateComponent::LoadAnimate(std::string _name,
     bool _repeat, float _switchTime)
 {
     ANIMATE_INFO* ani = new ANIMATE_INFO;
-    ani->Texture = LoadTexture(_path);
+    ani->TexPath = _path;
+    ani->Texture = 0;
     ani->Stride = _stride;
     ani->MaxCut = _maxCount;
     ani->RepeatFlg = _repeat;

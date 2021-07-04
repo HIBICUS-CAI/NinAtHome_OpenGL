@@ -10,6 +10,7 @@
 #include "ACollisionComponent.h"
 #include "ActorObject.h"
 #include "ATransformComponent.h"
+#include "SceneNode.h"
 #include "texture.h"
 #include "sprite.h"
 
@@ -24,11 +25,7 @@ ACollisionComponent::ACollisionComponent(std::string _name,
     mCircleTexture(0), mRectangleTexture(0),
     mColliedColor(MakeFloat4(1.f, 1.f, 1.f, 1.f))
 {
-    mCircleTexture = LoadTexture(
-        "rom:/Assets/Textures/collision-circ.tga");
-    mRectangleTexture = LoadTexture(
-        "rom:/Assets/Textures/collision-rect.tga");
-    mColliedColor = NOT_COLLIED;
+
 }
 
 ACollisionComponent::~ACollisionComponent()
@@ -38,7 +35,41 @@ ACollisionComponent::~ACollisionComponent()
 
 void ACollisionComponent::CompInit()
 {
-    
+    unsigned int exist =
+        GetActorObjOwner()->GetSceneNodePtr()->
+        CheckIfTexExist("rom:/Assets/Textures/collision-circ.tga");
+    if (!exist)
+    {
+        mCircleTexture = LoadTexture(
+            "rom:/Assets/Textures/collision-circ.tga");
+        GetActorObjOwner()->GetSceneNodePtr()->
+            InsertNewTex(
+                "rom:/Assets/Textures/collision-circ.tga",
+                mCircleTexture);
+    }
+    else
+    {
+        mCircleTexture = exist;
+    }
+
+    exist =
+        GetActorObjOwner()->GetSceneNodePtr()->
+        CheckIfTexExist("rom:/Assets/Textures/collision-rect.tga");
+    if (!exist)
+    {
+        mRectangleTexture = LoadTexture(
+            "rom:/Assets/Textures/collision-rect.tga");
+        GetActorObjOwner()->GetSceneNodePtr()->
+            InsertNewTex(
+                "rom:/Assets/Textures/collision-rect.tga",
+                mRectangleTexture);
+    }
+    else
+    {
+        mRectangleTexture = exist;
+    }
+
+    mColliedColor = NOT_COLLIED;
 }
 
 void ACollisionComponent::CompUpdate(float _deltatime)
@@ -120,10 +151,10 @@ void ACollisionComponent::DrawACollision()
                     "cannot find transform comp in this obj : [ %s ]\n",
                     GetActorObjOwner()->GetObjectName());
                 return;
-            }
+        }
             Matrix4x4f world = thisAtc->GetWorldMatrix();
             MatrixStore(&pworld, world);
-        }
+    }
 
 #ifdef NIN_AT_HOME
         glUniformMatrix4fv(
@@ -157,7 +188,7 @@ void ACollisionComponent::DrawACollision()
                 GetActorObjOwner()->GetObjectName().c_str());
             return;
         }
-    }
+}
 }
 
 bool ACollisionComponent::CheckCollisionWith(ActorObject* _obj)

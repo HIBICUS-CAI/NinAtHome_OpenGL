@@ -31,13 +31,16 @@ public:
 
     Float2 GetFontSize() const;
 
-    void LoadFontTexture(std::string _path);
+    void SaveFontTexPath(std::string _path);
 
     void ChangeTextString(std::string _text);
 
     void SetTextColor(Float4 _color);
 
     void DrawUText();
+
+private:
+    void LoadFontTexture(std::string _path);
 
 public:
     virtual void CompInit();
@@ -48,6 +51,8 @@ public:
 
 private:
     unsigned int mFontTexture;
+
+    std::string mFontTexPath;
 
     std::string mTextString;
 

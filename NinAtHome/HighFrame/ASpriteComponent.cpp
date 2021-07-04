@@ -20,7 +20,7 @@ ASpriteComponent::ASpriteComponent(std::string _name,
     mTexture(0), mOffsetColor(MakeFloat4(1.f, 1.f, 1.f, 1.f)),
     mVisible(true), mTexWidth(0.f), mTexHeight(0.f),
     mUVValue(MakeFloat4(1.f, 1.f, 1.f, 1.f)),
-    mFirstTexture(0)
+    mFirstTexture(0), mTexPath("")
 {
 
 }
@@ -33,6 +33,10 @@ ASpriteComponent::~ASpriteComponent()
 void ASpriteComponent::CompInit()
 {
     mUVValue = MakeFloat4(0.f, 0.f, 1.f, 1.f);
+    if (mTexPath != "")
+    {
+        LoadTextureByPath(mTexPath);
+    }
 }
 
 void ASpriteComponent::CompUpdate(float _deltatime)
@@ -43,6 +47,11 @@ void ASpriteComponent::CompUpdate(float _deltatime)
 void ASpriteComponent::CompDestory()
 {
     //DeleteTexture();
+}
+
+void ASpriteComponent::SaveTexturePath(std::string _path)
+{
+    mTexPath = _path;
 }
 
 void ASpriteComponent::LoadTextureByPath(std::string _path)

@@ -19,7 +19,7 @@ public:
         int _order, int _drawOrder);
     virtual ~USpriteComponent();
 
-    void LoadTextureByPath(std::string _path);
+    void SaveTexturePath(std::string _path);
 
     void DeleteTexture();
 
@@ -55,7 +55,12 @@ public:
     virtual void CompDestory();
 
 private:
+    void LoadTextureByPath(std::string _path);
+
+private:
     unsigned int mTexture;
+
+    std::string mTexPath;
 
     Float4 mOffsetColor;
 

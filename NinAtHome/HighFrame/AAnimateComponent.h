@@ -14,6 +14,7 @@
 
 struct ANIMATE_INFO
 {
+    std::string TexPath = "";
     unsigned int Texture = 0;
     Float2 Stride = MakeFloat2(0.f, 0.f);
     unsigned int MaxCut = 0;

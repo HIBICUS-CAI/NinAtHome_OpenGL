@@ -872,7 +872,7 @@ void ObjectFactory::AddACompToActor(ActorObject* _actor,
             _file, _nodePath + "/texture-path");
         if (compNode && compNode->IsString())
         {
-            asc->LoadTextureByPath(compNode->GetString());
+            asc->SaveTexturePath(compNode->GetString());
         }
 
         compNode = GetJsonNode(
@@ -1402,7 +1402,7 @@ void ObjectFactory::AddUCompToUi(UiObject* _ui,
             _file, _nodePath + "/texture-path");
         if (compNode && compNode->IsString())
         {
-            usc->LoadTextureByPath(compNode->GetString());
+            usc->SaveTexturePath(compNode->GetString());
         }
 
         compNode = GetJsonNode(
@@ -1607,7 +1607,7 @@ void ObjectFactory::AddUCompToUi(UiObject* _ui,
             _file, _nodePath + "/moji-path");
         if (compNode && compNode->IsString())
         {
-            utxc->LoadFontTexture(compNode->GetString());
+            utxc->SaveFontTexPath(compNode->GetString());
         }
 
         compNode = GetJsonNode(
