@@ -196,6 +196,14 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClCompile Include="TimeUi.cpp" />
     <ClCompile Include="TitleStartBtn.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\03_InputDevice\03_InputDevice.vcxproj">
+      <Project>{59009cc8-769f-4bdb-9334-a8c3f450fa68}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\04_WindowManager\04_WindowManager.vcxproj">
+      <Project>{948ff8dd-8fb2-4e3e-8ab2-f9f702f9c501}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
