@@ -23,7 +23,7 @@ public:
 
     void DeleteTexture();
 
-    unsigned int GetTexture() const;
+    ID3D11ShaderResourceView* GetTexture() const;
 
     void SetTexWidth(float _width);
 
@@ -45,7 +45,7 @@ public:
 
     void ResetDrawOrder(int _order);
 
-    void ResetTexture(unsigned int _texture);
+    void ResetTexture(ID3D11ShaderResourceView* _texture);
 
     void ResetFirstTexture();
 
@@ -64,9 +64,13 @@ public:
     virtual void CompDestory();
 
 private:
-    unsigned int mTexture;
+    ID3D11ShaderResourceView* mTexture;
 
-    unsigned int mFirstTexture;
+    ID3D11ShaderResourceView* mFirstTexture;
+
+    ID3D11Buffer* mSpriteVertexBuffer;
+
+    ID3D11Buffer* mSpriteIndexBuffer;
 
     std::string mTexPath;
 

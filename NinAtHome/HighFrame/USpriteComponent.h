@@ -23,7 +23,7 @@ public:
 
     void DeleteTexture();
 
-    unsigned int GetTexture() const;
+    ID3D11ShaderResourceView* GetTexture() const;
 
     void SetTexWidth(float _width);
 
@@ -58,7 +58,11 @@ private:
     void LoadTextureByPath(std::string _path);
 
 private:
-    unsigned int mTexture;
+    ID3D11ShaderResourceView* mTexture;
+
+    ID3D11Buffer* mSpriteVertexBuffer;
+
+    ID3D11Buffer* mSpriteIndexBuffer;
 
     std::string mTexPath;
 

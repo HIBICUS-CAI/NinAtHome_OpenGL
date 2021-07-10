@@ -17,10 +17,11 @@
 ASpriteComponent::ASpriteComponent(std::string _name,
     ActorObject* _owner, int _order, int _drawOrder) :
     AComponent(_name, _owner, _order), mDrawOrder(_drawOrder),
-    mTexture(0), mOffsetColor(MakeFloat4(1.f, 1.f, 1.f, 1.f)),
+    mTexture(nullptr), mOffsetColor(MakeFloat4(1.f, 1.f, 1.f, 1.f)),
     mVisible(true), mTexWidth(0.f), mTexHeight(0.f),
     mUVValue(MakeFloat4(1.f, 1.f, 1.f, 1.f)),
-    mFirstTexture(0), mTexPath("")
+    mFirstTexture(nullptr), mTexPath(""),
+    mSpriteVertexBuffer(nullptr), mSpriteIndexBuffer(nullptr)
 {
 
 }
@@ -37,6 +38,9 @@ void ASpriteComponent::CompInit()
     {
         LoadTextureByPath(mTexPath);
     }
+
+    CreateDefaultVertexIndexBuffer(&mSpriteVertexBuffer,
+        &mSpriteIndexBuffer);
 }
 
 void ASpriteComponent::CompUpdate(float _deltatime)
@@ -56,7 +60,7 @@ void ASpriteComponent::SaveTexturePath(std::string _path)
 
 void ASpriteComponent::LoadTextureByPath(std::string _path)
 {
-    unsigned int exist =
+    ID3D11ShaderResourceView* exist =
         GetActorObjOwner()->GetSceneNodePtr()->
         CheckIfTexExist(_path);
     if (!exist)
@@ -75,15 +79,15 @@ void ASpriteComponent::DeleteTexture()
 {
     if (mFirstTexture)
     {
-        UnloadTexture(mFirstTexture);
+        UnloadTexture(&mFirstTexture);
     }
     else
     {
-        UnloadTexture(mTexture);
+        UnloadTexture(&mTexture);
     }
 }
 
-unsigned int ASpriteComponent::GetTexture() const
+ID3D11ShaderResourceView* ASpriteComponent::GetTexture() const
 {
     return mTexture;
 }
@@ -148,7 +152,8 @@ void ASpriteComponent::ResetDrawOrder(int _order)
     mDrawOrder = _order;
 }
 
-void ASpriteComponent::ResetTexture(unsigned int _texture)
+void ASpriteComponent::ResetTexture(
+    ID3D11ShaderResourceView* _texture)
 {
     if (!mFirstTexture)
     {
@@ -163,7 +168,7 @@ void ASpriteComponent::ResetFirstTexture()
     if (mFirstTexture)
     {
         mTexture = mFirstTexture;
-        mFirstTexture = 0;
+        mFirstTexture = nullptr;
     }
 }
 
@@ -192,32 +197,13 @@ void ASpriteComponent::DrawASprite()
         return;
     }
 
-#ifdef NIN_AT_HOME
-    {
-        Matrix4x4f world = ((ATransformComponent*)transcomp)->
-            GetWorldMatrix();
-        Float4x4 pworld = nullptr;
-        MatrixStore(&pworld, world);
-        glUniformMatrix4fv(
-            glGetUniformLocation(
-                GetGlHelperPtr()->GetShaderID("default"),
-                "uWorld"), 1, GL_TRUE, pworld);
-    }
-#else
-    {
-        Matrix4x4f world = ((ATransformComponent*)transcomp)->
-            GetWorldMatrix();
-        Float4x4 pworld = Float4x4();
-        MatrixStore(&pworld, world);
-        glUniformMatrix4fv(
-            glGetUniformLocation(
-                GetShaderProgramId(),
-                "uWorld"), 1, GL_TRUE, (float*)&pworld);
-    }
-#endif // NIN_AT_HOME
+    Matrix4x4f world = ((ATransformComponent*)transcomp)->
+        GetWorldMatrix();
+    GetDxHelperPtr()->PassWorldMatrixToVS(&world);
 
-    SetTexture(mTexture);
-    DrawSprite(0.f, 0.f, mTexWidth, mTexHeight,
+    SetTexture(&mTexture);
+    DrawSprite(&mSpriteVertexBuffer, mSpriteIndexBuffer,
+        0.f, 0.f, mTexWidth, mTexHeight,
         mUVValue.x, mUVValue.y, mUVValue.z, mUVValue.w,
         mOffsetColor);
 }

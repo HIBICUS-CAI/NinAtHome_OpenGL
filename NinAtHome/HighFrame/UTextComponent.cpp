@@ -20,7 +20,8 @@ UTextComponent::UTextComponent(std::string _name,
     mTextPosition(MakeFloat3(0.f, 0.f, 0.f)),
     mFontSize(MakeFloat2(0.f, 0.f)), mFontTexture(0),
     mTextColor(MakeFloat4(1.f, 1.f, 1.f, 1.f)), mTextPtr(nullptr),
-    mKanaUV({}), mFontTexPath("")
+    mKanaUV({}), mFontTexPath(""),
+    mTextVertexBuffer(nullptr), mTextIndexBuffer(nullptr)
 {
     mKanaUV.clear();
 
@@ -45,6 +46,9 @@ UTextComponent::~UTextComponent()
 void UTextComponent::CompInit()
 {
     LoadFontTexture(mFontTexPath);
+
+    CreateDefaultVertexIndexBuffer(&mTextVertexBuffer,
+        &mTextIndexBuffer);
 }
 
 void UTextComponent::CompUpdate(float _deltatime)
@@ -56,7 +60,7 @@ void UTextComponent::CompDestory()
 {
     if (mFontTexture)
     {
-        UnloadTexture(mFontTexture);
+        UnloadTexture(&mFontTexture);
     }
 }
 
@@ -82,7 +86,7 @@ void UTextComponent::SaveFontTexPath(std::string _path)
 
 void UTextComponent::LoadFontTexture(std::string _path)
 {
-    unsigned int exist =
+    ID3D11ShaderResourceView* exist =
         GetUiObjOwner()->GetSceneNodePtr()->
         CheckIfTexExist(_path);
     if (!exist)
@@ -109,7 +113,7 @@ void UTextComponent::SetTextColor(Float4 _color)
 
 void UTextComponent::DrawUText()
 {
-    SetTexture(mFontTexture);
+    SetTexture(&mFontTexture);
     Float3 nowPosition = mTextPosition;
 
     for (auto i = mTextString.length() - mTextString.length();
@@ -145,37 +149,20 @@ void UTextComponent::DrawUText()
                 Float2 uv = MakeFloat2(mojiData.x, mojiData.y);
                 float sizeOffset = mojiData.z;
 
-#ifdef NIN_AT_HOME
                 {
-                    float zeroMove[16] =
+                    Matrix4x4f zeroMove =
                     {
                         1.f,0.f,0.f,0.f,
                         0.f,1.f,0.f,0.f,
                         0.f,0.f,1.f,0.f,
                         0.f,0.f,0.f,1.f
                     };
-                    glUniformMatrix4fv(
-                        glGetUniformLocation(
-                            GetGlHelperPtr()->GetShaderID("default"),
-                            "uWorld"), 1, GL_TRUE, zeroMove);
+                    GetDxHelperPtr()->
+                        PassWorldMatrixToVS(&zeroMove);
                 }
-#else
-                {
-                    float zeroMove[16] =
-                    {
-                        1.f,0.f,0.f,0.f,
-                        0.f,1.f,0.f,0.f,
-                        0.f,0.f,1.f,0.f,
-                        0.f,0.f,0.f,1.f
-                    };
-                    glUniformMatrix4fv(
-                        glGetUniformLocation(
-                            GetShaderProgramId(),
-                            "uWorld"), 1, GL_TRUE, zeroMove);
-                }
-#endif // NIN_AT_HOME
 
-                DrawSprite(nowPosition.x, nowPosition.y,
+                DrawSprite(&mTextVertexBuffer, mTextIndexBuffer,
+                    nowPosition.x, nowPosition.y,
                     mFontSize.x * sizeOffset,
                     mFontSize.y * sizeOffset,
                     uv.x, uv.y,
@@ -185,8 +172,8 @@ void UTextComponent::DrawUText()
                 nowPosition.x += mFontSize.x;
 
                 continue;
-                }
             }
+        }
 
         if (mTextPtr[i] >= 32 && mTextPtr[i] <= 126)
         {
@@ -195,47 +182,30 @@ void UTextComponent::DrawUText()
                 (float)(index % MOJI_TEX_H_NUM) * MOJI_U,
                 (float)(index / MOJI_TEX_H_NUM) * MOJI_V);
 
-#ifdef NIN_AT_HOME
             {
-                float zeroMove[16] =
+                Matrix4x4f zeroMove =
                 {
                     1.f,0.f,0.f,0.f,
                     0.f,1.f,0.f,0.f,
                     0.f,0.f,1.f,0.f,
                     0.f,0.f,0.f,1.f
                 };
-                glUniformMatrix4fv(
-                    glGetUniformLocation(
-                        GetGlHelperPtr()->GetShaderID("default"),
-                        "uWorld"), 1, GL_TRUE, zeroMove);
+                GetDxHelperPtr()->
+                    PassWorldMatrixToVS(&zeroMove);
             }
-#else
-            {
-                float zeroMove[16] =
-                {
-                    1.f,0.f,0.f,0.f,
-                    0.f,1.f,0.f,0.f,
-                    0.f,0.f,1.f,0.f,
-                    0.f,0.f,0.f,1.f
-                };
-                glUniformMatrix4fv(
-                    glGetUniformLocation(
-                        GetShaderProgramId(),
-                        "uWorld"), 1, GL_TRUE, zeroMove);
-            }
-#endif // NIN_AT_HOME
 
-            DrawSprite(nowPosition.x, nowPosition.y,
+            DrawSprite(&mTextVertexBuffer, mTextIndexBuffer,
+                nowPosition.x, nowPosition.y,
                 mFontSize.x, mFontSize.y, uv.x, uv.y,
                 MOJI_U, MOJI_V, mTextColor);
 
             nowPosition.x += mFontSize.x;
-            }
+        }
         else
         {
             MY_NN_LOG(LOG_ERROR,
                 "cannot support this char or moji in [ %s ]\n",
                 mTextString.c_str());
         }
-        }
-        }
+    }
+}

@@ -50,7 +50,11 @@ public:
     virtual void CompDestory();
 
 private:
-    unsigned int mFontTexture;
+    ID3D11ShaderResourceView* mFontTexture;
+
+    ID3D11Buffer* mTextVertexBuffer;
+
+    ID3D11Buffer* mTextIndexBuffer;
 
     std::string mFontTexPath;
 

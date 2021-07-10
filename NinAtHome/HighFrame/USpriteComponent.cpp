@@ -18,8 +18,9 @@
 USpriteComponent::USpriteComponent(std::string _name,
     UiObject* _owner, int _order, int _drawOrder) :
     UComponent(_name, _owner, _order), mDrawOrder(_drawOrder),
-    mTexture(0), mOffsetColor(MakeFloat4(1.f, 1.f, 1.f, 1.f)),
-    mVisible(true), mTexWidth(0), mTexHeight(0), mTexPath("")
+    mTexture(nullptr), mOffsetColor(MakeFloat4(1.f, 1.f, 1.f, 1.f)),
+    mVisible(true), mTexWidth(0), mTexHeight(0), mTexPath(""),
+    mSpriteVertexBuffer(nullptr), mSpriteIndexBuffer(nullptr)
 {
 
 }
@@ -35,6 +36,9 @@ void USpriteComponent::CompInit()
     {
         LoadTextureByPath(mTexPath);
     }
+
+    CreateDefaultVertexIndexBuffer(&mSpriteVertexBuffer,
+        &mSpriteIndexBuffer);
 }
 
 void USpriteComponent::CompUpdate(float _deltatime)
@@ -69,7 +73,7 @@ void USpriteComponent::SaveTexturePath(std::string _path)
 
 void USpriteComponent::LoadTextureByPath(std::string _path)
 {
-    unsigned int exist =
+    ID3D11ShaderResourceView* exist =
         GetUiObjOwner()->GetSceneNodePtr()->
         CheckIfTexExist(_path);
     if (!exist)
@@ -86,10 +90,10 @@ void USpriteComponent::LoadTextureByPath(std::string _path)
 
 void USpriteComponent::DeleteTexture()
 {
-    UnloadTexture(mTexture);
+    UnloadTexture(&mTexture);
 }
 
-unsigned int USpriteComponent::GetTexture() const
+ID3D11ShaderResourceView* USpriteComponent::GetTexture() const
 {
     return mTexture;
 }
@@ -174,32 +178,13 @@ void USpriteComponent::DrawUSprite()
         return;
     }
 
-#ifdef NIN_AT_HOME
-    {
-        Matrix4x4f world = ((UTransformComponent*)transcomp)->
-            GetWorldMatrix();
-        Float4x4 pworld = nullptr;
-        MatrixStore(&pworld, world);
-        glUniformMatrix4fv(
-            glGetUniformLocation(
-                GetGlHelperPtr()->GetShaderID("default"),
-                "uWorld"), 1, GL_TRUE, pworld);
-    }
-#else
-    {
-        Matrix4x4f world = ((UTransformComponent*)transcomp)->
-            GetWorldMatrix();
-        Float4x4 pworld = Float4x4();
-        MatrixStore(&pworld, world);
-        glUniformMatrix4fv(
-            glGetUniformLocation(
-                GetShaderProgramId(),
-                "uWorld"), 1, GL_TRUE, (float*)&pworld);
-    }
-#endif // NIN_AT_HOME
+    Matrix4x4f world = ((UTransformComponent*)transcomp)->
+        GetWorldMatrix();
+    GetDxHelperPtr()->PassWorldMatrixToVS(&world);
 
-    SetTexture(mTexture);
-    DrawSprite(0.f, 0.f, mTexWidth, mTexHeight,
+    SetTexture(&mTexture);
+    DrawSprite(&mSpriteVertexBuffer, mSpriteIndexBuffer,
+        0.f, 0.f, mTexWidth, mTexHeight,
         0.f, 0.f, 1.f, 1.f,
         mOffsetColor);
 }
