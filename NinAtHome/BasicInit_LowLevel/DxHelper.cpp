@@ -643,6 +643,8 @@ HRESULT DxHelper::CompileDefaultShaders()
 
 void DxHelper::ClearBuffer()
 {
+    mImmediateContextPtr->OMSetRenderTargets(
+        1, &mRenderTargetViewPtr, mDepthStencilViewPtr);
     mImmediateContextPtr->ClearRenderTargetView(
         mRenderTargetViewPtr, DirectX::Colors::Black);
     mImmediateContextPtr->ClearDepthStencilView(
