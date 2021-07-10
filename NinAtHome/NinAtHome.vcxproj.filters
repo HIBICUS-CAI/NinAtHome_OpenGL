@@ -48,12 +48,6 @@
     <ClInclude Include="BasicInit_LowLevel\main.h">
       <Filter>00_ForLowLevel</Filter>
     </ClInclude>
-    <ClInclude Include="BasicInit_LowLevel\GlProcess.h">
-      <Filter>00_ForLowLevel</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicInit_LowLevel\GlHelper.h">
-      <Filter>00_ForLowLevel</Filter>
-    </ClInclude>
     <ClInclude Include="BasicInit_LowLevel\stb_image.h">
       <Filter>00_ForLowLevel</Filter>
     </ClInclude>
@@ -195,18 +189,18 @@
     <ClInclude Include="Loading.h">
       <Filter>03_Temp</Filter>
     </ClInclude>
+    <ClInclude Include="BasicInit_LowLevel\DxHelper.h">
+      <Filter>00_ForLowLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicInit_LowLevel\DxProcess.h">
+      <Filter>00_ForLowLevel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BasicInit_LowLevel\GlProcess.cpp">
-      <Filter>00_ForLowLevel</Filter>
-    </ClCompile>
     <ClCompile Include="BasicInit_LowLevel\LowLevelCpp.cpp">
-      <Filter>00_ForLowLevel</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicInit_LowLevel\GlHelper.cpp">
       <Filter>00_ForLowLevel</Filter>
     </ClCompile>
     <ClCompile Include="MiddleFunctions\TextureHelper.cpp">
@@ -325,6 +319,12 @@
     </ClCompile>
     <ClCompile Include="Loading.cpp">
       <Filter>03_Temp</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicInit_LowLevel\DxHelper.cpp">
+      <Filter>00_ForLowLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicInit_LowLevel\DxProcess.cpp">
+      <Filter>00_ForLowLevel</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

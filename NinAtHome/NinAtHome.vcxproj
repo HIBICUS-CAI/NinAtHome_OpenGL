@@ -55,11 +55,11 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)HighFrame;$(ProjectDir)MiddleFunctions;$(ProjectDir)BasicInit_LowLevel;$(ProjectDir)ThirdParty\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)03_InputDevice;$(SolutionDir)04_WindowManager;$(ProjectDir)HighFrame;$(ProjectDir)MiddleFunctions;$(ProjectDir)BasicInit_LowLevel;$(ProjectDir)ThirdParty\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)ThirdParty\slibs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glad.lib;glfw3dll.lib;xinput9_1_0.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -80,11 +80,11 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)HighFrame;$(ProjectDir)MiddleFunctions;$(ProjectDir)BasicInit_LowLevel;$(ProjectDir)ThirdParty\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)03_InputDevice;$(SolutionDir)04_WindowManager;$(ProjectDir)HighFrame;$(ProjectDir)MiddleFunctions;$(ProjectDir)BasicInit_LowLevel;$(ProjectDir)ThirdParty\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -100,8 +100,8 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BasicInit_LowLevel\GlHelper.h" />
-    <ClInclude Include="BasicInit_LowLevel\GlProcess.h" />
+    <ClInclude Include="BasicInit_LowLevel\DxHelper.h" />
+    <ClInclude Include="BasicInit_LowLevel\DxProcess.h" />
     <ClInclude Include="BasicInit_LowLevel\main.h" />
     <ClInclude Include="BasicInit_LowLevel\NinLog.h" />
     <ClInclude Include="BasicInit_LowLevel\stb_image.h" />
@@ -152,8 +152,8 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClInclude Include="TitleStartBtn.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BasicInit_LowLevel\GlHelper.cpp" />
-    <ClCompile Include="BasicInit_LowLevel\GlProcess.cpp" />
+    <ClCompile Include="BasicInit_LowLevel\DxHelper.cpp" />
+    <ClCompile Include="BasicInit_LowLevel\DxProcess.cpp" />
     <ClCompile Include="BasicInit_LowLevel\LowLevelCpp.cpp" />
     <ClCompile Include="BasicInit_LowLevel\NinLog.cpp" />
     <ClCompile Include="Board.cpp" />

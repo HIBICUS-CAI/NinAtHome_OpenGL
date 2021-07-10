@@ -26,7 +26,7 @@ RootSystem::~RootSystem()
 
 }
 
-bool RootSystem::StartUp()
+bool RootSystem::StartUp(HINSTANCE hInstance, int cmdShow)
 {
     MY_NN_LOG(LOG_MESSAGE,
         "[START UP] : starting up ROOT SYSTEM\n");
@@ -35,7 +35,7 @@ bool RootSystem::StartUp()
     mPropertyManagerPtr = new PropertyManager();
     mObjectFactoryPtr = new ObjectFactory();
 
-    bool result = InitSystem();
+    bool result = InitSystem(hInstance, cmdShow);
 
     result = mSceneManagerPtr->StartUp();
     result = mPropertyManagerPtr->StartUp();

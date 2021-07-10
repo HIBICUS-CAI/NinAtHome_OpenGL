@@ -1,13 +1,12 @@
 #include "TextureHelper.h"
-#include "GlHelper.h"
+#include "DxHelper.h"
+#include "DxProcess.h"
 #include "main.h"
 #include <iostream>
 #include <vector>
+#include <DirectXTK\WICTextureLoader.h>
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-
-void SplitByRomSymbol(const std::string& s, 
+void SplitByRomSymbol(const std::string& s,
     std::vector<std::string>& v, const std::string& c)
 {
     v.clear();
@@ -23,7 +22,7 @@ void SplitByRomSymbol(const std::string& s,
         v.push_back(s.substr(pos1));
 }
 
-unsigned int LoadTexture(std::string fileName)
+ID3D11ShaderResourceView* LoadTexture(std::string fileName)
 {
     {
         std::vector<std::string> v;
@@ -48,67 +47,41 @@ unsigned int LoadTexture(std::string fileName)
         }
     }
 
-    int width, height, nrChannels;
-    unsigned char* texData = stbi_load(fileName.c_str(),
-        &width, &height, &nrChannels, 0);
+    HRESULT hr = S_OK;
+    ID3D11ShaderResourceView* texSRV = nullptr;
 
-    if (texData == NULL)
+    std::wstring wName = std::wstring(
+        fileName.begin(), fileName.end());
+
+    hr = DirectX::CreateWICTextureFromFile(
+        GetDxHelperPtr()->GetDevicePtr(),
+        wName.c_str(), nullptr, &texSRV);
+    if (FAILED(hr))
     {
-        stbi_image_free(texData);
-        std::cout <<
-            "cannot open this file : [" << fileName << "]"
-            << std::endl;
-
-        return 0;
+        return nullptr;
     }
 
-    unsigned int tex, format;
-    if (nrChannels == 4)
+    return texSRV;
+}
+
+void UnloadTexture(ID3D11ShaderResourceView** pSRV)
+{
+    if (pSRV && *pSRV)
     {
-        format = GL_RGBA;
+        (*pSRV)->Release();
+        (*pSRV) = nullptr;
+    }
+}
+
+void SetTexture(ID3D11ShaderResourceView** pSRV)
+{
+    if (!pSRV || !(*pSRV))
+    {
+        return;
     }
     else
     {
-        format = GL_RGB;
-    }
-
-    glGenTextures(1, &tex);
-    glBindTexture(GL_TEXTURE_2D, tex);
-    glTexParameteri(GL_TEXTURE_2D,
-        GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D,
-        GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D,
-        GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D,
-        GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, format,
-        width, height, 0, format, GL_UNSIGNED_BYTE, texData);
-
-    glBindTexture(GL_TEXTURE_2D, 0);
-    stbi_image_free(texData);
-
-    return tex;
-}
-
-void UnloadTexture(unsigned int texture)
-{
-    glDeleteTextures(1, &texture);
-}
-
-void SetTexture(unsigned int texture)
-{
-    if (texture == 0)
-    {
-        glUniform1i(glGetUniformLocation(
-            GetGlHelperPtr()->GetShaderID("default"), 
-            "uTextureEnable"), 0);
-    }
-    else
-    {
-        glUniform1i(glGetUniformLocation(
-            GetGlHelperPtr()->GetShaderID("default"),
-            "uTextureEnable"), 1);
-        glBindTexture(GL_TEXTURE_2D, texture);
+        GetDxHelperPtr()->GetImmediateContextPtr()->
+            PSSetShaderResources(0, 1, pSRV);
     }
 }

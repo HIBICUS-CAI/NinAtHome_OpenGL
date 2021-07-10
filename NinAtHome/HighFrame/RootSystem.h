@@ -17,7 +17,7 @@ public:
     RootSystem();
     ~RootSystem();
 
-    bool StartUp();
+    bool StartUp(HINSTANCE hInstance, int cmdShow);
 
     void ClearAndStop();
 

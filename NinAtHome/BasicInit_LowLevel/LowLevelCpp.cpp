@@ -1,22 +1,22 @@
 #include "main.h"
 #include <iostream>
 
-GlHelper* gp_GlHelper = nullptr;
+DxHelper* gp_DxHelper = nullptr;
 
-bool InitSystem(int width, int height, const char* title)
+bool InitSystem(HINSTANCE hInstance, int cmdShow)
 {
-    if (!InitGlAndCreateWindow(width, height, title))
+    if (!CreateWndAndInitInput(hInstance, cmdShow))
     {
-        std::cout << "failed to init basic" << std::endl;
+        std::cout << "failed to create wnd input" << std::endl;
         return false;
     }
 
-    gp_GlHelper = new GlHelper();
-    if (!gp_GlHelper->StartUp())
+    gp_DxHelper = new DxHelper();
+    if (FAILED((gp_DxHelper->StartUp(GetWndHandle()))))
     {
-        std::cout << "failed to init gl" << std::endl;
-        delete gp_GlHelper;
-        gp_GlHelper = nullptr;
+        std::cout << "failed to init dx" << std::endl;
+        delete gp_DxHelper;
+        gp_DxHelper = nullptr;
         return false;
     }
 
@@ -25,38 +25,32 @@ bool InitSystem(int width, int height, const char* title)
 
 void UninitSystem()
 {
-    TerminateGLFW();
+    gp_DxHelper->CleanAndStop();
 }
 
 float SwapBuffers()
 {
     float timer = GoRunLoopProcess();
-    gp_GlHelper->ClearVaoVbo();
+
+    gp_DxHelper->SwapBufferChain();
 
     return timer;
 }
 
 bool ShouldQuit()
 {
-    return ShouldGlfwQuit();
+    return ShouldWndQuit();
 }
 
-GlHelper* GetGlHelperPtr()
+DxHelper* GetDxHelperPtr()
 {
-    return gp_GlHelper;
+    return gp_DxHelper;
 }
 
-void SetVertexAttr(const VERTEX* v, int arraySize)
+void SetVertexAttr(
+    ID3D11Buffer* const* ppVertexBuffers,
+    ID3D11Buffer* ppIndexBuffers)
 {
-    int bufferSize = 9 * arraySize;
-    float* buffer = new float[bufferSize];
-    GLuint* vao = new GLuint;
-    GLuint* vbo = new GLuint;
-    GetGlHelperPtr()->MoveDataToBuffer(
-        v, arraySize, buffer);
-    GetGlHelperPtr()->BindVAOWithVBO(vao, vbo,
-        buffer, bufferSize);
-    glBindVertexArray(*vao);
-    delete vao, vbo;
-    delete[] buffer;
+    gp_DxHelper->BindVertexIndexBuffer(
+        ppVertexBuffers, ppIndexBuffers);
 }
