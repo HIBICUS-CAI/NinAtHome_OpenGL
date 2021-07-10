@@ -9,10 +9,6 @@
 
 #include "UTransformComponent.h"
 #include "UiObject.h"
-#ifndef NIN_AT_HOME
-#include <TP\glm\glm.hpp>
-#include <TP\glm\gtc\type_ptr.hpp>
-#endif // !NIN_AT_HOME
 
 UTransformComponent::UTransformComponent(std::string _name,
     UiObject* _owner, int _order, Float3 _initValue) :
@@ -655,38 +651,15 @@ void UTransformComponent::UpdateWorldMatrix()
         0.f, 0.f, 0.f, 1.f
     };
 
-#ifdef NIN_AT_HOME
-    mWorldMatrix = glm::translate(mWorldMatrix, mPosition);
-    mWorldMatrix = glm::rotate(mWorldMatrix,
-        glm::radians(mRotation.x), Float3(1.f, 0.f, 0.f));
-    mWorldMatrix = glm::rotate(mWorldMatrix,
-        glm::radians(mRotation.y), Float3(0.f, 1.f, 0.f));
-    mWorldMatrix = glm::rotate(mWorldMatrix,
-        glm::radians(mRotation.z), Float3(0.f, 0.f, 1.f));
-    mWorldMatrix = glm::scale(mWorldMatrix, mScale);
-#else
-    glm::fmat4x4 world =
-    {
-        1.f, 0.f, 0.f, 0.f,
-        0.f, 1.f, 0.f, 0.f,
-        0.f, 0.f, 1.f, 0.f,
-        0.f, 0.f, 0.f, 1.f
-    };
-    world = glm::translate(world, mPosition);
-    world = glm::rotate(world,
-        glm::radians(mRotation.x), Float3(1.f, 0.f, 0.f));
-    world = glm::rotate(world,
-        glm::radians(mRotation.y), Float3(0.f, 1.f, 0.f));
-    world = glm::rotate(world,
-        glm::radians(mRotation.z), Float3(0.f, 0.f, 1.f));
-    world = glm::scale(world, mScale);
-    float* matArray = glm::value_ptr(world);
-    mWorldMatrix =
-    {
-        matArray[0],matArray[1],matArray[2],matArray[3],
-        matArray[4],matArray[5],matArray[6],matArray[7],
-        matArray[8],matArray[9],matArray[10],matArray[11],
-        matArray[12],matArray[13],matArray[14],matArray[15]
-    };
-#endif // NIN_AT_HOME
+    Float4x4 world = DirectX::XMLoadFloat4x4(&mWorldMatrix);
+
+    world = DirectX::XMMatrixTranslation(
+        mPosition.x, mPosition.y, mPosition.z);
+    world = DirectX::XMMatrixRotationX(mRotation.x);
+    world = DirectX::XMMatrixRotationY(mRotation.y);
+    world = DirectX::XMMatrixRotationZ(mRotation.z);
+    world = DirectX::XMMatrixScaling(
+        mScale.x, mScale.y, mScale.z);
+
+    DirectX::XMStoreFloat4x4(&mWorldMatrix, world);
 }

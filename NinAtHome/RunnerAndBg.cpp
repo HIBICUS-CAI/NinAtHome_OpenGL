@@ -23,14 +23,14 @@ void RunnerAndBgRegister(ObjectFactory* _factory)
 
 void HiddenCommandInput(AInputComponent* _aic, float _deltatime)
 {
-    if (GetControllerTrigger(NpadButton::StickL::Index))
+    if (GetControllerTrigger(GP_LEFTSTICKBTN))
     {
         _aic->GetActorObjOwner()->GetSceneNodePtr()->
             GetSceneManagerPtr()->LoadSceneNode(
                 "result-success-scene",
                 "rom:/Configs/Scenes/result-success-scene.json");
     }
-    else if (GetControllerTrigger(NpadButton::StickR::Index))
+    else if (GetControllerTrigger(GP_RIGHTSTICKBTN))
     {
         _aic->GetActorObjOwner()->GetSceneNodePtr()->
             GetSceneManagerPtr()->LoadSceneNode(
@@ -48,7 +48,7 @@ void RunnerInput(AInputComponent* _aic, float _deltatime)
 {
     ActorObject* owner = _aic->GetActorObjOwner();
 
-    if (GetControllerPress(NpadButton::StickLLeft::Index))
+    if (GetControllerLeftStick().x < 0)
     {
         if (owner && owner->IsObjectActive() == STATUS::ACTIVE)
         {
@@ -60,7 +60,7 @@ void RunnerInput(AInputComponent* _aic, float _deltatime)
                     -g_HVel * _deltatime, 0.f));
         }
     }
-    else if (GetControllerPress(NpadButton::StickLRight::Index))
+    else if (GetControllerLeftStick().x > 0)
     {
         if (owner && owner->IsObjectActive() == STATUS::ACTIVE)
         {
@@ -82,8 +82,7 @@ void RunnerInput(AInputComponent* _aic, float _deltatime)
         }
     }
 
-    if (GetControllerTrigger(NpadButton::StickLLeft::Index) ||
-        GetControllerTrigger(NpadButton::StickLRight::Index))
+    if (GetControllerLeftStick().x)
     {
         if (owner && owner->IsObjectActive() == STATUS::ACTIVE)
         {
@@ -94,7 +93,7 @@ void RunnerInput(AInputComponent* _aic, float _deltatime)
     }
 
     static bool shouldSetWalk = true;
-    if (GetControllerTrigger(NpadButton::B::Index))
+    if (GetControllerTrigger(GP_BOTTOMBTN))
     {
         SetControllerLeftVibration(5);
         SetControllerRightVibration(5);
@@ -126,7 +125,7 @@ void RunnerInput(AInputComponent* _aic, float _deltatime)
         }
     }
 
-    if (GetControllerTrigger(NpadButton::ZR::Index) && owner)
+    if (GetControllerTrigger(GP_RIGHTBACKSHDBTN) && owner)
     {
         SetControllerLeftVibration(5);
         SetControllerRightVibration(5);

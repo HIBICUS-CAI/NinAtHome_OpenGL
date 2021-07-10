@@ -85,7 +85,7 @@ void TestUiInit(UInteractionComponent* _aitc)
 void TestUiUpdate(UInteractionComponent* _aitc, float _deltatime)
 {
     auto scene = _aitc->GetUiObjOwner()->GetSceneNodePtr();
-    if (GetControllerTrigger(NpadButton::R::Index))
+    if (GetControllerTrigger(GP_RIGHTFORESHDBTN))
     {
         if (scene->GetUiObject("test-ui")->IsObjectActive() ==
             STATUS::ACTIVE)
@@ -116,28 +116,28 @@ void TempUiInput(UInputComponent* _uic, float _deltatime)
     UBtnMapComponent* ubmc = nullptr;
     ubmc = (UBtnMapComponent*)owner->GetUComponent(btnmapName);
 
-    if (GetControllerTrigger(NpadButton::Left::Index))
+    if (GetControllerTrigger(GP_LEFTDIRBTN))
     {
         if (ubmc && ubmc->IsBeingSelected())
         {
             ubmc->SelectLeftBtn();
         }
     }
-    else if (GetControllerTrigger(NpadButton::Right::Index))
+    else if (GetControllerTrigger(GP_RIGHTDIRBTN))
     {
         if (ubmc && ubmc->IsBeingSelected())
         {
             ubmc->SelectRightBtn();
         }
     }
-    else if (GetControllerTrigger(NpadButton::Up::Index))
+    else if (GetControllerTrigger(GP_UPDIRBTN))
     {
         if (ubmc && ubmc->IsBeingSelected())
         {
             ubmc->SelectUpBtn();
         }
     }
-    else if (GetControllerTrigger(NpadButton::Down::Index))
+    else if (GetControllerTrigger(GP_DOWNDIRBTN))
     {
         if (ubmc && ubmc->IsBeingSelected())
         {
@@ -150,7 +150,7 @@ void TempMove(AInputComponent* _aic, float _deltatime)
 {
     ActorObject* owner = _aic->GetActorObjOwner();
 
-    if (GetControllerTrigger(NpadButton::X::Index))
+    if (GetControllerTrigger(GP_TOPBTN))
     {
         if (owner)
         {
@@ -162,7 +162,7 @@ void TempMove(AInputComponent* _aic, float _deltatime)
             }
         }
     }
-    if (GetControllerTrigger(NpadButton::Y::Index))
+    if (GetControllerTrigger(GP_LEFTBTN))
     {
         if (owner)
         {
@@ -174,7 +174,7 @@ void TempMove(AInputComponent* _aic, float _deltatime)
             }
         }
     }
-    if (GetControllerTrigger(NpadButton::A::Index))
+    if (GetControllerTrigger(GP_RIGHTBTN))
     {
         if (owner)
         {
@@ -188,7 +188,7 @@ void TempMove(AInputComponent* _aic, float _deltatime)
             }
         }
     }
-    if (GetControllerTrigger(NpadButton::B::Index))
+    if (GetControllerTrigger(GP_BOTTOMBTN))
     {
         if (owner)
         {
@@ -202,7 +202,7 @@ void TempMove(AInputComponent* _aic, float _deltatime)
             }
         }
     }
-    if (GetControllerPress(NpadButton::StickLLeft::Index))
+    if (GetControllerLeftStick().x < 0)
     {
         if (owner && owner->IsObjectActive() == STATUS::ACTIVE)
         {
@@ -214,7 +214,7 @@ void TempMove(AInputComponent* _aic, float _deltatime)
                     -200.f * _deltatime, 0.f));
         }
     }
-    if (GetControllerPress(NpadButton::StickLRight::Index))
+    if (GetControllerLeftStick().x > 0)
     {
         if (owner && owner->IsObjectActive() == STATUS::ACTIVE)
         {
@@ -226,7 +226,7 @@ void TempMove(AInputComponent* _aic, float _deltatime)
                     200.f * _deltatime, 0.f));
         }
     }
-    if (GetControllerPress(NpadButton::StickLUp::Index))
+    if (GetControllerLeftStick().y > 0)
     {
         if (owner && owner->IsObjectActive() == STATUS::ACTIVE)
         {
@@ -238,7 +238,7 @@ void TempMove(AInputComponent* _aic, float _deltatime)
                     0.f, -200.f * _deltatime));
         }
     }
-    if (GetControllerPress(NpadButton::StickLDown::Index))
+    if (GetControllerLeftStick().y < 0)
     {
         if (owner && owner->IsObjectActive() == STATUS::ACTIVE)
         {

@@ -15,7 +15,7 @@ void StartBtnInput(UInputComponent* _uic, float _deltatime)
             "start-btn-ui-btnmap")))->IsBeingSelected();
     if (selected)
     {
-        if (GetControllerTrigger(NpadButton::A::Index))
+        if (GetControllerTrigger(GP_RIGHTBTN))
         {
             _uic->GetUiObjOwner()->GetSceneNodePtr()->
                 GetSceneManagerPtr()->LoadSceneNode(

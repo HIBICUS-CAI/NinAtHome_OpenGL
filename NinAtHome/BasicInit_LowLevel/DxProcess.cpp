@@ -22,11 +22,8 @@ bool CreateWndAndInitInput(HINSTANCE hInstance, int cmdShow)
     {
         return false;
     }
-    if (!InputInterface::StartUp())
-    {
-        return false;
-    }
 
+    g_WndHandle = WindowInterface::GetWindowPtr()->GetWndHandle();
     g_ShouldQuit = false;
     g_InitTime = GetTickCount64();
 

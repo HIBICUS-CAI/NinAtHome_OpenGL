@@ -19,14 +19,14 @@ void RetryBtnInput(UInputComponent* _uic, float _deltatime)
     UBtnMapComponent* ubmc = nullptr;
     ubmc = (UBtnMapComponent*)owner->GetUComponent(btnmapName);
 
-    if (GetControllerTrigger(NpadButton::Left::Index))
+    if (GetControllerTrigger(GP_LEFTDIRBTN))
     {
         if (ubmc && ubmc->IsBeingSelected())
         {
             ubmc->SelectLeftBtn();
         }
     }
-    else if (GetControllerTrigger(NpadButton::Right::Index))
+    else if (GetControllerTrigger(GP_RIGHTDIRBTN))
     {
         if (ubmc && ubmc->IsBeingSelected())
         {
@@ -36,7 +36,7 @@ void RetryBtnInput(UInputComponent* _uic, float _deltatime)
 
     if (ubmc && ubmc->IsBeingSelected())
     {
-        if (GetControllerTrigger(NpadButton::A::Index))
+        if (GetControllerTrigger(GP_RIGHTBTN))
         {
             _uic->GetUiObjOwner()->GetSceneNodePtr()->
                 GetSceneManagerPtr()->LoadSceneNode(
@@ -55,14 +55,14 @@ void TitleBtnInput(UInputComponent* _uic, float _deltatime)
     UBtnMapComponent* ubmc = nullptr;
     ubmc = (UBtnMapComponent*)owner->GetUComponent(btnmapName);
 
-    if (GetControllerTrigger(NpadButton::Left::Index))
+    if (GetControllerTrigger(GP_LEFTDIRBTN))
     {
         if (ubmc && ubmc->IsBeingSelected())
         {
             ubmc->SelectLeftBtn();
         }
     }
-    else if (GetControllerTrigger(NpadButton::Right::Index))
+    else if (GetControllerTrigger(GP_RIGHTDIRBTN))
     {
         if (ubmc && ubmc->IsBeingSelected())
         {
@@ -72,7 +72,7 @@ void TitleBtnInput(UInputComponent* _uic, float _deltatime)
 
     if (ubmc && ubmc->IsBeingSelected())
     {
-        if (GetControllerTrigger(NpadButton::A::Index))
+        if (GetControllerTrigger(GP_RIGHTBTN))
         {
             _uic->GetUiObjOwner()->GetSceneNodePtr()->
                 GetSceneManagerPtr()->LoadSceneNode(

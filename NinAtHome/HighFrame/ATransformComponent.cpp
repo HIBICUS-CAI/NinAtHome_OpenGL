@@ -10,11 +10,6 @@
 #include "ATransformComponent.h"
 #include "ActorObject.h"
 #include "SceneNode.h"
-#ifndef NIN_AT_HOME
-#include <TP\glm\glm.hpp>
-#include <TP\glm\gtc\type_ptr.hpp>
-#endif // !NIN_AT_HOME
-
 
 ATransformComponent::ATransformComponent(std::string _name,
     ActorObject* _owner, int _order, Float3 _initValue) :
@@ -661,38 +656,15 @@ void ATransformComponent::UpdateWorldMatrix()
     relative = GetActorObjOwner()->GetSceneNodePtr()->
         GetCamera()->GetRelativePosWithCam(mPosition);
 
-#ifdef NIN_AT_HOME
-    mWorldMatrix = glm::translate(mWorldMatrix, relative);
-    mWorldMatrix = glm::rotate(mWorldMatrix,
-        glm::radians(mRotation.x), Float3(1.f, 0.f, 0.f));
-    mWorldMatrix = glm::rotate(mWorldMatrix,
-        glm::radians(mRotation.y), Float3(0.f, 1.f, 0.f));
-    mWorldMatrix = glm::rotate(mWorldMatrix,
-        glm::radians(mRotation.z), Float3(0.f, 0.f, 1.f));
-    mWorldMatrix = glm::scale(mWorldMatrix, mScale);
-#else
-    glm::fmat4x4 world =
-    {
-        1.f, 0.f, 0.f, 0.f,
-        0.f, 1.f, 0.f, 0.f,
-        0.f, 0.f, 1.f, 0.f,
-        0.f, 0.f, 0.f, 1.f
-    };
-    world = glm::translate(world, glm::fvec3(relative.x, relative.y, relative.z));
-    world = glm::rotate(world,
-        glm::radians(mRotation.x), glm::fvec3(1.f, 0.f, 0.f));
-    world = glm::rotate(world,
-        glm::radians(mRotation.y), glm::fvec3(0.f, 1.f, 0.f));
-    world = glm::rotate(world,
-        glm::radians(mRotation.z), glm::fvec3(0.f, 0.f, 1.f));
-    world = glm::scale(world, glm::fvec3(mScale.x, mScale.y, mScale.z));
-    float* matArray = glm::value_ptr(world);
-    mWorldMatrix =
-    {
-        matArray[0],matArray[1],matArray[2],matArray[3],
-        matArray[4],matArray[5],matArray[6],matArray[7],
-        matArray[8],matArray[9],matArray[10],matArray[11],
-        matArray[12],matArray[13],matArray[14],matArray[15]
-    };
-#endif // NIN_AT_HOME
+    Float4x4 world = DirectX::XMLoadFloat4x4(&mWorldMatrix);
+
+    world = DirectX::XMMatrixTranslation(
+        relative.x, relative.y, relative.z);
+    world = DirectX::XMMatrixRotationX(mRotation.x);
+    world = DirectX::XMMatrixRotationY(mRotation.y);
+    world = DirectX::XMMatrixRotationZ(mRotation.z);
+    world = DirectX::XMMatrixScaling(
+        mScale.x, mScale.y, mScale.z);
+
+    DirectX::XMStoreFloat4x4(&mWorldMatrix, world);
 }
