@@ -658,13 +658,16 @@ void ATransformComponent::UpdateWorldMatrix()
 
     Float4x4 world = DirectX::XMLoadFloat4x4(&mWorldMatrix);
 
-    world = DirectX::XMMatrixTranslation(
-        relative.x, relative.y, relative.z);
-    world = DirectX::XMMatrixRotationX(mRotation.x);
-    world = DirectX::XMMatrixRotationY(mRotation.y);
-    world = DirectX::XMMatrixRotationZ(mRotation.z);
-    world = DirectX::XMMatrixScaling(
-        mScale.x, mScale.y, mScale.z);
+    world = DirectX::XMMatrixMultiply(
+        DirectX::XMMatrixScaling(mScale.x, mScale.y, mScale.z),
+        DirectX::XMMatrixRotationRollPitchYaw(
+            mRotation.x, mRotation.y, mRotation.z)
+    );
+    world = DirectX::XMMatrixMultiply(
+        world,
+        DirectX::XMMatrixTranslation(
+            relative.x, relative.y, relative.z)
+    );
 
     DirectX::XMStoreFloat4x4(&mWorldMatrix, world);
 }

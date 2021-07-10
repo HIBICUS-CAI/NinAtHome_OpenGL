@@ -78,6 +78,11 @@ void ACollisionComponent::CompInit()
 
 void ACollisionComponent::CompUpdate(float _deltatime)
 {
+    
+}
+
+void ACollisionComponent::CompDestory()
+{
     if (mColliVertexBuffer)
     {
         mColliVertexBuffer->Release();
@@ -86,12 +91,6 @@ void ACollisionComponent::CompUpdate(float _deltatime)
     {
         mColliIndexBuffer->Release();
     }
-}
-
-void ACollisionComponent::CompDestory()
-{
-    UnloadTexture(&mCircleTexture);
-    UnloadTexture(&mRectangleTexture);
 }
 
 void ACollisionComponent::SetCollisionStatus(COLLISION_TYPE _type,
