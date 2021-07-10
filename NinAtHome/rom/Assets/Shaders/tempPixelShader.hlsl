@@ -13,5 +13,5 @@ float4 main(VS_OUTPUT input) : SV_TARGET
 {
     float4 texColor = Texture.Sample(SamLiner,input.TexCoordL);
 
-    return texColor;
+    return texColor * input.ColorW;
 }

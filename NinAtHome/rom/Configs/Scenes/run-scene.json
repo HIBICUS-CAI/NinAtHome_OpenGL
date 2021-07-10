@@ -40,7 +40,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -5,
-                    "texture-path": "rom:/Assets/Textures/run_bg.tga",
+                    "texture-path": "rom:/Assets/Textures/run_bg.png",
                     "texture-width": 20000.0,
                     "texture-height": 1080.0
                 },
@@ -84,7 +84,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -133,7 +133,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -182,7 +182,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -231,7 +231,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -280,7 +280,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -329,7 +329,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -378,7 +378,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -427,7 +427,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -476,7 +476,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -525,7 +525,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -574,7 +574,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -623,7 +623,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -672,7 +672,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -721,7 +721,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -770,7 +770,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -819,7 +819,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -868,7 +868,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -917,7 +917,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -966,7 +966,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 350.0,
                     "texture-height": 70.0
                 },
@@ -1015,7 +1015,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/mid_land.tga",
+                    "texture-path": "rom:/Assets/Textures/mid_land.png",
                     "texture-width": 3625.0,
                     "texture-height": 70.0
                 },
@@ -1064,7 +1064,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/wood.tga",
+                    "texture-path": "rom:/Assets/Textures/wood.png",
                     "texture-width": 70.0,
                     "texture-height": 25.0
                 },
@@ -1084,7 +1084,7 @@
                     "animates": [
                         {
                             "animate-name": "explosion",
-                            "animate-path": "rom:/Assets/Textures/explosion.tga",
+                            "animate-path": "rom:/Assets/Textures/explosion.png",
                             "animate-stride": [
                                 0.142857,
                                 0.5
@@ -1145,7 +1145,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/wood.tga",
+                    "texture-path": "rom:/Assets/Textures/wood.png",
                     "texture-width": 70.0,
                     "texture-height": 25.0
                 },
@@ -1165,7 +1165,7 @@
                     "animates": [
                         {
                             "animate-name": "explosion",
-                            "animate-path": "rom:/Assets/Textures/explosion.tga",
+                            "animate-path": "rom:/Assets/Textures/explosion.png",
                             "animate-stride": [
                                 0.142857,
                                 0.5
@@ -1226,7 +1226,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/wood.tga",
+                    "texture-path": "rom:/Assets/Textures/wood.png",
                     "texture-width": 70.0,
                     "texture-height": 25.0
                 },
@@ -1246,7 +1246,7 @@
                     "animates": [
                         {
                             "animate-name": "explosion",
-                            "animate-path": "rom:/Assets/Textures/explosion.tga",
+                            "animate-path": "rom:/Assets/Textures/explosion.png",
                             "animate-stride": [
                                 0.142857,
                                 0.5
@@ -1307,7 +1307,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/wood.tga",
+                    "texture-path": "rom:/Assets/Textures/wood.png",
                     "texture-width": 70.0,
                     "texture-height": 25.0
                 },
@@ -1327,7 +1327,7 @@
                     "animates": [
                         {
                             "animate-name": "explosion",
-                            "animate-path": "rom:/Assets/Textures/explosion.tga",
+                            "animate-path": "rom:/Assets/Textures/explosion.png",
                             "animate-stride": [
                                 0.142857,
                                 0.5
@@ -1388,7 +1388,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/wood.tga",
+                    "texture-path": "rom:/Assets/Textures/wood.png",
                     "texture-width": 70.0,
                     "texture-height": 25.0
                 },
@@ -1408,7 +1408,7 @@
                     "animates": [
                         {
                             "animate-name": "explosion",
-                            "animate-path": "rom:/Assets/Textures/explosion.tga",
+                            "animate-path": "rom:/Assets/Textures/explosion.png",
                             "animate-stride": [
                                 0.142857,
                                 0.5
@@ -1469,7 +1469,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/wood.tga",
+                    "texture-path": "rom:/Assets/Textures/wood.png",
                     "texture-width": 70.0,
                     "texture-height": 25.0
                 },
@@ -1489,7 +1489,7 @@
                     "animates": [
                         {
                             "animate-name": "explosion",
-                            "animate-path": "rom:/Assets/Textures/explosion.tga",
+                            "animate-path": "rom:/Assets/Textures/explosion.png",
                             "animate-stride": [
                                 0.142857,
                                 0.5
@@ -1550,7 +1550,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/wood.tga",
+                    "texture-path": "rom:/Assets/Textures/wood.png",
                     "texture-width": 70.0,
                     "texture-height": 25.0
                 },
@@ -1570,7 +1570,7 @@
                     "animates": [
                         {
                             "animate-name": "explosion",
-                            "animate-path": "rom:/Assets/Textures/explosion.tga",
+                            "animate-path": "rom:/Assets/Textures/explosion.png",
                             "animate-stride": [
                                 0.142857,
                                 0.5
@@ -1631,7 +1631,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": 1,
-                    "texture-path": "rom:/Assets/Textures/coin.tga",
+                    "texture-path": "rom:/Assets/Textures/coin.png",
                     "texture-width": 36.0,
                     "texture-height": 36.0
                 },
@@ -1694,7 +1694,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": 1,
-                    "texture-path": "rom:/Assets/Textures/coin.tga",
+                    "texture-path": "rom:/Assets/Textures/coin.png",
                     "texture-width": 36.0,
                     "texture-height": 36.0
                 },
@@ -1757,7 +1757,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": 1,
-                    "texture-path": "rom:/Assets/Textures/coin.tga",
+                    "texture-path": "rom:/Assets/Textures/coin.png",
                     "texture-width": 36.0,
                     "texture-height": 36.0
                 },
@@ -1820,7 +1820,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -1,
-                    "texture-path": "rom:/Assets/Textures/flag.tga",
+                    "texture-path": "rom:/Assets/Textures/flag.png",
                     "texture-width": 100.0,
                     "texture-height": 200.0
                 },
@@ -1876,7 +1876,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": 0,
-                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-path": "rom:/Assets/Textures/player.png",
                     "texture-width": 72.0,
                     "texture-height": 97.0
                 },
@@ -1896,7 +1896,7 @@
                     "animates": [
                         {
                             "animate-name": "stand",
-                            "animate-path": "rom:/Assets/Textures/stand_ani.tga",
+                            "animate-path": "rom:/Assets/Textures/stand_ani.png",
                             "animate-stride": [
                                 0.5,
                                 1.0
@@ -1907,7 +1907,7 @@
                         },
                         {
                             "animate-name": "walk",
-                            "animate-path": "rom:/Assets/Textures/walk_ani.tga",
+                            "animate-path": "rom:/Assets/Textures/walk_ani.png",
                             "animate-stride": [
                                 0.33333333333333333333333333333,
                                 0.33333333333333333333333333333
@@ -1918,7 +1918,7 @@
                         },
                         {
                             "animate-name": "jump",
-                            "animate-path": "rom:/Assets/Textures/jump_ani.tga",
+                            "animate-path": "rom:/Assets/Textures/jump_ani.png",
                             "animate-stride": [
                                 0.5,
                                 1.0
@@ -1993,7 +1993,7 @@
                 {
                     "type": "text",
                     "update-order": 0,
-                    "moji-path": "rom:/Assets/Textures/moji.tga",
+                    "moji-path": "rom:/Assets/Textures/moji.png",
                     "init-text": "REST : ",
                     "init-size": [
                         80.0,

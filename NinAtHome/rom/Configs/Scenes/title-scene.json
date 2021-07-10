@@ -41,14 +41,14 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -2,
-                    "texture-path": "rom:/Assets/Textures/title_success_bg.tga",
+                    "texture-path": "rom:/Assets/Textures/title_success_bg.png",
                     "texture-width": 1920.0,
                     "texture-height": 1080.0
                 },
                 {
                     "type": "text",
                     "update-order": 0,
-                    "moji-path": "rom:/Assets/Textures/moji.tga",
+                    "moji-path": "rom:/Assets/Textures/moji.png",
                     "init-text": "FIELD RUNNER",
                     "init-size": [
                         100.0,
@@ -101,7 +101,7 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -2,
-                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-path": "rom:/Assets/Textures/player.png",
                     "texture-width": 400.0,
                     "texture-height": 80.0
                 },
@@ -118,7 +118,7 @@
                 {
                     "type": "text",
                     "update-order": 0,
-                    "moji-path": "rom:/Assets/Textures/moji.tga",
+                    "moji-path": "rom:/Assets/Textures/moji.png",
                     "init-text": "START",
                     "init-size": [
                         50.0,
