@@ -15,6 +15,9 @@ using Matrix4x4f = DirectX::XMFLOAT4X4;
 using Float4x4 = DirectX::XMMATRIX;
 
 void MatrixStore_DX(Float4x4* ptr, Matrix4x4f mat);
+void CreateDefaultVertexIndexBuffer(
+    ID3D11Buffer** ppVertexBuffer,
+    ID3D11Buffer** ppIndexBuffer);
 
 using MakeFloat2 = Float2;
 using MakeFloat3 = Float3;

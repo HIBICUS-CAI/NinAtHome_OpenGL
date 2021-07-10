@@ -72,60 +72,8 @@ void ACollisionComponent::CompInit()
 
     mColliedColor = NOT_COLLIED;
 
-    VERTEX vertices[] =
-    {
-        {
-            MakeFloat3(-1.0f, 1.0f, 0.0f),
-            MakeFloat4(1.0f, 1.0f, 1.0f, 1.0f),
-            MakeFloat2(0.0f, 1.0f)
-        },
-        {
-            DirectX::XMFLOAT3(1.0f, 1.0f, 0.0f),
-            DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
-            DirectX::XMFLOAT2(1.0f, 1.0f)
-        },
-        {
-            DirectX::XMFLOAT3(1.0f, -1.0f, 0.0f),
-            DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
-            DirectX::XMFLOAT2(1.0f, 0.0f)
-        },
-        {
-            DirectX::XMFLOAT3(-1.0f, -1.0f, 0.0f),
-            DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
-            DirectX::XMFLOAT2(0.0f, 0.0f)
-        },
-    };
-    D3D11_BUFFER_DESC bdc = {};
-    bdc.Usage = D3D11_USAGE_DYNAMIC;
-    bdc.ByteWidth = sizeof(VERTEX) * 4;
-    bdc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-    bdc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-    D3D11_SUBRESOURCE_DATA initData = {};
-    initData.pSysMem = vertices;
-    HRESULT hr = GetDxHelperPtr()->GetDevicePtr()->CreateBuffer(
-        &bdc, &initData, &mColliVertexBuffer);
-    if (FAILED(hr))
-    {
-        MY_NN_LOG(LOG_ERROR,
-            "failed to create vertex buffer\n");
-    }
-    WORD indices[] =
-    {
-        3,1,0,
-        2,1,3,
-    };
-    bdc.Usage = D3D11_USAGE_DYNAMIC;
-    bdc.ByteWidth = sizeof(WORD) * 6;
-    bdc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-    bdc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-    initData.pSysMem = indices;
-    hr = GetDxHelperPtr()->GetDevicePtr()->CreateBuffer(
-        &bdc, &initData, &mColliIndexBuffer);
-    if (FAILED(hr))
-    {
-        MY_NN_LOG(LOG_ERROR,
-            "failed to create index buffer\n");
-    }
+    CreateDefaultVertexIndexBuffer(&mColliVertexBuffer,
+        &mColliIndexBuffer);
 }
 
 void ACollisionComponent::CompUpdate(float _deltatime)

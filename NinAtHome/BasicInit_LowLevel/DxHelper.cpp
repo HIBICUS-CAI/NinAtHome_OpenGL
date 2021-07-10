@@ -19,6 +19,67 @@ void MatrixStore_DX(Float4x4* ptr, Matrix4x4f mat)
     *ptr = DirectX::XMLoadFloat4x4(&mat);
 }
 
+void CreateDefaultVertexIndexBuffer(
+    ID3D11Buffer** ppVertexBuffer,
+    ID3D11Buffer** ppIndexBuffer)
+{
+    VERTEX vertices[] =
+    {
+        {
+            MakeFloat3(-1.0f, 1.0f, 0.0f),
+            MakeFloat4(1.0f, 1.0f, 1.0f, 1.0f),
+            MakeFloat2(0.0f, 1.0f)
+        },
+        {
+            MakeFloat3(1.0f, 1.0f, 0.0f),
+            MakeFloat4(1.0f, 1.0f, 1.0f, 1.0f),
+            MakeFloat2(1.0f, 1.0f)
+        },
+        {
+            MakeFloat3(1.0f, -1.0f, 0.0f),
+            MakeFloat4(1.0f, 1.0f, 1.0f, 1.0f),
+            MakeFloat2(1.0f, 0.0f)
+        },
+        {
+            MakeFloat3(-1.0f, -1.0f, 0.0f),
+            MakeFloat4(1.0f, 1.0f, 1.0f, 1.0f),
+            MakeFloat2(0.0f, 0.0f)
+        },
+    };
+    D3D11_BUFFER_DESC bdc = {};
+    bdc.Usage = D3D11_USAGE_DYNAMIC;
+    bdc.ByteWidth = sizeof(VERTEX) * 4;
+    bdc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+    bdc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+    D3D11_SUBRESOURCE_DATA initData = {};
+    initData.pSysMem = vertices;
+    HRESULT hr = GetDxHelperPtr()->GetDevicePtr()->CreateBuffer(
+        &bdc, &initData, ppVertexBuffer);
+    if (FAILED(hr))
+    {
+        MY_NN_LOG(LOG_ERROR,
+            "failed to create vertex buffer\n");
+    }
+
+    WORD indices[] =
+    {
+        3,1,0,
+        2,1,3,
+    };
+    bdc.Usage = D3D11_USAGE_DYNAMIC;
+    bdc.ByteWidth = sizeof(WORD) * 6;
+    bdc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+    bdc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+    initData.pSysMem = indices;
+    hr = GetDxHelperPtr()->GetDevicePtr()->CreateBuffer(
+        &bdc, &initData, ppIndexBuffer);
+    if (FAILED(hr))
+    {
+        MY_NN_LOG(LOG_ERROR,
+            "failed to create index buffer\n");
+    }
+}
+
 HRESULT CompileShaderFromFile(const WCHAR* szFileName,
     LPCSTR szEntryPoint, LPCSTR szShaderModel,
     ID3DBlob** ppBlobOut)
