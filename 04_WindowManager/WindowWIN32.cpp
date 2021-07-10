@@ -39,7 +39,7 @@ HRESULT WindowWIN32::CreateMyWindow(
     this->mInstance = hInstance;
 
     RECT rc = {
-        0,0,1280,720
+        0,0,1920,1080
     };
     AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
     this->mWndHandle = CreateWindow(
@@ -61,8 +61,8 @@ HRESULT WindowWIN32::CreateMyWindow(
     GetWindowRect(hDesk, &rc);
     UINT offsetX = rc.right / 2;
     UINT offsetY = rc.bottom / 2;
-    UINT width = 1280;
-    UINT height = 720;
+    UINT width = 1920;
+    UINT height = 1080;
     SetWindowLong(this->mWndHandle, GWL_STYLE,
         WS_OVERLAPPED);
     SetWindowPos(this->mWndHandle, HWND_NOTOPMOST, 

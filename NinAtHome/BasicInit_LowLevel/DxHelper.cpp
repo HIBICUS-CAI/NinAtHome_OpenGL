@@ -44,7 +44,7 @@ void CreateDefaultVertexIndexBuffer(
             MakeFloat3(-1.0f, -1.0f, 0.0f),
             MakeFloat4(1.0f, 1.0f, 1.0f, 1.0f),
             MakeFloat2(0.0f, 0.0f)
-        },
+        }
     };
     D3D11_BUFFER_DESC bdc = {};
     bdc.Usage = D3D11_USAGE_DYNAMIC;
@@ -64,7 +64,7 @@ void CreateDefaultVertexIndexBuffer(
     WORD indices[] =
     {
         3,1,0,
-        2,1,3,
+        2,1,3
     };
     bdc.Usage = D3D11_USAGE_DYNAMIC;
     bdc.ByteWidth = sizeof(WORD) * 6;
