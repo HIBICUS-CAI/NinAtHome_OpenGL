@@ -22,8 +22,9 @@ ACollisionComponent::ACollisionComponent(std::string _name,
     AComponent(_name, _owner, _order),
     mCollisionType(COLLISION_TYPE::NULLTYPE),
     mCollisionSize(MakeFloat2(0.f, 0.f)), mShowCollisionFlg(false),
-    mCircleTexture(0), mRectangleTexture(0),
-    mColliedColor(MakeFloat4(1.f, 1.f, 1.f, 1.f))
+    mCircleTexture(nullptr), mRectangleTexture(nullptr),
+    mColliedColor(MakeFloat4(1.f, 1.f, 1.f, 1.f)),
+    mColliVertexBuffer(nullptr), mColliIndexBuffer(nullptr)
 {
 
 }
@@ -35,7 +36,7 @@ ACollisionComponent::~ACollisionComponent()
 
 void ACollisionComponent::CompInit()
 {
-    unsigned int exist =
+    ID3D11ShaderResourceView* exist =
         GetActorObjOwner()->GetSceneNodePtr()->
         CheckIfTexExist("rom:/Assets/Textures/collision-circ.tga");
     if (!exist)
@@ -70,17 +71,79 @@ void ACollisionComponent::CompInit()
     }
 
     mColliedColor = NOT_COLLIED;
+
+    VERTEX vertices[] =
+    {
+        {
+            MakeFloat3(-1.0f, 1.0f, 0.0f),
+            MakeFloat4(1.0f, 1.0f, 1.0f, 1.0f),
+            MakeFloat2(0.0f, 1.0f)
+        },
+        {
+            DirectX::XMFLOAT3(1.0f, 1.0f, 0.0f),
+            DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
+            DirectX::XMFLOAT2(1.0f, 1.0f)
+        },
+        {
+            DirectX::XMFLOAT3(1.0f, -1.0f, 0.0f),
+            DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
+            DirectX::XMFLOAT2(1.0f, 0.0f)
+        },
+        {
+            DirectX::XMFLOAT3(-1.0f, -1.0f, 0.0f),
+            DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
+            DirectX::XMFLOAT2(0.0f, 0.0f)
+        },
+    };
+    D3D11_BUFFER_DESC bdc = {};
+    bdc.Usage = D3D11_USAGE_DYNAMIC;
+    bdc.ByteWidth = sizeof(VERTEX) * 4;
+    bdc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+    bdc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+    D3D11_SUBRESOURCE_DATA initData = {};
+    initData.pSysMem = vertices;
+    HRESULT hr = GetDxHelperPtr()->GetDevicePtr()->CreateBuffer(
+        &bdc, &initData, &mColliVertexBuffer);
+    if (FAILED(hr))
+    {
+        MY_NN_LOG(LOG_ERROR,
+            "failed to create vertex buffer\n");
+    }
+    WORD indices[] =
+    {
+        3,1,0,
+        2,1,3,
+    };
+    bdc.Usage = D3D11_USAGE_DYNAMIC;
+    bdc.ByteWidth = sizeof(WORD) * 6;
+    bdc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+    bdc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+    initData.pSysMem = indices;
+    hr = GetDxHelperPtr()->GetDevicePtr()->CreateBuffer(
+        &bdc, &initData, &mColliIndexBuffer);
+    if (FAILED(hr))
+    {
+        MY_NN_LOG(LOG_ERROR,
+            "failed to create index buffer\n");
+    }
 }
 
 void ACollisionComponent::CompUpdate(float _deltatime)
 {
-
+    if (mColliVertexBuffer)
+    {
+        mColliVertexBuffer->Release();
+    }
+    if (mColliIndexBuffer)
+    {
+        mColliIndexBuffer->Release();
+    }
 }
 
 void ACollisionComponent::CompDestory()
 {
-    UnloadTexture(mCircleTexture);
-    UnloadTexture(mRectangleTexture);
+    UnloadTexture(&mCircleTexture);
+    UnloadTexture(&mRectangleTexture);
 }
 
 void ACollisionComponent::SetCollisionStatus(COLLISION_TYPE _type,
@@ -151,34 +214,24 @@ void ACollisionComponent::DrawACollision()
                     "cannot find transform comp in this obj : [ %s ]\n",
                     GetActorObjOwner()->GetObjectName());
                 return;
-        }
+            }
             Matrix4x4f world = thisAtc->GetWorldMatrix();
-            MatrixStore(&pworld, world);
-    }
-
-#ifdef NIN_AT_HOME
-        glUniformMatrix4fv(
-            glGetUniformLocation(
-                GetGlHelperPtr()->GetShaderID("default"),
-                "uWorld"), 1, GL_TRUE, pworld);
-#else
-        glUniformMatrix4fv(
-            glGetUniformLocation(
-                GetShaderProgramId(),
-                "uWorld"), 1, GL_TRUE, (float*)&pworld);
-#endif // NIN_AT_HOME
+            GetDxHelperPtr()->PassWorldMatrixToVS(&world);
+        }
 
         switch (mCollisionType)
         {
         case COLLISION_TYPE::CIRCLE:
-            SetTexture(mCircleTexture);
-            DrawSprite(0.f, 0.f,
+            SetTexture(&mCircleTexture);
+            DrawSprite(&mColliVertexBuffer, mColliIndexBuffer,
+                0.f, 0.f,
                 mCollisionSize.x * 2.f, mCollisionSize.y * 2.f,
                 0.f, 0.f, 1.f, 1.f, mColliedColor);
             return;
         case COLLISION_TYPE::RECTANGLE:
-            SetTexture(mRectangleTexture);
-            DrawSprite(0.f, 0.f,
+            SetTexture(&mRectangleTexture);
+            DrawSprite(&mColliVertexBuffer, mColliIndexBuffer,
+                0.f, 0.f,
                 mCollisionSize.x, mCollisionSize.y,
                 0.f, 0.f, 1.f, 1.f, mColliedColor);
             return;
@@ -188,7 +241,7 @@ void ACollisionComponent::DrawACollision()
                 GetActorObjOwner()->GetObjectName().c_str());
             return;
         }
-}
+    }
 }
 
 bool ACollisionComponent::CheckCollisionWith(ActorObject* _obj)

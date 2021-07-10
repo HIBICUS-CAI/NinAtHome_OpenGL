@@ -49,9 +49,11 @@ public:
         ID3D11Buffer* ppIndexBuffers);
     ID3D11VertexShader* GetVertexShader(std::string name);
     ID3D11PixelShader* GetPixelShader(std::string name);
+    void ClearBuffer();
     void SwapBufferChain();
     ID3D11Device* GetDevicePtr();
     ID3D11DeviceContext* GetImmediateContextPtr();
+    void PassWorldMatrixToVS(Matrix4x4f* world);
 
 private:
     HRESULT CompileDefaultShaders();
@@ -77,4 +79,6 @@ private:
     ID3D11Buffer* mConstBufferPtr;
     ID3D11Buffer* mUpdateConstBufferPtr;
     Matrix4x4f mProjMatrix;
+    ConstantBuffer mProjBuffer;
+    ConstantUpdateBuffer mWorldBuffer;
 };

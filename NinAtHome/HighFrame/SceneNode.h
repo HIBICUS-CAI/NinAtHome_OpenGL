@@ -55,9 +55,10 @@ public:
 
     void DeleteUiObject(std::string _name);
 
-    unsigned int CheckIfTexExist(std::string _path);
+    ID3D11ShaderResourceView* CheckIfTexExist(std::string _path);
 
-    void InsertNewTex(std::string _path, unsigned int _tex);
+    void InsertNewTex(std::string _path, 
+        ID3D11ShaderResourceView* _tex);
 
     void SetSceneLoopFunc(SceneLoopFuncType _func);
 
@@ -103,7 +104,8 @@ private:
 
     std::vector<class UiObject*> mRetiredUiObjectsArray;
 
-    std::unordered_map<std::string, unsigned int> mTexPool;
+    std::unordered_map<std::string, ID3D11ShaderResourceView*> 
+        mTexPool;
 
     SceneLoopFuncType mSceneLoopFuncPtr;
 

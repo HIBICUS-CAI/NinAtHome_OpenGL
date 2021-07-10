@@ -79,9 +79,13 @@ private:
 
     bool mShowCollisionFlg;
 
-    unsigned int mCircleTexture;
+    ID3D11ShaderResourceView* mCircleTexture;
 
-    unsigned int mRectangleTexture;
+    ID3D11ShaderResourceView* mRectangleTexture;
 
     Float4 mColliedColor;
+
+    ID3D11Buffer* mColliVertexBuffer;
+
+    ID3D11Buffer* mColliIndexBuffer;
 };

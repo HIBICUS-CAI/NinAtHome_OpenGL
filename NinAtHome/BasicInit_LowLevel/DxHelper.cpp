@@ -2,6 +2,7 @@
 #include "NinLog.h"
 #include "main.h"
 #include <d3dcompiler.h>
+#include <DirectXColors.h>
 
 ID3D11VertexShader* g_DefaultVertexShaderPtr = nullptr;
 ID3D11PixelShader* g_DefaultPixelShaderPtr = nullptr;
@@ -64,7 +65,8 @@ DxHelper::DxHelper() :
     mConstBufferPtr(nullptr), mUpdateConstBufferPtr(nullptr),
     mProjMatrix(g_InitValue), mRasterizerStatePtr(nullptr),
     mDriverType(D3D_DRIVER_TYPE_UNKNOWN),
-    mFeatLevel(D3D_FEATURE_LEVEL_1_0_CORE)
+    mFeatLevel(D3D_FEATURE_LEVEL_1_0_CORE),
+    mProjBuffer({}), mWorldBuffer({})
 {
 
 }
@@ -311,6 +313,9 @@ HRESULT DxHelper::StartUp(HWND wndHandle)
     mImmediateContextPtr->OMSetRenderTargets(
         1, &mRenderTargetViewPtr, mDepthStencilViewPtr);
 
+    mImmediateContextPtr->IASetPrimitiveTopology(
+        D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
     D3D11_VIEWPORT vp = {};
     vp.Width = (FLOAT)width;
     vp.Height = (FLOAT)height;
@@ -346,10 +351,19 @@ HRESULT DxHelper::StartUp(HWND wndHandle)
     {
         return hr;
     }
+    mImmediateContextPtr->VSSetShader(
+        g_DefaultVertexShaderPtr, nullptr, 0);
+    mImmediateContextPtr->PSSetShader(
+        g_DefaultPixelShaderPtr, nullptr, 0);
 
     Float4x4 projMatrix = DirectX::XMMatrixOrthographicLH(
         SCREEN_WIDTH, -SCREEN_HEIGHT, 10000.f, -10000.f);
     DirectX::XMStoreFloat4x4(&mProjMatrix, projMatrix);
+    mProjBuffer.mProjection = projMatrix;
+    mImmediateContextPtr->UpdateSubresource(mConstBufferPtr,
+        0, nullptr, &mProjBuffer, 0, 0);
+    mImmediateContextPtr->VSSetConstantBuffers(
+        0, 1, &mConstBufferPtr);
 
     return hr;
 }
@@ -566,6 +580,14 @@ HRESULT DxHelper::CompileDefaultShaders()
     return hr;
 }
 
+void DxHelper::ClearBuffer()
+{
+    mImmediateContextPtr->ClearRenderTargetView(
+        mRenderTargetViewPtr, DirectX::Colors::Black);
+    mImmediateContextPtr->ClearDepthStencilView(
+        mDepthStencilViewPtr, D3D11_CLEAR_DEPTH, 1.f, 0);
+}
+
 void DxHelper::SwapBufferChain()
 {
     mSwapChainPtr->Present(0, DXGI_PRESENT_ALLOW_TEARING);
@@ -579,4 +601,15 @@ ID3D11Device* DxHelper::GetDevicePtr()
 ID3D11DeviceContext* DxHelper::GetImmediateContextPtr()
 {
     return mImmediateContextPtr;
+}
+
+void DxHelper::PassWorldMatrixToVS(Matrix4x4f* world)
+{
+    Float4x4 worldMat = DirectX::XMLoadFloat4x4(world);
+    mWorldBuffer.mWorld = worldMat;
+
+    mImmediateContextPtr->UpdateSubresource(mUpdateConstBufferPtr,
+        0, nullptr, &mWorldBuffer, 0, 0);
+    mImmediateContextPtr->VSSetConstantBuffers(
+        1, 1, &mUpdateConstBufferPtr);
 }

@@ -44,11 +44,6 @@ bool RootSystem::StartUp(HINSTANCE hInstance, int cmdShow)
     mSceneManagerPtr->PostStartUp(
         mPropertyManagerPtr, mObjectFactoryPtr);
 
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-
-    glFrontFace(GL_CCW);
-
     InitController();
 
     if (result)
@@ -98,8 +93,7 @@ void RootSystem::RunGameLoop()
 {
     while (true)
     {
-        glClearColor(0.0f, 0.5f, 0.5f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        GetDxHelperPtr()->ClearBuffer();
 
         UpdateController();
 

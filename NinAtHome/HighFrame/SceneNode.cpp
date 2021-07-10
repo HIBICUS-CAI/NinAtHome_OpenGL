@@ -439,7 +439,8 @@ void SceneNode::DestoryAllRetiredObjects()
     }
 }
 
-unsigned int SceneNode::CheckIfTexExist(std::string _path)
+ID3D11ShaderResourceView* SceneNode::CheckIfTexExist(
+    std::string _path)
 {
     if (mTexPool.find(_path) != mTexPool.end())
     {
@@ -447,11 +448,12 @@ unsigned int SceneNode::CheckIfTexExist(std::string _path)
     }
     else
     {
-        return 0;
+        return nullptr;
     }
 }
 
-void SceneNode::InsertNewTex(std::string _path, unsigned int _tex)
+void SceneNode::InsertNewTex(std::string _path,
+    ID3D11ShaderResourceView* _tex)
 {
     mTexPool.insert(std::make_pair(_path, _tex));
 }
@@ -460,7 +462,7 @@ void SceneNode::ClearTexPool()
 {
     for (auto& tex : mTexPool)
     {
-        UnloadTexture(tex.second);
+        UnloadTexture(&(tex.second));
     }
 
     mTexPool.clear();

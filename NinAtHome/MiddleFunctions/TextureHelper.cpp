@@ -69,7 +69,6 @@ void UnloadTexture(ID3D11ShaderResourceView** pSRV)
     if (pSRV && *pSRV)
     {
         (*pSRV)->Release();
-        (*pSRV) = nullptr;
     }
 }
 

@@ -15,7 +15,7 @@
 struct ANIMATE_INFO
 {
     std::string TexPath = "";
-    unsigned int Texture = 0;
+    ID3D11ShaderResourceView* Texture = nullptr;
     Float2 Stride = MakeFloat2(0.f, 0.f);
     unsigned int MaxCut = 0;
     bool RepeatFlg = false;

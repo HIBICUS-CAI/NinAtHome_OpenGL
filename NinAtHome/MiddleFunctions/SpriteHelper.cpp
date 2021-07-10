@@ -34,10 +34,10 @@ void DrawSprite(ID3D11Buffer* const* ppVertexBuffers,
     vertex[2].Color = color;
     vertex[3].Color = color;
 
-    vertex[0].TexCoord = MakeFloat2(tx + tw, ty);
-    vertex[1].TexCoord = MakeFloat2(tx, ty);
-    vertex[2].TexCoord = MakeFloat2(tx + tw, ty + th);
-    vertex[3].TexCoord = MakeFloat2(tx, ty + th);
+    vertex[0].TexCoord = MakeFloat2(tx, ty + th);
+    vertex[1].TexCoord = MakeFloat2(tx + tw, ty + th);
+    vertex[2].TexCoord = MakeFloat2(tx + tw, ty);
+    vertex[3].TexCoord = MakeFloat2(tx, ty);
 
     GetDxHelperPtr()->GetImmediateContextPtr()->Unmap(
         *ppVertexBuffers, 0);

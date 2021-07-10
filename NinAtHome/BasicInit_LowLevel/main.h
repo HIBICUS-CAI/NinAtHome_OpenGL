@@ -1,6 +1,5 @@
 #pragma once
 #include <Windows.h>
-#include <TP\glad\glad.h>
 #include "DxHelper.h"
 #include "DxProcess.h"
 #include <math.h>
