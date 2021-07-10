@@ -91,19 +91,28 @@ void RootSystem::ClearAndStop()
 
 void RootSystem::RunGameLoop()
 {
-    while (true)
+    MSG msg = { 0 };
+    while (WM_QUIT != msg.message)
     {
-        GetDxHelperPtr()->ClearBuffer();
-
-        UpdateController();
-
-        mSceneManagerPtr->UpdateSceneManager(mDeltaTime);
-
-        SwapAndClacDeltaTime();
-
-        if (ShouldQuit())
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            break;
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
+        else
+        {
+            GetDxHelperPtr()->ClearBuffer();
+
+            UpdateController();
+
+            mSceneManagerPtr->UpdateSceneManager(mDeltaTime);
+
+            SwapAndClacDeltaTime();
+
+            if (ShouldQuit())
+            {
+                PostQuitMessage(0);
+            }
         }
     }
 }

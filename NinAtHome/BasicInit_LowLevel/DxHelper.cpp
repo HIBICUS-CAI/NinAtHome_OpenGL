@@ -61,13 +61,13 @@ void CreateDefaultVertexIndexBuffer(
             "failed to create vertex buffer\n");
     }
 
-    WORD indices[] =
+    UINT indices[] =
     {
         3,1,0,
         2,1,3
     };
     bdc.Usage = D3D11_USAGE_DYNAMIC;
-    bdc.ByteWidth = sizeof(WORD) * 6;
+    bdc.ByteWidth = sizeof(UINT) * 6;
     bdc.BindFlags = D3D11_BIND_INDEX_BUFFER;
     bdc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
     initData.pSysMem = indices;
