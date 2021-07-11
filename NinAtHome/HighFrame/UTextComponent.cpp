@@ -58,10 +58,7 @@ void UTextComponent::CompUpdate(float _deltatime)
 
 void UTextComponent::CompDestory()
 {
-    /*if (mFontTexture)
-    {
-        UnloadTexture(&mFontTexture);
-    }*/
+    
 }
 
 void UTextComponent::SetTextPosition(Float3 _pos)

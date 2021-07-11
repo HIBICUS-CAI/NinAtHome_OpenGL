@@ -63,7 +63,7 @@ void USpriteComponent::CompUpdate(float _deltatime)
 
 void USpriteComponent::CompDestory()
 {
-    //DeleteTexture();
+    
 }
 
 void USpriteComponent::SaveTexturePath(std::string _path)

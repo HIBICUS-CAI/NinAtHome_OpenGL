@@ -88,7 +88,6 @@ void AAnimateComponent::CompDestory()
 {
     for (auto& ani : mAnimates)
     {
-        UnloadTexture(&(ani.second->Texture));
         delete ani.second;
     }
 
@@ -121,7 +120,6 @@ void AAnimateComponent::DeleteAnimate(std::string _name)
     }
 
     ANIMATE_INFO* ani = mAnimates[_name];
-    UnloadTexture(&(ani->Texture));
     delete ani;
     mAnimates.erase(_name);
 }
