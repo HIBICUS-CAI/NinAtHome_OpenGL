@@ -239,7 +239,7 @@ HRESULT DxHelper::StartUp(HWND wndHandle)
         dc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
         dc.BufferCount = 2;
         dc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
-        dc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING;
+        //dc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING;
 
         hr = dxgiFactory2->CreateSwapChainForHwnd(
             mD3dDevicePtr, wndHandle,
@@ -268,7 +268,7 @@ HRESULT DxHelper::StartUp(HWND wndHandle)
         dc.SampleDesc.Quality = 0;
         dc.Windowed = TRUE;
         dc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
-        dc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING;
+        //dc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING;
 
         hr = dxgiFactory1->CreateSwapChain(
             mD3dDevicePtr, &dc, &mSwapChainPtr);
@@ -653,7 +653,7 @@ void DxHelper::ClearBuffer()
 
 void DxHelper::SwapBufferChain()
 {
-    mSwapChainPtr->Present(0, DXGI_PRESENT_ALLOW_TEARING);
+    mSwapChainPtr->Present(1, 0);
 }
 
 ID3D11Device* DxHelper::GetDevicePtr()

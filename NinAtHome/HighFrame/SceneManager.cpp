@@ -138,7 +138,7 @@ void SceneManager::PlusHasLoaded()
     ++mHasLoadedSize;
 #ifdef SHOW_LOADING
 #ifdef NIN_AT_HOME
-    Sleep(100);
+    Sleep(10);
 #endif // NIN_AT_HOME
 #endif // SHOW_LOADING
 }
