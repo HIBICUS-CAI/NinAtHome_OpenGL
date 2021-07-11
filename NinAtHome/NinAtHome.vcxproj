@@ -62,14 +62,13 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)ThirdParty\slibs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glad.lib;glfw3dll.lib;xinput9_1_0.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glad.lib;glfw3dll.lib;xinput9_1_0.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;dxtk-debug\DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy /r /y $(ProjectDir)ThirdParty\dlibs\glfw3.dll $(TargetDir)
-xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
+      <Command>xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -89,14 +88,13 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)ThirdParty\slibs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glad.lib;glfw3dll.lib;xinput9_1_0.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glad.lib;glfw3dll.lib;xinput9_1_0.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;dxtk-release\DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy /r /y $(ProjectDir)ThirdParty\dlibs\glfw3.dll $(TargetDir)
-xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
+      <Command>xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

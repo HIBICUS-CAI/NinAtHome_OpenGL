@@ -4,7 +4,7 @@
 #include "main.h"
 #include <iostream>
 #include <vector>
-#include <DirectXTK\WICTextureLoader.h>
+#include <TP\DirectXTK\WICTextureLoader.h>
 
 void SplitByRomSymbol(const std::string& s,
     std::vector<std::string>& v, const std::string& c)
