@@ -82,14 +82,21 @@ void RunnerInput(AInputComponent* _aic, float _deltatime)
         }
     }
 
+    static bool shouldSetWalking = true;
     if (GetControllerLeftStick().x)
     {
-        if (owner && owner->IsObjectActive() == STATUS::ACTIVE)
+        if (owner && owner->IsObjectActive() == STATUS::ACTIVE &&
+            shouldSetWalking)
         {
             ((AAnimateComponent*)(owner->
                 GetAComponent("runner-actor-animate")))->
                 ChangeAnimateTo("walk");
+            shouldSetWalking = false;
         }
+    }
+    else
+    {
+        shouldSetWalking = true;
     }
 
     static bool shouldSetWalk = true;
