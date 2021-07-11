@@ -657,17 +657,23 @@ void ATransformComponent::UpdateWorldMatrix()
         GetCamera()->GetRelativePosWithCam(mPosition);
 
     Float4x4 world = DirectX::XMLoadFloat4x4(&mWorldMatrix);
+    static const float PI = 3.14156f;
+    Float3 angle = MakeFloat3(
+        mRotation.x * PI / 180.f,
+        mRotation.y * PI / 180.f,
+        mRotation.z * PI / 180.f);
 
     world = DirectX::XMMatrixMultiply(
         DirectX::XMMatrixScaling(mScale.x, mScale.y, mScale.z),
         DirectX::XMMatrixRotationRollPitchYaw(
-            mRotation.x, mRotation.y, mRotation.z)
+            angle.x, angle.y, angle.z)
     );
     world = DirectX::XMMatrixMultiply(
         world,
         DirectX::XMMatrixTranslation(
             relative.x, relative.y, relative.z)
     );
+    world = DirectX::XMMatrixTranspose(world);
 
     DirectX::XMStoreFloat4x4(&mWorldMatrix, world);
 }
