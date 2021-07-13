@@ -12,6 +12,8 @@ HRESULT WindowWIN32::CreateMyWindow(
     const char* wndName,
     HINSTANCE hInstance,
     int cmdShow,
+    UINT width,
+    UINT height,
     bool inFullScr)
 {
     char className[128] = "";
@@ -39,11 +41,11 @@ HRESULT WindowWIN32::CreateMyWindow(
     this->mInstance = hInstance;
 
     RECT rc = {
-        0,0,1920,1080
+        0,0,(LONG)width,(LONG)height
     };
     AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
     this->mWndHandle = CreateWindow(
-        className,wndName,
+        className, wndName,
         WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
         CW_USEDEFAULT, CW_USEDEFAULT,
         rc.right - rc.left, rc.bottom - rc.top,
@@ -61,11 +63,9 @@ HRESULT WindowWIN32::CreateMyWindow(
     GetWindowRect(hDesk, &rc);
     UINT offsetX = rc.right / 2;
     UINT offsetY = rc.bottom / 2;
-    UINT width = 1920;
-    UINT height = 1080;
     SetWindowLong(this->mWndHandle, GWL_STYLE,
         WS_OVERLAPPED);
-    SetWindowPos(this->mWndHandle, HWND_NOTOPMOST, 
+    SetWindowPos(this->mWndHandle, HWND_NOTOPMOST,
         offsetX - width / 2, offsetY - height / 2,
         width, height, SWP_SHOWWINDOW);
 
@@ -118,7 +118,7 @@ HRESULT WindowWIN32::SwitchWindowSize()
         UINT height = 720;
         SetWindowLong(this->mWndHandle, GWL_STYLE,
             WS_OVERLAPPED);
-        SetWindowPos(this->mWndHandle, HWND_NOTOPMOST, 
+        SetWindowPos(this->mWndHandle, HWND_NOTOPMOST,
             offsetX - width / 2, offsetY - height / 2,
             width, height, SWP_SHOWWINDOW);
     }

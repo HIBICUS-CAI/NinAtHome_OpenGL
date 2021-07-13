@@ -12,6 +12,8 @@ namespace WindowInterface
         const char* wndName,
         HINSTANCE hInstance,
         int cmdShow,
+        UINT width,
+        UINT height,
         bool inFullScr = false
     );
 

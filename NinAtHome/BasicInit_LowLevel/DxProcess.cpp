@@ -18,7 +18,7 @@ bool CreateWndAndInitInput(HINSTANCE hInstance, int cmdShow)
         return false;
     }
     if (!WindowInterface::CreateInitWindow("a test window",
-        hInstance, cmdShow))
+        hInstance, cmdShow, 1920, 1080))
     {
         return false;
     }

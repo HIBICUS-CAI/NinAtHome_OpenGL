@@ -10,6 +10,8 @@ public:
         const char* wndName,
         HINSTANCE hInstance,
         int cmdShow,
+        UINT width,
+        UINT height,
         bool inFullScr
     );
     static LRESULT CALLBACK MyWndProc(
