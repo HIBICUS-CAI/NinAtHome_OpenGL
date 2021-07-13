@@ -304,7 +304,6 @@ void LoadSound(std::string name, LOAD_HANDLE path)
         return;
     }
 
-    // ¥Õ¥©©`¥Þ¥Ã¥È¥Á¥§¥Ã¥¯
     hr = CheckChunk(hFile, ' tmf',
         &dwChunkSize, &dwChunkPosition);
     if (FAILED(hr))
@@ -321,7 +320,6 @@ void LoadSound(std::string name, LOAD_HANDLE path)
         return;
     }
 
-    // ¥ª©`¥Ç¥£¥ª¥Ç©`¥¿Õi¤ßÞz¤ß
     DWORD size = 0;
     hr = CheckChunk(hFile, 'atad', &size, &dwChunkPosition);
     if (FAILED(hr))
@@ -344,7 +342,6 @@ void LoadSound(std::string name, LOAD_HANDLE path)
     }
     g_SoundDataPool.insert(std::make_pair(name, pData));
 
-    // ¥½©`¥¹¥Ü¥¤¥¹¤ÎÉú³É
     SOUND_HANDLE soundHandle = nullptr;
     hr = gp_XAudio2->CreateSourceVoice(
         &soundHandle, &(wfx.Format));
