@@ -14,6 +14,7 @@
 #include "SceneNode.h"
 #include "Actor_all.h"
 #include "Ui_all.h"
+#include "sound.h"
 
 // TEMP---------------------------------------------
 #include "..\TempTest.h"
@@ -558,6 +559,21 @@ SceneNode* ObjectFactory::CreateNewScene(std::string _name,
             MakeFloat2(
                 config["camera"][2].GetFloat(),
                 config["camera"][3].GetFloat()));
+    }
+
+    if (config.HasMember("sound"))
+    {
+        unsigned int soundSize = config["sound"].Size();
+        for (unsigned int i = 0; i < soundSize; i++)
+        {
+            if (config["sound"][i]["name"].IsString() &&
+                config["sound"][i]["path"].IsString())
+            {
+                LoadSound(
+                    config["sound"][i]["name"].GetString(),
+                    config["sound"][i]["path"].GetString());
+            }
+        }
     }
 
     if (config.HasMember("actor") &&

@@ -13,6 +13,7 @@
 #include "ObjectFactory.h"
 #include "main.h"
 #include "controller.h"
+#include "sound.h"
 
 RootSystem::RootSystem() :
     mSceneManagerPtr(nullptr), mPropertyManagerPtr(nullptr),
@@ -35,17 +36,19 @@ bool RootSystem::StartUp(HINSTANCE hInstance, int cmdShow)
     mPropertyManagerPtr = new PropertyManager();
     mObjectFactoryPtr = new ObjectFactory();
 
-    bool result = InitSystem(hInstance, cmdShow);
-
-    result = mSceneManagerPtr->StartUp();
-    result = mPropertyManagerPtr->StartUp();
-    result = mObjectFactoryPtr->StartUp(
+    bool result1 = InitSystem(hInstance, cmdShow);
+    bool result2 = InitSound();
+    bool result3 = mSceneManagerPtr->StartUp();
+    bool result4 = mPropertyManagerPtr->StartUp();
+    bool result5 = mObjectFactoryPtr->StartUp(
         mPropertyManagerPtr, mSceneManagerPtr);
     mSceneManagerPtr->PostStartUp(
         mPropertyManagerPtr, mObjectFactoryPtr);
 
     InitController();
 
+    bool result = result1 && result2 &&
+        result3 && result4 && result5;
     if (result)
     {
         MY_NN_LOG(LOG_MESSAGE,
@@ -82,7 +85,7 @@ void RootSystem::ClearAndStop()
     }
 
     UninitController();
-
+    UninitSound();
     UninitSystem();
 
     MY_NN_LOG(LOG_MESSAGE,

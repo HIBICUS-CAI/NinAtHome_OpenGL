@@ -195,6 +195,12 @@
     <ClInclude Include="BasicInit_LowLevel\DxProcess.h">
       <Filter>00_ForLowLevel</Filter>
     </ClInclude>
+    <ClInclude Include="MiddleFunctions\sound.h">
+      <Filter>01_MiddleFunc</Filter>
+    </ClInclude>
+    <ClInclude Include="MiddleFunctions\SoundHelper.h">
+      <Filter>01_MiddleFunc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -325,6 +331,9 @@
     </ClCompile>
     <ClCompile Include="BasicInit_LowLevel\DxProcess.cpp">
       <Filter>00_ForLowLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="MiddleFunctions\SoundHelper.cpp">
+      <Filter>01_MiddleFunc</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
