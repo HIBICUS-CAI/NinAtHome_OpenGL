@@ -88,7 +88,7 @@ void AAnimateComponent::CompDestory()
 {
     for (auto& ani : mAnimates)
     {
-        UnloadTexture(ani.second->Texture);
+        //UnloadTexture(ani.second->Texture);
         delete ani.second;
     }
 

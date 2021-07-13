@@ -79,8 +79,8 @@ void ACollisionComponent::CompUpdate(float _deltatime)
 
 void ACollisionComponent::CompDestory()
 {
-    UnloadTexture(mCircleTexture);
-    UnloadTexture(mRectangleTexture);
+    //UnloadTexture(mCircleTexture);
+    //UnloadTexture(mRectangleTexture);
 }
 
 void ACollisionComponent::SetCollisionStatus(COLLISION_TYPE _type,
