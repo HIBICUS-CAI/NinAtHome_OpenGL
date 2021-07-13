@@ -30,6 +30,8 @@ void PlayBGM(std::string soundName);
 
 void StopBGM(std::string soundName);
 
+void StopBGM();
+
 void SetVolumeBGM(float volume, int delayFrame = 0);
 
 void PlaySE(std::string soundName);

@@ -424,6 +424,25 @@ void StopBGM(std::string soundName)
 #endif // NIN_AT_HOME
 }
 
+void StopBGM()
+{
+#ifdef NIN_AT_HOME
+    XAUDIO2_VOICE_STATE xa2state;
+
+    for (auto& sound : g_SoundPool)
+    {
+        sound.second->GetState(&xa2state);
+        if (xa2state.BuffersQueued != 0)
+        {
+            sound.second->Stop(0);
+            sound.second->FlushSourceBuffers();
+        }
+    }
+#else
+
+#endif // NIN_AT_HOME
+}
+
 void SetVolumeBGM(float volume, int delayFrame)
 {
 #ifdef NIN_AT_HOME
