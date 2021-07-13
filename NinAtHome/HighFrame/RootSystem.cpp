@@ -13,6 +13,7 @@
 #include "ObjectFactory.h"
 #include "main.h"
 #include "controller.h"
+#include "sound.h"
 
 RootSystem::RootSystem() :
     mSceneManagerPtr(nullptr), mPropertyManagerPtr(nullptr),
@@ -51,6 +52,8 @@ bool RootSystem::StartUp()
 
     InitController();
 
+    result = InitSound();
+
     if (result)
     {
         MY_NN_LOG(LOG_MESSAGE,
@@ -88,6 +91,8 @@ void RootSystem::ClearAndStop()
 
     UninitController();
 
+    UninitSound();
+
     UninitSystem();
 
     MY_NN_LOG(LOG_MESSAGE,
@@ -96,6 +101,9 @@ void RootSystem::ClearAndStop()
 
 void RootSystem::RunGameLoop()
 {
+    LoadSound("test", "rom:/Assets/Sounds/cylinder.wav");
+    PlayBGM("test");
+
     while (true)
     {
         glClearColor(0.0f, 0.5f, 0.5f, 1.0f);

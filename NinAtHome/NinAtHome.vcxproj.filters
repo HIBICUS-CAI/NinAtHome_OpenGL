@@ -195,6 +195,12 @@
     <ClInclude Include="Loading.h">
       <Filter>03_Temp</Filter>
     </ClInclude>
+    <ClInclude Include="MiddleFunctions\SoundHelper.h">
+      <Filter>01_MiddleFunc</Filter>
+    </ClInclude>
+    <ClInclude Include="MiddleFunctions\sound.h">
+      <Filter>01_MiddleFunc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -325,6 +331,9 @@
     </ClCompile>
     <ClCompile Include="Loading.cpp">
       <Filter>03_Temp</Filter>
+    </ClCompile>
+    <ClCompile Include="MiddleFunctions\SoundHelper.cpp">
+      <Filter>01_MiddleFunc</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
