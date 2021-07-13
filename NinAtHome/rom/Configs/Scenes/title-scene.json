@@ -1,5 +1,11 @@
 {
     "scene-name": "title-scene",
+    "sound": [
+        {
+            "name": "title",
+            "path": "rom:/Assets/Sounds/night-drive.wav"
+        }
+    ],
     "camera": [
         0.0,
         0.0,

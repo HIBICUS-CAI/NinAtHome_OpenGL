@@ -36,11 +36,11 @@ bool RootSystem::StartUp()
     mPropertyManagerPtr = new PropertyManager();
     mObjectFactoryPtr = new ObjectFactory();
 
-    bool result = InitSystem();
-
-    result = mSceneManagerPtr->StartUp();
-    result = mPropertyManagerPtr->StartUp();
-    result = mObjectFactoryPtr->StartUp(
+    bool result1 = InitSystem();
+    bool result2 = InitSound();
+    bool result3 = mSceneManagerPtr->StartUp();
+    bool result4 = mPropertyManagerPtr->StartUp();
+    bool result5 = mObjectFactoryPtr->StartUp(
         mPropertyManagerPtr, mSceneManagerPtr);
     mSceneManagerPtr->PostStartUp(
         mPropertyManagerPtr, mObjectFactoryPtr);
@@ -52,7 +52,8 @@ bool RootSystem::StartUp()
 
     InitController();
 
-    result = InitSound();
+    bool result = result1 && result2 && 
+        result3 && result4 && result5;
 
     if (result)
     {
@@ -101,9 +102,6 @@ void RootSystem::ClearAndStop()
 
 void RootSystem::RunGameLoop()
 {
-    LoadSound("test", "rom:/Assets/Sounds/cylinder.wav");
-    PlayBGM("test");
-
     while (true)
     {
         glClearColor(0.0f, 0.5f, 0.5f, 1.0f);

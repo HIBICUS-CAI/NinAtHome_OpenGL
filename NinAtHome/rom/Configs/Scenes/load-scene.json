@@ -1,5 +1,11 @@
 {
     "scene-name": "load-scene",
+    "sound": [
+        {
+            "name": "loading",
+            "path": "rom:/Assets/Sounds/decision24.wav"
+        }
+    ],
     "ui": [
         {
             "ui-name": "load",

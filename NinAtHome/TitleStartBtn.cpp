@@ -1,5 +1,6 @@
 #include "TitleStartBtn.h"
 #include "controller.h"
+#include "sound.h"
 
 void StartBtnRegister(ObjectFactory* _factory)
 {
@@ -13,6 +14,14 @@ void StartBtnInput(UInputComponent* _uic, float _deltatime)
     bool selected = ((UBtnMapComponent*)
         (_uic->GetUiObjOwner()->GetUComponent(
             "start-btn-ui-btnmap")))->IsBeingSelected();
+
+    static bool sound = false;
+    if (!sound)
+    {
+        sound = true;
+        PlayBGM("title");
+    }
+
     if (selected)
     {
         if (GetControllerTrigger(NpadButton::A::Index))
@@ -21,6 +30,8 @@ void StartBtnInput(UInputComponent* _uic, float _deltatime)
                 GetSceneManagerPtr()->LoadSceneNode(
                     "run-scene",
                     "rom:/Configs/Scenes/run-scene.json");
+            sound = false;
+            StopBGM("title");
         }
     }
 }
