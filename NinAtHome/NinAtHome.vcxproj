@@ -105,9 +105,6 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClInclude Include="BasicInit_LowLevel\main.h" />
     <ClInclude Include="BasicInit_LowLevel\NinLog.h" />
     <ClInclude Include="BasicInit_LowLevel\stb_image.h" />
-    <ClInclude Include="Board.h" />
-    <ClInclude Include="BulletCoin.h" />
-    <ClInclude Include="Flag.h" />
     <ClInclude Include="HighFrame\AAnimateComponent.h" />
     <ClInclude Include="HighFrame\ACollisionComponent.h" />
     <ClInclude Include="HighFrame\AComponent.h" />
@@ -136,7 +133,6 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClInclude Include="HighFrame\USpriteComponent.h" />
     <ClInclude Include="HighFrame\UTextComponent.h" />
     <ClInclude Include="HighFrame\UTransformComponent.h" />
-    <ClInclude Include="Loading.h" />
     <ClInclude Include="MiddleFunctions\controller.h" />
     <ClInclude Include="MiddleFunctions\ControllerHelper.h" />
     <ClInclude Include="MiddleFunctions\json.h" />
@@ -147,20 +143,12 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClInclude Include="MiddleFunctions\SpriteHelper.h" />
     <ClInclude Include="MiddleFunctions\texture.h" />
     <ClInclude Include="MiddleFunctions\TextureHelper.h" />
-    <ClInclude Include="ResultBtn.h" />
-    <ClInclude Include="RunnerAndBg.h" />
-    <ClInclude Include="TempTest.h" />
-    <ClInclude Include="TimeUi.h" />
-    <ClInclude Include="TitleStartBtn.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicInit_LowLevel\GlHelper.cpp" />
     <ClCompile Include="BasicInit_LowLevel\GlProcess.cpp" />
     <ClCompile Include="BasicInit_LowLevel\LowLevelCpp.cpp" />
     <ClCompile Include="BasicInit_LowLevel\NinLog.cpp" />
-    <ClCompile Include="Board.cpp" />
-    <ClCompile Include="BulletCoin.cpp" />
-    <ClCompile Include="Flag.cpp" />
     <ClCompile Include="HighFrame\AAnimateComponent.cpp" />
     <ClCompile Include="HighFrame\ACollisionComponent.cpp" />
     <ClCompile Include="HighFrame\AComponent.cpp" />
@@ -186,18 +174,12 @@ xcopy /e /r /y $(ProjectDir)rom $(TargetDir)rom\</Command>
     <ClCompile Include="HighFrame\USpriteComponent.cpp" />
     <ClCompile Include="HighFrame\UTextComponent.cpp" />
     <ClCompile Include="HighFrame\UTransformComponent.cpp" />
-    <ClCompile Include="Loading.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MiddleFunctions\ControllerHelper.cpp" />
     <ClCompile Include="MiddleFunctions\JsonHelper.cpp" />
     <ClCompile Include="MiddleFunctions\SoundHelper.cpp" />
     <ClCompile Include="MiddleFunctions\SpriteHelper.cpp" />
     <ClCompile Include="MiddleFunctions\TextureHelper.cpp" />
-    <ClCompile Include="ResultBtn.cpp" />
-    <ClCompile Include="RunnerAndBg.cpp" />
-    <ClCompile Include="TempTest.cpp" />
-    <ClCompile Include="TimeUi.cpp" />
-    <ClCompile Include="TitleStartBtn.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

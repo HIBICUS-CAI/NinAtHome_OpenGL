@@ -1,11 +1,5 @@
 {
     "scene-name": "load-scene",
-    "sound": [
-        {
-            "name": "loading",
-            "path": "rom:/Assets/Sounds/decision24.wav"
-        }
-    ],
     "ui": [
         {
             "ui-name": "load",
@@ -39,37 +33,9 @@
                     "type": "sprite",
                     "update-order": 0,
                     "draw-order": -2,
-                    "texture-path": "rom:/Assets/Textures/title_success_bg.tga",
-                    "texture-width": 1920.0,
-                    "texture-height": 1080.0
-                },
-                {
-                    "type": "text",
-                    "update-order": 0,
-                    "moji-path": "rom:/Assets/Textures/moji.tga",
-                    "init-text": "NOW LOADING ...",
-                    "init-size": [
-                        100.0,
-                        100.0
-                    ],
-                    "init-position": [
-                        -550.0,
-                        400.0,
-                        0.0
-                    ],
-                    "init-color": [
-                        0.0,
-                        0.0,
-                        0.0,
-                        1.0
-                    ]
-                },
-                {
-                    "type": "interaction",
-                    "update-order": 0,
-                    "init-func-name": "LoadingInit",
-                    "update-func-name": "LoadingUpdate",
-                    "destory-func-name": "LoadingDestory"
+                    "texture-path": "rom:/Assets/Textures/player.tga",
+                    "texture-width": 200.0,
+                    "texture-height": 100.0
                 }
             ]
         }

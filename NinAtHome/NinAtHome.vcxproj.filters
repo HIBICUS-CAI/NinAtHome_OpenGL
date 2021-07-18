@@ -168,33 +168,6 @@
     <ClInclude Include="HighFrame\Ui_all.h">
       <Filter>02_HightFrame\Common</Filter>
     </ClInclude>
-    <ClInclude Include="TempTest.h">
-      <Filter>03_Temp</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleStartBtn.h">
-      <Filter>03_Temp</Filter>
-    </ClInclude>
-    <ClInclude Include="ResultBtn.h">
-      <Filter>03_Temp</Filter>
-    </ClInclude>
-    <ClInclude Include="RunnerAndBg.h">
-      <Filter>03_Temp</Filter>
-    </ClInclude>
-    <ClInclude Include="BulletCoin.h">
-      <Filter>03_Temp</Filter>
-    </ClInclude>
-    <ClInclude Include="Board.h">
-      <Filter>03_Temp</Filter>
-    </ClInclude>
-    <ClInclude Include="Flag.h">
-      <Filter>03_Temp</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeUi.h">
-      <Filter>03_Temp</Filter>
-    </ClInclude>
-    <ClInclude Include="Loading.h">
-      <Filter>03_Temp</Filter>
-    </ClInclude>
     <ClInclude Include="MiddleFunctions\SoundHelper.h">
       <Filter>01_MiddleFunc</Filter>
     </ClInclude>
@@ -304,33 +277,6 @@
     </ClCompile>
     <ClCompile Include="HighFrame\AAnimateComponent.cpp">
       <Filter>02_HightFrame\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="TempTest.cpp">
-      <Filter>03_Temp</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleStartBtn.cpp">
-      <Filter>03_Temp</Filter>
-    </ClCompile>
-    <ClCompile Include="ResultBtn.cpp">
-      <Filter>03_Temp</Filter>
-    </ClCompile>
-    <ClCompile Include="RunnerAndBg.cpp">
-      <Filter>03_Temp</Filter>
-    </ClCompile>
-    <ClCompile Include="BulletCoin.cpp">
-      <Filter>03_Temp</Filter>
-    </ClCompile>
-    <ClCompile Include="Board.cpp">
-      <Filter>03_Temp</Filter>
-    </ClCompile>
-    <ClCompile Include="Flag.cpp">
-      <Filter>03_Temp</Filter>
-    </ClCompile>
-    <ClCompile Include="TimeUi.cpp">
-      <Filter>03_Temp</Filter>
-    </ClCompile>
-    <ClCompile Include="Loading.cpp">
-      <Filter>03_Temp</Filter>
     </ClCompile>
     <ClCompile Include="MiddleFunctions\SoundHelper.cpp">
       <Filter>01_MiddleFunc</Filter>

@@ -12,7 +12,6 @@
 #include "PropertyManager.h"
 #include "ObjectFactory.h"
 #include <thread>
-#include "controller.h"
 
 SceneManager::SceneManager() :
     mPropertyManagerPtr(nullptr), mObjectFactoryPtr(nullptr),

@@ -16,17 +16,8 @@
 #include "Ui_all.h"
 #include "sound.h"
 
-// TEMP---------------------------------------------
-#include "..\TempTest.h"
-#include "..\TitleStartBtn.h"
-#include "..\ResultBtn.h"
-#include "..\RunnerAndBg.h"
-#include "..\BulletCoin.h"
-#include "..\Board.h"
-#include "..\Flag.h"
-#include "..\TimeUi.h"
-#include "..\Loading.h"
-// TEMP---------------------------------------------
+// ADD INTERACTION HERE-----------------------------
+// ADD INTERACTION HERE-----------------------------
 
 ObjectFactory::ObjectFactory() :
     mPropertyManagerPtr(nullptr), mSceneManagerPtr(nullptr),
@@ -54,15 +45,8 @@ bool ObjectFactory::StartUp(PropertyManager* _pmPtr,
 
     bool result = true;
 
-    LoadingRegister(this);
-    TempTestRegister(this);
-    StartBtnRegister(this);
-    ResultBtnRegister(this);
-    RunnerAndBgRegister(this);
-    BulletCoinRegister(this);
-    BoardRegister(this);
-    FlagRegister(this);
-    TimeUiRegister(this);
+    // ADD INTERACTION REGISTER-----------------------------
+    // ADD INTERACTION REGISTER-----------------------------
 
     return result;
 }
