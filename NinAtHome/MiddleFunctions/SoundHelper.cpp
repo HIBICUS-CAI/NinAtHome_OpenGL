@@ -331,6 +331,7 @@ void LoadSound(std::string name, LOAD_HANDLE path)
         g_SoundDataPool.erase(name);
         return;
     }
+    soundHandle->SetVolume(0.4f);
     g_SoundPool.insert(std::make_pair(name, soundHandle));
 }
 
