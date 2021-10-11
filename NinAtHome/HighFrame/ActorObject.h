@@ -23,6 +23,48 @@ public:
 
     class AComponent* GetAComponent(std::string _name);
 
+    template <typename T>
+    inline T* GetAComponent(COMP_TYPE _type)
+    {
+        static std::string compName = "";
+        compName = GetObjectName();
+        switch (_type)
+        {
+        case COMP_TYPE::ATRANSFORM:
+            compName += "-transform";
+            return (T*)(GetAComponent(compName));
+
+        case COMP_TYPE::ATIMER:
+            compName += "-timer";
+            return (T*)(GetAComponent(compName));
+
+        case COMP_TYPE::ASPRITE:
+            compName += "-sprite";
+            return (T*)(GetAComponent(compName));
+
+        case COMP_TYPE::ACOLLISION:
+            compName += "-collision";
+            return (T*)(GetAComponent(compName));
+
+        case COMP_TYPE::AINPUT:
+            compName += "-input";
+            return (T*)(GetAComponent(compName));
+
+        case COMP_TYPE::AANIMATE:
+            compName += "-animate";
+            return (T*)(GetAComponent(compName));
+
+        case COMP_TYPE::AINTERACT:
+            compName += "-interaction";
+            return (T*)(GetAComponent(compName));
+
+        default:
+            MY_NN_LOG(LOG_ERROR,
+                "cannot return this component type\n");
+            return nullptr;
+        }
+    }
+
     void AddAComponent(class AComponent* _comp);
 
     int GetUpdateOrder() const;

@@ -23,6 +23,44 @@ public:
 
     class UComponent* GetUComponent(std::string _name);
 
+    template <typename T>
+    inline T* GetUComponent(COMP_TYPE _type)
+    {
+        static std::string compName = "";
+        compName = GetObjectName();
+        switch (_type)
+        {
+        case COMP_TYPE::UTRANSFORM:
+            compName += "-transform";
+            return (T*)(GetUComponent(compName));
+
+        case COMP_TYPE::UINPUT:
+            compName += "-input";
+            return (T*)(GetUComponent(compName));
+
+        case COMP_TYPE::UTEXT:
+            compName += "-text";
+            return (T*)(GetUComponent(compName));
+
+        case COMP_TYPE::USPRITE:
+            compName += "-sprite";
+            return (T*)(GetUComponent(compName));
+
+        case COMP_TYPE::UBTNMAP:
+            compName += "-btnmap";
+            return (T*)(GetUComponent(compName));
+
+        case COMP_TYPE::UINTERACT:
+            compName += "-interaction";
+            return (T*)(GetUComponent(compName));
+
+        default:
+            MY_NN_LOG(LOG_ERROR,
+                "cannot return this component type\n");
+            return nullptr;
+        }
+    }
+
     void AddUComponent(class UComponent* _comp);
 
     int GetUpdateOrder() const;

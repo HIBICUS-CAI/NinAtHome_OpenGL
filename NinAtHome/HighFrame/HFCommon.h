@@ -39,13 +39,13 @@ enum class COMP_TYPE
     ACOLLISION,
     AINPUT,
     AANIMATE,
-    AINTERUPDATE,
+    AINTERACT,
     UTRANSFORM,
     UINPUT,
     UTEXT,
     USPRITE,
-    UCHECK,
     UBTNMAP,
+    UINTERACT,
     NULLTYPE
 };
 

@@ -52,8 +52,8 @@ void RunnerInput(AInputComponent* _aic, float _deltatime)
     {
         if (owner && owner->IsObjectActive() == STATUS::ACTIVE)
         {
-            ((ATransformComponent*)(owner->
-                GetAComponent("runner-actor-transform")))->
+            owner->GetAComponent<ATransformComponent>(
+                COMP_TYPE::ATRANSFORM)->
                 TranslateXAsix(-g_HVel * _deltatime);
             owner->GetSceneNodePtr()->GetCamera()->
                 TranslateCameraPos(MakeFloat2(
